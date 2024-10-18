@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1 kuffi">تبديل الدائرة</h4>
+               
+            </div><!-- end card header -->
+        <form #f="ngForm"  (ngSubmit)="onUpdateResource(f)" *ngIf="currentResource"  [ngClass]="{'was-validated':formSubmitted}">
+            <div class="card-body">
+                <p></p>
+                <div class="live-preview">
+                    <div class="row gy-4">
+                 
+          
+                        <div class="col-xxl-4 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi">إسم الدائرة بالعربية  </label>
+                                <input type="text" name="designation"  required class="form-control kuffi" id="placeholderInput"
+                                    placeholder="أدخل إسم الدائرة بالعربية" [ngModel]="currentResource.designation" #designationInput="ngModel">
+                                    <div class="invalid-feedback kuffi" *ngIf="(f.submitted && designationInput.invalid)">
+                                        يرجى إدخال إسم الدائرة بالعربية 
+                                    </div>
+                                  
+                                   
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-4 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi">إسم الدائرة بالفرنسية</label>
+                                <input type="text" class="form-control designation-placeholder" required id="placeholderInput"
+                                [ngModel]="currentResource.designationFr" #designationFrInput="ngModel"  name="designationFr" placeholder="أدخل إسم الدائرة بالفرنسية">
+                                <div class="invalid-feedback kuffi" *ngIf="f.submitted && designationFrInput.invalid">
+                                    يرجى إدخال إسم الدائرة بالفرنسية
+                                </div>  
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-4 col-md-6">
+                            <label for="placeholderInput" class="form-label kuffi">الباشوية</label>
+                              <select class="form-select mb-3 kuffi" name="pachalik" [ngModel]="district"  ngModel (ngModelChange)="onRowClick($event)">
+                                <option  value="" disabled selected>أدخل الباشوية</option>
+                                <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
+                              </select> 
+                         
+                    
+                        </div>
+            
+                        <div>
+                            <div class="hstack gap-2">
+                                <button type="submit"  class="btn btn-success">حفظ</button>
+                                <button type="button" class="btn btn-danger" (click)="reset(f)">إلغاء</button>
+                            </div>
+                        </div>
+    </div>
+    </div>
+    </div>
+        </form>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> 
+          لائحة مستعملي النظام  </h4>
+      </div><!-- end card header -->
+
+      <div class="card-body">
+        <div class="row g-4 mb-3">
+          <div class="col-sm-auto">
+            <div class="search-box ms-2">
+              <input type="text" class="form-control search kuffi" placeholder="بحث..." [(ngModel)]="service.searchTerm">
+              <i class="ri-search-line search-icon"></i>
+          </div> 
+           
+          </div>
+          <div class="col-sm">
+              <div class="d-flex justify-content-sm-end">
+                <button type="button" (click)="withimage()"   class="btn btn-soft-info add-btn"> <i class=" ri-eye-line me-1"></i></button>&nbsp;
+                  <button type="button" (click)="addResource()" class="btn btn-success add-btn">مستعمل جديد <i class="ri-add-line align-bottom me-1"></i></button> 
+
+              </div>
+              
+          </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>الإسم الشخصي</th>
+                <th>الإسم العائلي</th>
+                <th>إسم المرور</th>
+                <th>رقم البطاقة الوطنية</th>
+                <th>البريد الإلكتروني</th>
+                <th>الهاتف</th>
+              <th>الوظيفة</th>
+<th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of users; let i = index">
+                <td style="vertical-align: middle;" class="kuffi">{{p.firstNameAr}}</td>
+                <td style="vertical-align: middle;" class="kuffi">{{p.lastNameAr}}</td>
+                <td style="vertical-align: middle;">{{p.username}}</td>
+                <td style="vertical-align: middle;">{{p.cin}}</td>
+                <td style="vertical-align: middle;">{{p.email}}</td>
+                <td style="vertical-align: middle;">{{p.phone}}</td>
+                <td style="vertical-align: middle;" class="kuffi">{{p.job}}</td>
+                <td style="vertical-align: middle;">
+                    <button class="btn btn-warning" (click)="onEditResource(p.id)">تبديل <i class="ri-edit-line"></i></button>
+                    &nbsp;
+                    <button class="btn btn-danger" (click)="onDeleteResource(p.id)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                </td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-md-between align-items-md-center">
+          <!-- <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+              Showing
+              {{service.startIndex}} to
+              {{service.endIndex}} of {{service.totalRecords}}
+              entries
+            </div>
+          </div> -->
+          <!-- Pagination -->
+          <!-- <div class="col-sm-12 col-md-5">
+            <div class="text-md-right float-md-end gridjs-pagination">
+              <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+              </ngb-pagination>
+            </div>
+          </div> -->
+          <!-- End Pagination -->
+        </div>
+      </div><!-- end card-body -->
+    </div><!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
+

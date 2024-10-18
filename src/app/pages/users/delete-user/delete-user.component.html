@@ -1,0 +1,90 @@
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+         <div class="card-header">
+         <label>  هل تريد حقا حذف الموضف: </label>&nbsp;  <label style="font-weight: bold;">{{currentResource?.firstNameAr}} {{currentResource?.lastNameAr}}</label> 
+         </div>
+         <div class="card-body">
+            <div class="row gy-4">
+
+            <div class="col-xxl-3 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label">الإسم الشخصي بالعربية</label> :&nbsp;
+                   <span style="font-weight: bold;" class="kuffi">{{currentResource?.firstNameAr}}</span> 
+                  
+                </div>
+            </div><!--end col-->
+            <div class="col-xxl-3 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label">
+                        الإسم العائلي بالعربية
+                    </label> :&nbsp;
+                    <span style="font-weight: bold;" class="kuffi">{{currentResource?.lastNameAr}}</span> 
+                  
+                </div>
+            </div><!--end col-->
+            <div class="col-xxl-3 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label">الإسم الشخصي بالفرنسية</label> :&nbsp;
+                    <span style="font-weight: bold;">{{currentResource?.firstNameFr | uppercase }}</span> 
+             
+                </div>
+            </div><!--end col-->
+            <div class="col-xxl-3 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label">الإسم العائلي بالفرنسية</label> :&nbsp;
+                    <span style="font-weight: bold;">{{currentResource?.lastNameFr | uppercase}}</span> 
+             
+                </div>
+            </div><!--end col-->
+            <div class="col-xxl-3 col-md-6">
+
+                <div>
+                    <label for="placeholderInput" class="form-label">رقم البطاقة الوطنية</label> :&nbsp;
+                    <span style="font-weight: bold;">{{currentResource?.cin | uppercase}}</span> 
+                </div>
+            </div><!--end col-->
+            <div class="col-xxl-3 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label">الهاتف</label> :&nbsp;
+                    <span style="font-weight: bold;">{{currentResource?.phone}}</span> 
+                </div>
+            </div><!--end col-->
+            <div class="col-xxl-3 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label">البريد الإلكتروني</label> :&nbsp;
+                    <span style="font-weight: bold;">{{currentResource?.email}}</span> 
+                <!-- <div class="invalid-feedback" *ngIf="f.submitted && email.invalid && email.errors?.['email']">
+                    يرجى إدخال البريد الإلكتروني بصيغة صحيحة.
+                </div> -->
+            </div><!--end col-->
+  
+          
+            </div>
+            
+            <div class="col-xxl-3 col-md-6" *ngIf="role?.id==3">
+                <label for="placeholderInput" class="form-label kuffi">الملحقة</label> :&nbsp;
+                <span style="font-weight: bold;" class="kuffi">{{currentResource?._embedded.annexe.designation}}</span> 
+              
+         </div>
+         <div class="col-xxl-3 col-md-6">
+            <label for="placeholderInput" class="form-label kuffi">إسم المستعمل</label> :&nbsp;
+            <span style="font-weight: bold;">{{currentResource?.username}}</span> 
+          
+     </div>
+     <div class="col-xxl-3 col-md-6">
+        <label for="placeholderInput" class="form-label kuffi">صلاحيات الولوج للنظام</label> :&nbsp;
+        <span class="kuffi" style="font-weight: bold;">{{role?.roleNameAr}}</span> 
+      
+ </div>
+         </div>
+         
+    </div>
+    <div class="card-footer">
+        <div class="hstack gap-2">
+         
+            <button type="button" class="btn btn-danger kuffi" (click)="onDeleteResource(currentResource)">حذف</button>
+        </div>
+    </div>
+</div>

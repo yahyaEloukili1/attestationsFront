@@ -1,0 +1,72 @@
+
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> 
+            لائحة الدوائر  </h4>
+        </div><!-- end card header -->
+  
+        <div class="card-body">
+          <div class="row g-4 mb-3">
+            <div class="col-sm-auto">
+                <button type="button" (click)="addResource()" class="btn btn-success add-btn">دائرة جديدة <i class="ri-add-line align-bottom me-1"></i></button> 
+             
+            </div>
+       
+        </div>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>إسم الدائرة بالعربية</th>
+                  <th>إسم الدائرة بالفرنسية</th>
+                  <th>الباشوية</th>
+             
+            
+  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of districts; let i = index">
+                  <td style="vertical-align: middle;" class="kuffi">{{p.designation}}</td>
+                  <td style="vertical-align: middle;">{{p.designationFr}}</td>
+               <td class="kuffi">{{p.pachalik?.designation}}</td>
+                  <td style="vertical-align: middle;">
+                      <button class="btn  btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
+                      &nbsp;
+                      <button class="btn  btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p['_links'].self.href)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                  </td>
+              </tr>
+              
+              </tbody>
+            </table>
+          </div>
+          <div class="row justify-content-md-between align-items-md-center">
+            <!-- <div class="col-sm-12 col-md-5">
+              <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                Showing
+                {{service.startIndex}} to
+                {{service.endIndex}} of {{service.totalRecords}}
+                entries
+              </div>
+            </div> -->
+            <!-- Pagination -->
+            <!-- <div class="col-sm-12 col-md-5">
+              <div class="text-md-right float-md-end gridjs-pagination">
+                <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
+                </ngb-pagination>
+              </div>
+            </div> -->
+            <!-- End Pagination -->
+          </div>
+        </div><!-- end card-body -->
+      </div><!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>
+  <!-- end row -->
+  
+  

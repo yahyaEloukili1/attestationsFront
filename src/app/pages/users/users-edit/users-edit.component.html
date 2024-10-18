@@ -1,0 +1,473 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">تبديل المستعمل</h4>
+               
+            </div><!-- end card header -->
+            <form #f="ngForm" (ngSubmit)="uploadPhoto(f)" *ngIf="currentResource">
+            <div class="card-body">
+                <p></p>
+                <div class="live-preview">
+                    <div class="row gy-4">
+                     
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi">الإسم الشخصي بالعربية</label>
+                                <input type="text" name="firstNameAr" required
+                                [ngClass]="{'is-invalid':(prenomAr.errors && prenomAr.touched)||(prenomAr.errors && formSubmitted),
+                                'is-valid': (!prenomAr.errors && prenomAr.touched)||(!prenomAr.errors && formSubmitted)}" required id="placeholprenomFrrInput"
+                               pattern="^[\u0600-\u06FF\s]+$"
+                                ngModel  class="form-control kuffi" id="placeholderInput"
+                                    placeholder="أدخل الإسم الشخصي بالعربية " #prenomAr="ngModel" [(ngModel)]="currentResource.firstNameAr">
+                                    <div [hidden]="!prenomAr.errors?.['required']"  class="invalid-feedback">
+                                        يرجى إدخال الإسم الشخصي بالعربية 
+                                    </div>
+                                    <div [hidden]="!prenomAr.errors?.['pattern']"  class="invalid-feedback">
+                                        يرجى إدخال الإسم الشخصي باللغة العربية
+                                    </div>
+                                   
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالفرنسية</label>
+                                <input type="text" class="form-control" required id="placeholderInput"
+                                ngModel
+                                [ngClass]="{'is-invalid':(prenomFr.errors && prenomFr.touched)||(prenomFr.errors && formSubmitted),
+                                'is-valid': (!prenomFr.errors && prenomFr.touched)||(!prenomFr.errors && formSubmitted)}" name="firstNameFr" placeholder="أدخل الإسم الشخصي بالفرنسية"  #prenomFr="ngModel" [(ngModel)]="currentResource.firstNameFr">
+                                <div [hidden]="!prenomFr.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم الشخصي بالفرنسية 
+                                </div>
+                              
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                    الإسم العائلي بالعربية
+                                </label>
+                                <input type="text" class="form-control" required id="placeholderInput"
+                                [ngClass]="{'is-invalid':(nomAR.errors && nomAR.touched)||(nomAR.errors && formSubmitted ),
+                                'is-valid': (!nomAR.errors && nomAR.touched)||(!nomAR.errors && formSubmitted)}"
+                                ngModel name="lastNameAr"  placeholder="أدخل الإسم العائلي بالعربية" #nomAR="ngModel" [(ngModel)]="currentResource.lastNameAr">
+                                <div [hidden]="!nomAR.errors?.['required'] "  class="invalid-feedback">
+                                    يرجى إدخال الإسم العائلي بالعربية 
+                                </div>
+                                         <div [hidden]="!nomAR.errors?.['pattern']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم العائلي باللغة العربية
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم العائلي بالفرنسية</label>
+                                <input type="text" required class="form-control" id="placeholderInput"
+                                [ngClass]="{'is-invalid':(nomFR.errors && nomFR.touched)||(nomFR.errors && formSubmitted),
+                                'is-valid': (!nomFR.errors && nomFR.touched)||(!nomFR.errors && formSubmitted)}"
+                                ngModel name="lastNameFr"     placeholder="أدخل الإسم العائلي بالفرنسية" #nomFR="ngModel" [(ngModel)]="currentResource.lastNameFr">
+                                <div [hidden]="!nomFR.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم العائلي بالفرنسية 
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div >
+
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+
+                            <div>
+                                <label for="placeholderInput" class="form-label">رقم البطاقة الوطنية</label>
+                                <input type="text" required class="form-control" id="placeholderInput"
+                                [(ngModel)]="cinn"
+                                (ngModelChange)="findUserByCin()"
+                                [ngClass]="{'is-invalid':(cin.errors && cin.touched)
+                                  ||(cin.errors && formSubmitted)
+                               ||   (cinError && cin.touched)
+                               ||   (cinError && formSubmitted),
+                                  'is-valid': (!cin.errors &&!cinError &&  cin.touched)||(!cin.errors &&!cinError&& formSubmitted)}"
+                                name="cin"    pattern="[a-zA-Z]{1,2}[0-9]+"  placeholder="أدخل رقم البطاقة الوطنية" #cin="ngModel" [(ngModel)]="currentResource.cin">
+                                <div *ngIf="cin.errors?.['required'] && !cinError" class="invalid-feedback">
+                                    يرجى إدخال رقم البطاقة الوطنية 
+                                </div>
+                                <div *ngIf="cin.errors?.['pattern'] && !cinError" class="invalid-feedback">
+                                    يرجى التحقق من رقم البطاقة الوطنية
+                                </div>
+                                <div *ngIf="!cin.errors?.['required'] && cinError" class="invalid-feedback">
+                                      رقم البطاقة الوطنية الذي أدخلته مستخدم في حساب آخر
+                                </div>
+
+
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الهاتف</label>
+                                <input type="text" required class="form-control" id="placeholderInput"
+                                [(ngModel)]="phone"
+                                (ngModelChange)="findUserTele()"
+                                [ngClass]="{'is-invalid':(tele.errors && tele.touched)
+                                  ||(tele.errors && formSubmitted)
+                               ||   (teleError && tele.touched)
+                               ||   (teleError && formSubmitted),
+                                  'is-valid': (!tele.errors &&!teleError &&  tele.touched)||(!tele.errors &&!teleError&& formSubmitted)}"
+                                name="phone"     pattern="^(\+?212|0)([ \-_/]*)(\d[ \-_/]*){9}$|^(\+?2120)([ \-_/]*)(\-?\d){9}$"  placeholder="أدخل الهاتف  " #tele="ngModel" [(ngModel)]="currentResource.phone">
+                        
+                                <div *ngIf="tele.errors?.['required'] && !teleError" class="invalid-feedback">
+                                    يرجى إدخال الهاتف 
+                                </div>
+                                <div *ngIf="tele.errors?.['pattern'] && !teleError" class="invalid-feedback">
+                                    يرجى إدخال هاتف صحيح 
+                                </div>
+                                <!-- {{tele.errors?.['required']}} {{!teleError}} -->
+                                <div *ngIf="!tele.errors?.['required'] && teleError" class="invalid-feedback">
+                                    الهاتف الذي أدخلته مستخدم في حساب آخر
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">  
+                            <div>
+                                <label for="placeholderInput" class="form-label">البريد الإلكتروني</label>
+                                <input type="text" required class="form-control" id="placeholderInput"
+                                [(ngModel)]="emaill"
+                                (ngModelChange)="findUserByEmail()"
+                                [ngClass]="{'is-invalid':(email.errors && email.touched)
+                                  ||(email.errors && formSubmitted)
+                               ||   (emailError && email.touched)
+                               ||   (emailError && formSubmitted),
+                                  'is-valid': (!email.errors &&!emailError &&  email.touched)||(!email.errors &&!emailError&& formSubmitted)}"
+                                name="email"      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"  placeholder="أدخل رقم البطاقة الوطنية" #email="ngModel" [(ngModel)]="currentResource.email">
+                                <div *ngIf="email.errors?.['required'] && !emailError" class="invalid-feedback">
+                                    يرجى إدخال البريد الإلكتروني  
+                                </div>
+                                <div *ngIf="email.errors?.['pattern'] && !emailError" class="invalid-feedback">
+                                    يرجى إدخال بريد إلكتروني صحيح  
+                                </div>
+                                <!-- {{email.errors?.['required']}} {{!emailError}} -->
+                                <div *ngIf="!email.errors?.['required'] && emailError" class="invalid-feedback">
+                                    البريد الإلكتروني الذي أدخلته مستخدم في حساب آخر
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                         
+                            <!-- <div class="invalid-feedback" *ngIf="f.submitted && email.invalid && email.errors?.['email']">
+                                يرجى إدخال البريد الإلكتروني بصيغة صحيحة.
+                            </div> -->
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الصورة الشخصية</label>
+                                <input type="file" (change)="onSelectedFile($event)" class="form-control" id="placeholderInput">
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <label for="placeholderInput" class="form-label"></label><br>
+                            <img style="border-radius: 50%;" height="60" src="{{ this.restService.host + '/photoUser/' + currentResource.id }}" alt="">
+
+                            
+                            
+                        </div>
+                    
+                      <!-- <h5 style="color: #14c1d4;margin-top: 50px;">
+                        المعلومات الخاصة بالمستعملين للولوج للمنصة
+                      </h5> -->
+                      <div class="card-header align-items-center d-flex">
+                        <h5 class="card-title mb-0 flex-grow-1" style="color: #14c1d4;">
+                            المعلومات الخاصة بالمستعملين للولوج للمنصة
+                          </h5>
+                       
+                    </div>
+                    <div></div>
+                  
+
+                      <div class="row gy-2">  
+                      <div class="col-xxl-3 col-md-6">
+                        <div>
+                            <label for="placeholderInput" class="form-label">إسم المرور</label>
+                            <input type="text" class="form-control" id="placeholderInput"
+                                placeholder="أدخل إسم المرور" required [(ngModel)]="userName" 
+                                [ngClass]="{'is-invalid':(username.errors && username.touched)
+                                ||(username.errors && formSubmitted)
+                             ||   (userNameError && username.touched)
+                             ||   (userNameError && formSubmitted),
+                                'is-valid': (!username.errors &&!userNameError &&  username.touched)||(!username.errors &&!userNameError&& formSubmitted)}"
+                        
+                               name="username" #username="ngModel"   (ngModelChange)="findUserByUserName()" [(ngModel)]="currentResource.username">
+                                <div *ngIf="username.errors?.['required'] && !userNameError" class="invalid-feedback">
+                                    يرجى إدخال إسم المرور 
+                                </div>
+                                <!-- {{username.errors?.['required']}} {{!userNameError}} -->
+                                <div *ngIf="!username.errors?.['required'] && userNameError" class="invalid-feedback">
+                                    إسم المرور الذي أدخلته مستخدم في حساب آخر
+                                </div>
+                        </div>
+                 
+                    </div><!--end col-->
+                  
+                    <!-- <div class="col-xxl-3 col-md-6">
+                        <label for="placeholderInput" class="form-label">صلاحيات الولوج للنظام</label>
+                        <select class="form-select mb-3" required aria-label="Default select example" name="role" #role="ngModel" ngModel>
+                            <option value="">صلاحيات الولوج للنظام </option>
+                            <option [ngValue]="{ id: 4, roleName: 'ADMIN' }">مدير النظام</option>
+                            <option [ngValue]="{ id: 5, roleName: 'USER-DSIT' }">موظفي الولاية -DSIT</option>
+                            <option [ngValue]="{ id: 6, roleName: 'USER-AAL' }">موظفي الملحقات</option>
+                          </select>
+                          <div class="invalid-feedback"  *ngIf="f.submitted && role.invalid">
+                            يرجى إدخال صلاحيات الولوج للنظام
+                        </div>
+          
+                    </div> -->
+                    <div class="col-xxl-3 col-md-6">
+                        <label for="placeholderInput" class="form-label">صلاحيات الولوج للنظام</label>
+                        <select class="form-select mb-3" required aria-label="Default select example" name="role" #role="ngModel"
+                        [ngClass]="{'is-invalid':(role.errors && role.touched)||(role.errors && formSubmitted),
+                                'is-valid': (!role.errors && role.touched)||(!role.errors && formSubmitted)}"
+                                 [ngModel]="roleId2" (ngModelChange)="onRoleSelected($event)">
+                            <option value="" disabled>صلاحيات الولوج للنظام </option>
+                            <option [value]="1">مدير النظام</option>
+                            <option [value]="2">موظفي الولاية -DSIT</option>
+                            <option [value]="3">موظفي الملحقات</option>
+                          </select>
+                          <div *ngIf="role.errors?.['required']" class="invalid-feedback">
+                            يرجى إدخال صلاحيات الولوج للنظام
+                        </div>
+                    </div>
+ 
+
+
+
+                    <div class="col-xxl-3 col-md-6" *ngIf="showPachalik || roleId==3">
+                        <label for="placeholderInput" class="form-label kuffi">الباشوية</label>
+                        <select class="form-select mb-3" required aria-label="Default select example" name="pachalik"
+                        [ngClass]="{'is-invalid':(pachalik.errors && pachalik.touched)||(pachalik.errors && formSubmitted),
+                        'is-valid': (!pachalik.errors && pachalik.touched)||(!pachalik.errors && formSubmitted)}"
+                        #pachalik="ngModel" ngModel [ngModel]="pachalik2"  (ngModelChange)="onPachalikChanged($event)">
+                            <option value="" disabled selected>أدخل الباشوية</option>*
+        
+                            <option *ngFor="let pachalik of pachaliks" [value]="pachalik.id">{{pachalik.designation}}</option>
+                          </select>
+                          <div *ngIf="pachalik.errors?.['required']" class="invalid-feedback">
+                       يرجى إدخال الباشوية
+                        </div>
+                     
+                      
+                    </div>
+                    <div class="col-xxl-3 col-md-6" *ngIf="showDistrict || roleId==3">
+                        <label for="placeholderInput" class="form-label kuffi">الدائرة</label>
+                            <select class="form-select mb-3" required  name="district" #district="ngModel"
+                            [ngClass]="{'is-invalid':(district.errors && district.touched)||(district.errors && formSubmitted),
+                            'is-valid': (!district.errors && district.touched)||(!district.errors && formSubmitted)}"
+                            ngModel [ngModel]="district2" (ngModelChange)="onDitrictChanged($event)">
+                            <option value="" disabled selected>أدخل الدائرة</option>
+                           
+                            <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
+                          </select>
+                          <div *ngIf="district.errors?.['required']" class="invalid-feedback">
+                            يرجى إدخال الدائرة
+                        </div>
+                       
+                      
+                    </div>
+                    <div class="col-xxl-3 col-md-6" *ngIf="showAnnexe || roleId==3">
+                        <label for="placeholderInput" class="form-label kuffi">الملحقة</label>
+                        <select class="form-select mb-3" required
+                        [ngClass]="{'is-invalid': (annexeSelect.errors && annexeSelect.touched) || (annexeSelect.errors && formSubmitted),
+                                    'is-valid': (!annexeSelect.errors && annexeSelect.touched) || (!annexeSelect.errors && formSubmitted)}"
+                        aria-label="Default select example" name="annexe"
+                        [ngModel]="annexe2" #annexeSelect="ngModel" 
+                        (ngModelChange)="onAnnexeChanged($event)">
+                            <option value="" disabled selected>أدخل الملحقة</option>
+                           
+                            <option *ngFor="let annexe of annexes" [value]="annexe.id">{{annexe.designation}}</option>
+                          </select>
+                          <div *ngIf="annexeSelect.errors?.['required']" class="invalid-feedback">
+                            يرجى إدخال الملحقة
+                        </div>
+                         
+                        
+                    </div>
+                    </div>
+                    <div></div>
+                </div>
+                </div>
+                </div>
+                <div class="card-footer">
+                    <div class="hstack gap-2">
+                        <button type="submit"  class="btn btn-success">حفظ</button>
+                        <button type="button" class="btn btn-danger">إلغاء</button>
+                    </div>
+                </div>
+                </form>
+                </div>
+                </div>
+                
+
+
+
+<!-- <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">إضافة مستعمل جديد</h4>
+               
+            </div>
+            <form #f="ngForm" (ngSubmit)="uploadPhoto(f)" *ngIf="currentResource">
+            <div class="card-body">
+                <p></p>
+                <div class="live-preview">
+                    <div class="row gy-4">
+                     <input type="text" hidden name="id"   [(ngModel)]="currentResource.id">
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالعربية</label>
+                                <input type="text" name="firstNameAr" [(ngModel)]="currentResource.firstNameAr" required class="form-control" id="placeholderInput"
+                                    placeholder="أدخل الإسم الشخصي بالعربية ">
+                                    <div class="invalid-feedback">
+                                        eeded
+                                    </div>
+                                   
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالفرنسية</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.firstNameFr" name="firstNameFr" placeholder="أدخل الإسم الشخصي بالفرنسية">
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                    الإسم العائلي بالعربية
+                                </label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.lastNameAr" name="lastNameAr"  placeholder="أدخل الإسم العائلي بالعربية">
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم العائلي بالفرنسية</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.lastNameFr" name="lastNameFr"     placeholder="أدخل الإسم العائلي بالفرنسية">
+                            </div>
+                        </div>
+                        <div >
+
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+
+                            <div>
+                                <label for="placeholderInput" class="form-label">رقم البطاقة الوطنية</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.cin" name="cin"    placeholder="أدخل رقم البطاقة الوطنية">
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الهاتف</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.phone" name="phone"        placeholder="أدخل الهاتف">
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">البريد الإلكتروني</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.email" name="email"      placeholder="أدخل البريد الإلكتروني">
+                            </div>
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الوظيفة</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                [(ngModel)]="currentResource.job" name="job"       placeholder="أدخل الوظيفة">
+                            </div>
+                            
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الصورة الشخصية</label>
+                                <input type="file" (change)="onSelectedFile($event)" class="form-control" id="placeholderInput">
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <label for="placeholderInput" class="form-label"></label><br>
+                            <img style="border-radius: 50%;" height="60" src="{{ this.restService.host + '/photoUser/' + currentResource.id }}" alt="">
+
+                            
+                            
+                        </div>
+                    
+               
+                      <div class="card-header align-items-center d-flex">
+                        <h5 class="card-title mb-0 flex-grow-1" style="color: #14c1d4;">
+                            المعلومات الخاصة بالمستعملين للولوج للمنصة
+                          </h5>
+                       
+                    </div>
+                    <div></div>
+                  
+
+                      <div class="row gy-2">  
+                      <div class="col-xxl-3 col-md-6">
+                        <div>
+                            <label for="placeholderInput" class="form-label">إسم المرور</label>
+                            <input type="text" class="form-control" id="placeholderInput"
+                                placeholder="أدخل إسم المرور"  [(ngModel)]="currentResource.username" name="username">
+                        </div>
+                    </div>
+                   
+                    <div class="col-xxl-3 col-md-6" *ngIf="role">
+                        <label for="placeholderInput" class="form-label">صلاحيات الولوج للنظام</label>
+                        <select class="form-select mb-3" aria-label="Default select example" name="role" [ngModel]="role" [compareWith]="compareRoles" (ngModelChange)="onRowClick($event)">
+                            <option [ngValue]="null" disabled>أدخل صلاحيات النظام</option>
+                            <option [ngValue]="{id: 1, roleName: 'ADMIN'}" [selected]="user.role?.id === 1">مدير النظام</option>
+                            <option [ngValue]="{id: 2, roleName: 'USER-DSIT'}" [selected]="user.role?.id === 2">موظفي الولاية -DSIT</option>
+                            <option [ngValue]="{id: 3, roleName: 'USER-AAL'}" [selected]="user.role?.id === 3">موظفي الملحقات</option>
+                          </select>
+                          
+                
+
+                    </div>
+                    </div>
+                    <div></div>
+                </div>
+                </div>
+                </div>
+                <div class="card-footer">
+                    <div class="hstack gap-2">
+                        <button type="submit"  class="btn btn-success">حفظ</button>
+                        <button type="button" class="btn btn-danger">إلغاء</button>
+                    </div>
+                </div>
+                </form>
+                </div>
+                </div>
+                 -->
+
+
+
+
+                <!-- <select class="form-select mb-3" aria-label="Default select example" name="role" [ngModel]="role" [compareWith]="compareRoles" (ngModelChange)="onRowClick($event)">
+                    <option [ngValue]="null" disabled>أدخل صلاحيات النظام</option>
+                    <option [ngValue]="{id: 1, roleName: 'ADMIN'}" [selected]="user.role?.id === 1">مدير النظام</option>
+                    <option [ngValue]="{id: 2, roleName: 'USER-DSIT'}" [selected]="user.role?.id === 2">موظفي الولاية -DSIT</option>
+                    <option [ngValue]="{id: 3, roleName: 'USER-AAL'}" [selected]="user.role?.id === 3">موظفي الملحقات</option>
+                  </select>
+                   -->

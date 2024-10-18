@@ -1,0 +1,106 @@
+
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة الملحقات </h4>
+        <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">ملحقة جديدة <i class="ri-add-line align-bottom me-1"></i></button>
+   
+      </div><!-- end card header -->
+    
+      <div class="card-body">
+        <div class="row g-4 mb-3">
+          <div class="col-sm flex-container2">
+              <!-- <div>
+                1
+              </div>
+            <div>
+              2
+            </div> -->
+                <select class="form-select mb-3 kuffi" style="width: 200px;" name="district" ngModel (ngModelChange)="onRowClickCommon($event)">
+                  <option disabled value="" selected>أدخل الدائرة</option>
+                  <option  [value]="0">-</option>
+                  <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
+                </select>
+       <div class="flex-container">
+        <div class="kuffi pt-2">أظهر</div> &nbsp;&nbsp;&nbsp;&nbsp;
+        <select class="form-select mb-3" style="width: 100px;"  (change)="onSelectedSize($event)">
+          <option  [value]="10">10</option>
+          <option  [value]="20">20</option>
+          <option  [value]="30">30</option>
+          
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="kuffi pt-2">مدخلات</div>
+    
+     
+       </div>
+           
+              
+           
+         
+          </div>
+     
+      </div>
+        <div class="">
+          <div class="">
+
+      
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>إسم الملحقة بالعربية</th>
+                <th>إسم الملحقة بالفرنسية</th>
+                <th> الدائرة </th>
+           
+          
+<th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of annexes; let i = index">
+                <td style="vertical-align: middle;" class="kuffi">{{p.designation}}</td>
+                <td style="vertical-align: middle;">{{p.designationFr}}</td>
+                <td style="vertical-align: middle;" class="kuffi">{{p.district?.designation}}</td>
+             
+                <td style="vertical-align: middle;">
+                    <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
+                    &nbsp;
+                    <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                </td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        </div>
+        <div style="text-align: left;">
+          <div style="display: flex; justify-content: space-between;">
+            <p class="kuffi">{{ getDisplayRange() }}</p>
+            <ul *ngIf="pages && pages.length > 0" class="pagination" [ngClass]="selected == true ? 'd-none' : 'd-flex'">
+                <li class="kuffi">
+                    <a class="clickable page-link" (click)="goToPreviousPage()" [ngClass]="{ 'disabled': currentPage === 0 }">السابق</a>
+                </li>
+                <li [ngClass]="i == currentPage ? 'page-item active' : 'page-item'" *ngFor="let p of pages; let i = index">
+                    <a class="clickable page-link" (click)="onPageClicked(i)">{{i}}</a>
+                </li>
+                <li class="kuffi">
+                    <a class="clickable page-link" (click)="goToNextPage()" [ngClass]="{ 'disabled': currentPage === pages.length - 1 }">التالي</a>
+                </li>
+            </ul>
+            
+        </div>
+        
+        
+     <!-- <span class="kuffi">إظهار {{size}} من أصل {{totalCount}} ملحقات</span> -->
+        </div>
+      </div><!-- end card-body -->
+    </div><!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+
+<!-- end row -->
+

@@ -1,0 +1,251 @@
+
+<!-- End Breadcrumbs -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة مستعملي النظام </h4>
+        <button type="button" (click)="addResource()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp;
+        <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">مستعمل جديد <i class="ri-add-line align-bottom me-1"></i></button>
+      
+   
+      </div><!-- end card header -->
+    
+      <div class="card-body">
+        <div class="row g-4 mb-3">
+          <div class="col-sm flex-container2">
+            <div class="d-flex">
+              <div class="search-box ms-2">
+                <input type="text" class="form-control search kuffi" placeholder="البحث بالبطاقة الوطنية...">
+                
+            </div>
+                <!-- <div>
+                  1
+                </div>
+              <div>
+                2
+              </div> -->&nbsp;
+                  <select class="form-select mb-3 kuffi" style="width: 200px;" name="appRole" #role="ngModel" ngModel (ngModelChange)="onRowClickCommon($event)" >
+                    <option disabled value="" selected>  البحث بصلاحيات النظام </option>
+                    <option  [value]="0">-</option>
+                    <option *ngFor="let appRole of appRoles" [value]="appRole.roleName" >
+                      <ng-container [ngSwitch]="appRole.roleName">
+                        <ng-container *ngSwitchCase="'ADMIN'">مدير النظام</ng-container>
+                        <ng-container *ngSwitchCase="'USER-DSIT'">موضفي الولاية - DSIT</ng-container>
+                        <ng-container *ngSwitchCase="'USER-AAL'">موضفي الملحقات</ng-container>
+                        <ng-container *ngSwitchDefault>{{ appRole.roleName }}</ng-container>
+                      </ng-container>
+                    
+                    </option>
+                    
+                    <option *ngFor="let annexe of annexes" [value]="annexe.id" >موضفي الملحقات التابعين ل  {{annexe.designation}}</option>
+                  </select>
+            </div>
+      
+       <div class="flex-container">
+        <div class="kuffi pt-2">أظهر</div> &nbsp;&nbsp;&nbsp;&nbsp;
+        <select class="form-select mb-3" style="width: 100px;"  (change)="onSelectedSize($event)">
+          <option  [value]="5">5</option>
+          <option  [value]="10">10</option>
+          <option  [value]="20">20</option>
+          <option  [value]="40">40</option>
+          
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="kuffi pt-2">مدخلات</div>
+    
+     
+       </div>
+           
+              
+           
+         
+          </div>
+     
+      </div>
+        <div class="table-responsive">
+          <div class="table-container">
+
+      
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>الإسم الشخصي</th>
+                <th>الإسم العائلي</th>
+                <th>إسم المرور</th>
+                <th>رقم البطاقة الوطنية</th>
+                <th>البريد الإلكتروني</th>
+                <th>الهاتف</th>
+              <th>صلاحيات النظام</th>
+<th>
+
+  
+</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of appUsers; let i = index">
+                <td style="vertical-align: middle;" class="kuffi">{{p.firstNameAr}}</td>
+                <td style="vertical-align: middle;" class="kuffi">{{p.lastNameAr}}</td>
+                <td style="vertical-align: middle;">{{p.username}}</td>
+                <td style="vertical-align: middle;">{{p.cin}}</td>
+                <td style="vertical-align: middle;">{{p.email}}</td>
+                <td style="vertical-align: middle;">{{p.phone}}</td>
+                <td style="vertical-align: middle;" class="kuffi">{{p.role?.roleName}}</td>
+                <td style="vertical-align: middle;">
+                    <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
+                    &nbsp;
+                    <button class="btn  btn-sm btn-secondary" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">إظهار <i class="ri-eye-line"></i></button>
+                    &nbsp;
+
+
+                    <button class="btn  btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                    &nbsp;
+
+
+                    <button class="btn  btn-sm" style="width: 120px;height: 30px;background-color: #5d7bc6;color: white;" (click)="onUpdatePassword(p)">تبديل كلمة السر <i class="ri-lock-2-line"></i></button>
+                </td>
+            </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        </div>
+        <div style="text-align: left;">
+          <div style="display: flex; justify-content: space-between;">
+            <p class="kuffi">{{ getDisplayRange() }}</p>
+            <ul *ngIf="pages && pages.length > 0" class="pagination" [ngClass]="selected == true ? 'd-none' : 'd-flex'">
+                <li class="kuffi">
+                    <a class="clickable page-link" (click)="goToPreviousPage()" [ngClass]="{ 'disabled': currentPage === 0 }">السابق</a>
+                </li>
+                <li [ngClass]="i == currentPage ? 'page-item active' : 'page-item'" *ngFor="let p of pages; let i = index">
+                    <a class="clickable page-link" (click)="onPageClicked(i)">{{i}}</a>
+                </li>
+                <li class="kuffi">
+                    <a class="clickable page-link" (click)="goToNextPage()" [ngClass]="{ 'disabled': currentPage === pages.length - 1 }">التالي</a>
+                </li>
+            </ul>
+            
+        </div>
+        
+        
+     <!-- <span class="kuffi">إظهار {{size}} من أصل {{totalCount}} ملحقات</span> -->
+        </div>
+      </div><!-- end card-body -->
+    </div><!-- end card -->
+  </div>
+  <!-- end col -->
+</div>
+
+<!-- end row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> 
+            لائحة مستعملي النظام  </h4>
+        </div>
+  
+        <div class="card-body">
+          <div class="row g-4 mb-3">
+            <div class="col-sm-auto">
+              <div class="search-box ms-2">
+                <input type="text" class="form-control search kuffi" placeholder="بحث...">
+                <i class="ri-search-line search-icon"></i>
+            </div> 
+             
+            </div>
+            <div class="col-sm">
+                <div class="d-flex justify-content-sm-end">
+                  <button type="button" (click)="withimage()"   class="btn btn-soft-info add-btn"> <i class=" ri-eye-line me-1"></i></button>&nbsp;
+                    <button type="button" (click)="addResource()" class="btn btn-success add-btn">مستعمل جديد <i class="ri-add-line align-bottom me-1"></i></button> 
+  
+                </div>
+                
+            </div>
+        </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>الإسم الشخصي</th>
+                  <th>الإسم العائلي</th>
+                  <th>إسم المرور</th>
+                  <th>رقم البطاقة الوطنية</th>
+                  <th>البريد الإلكتروني</th>
+                  <th>الهاتف</th>
+                <th>الوظيفة</th>
+  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of users; let i = index">
+                  <td style="vertical-align: middle;" class="kuffi">{{p.firstNameAr}}</td>
+                  <td style="vertical-align: middle;" class="kuffi">{{p.lastNameAr}}</td>
+                  <td style="vertical-align: middle;">{{p.username}}</td>
+                  <td style="vertical-align: middle;">{{p.cin}}</td>
+                  <td style="vertical-align: middle;">{{p.email}}</td>
+                  <td style="vertical-align: middle;">{{p.phone}}</td>
+                  <td style="vertical-align: middle;" class="kuffi">{{p.job}}</td>
+                  <td style="vertical-align: middle;">
+                      <button class="btn btn-warning" (click)="onEditResource(p.id)">تبديل <i class="ri-edit-line"></i></button>
+                      &nbsp;
+                      <button class="btn btn-secondary" (click)="onDeleteResource(p.id)">إظهار <i class="ri-eye-line"></i></button>
+                      &nbsp;
+
+
+                      <button class="btn btn-danger" (click)="onDeleteResource(p.id)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                  </td>
+              </tr>
+              
+              </tbody>
+            </table>
+          </div>
+          <div class="row justify-content-md-between align-items-md-center">
+       
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    -->
