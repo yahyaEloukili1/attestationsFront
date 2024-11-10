@@ -1023,8 +1023,7 @@ addResource(){
 onDeleteResource(p){
   let url = `${this.rnpService.host}/citoyens/${p.id}`;
   this.router.navigateByUrl("/delete/"+btoa(url))
-
-  }
+}
   modelError(error) {
     Swal.fire({
     

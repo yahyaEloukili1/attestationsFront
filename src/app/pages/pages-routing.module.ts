@@ -52,8 +52,11 @@ const routes: Routes = [
     {
       path: 'ruelles', loadChildren: () => import('./zanqa/zanqa.module').then(m => m.ZanqaModule),canActivate:[WilayaOrAdminGuard]
     },
+    {
+      path: 'hommesAutorites', loadChildren: () => import('./hommesAutorites/hommesAutorites.module').then(m => m.HommeAutoritesModule),canActivate:[WilayaOrAdminGuard]
+    }
    
-   
+   ,
     // {
     //   path: 'apps', loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule)
     // },
