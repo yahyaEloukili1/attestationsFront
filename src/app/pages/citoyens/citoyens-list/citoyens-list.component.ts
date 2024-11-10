@@ -4,6 +4,7 @@ import { restApiService } from 'src/app/core/services/rest-api.service copy';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import {  } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-citoyens-list',
@@ -570,6 +571,8 @@ this.ruelleName = ""
     this.showRuelle = false
   }
  
+ 
+ 
   
 
   this.quartierSelected =  true
@@ -585,6 +588,8 @@ this.ruelleName = ""
  
   
  }
+ 
+
  onSituationClicked(e, page = 0) {
   console.log(e,'situation clicked')
   this.setTotalCountForSituationSelected(e)

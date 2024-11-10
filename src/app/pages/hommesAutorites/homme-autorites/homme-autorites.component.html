@@ -5,9 +5,9 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة الأحياء </h4>
+          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة رجال السلطة </h4>
           <button type="button" (click)="addResource()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp;
-          <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">حي جديد <i class="ri-add-line align-bottom me-1"></i></button>
+          <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">رجل سلطة جديد <i class="ri-add-line align-bottom me-1"></i></button>
      
         </div><!-- end card header -->
       
@@ -20,7 +20,7 @@
                &nbsp;   <div class="search-box ms-2">
                    
                     <div class="hstack gap-2">
-                      <input type="text" class="form-control search kuffi" placeholder="البحث بإسم الحي   ..." [(ngModel)]="designation">
+                      <input type="text" class="form-control search kuffi" placeholder="البحث  برقم البطاقة الوطنية   ..." [(ngModel)]="designation">
                       <button type="button" class="btn btn-success" (click)="searchByDesignation()"><i class="ri-search-line"></i></button>
                   </div>
                 </div>
@@ -46,7 +46,7 @@
                   <td style="vertical-align: middle;" class="kuffi">{{p.prenom}}</td>
                   <td style="vertical-align: middle;">{{p.nom}}</td>
                   <td style="vertical-align: middle;">{{p.cin}}</td>
-                  <td style="vertical-align: middle;">{{p.fonction.designation}}</td>
+                  <td style="vertical-align: middle;">{{p.fonctionHommeAUtorite.designation}}</td>
                
                   <td style="vertical-align: middle;">
                       <button class="btn  btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>

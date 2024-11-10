@@ -62,13 +62,20 @@
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الأزقة</span>  
                       </a>
                   </li>
+             
+                      
                   <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/agents/list']" [routerLinkActive]="['is-active']">
+                          <span class="droid-arabic-kufi" style="color: white !important;">تدبير أعوان السلطة</span>  
+                      </a>
+                  </li>
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                    <a href="javascript:void(0);" class="is-parent nav-link menu-link"
+                      [routerLink]="['/hommesAutorites/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير رجال السلطة</span>  
                       </a>
                   </li>
-                      
                 
                 
             </ul>
