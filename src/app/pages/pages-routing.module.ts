@@ -35,6 +35,9 @@ const routes: Routes = [
       path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule),canActivate:[WilayaOrAdminGuard]
     },
     {
+      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule),canActivate:[WilayaOrAdminGuard]
+    },
+    {
       path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canActivate: [AdminGuard]
     },
     {

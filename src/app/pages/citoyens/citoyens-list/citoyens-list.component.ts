@@ -1080,7 +1080,7 @@ onDeleteResource(p){
   onEditResource(p:any){
     console.log(p.id,";;;;;;;;;;;;;;")
     let url = `${this.rnpService.host}/citoyens/${p.id}`;
-     this.router.navigateByUrl("users/edit/"+btoa(url))
+     this.router.navigateByUrl("attestations/edit/"+btoa(url))
   }  
 
 
