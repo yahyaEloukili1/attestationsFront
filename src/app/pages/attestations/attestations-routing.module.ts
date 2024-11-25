@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AttestationsEditComponent } from './attestations-edit/attestations-edit.component';
+import { AddAttestationComponent } from './add-attestation/add-attestation.component';
 
 
 const routes: Routes = [
@@ -9,6 +10,11 @@ const routes: Routes = [
     path: "edit/:id",
     component: AttestationsEditComponent
   }
+,
+{
+  path: "add",
+  component: AddAttestationComponent
+}
 
 ];
 

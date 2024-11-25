@@ -1,0 +1,165 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1 kuffi">إضافة شهادة جديدة  </h4>
+               
+            </div><!-- end card header -->
+        <form #f="ngForm" (ngSubmit)="onSaveResource(f)" [ngClass]="{'was-validated':formSubmitted}">
+            <div class="card-body">
+                <p></p>
+                <div class="live-preview">
+                    <div class="row gy-4">
+                 
+          
+                        <div class="col-xxl-3 col-md-3">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi"> 
+                                    رقم البطاقة الوطنية للمواطن 
+                                  </label>
+                                <input type="text" name="designation" [(ngModel)]="cin"  class="form-control kuffi" id="placeholderInput"
+                                    placeholder=" رقم البطاقة الوطنية للمواطن"  >
+                                   
+                                    <!-- <div class="invalid-feedback kuffi" *ngIf="(f.submitted && designationInput.invalid)">
+                                        يرجى إسم الحي بالعربية
+                                    </div> -->
+                                  
+                                  
+                                   
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-6 col-md-6">
+                            <div>
+                                <label for="placeholderInput" [hidden]="true" class="form-label kuffi">إسم الحي بالفرنسية  </label> <br>
+                                <button class="btn btn-primary mt-2" type="button" (click)="searchByCin()">بحث</button>
+                                  
+                                  
+                                   
+                            </div>
+                        </div><!--end col-->
+            
+                     
+                    
+
+    </div>
+ 
+    </div>
+    <div *ngIf="display==true">
+        <div class="">
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                     <div class="card-header">
+                     <label>  تفاصيل الموظف : </label>  <label style="font-weight: bold;">{{currentResource?.firstNameAr}} {{currentResource?.lastNameAr}}</label> 
+                     </div>
+                     <div class="card-body">
+                        <div class="row gy-4">
+            
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالعربية</label> :&nbsp;
+                               <span style="font-weight: bold;" class="kuffi">{{currentResource?.firstNameAr}}</span> 
+                              
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                    الإسم العائلي بالعربية
+                                </label> :&nbsp;
+                                <span style="font-weight: bold;" class="kuffi">{{currentResource?.lastNameAr}}</span> 
+                              
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالفرنسية</label> :&nbsp;
+                                <span style="font-weight: bold;">{{currentResource?.firstNameFr | uppercase }}</span> 
+                         
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم العائلي بالفرنسية</label> :&nbsp;
+                                <span style="font-weight: bold;">{{currentResource?.lastNameFr | uppercase}}</span> 
+                         
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+            
+                            <div>
+                                <label for="placeholderInput" class="form-label">رقم البطاقة الوطنية</label> :&nbsp;
+                                <span style="font-weight: bold;">{{currentResource?.cin | uppercase}}</span> 
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الهاتف</label> :&nbsp;
+                                <span style="font-weight: bold;">{{currentResource?.phone}}</span> 
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">البريد الإلكتروني</label> :&nbsp;
+                                <span style="font-weight: bold;">{{currentResource?.email}}</span> 
+                            <!-- <div class="invalid-feedback" *ngIf="f.submitted && email.invalid && email.errors?.['email']">
+                                يرجى إدخال البريد الإلكتروني بصيغة صحيحة.
+                            </div> -->
+                        </div><!--end col-->
+              
+                      
+                        </div>
+                        
+                  
+                
+              
+                     </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-xxl-4 col-md-6">
+                <label for="placeholderInput" class="form-label kuffi"
+                >
+              نوع الشهادة
+             </label>
+             <select class="form-select mb-3 kuffi" name="type" required  ngModel  #designationInput="ngModel">
+                <option  value="" disabled selected>أدخل نوع الشهادة</option>
+                <option  value="1">
+                    شهادة السكنى
+                </option>
+                <option  value="2">
+                    تاريخ الإزدياد
+                </option>
+            
+              </select> 
+              </div>
+              <div class="invalid-feedback kuffi" *ngIf="f.submitted && (designationInput.invalid)">
+                    
+                يرجى إدخال نوع الشهادة
+             </div>
+             <div class="col-xxl-4 col-md-6">
+                <div>
+                    <label for="placeholderInput" class="form-label kuffi"> بحث عون السلطة </label>
+                    <select class="form-select mb-3 kuffi" name="pachalik"  required ngModel #designationFrInput="ngModel">
+                        <option  value="" disabled selected>أدخل الباشوية</option>
+                        <option *ngFor="let pachalik of agentAutorites" [value]="pachalik.id">{{pachalik.cin}}-{{pachalik.nom}}-{{pachalik.prenom}}</option>
+                      </select> 
+                    <div class="invalid-feedback kuffi" *ngIf="f.submitted && designationFrInput.invalid">
+                        يرجى إدخال إسم الدائرة بالفرنسية
+                    </div>  
+                </div>
+            </div><!--end col-->
+   
+                   
+                  
+                   
+            </div>
+                </div>
+                </div>
+            
+        </div>
+    </div>
+    </div>
+
+ 
+           </form>
