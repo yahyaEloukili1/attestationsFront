@@ -59,7 +59,7 @@ Swal.fire({
 }).then(result => {
  
   if (result.value) {
-    this.rnpService.deleteResource('quartiers',url).subscribe(data=>{
+    this.rnpService.deleteResource('HommeAutorites',url).subscribe(data=>{
       this.getReources()
        },err=>{
          console.log(err)

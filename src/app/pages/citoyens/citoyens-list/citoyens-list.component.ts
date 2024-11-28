@@ -1026,9 +1026,34 @@ addResource(){
 
 }
 onDeleteResource(p){
-  let url = `${this.rnpService.host}/citoyens/${p.id}`;
-  this.router.navigateByUrl("/delete/"+btoa(url))
-}
+  this.modelWarning().then(result => {
+      if (result.value) {
+        if(this.districtSelected==false){
+          let url = p['_links'].self.href
+          this.rnpService.deleteResource('citoyens',url).subscribe(data=>{
+           
+            this.modelSuccess('لقد تم حذف الملحقة')
+      
+             },err=>{
+              this.modelError('لا يمكن حدف الملحقة')
+          
+             })
+        }else{
+          
+          this.rnpService.deleteResource('citoyens',`${this.rnpService.host}/citoyens/${p.id}`).subscribe(data=>{
+           
+            this.modelSuccess('لقد تم حذف الملحقة')
+             },err=>{
+              this.modelError('لا يمكن حدف الملحقة')
+             })
+        
+        }
+    
+      
+      }
+    });
+     
+    }
   modelError(error) {
     Swal.fire({
     

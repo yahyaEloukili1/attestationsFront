@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AttestationsEditComponent } from './attestations-edit/attestations-edit.component';
 import { AddAttestationComponent } from './add-attestation/add-attestation.component';
+import { AttestationsListComponent } from './attestations-list/attestations-list.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
 {
   path: "add",
   component: AddAttestationComponent
+},
+{
+  path: "list",
+  component: AttestationsListComponent
 }
 
 ];

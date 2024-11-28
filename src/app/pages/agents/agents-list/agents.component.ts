@@ -42,6 +42,7 @@ addResource(){
 
 }
 onDeleteResource(url:string){
+  console.log(url,"sedse");
 Swal.fire({
   title: 'هل أنت متأكد؟',
   text: 'سوف يتم الحذف بصفة نهائية!',
@@ -59,7 +60,7 @@ Swal.fire({
 }).then(result => {
  
   if (result.value) {
-    this.rnpService.deleteResource('quartiers',url).subscribe(data=>{
+    this.rnpService.deleteResource('agentAutorites',url).subscribe(data=>{
       this.getReources()
        },err=>{
          console.log(err)

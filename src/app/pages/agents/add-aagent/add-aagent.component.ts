@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class AddAagentComponent {
   fonctions
   formSubmitted: boolean = false;
+  annexes: any;
   constructor(private pdiService: restApiService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,6 +26,9 @@ export class AddAagentComponent {
     this.pdiService.getResourceAll('fonctions').subscribe(data=>{
       this.fonctions = data['_embedded'].fonctions  
   })
+  this.pdiService.getResourceAll('annexes').subscribe(data=>{
+    this.annexes = data['_embedded'].annexes  
+})
   }
   onSaveResource(f:NgForm){
     this.formSubmitted = true;
@@ -34,12 +38,13 @@ export class AddAagentComponent {
         else{
           console.log(f.value,"sqqs")
           f.value.fonction = `${this.pdiService.host}/fonctions/${f.value.fonction}`
+                    f.value.annexe = `${this.pdiService.host}/annexes/${f.value.annexe}`
           this.pdiService.addResource("agentAutorites",f.value).subscribe(data=>{
         this.reset(f)
           this.formSubmitted  = false
-          this.modelSuccess('تم حفظ الدائرة بنجاح')
+          this.modelSuccess('تم حفظ عوان السلطة بنجاح')
                 },err=>{
-                  this.modelError('يتعذر إضافة الدائرة')
+                  this.modelError('يتعذر إضافة عوان السلطة')
                 })
         }
  

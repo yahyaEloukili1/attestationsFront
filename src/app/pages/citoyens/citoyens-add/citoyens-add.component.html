@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">تبديل المواطن - الملحقة الإدارية 1 </h4>
+                <h4 class="card-title mb-0 flex-grow-1">  إضافة مواطن جديد</h4>
                
             </div><!-- end card header -->
             <form #f="ngForm" (ngSubmit)="uploadPhoto(f)">
@@ -205,7 +205,7 @@
                                 
                                 }" id="placeholderInput"
                                  (ngModelChange)="findUserTele()"
-                                    placeholder="أدخل البريد الإلكتروني" #tele="ngModel"
+                                    placeholder="أدخل الهاتف " #tele="ngModel"
                                     pattern="^(\+?212|0)([ \-_/]*)(\d[ \-_/]*){9}$|^(\+?2120)([ \-_/]*)(\-?\d){9}$">
 
                                 <!-- <div [hidden]="!tele.errors?.['required']" class="invalid-feedback">

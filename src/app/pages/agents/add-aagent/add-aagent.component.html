@@ -61,6 +61,17 @@
                             </div>
                     
                         </div>
+                        <div class="col-xxl-3 col-md-3">
+                            <label for="placeholderInput" class="form-label kuffi">الملحقة</label>
+                              <select class="form-select mb-3 kuffi" name="annexe"  required ngModel #annexeSelected="ngModel">
+                                <option  value="" disabled selected>أدخل الملحقة</option>
+                                <option *ngFor="let pachalik of annexes" [value]="pachalik.id">{{pachalik.designation}}</option>
+                              </select> 
+                              <div class="invalid-feedback kuffi" *ngIf="f.submitted && (annexeSelected.invalid)">
+                                يرجى إدخال الملحقة
+                            </div>
+                    
+                        </div>
                         <div>
                             <div class="hstack gap-2">
                                 <button type="submit"  class="btn btn-success">حفظ</button>

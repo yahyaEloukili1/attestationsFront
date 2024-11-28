@@ -258,7 +258,7 @@ onRoleClicked(e, page = 0) {
     this.rnpService.getOneResourceById("appRoles",e).subscribe(data=>{
       console.log(data.roleNameAr,"jhjjhjhh")
       this.roleName = data.roleNameAr
-      this.roleName =  ' ذوي الحالة العائلية: '+ this.roleName
+      this.roleName =  ' ذوي  صلاحية: '+ this.roleName
       this.pachalikForhtml = ""
       this.pachalikName = ""
       this.districtName = ""

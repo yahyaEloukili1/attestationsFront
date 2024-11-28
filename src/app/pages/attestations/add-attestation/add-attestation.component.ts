@@ -19,21 +19,32 @@ export class AddAttestationComponent {
   display = false
   currentResource
   agentAutorites: any;
+  dateOfBirthValue
+  typeAttestations: any;
+  citoyen: any;
   constructor(private pdiService: restApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.getReources()
+    const today = new Date();
+    this.dateOfBirthValue = today.toISOString().split('T')[0];
   }
   getReources(){
     this.pdiService.getResourceAll('agentAutorites').subscribe(data=>{
       this.agentAutorites = data['_embedded'].agentAutorites 
       console.log(this.agentAutorites,"77777777"); 
     })
+    this.pdiService.getResourceAll('typeAttestations').subscribe(data=>{
+      this.typeAttestations = data['_embedded'].typeAttestations 
+      console.log(this.typeAttestations,"77777777"); 
+    })
     }
   searchByCin(){
     let url = `${this.pdiService.host}/citoyens/search/findByCin2?cin=${this.cin}`;
     this.pdiService.getOneResource(url).subscribe(data=>{
       let citoyens = data['_embedded'].citoyens
+      this.citoyen = citoyens[0]
+      console.log(citoyens,",,,,,,,,,,,,,,");
       if(citoyens.length<1){
         this.modelError("لا يوجد مواطن بهذا الرقم");
         this.display = false
@@ -45,23 +56,7 @@ export class AddAttestationComponent {
     })
   }
 
-  onSaveResource(f:NgForm){
-    this.formSubmitted = true;
-        if(!f.valid){
-        this.modelError( 'يرجى التأكد من البيانات وإعادة المحاولة')
-        }
-        else{
-         
-          this.pdiService.addResource("quartiers",f.value).subscribe(data=>{
-      this.reset(f)
-          this.formSubmitted  = false
-          this.modelSuccess('تم حفظ الحي بنجاح')
-                },err=>{
-                  this.modelError('يتعذر إضافة الحي')
-                })
-        }
- 
-}
+
   modelError(error) {
     Swal.fire({
     
@@ -100,6 +95,28 @@ export class AddAttestationComponent {
   gotoList(){
     this.router.navigateByUrl('sgi/districts');
   }
+  onSaveResource(f:NgForm){
+    this.formSubmitted = true;
+    console.log(f.value,"leleldr");
+    // if(!f.valid){
+    // this.modelError( 'يرجى التأكد من البيانات وإعادة المحاولة')
+    // }
+    // else{
+     
+       f.value.typeAttestation = `${this.pdiService.host}/typeAttestations/${f.value.typeAttestation}`
+       f.value.agentAutorite= `${this.pdiService.host}/agentAutorites/${f.value.agentAutorite}`
+      f.value.citoyen= `${this.pdiService.host}/citoyens/${this.citoyen['id']}`
+      f.value.cin = this.cin
+      this.pdiService.addResource("attestations",f.value).subscribe(data=>{
+      this.reset(f)
+      this.display = false
+      this.formSubmitted  = false
+      this.modelSuccess('تم حفظ الشهادة بنجاح')
+            },err=>{
+              this.modelError('يتعذر إضافة الشهادة')
+            })
+    }
+  // }
   
 
 }

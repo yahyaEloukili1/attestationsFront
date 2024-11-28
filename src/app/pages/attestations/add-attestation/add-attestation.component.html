@@ -17,7 +17,7 @@
                                 <label for="placeholderInput" class="form-label kuffi"> 
                                     رقم البطاقة الوطنية للمواطن 
                                   </label>
-                                <input type="text" name="designation" [(ngModel)]="cin"  class="form-control kuffi" id="placeholderInput"
+                                <input type="text" name="cin" [(ngModel)]="cin"  class="form-control kuffi" id="placeholderInput"
                                     placeholder=" رقم البطاقة الوطنية للمواطن"  >
                                    
                                     <!-- <div class="invalid-feedback kuffi" *ngIf="(f.submitted && designationInput.invalid)">
@@ -31,7 +31,7 @@
                         <div class="col-xxl-6 col-md-6">
                             <div>
                                 <label for="placeholderInput" [hidden]="true" class="form-label kuffi">إسم الحي بالفرنسية  </label> <br>
-                                <button class="btn btn-primary mt-2" type="button" (click)="searchByCin()">بحث</button>
+                                <button class="btn btn-primary kuffi mt-2" type="button" (click)="searchByCin()">بحث</button>
                                   
                                   
                                    
@@ -50,7 +50,7 @@
                 <div class="col-lg-12">
                   <div class="card">
                      <div class="card-header">
-                     <label>  تفاصيل الموظف : </label>  <label style="font-weight: bold;">{{currentResource?.firstNameAr}} {{currentResource?.lastNameAr}}</label> 
+                     <label style="font-weight: bold;color: red;">  تفاصيل المواطن : </label>  <label style="font-weight: bold;color: red;">{{currentResource?.firstNameAr}} {{currentResource?.lastNameAr}}</label> 
                      </div>
                      <div class="card-body">
                         <div class="row gy-4">
@@ -94,7 +94,7 @@
                         </div><!--end col-->
                         <div class="col-xxl-3 col-md-6">
                             <div>
-                                <label for="placeholderInput" class="form-label">الهاتف</label> :&nbsp;
+                                <label for="placeholderInput" class="form-lSH12543abel">الهاتف</label> :&nbsp;
                                 <span style="font-weight: bold;">{{currentResource?.phone}}</span> 
                             </div>
                         </div><!--end col-->
@@ -122,14 +122,9 @@
                 >
               نوع الشهادة
              </label>
-             <select class="form-select mb-3 kuffi" name="type" required  ngModel  #designationInput="ngModel">
-                <option  value="" disabled selected>أدخل نوع الشهادة</option>
-                <option  value="1">
-                    شهادة السكنى
-                </option>
-                <option  value="2">
-                    تاريخ الإزدياد
-                </option>
+             <select class="form-select mb-3 kuffi" name="typeAttestation" required  ngModel  #designationInput="ngModel">
+                <option  value="" disabled selected>أدخل  نوع الشهادة</option>
+                <option *ngFor="let pachalik of typeAttestations" [value]="pachalik.id">{{pachalik.designation}}</option>
             
               </select> 
               </div>
@@ -140,8 +135,8 @@
              <div class="col-xxl-4 col-md-6">
                 <div>
                     <label for="placeholderInput" class="form-label kuffi"> بحث عون السلطة </label>
-                    <select class="form-select mb-3 kuffi" name="pachalik"  required ngModel #designationFrInput="ngModel">
-                        <option  value="" disabled selected>أدخل الباشوية</option>
+                    <select class="form-select mb-3 kuffi" name="agentAutorite"  required ngModel #designationFrInput="ngModel">
+                        <option  value="" disabled selected>أدخل عون السلطة</option>
                         <option *ngFor="let pachalik of agentAutorites" [value]="pachalik.id">{{pachalik.cin}}-{{pachalik.nom}}-{{pachalik.prenom}}</option>
                       </select> 
                     <div class="invalid-feedback kuffi" *ngIf="f.submitted && designationFrInput.invalid">
@@ -149,10 +144,29 @@
                     </div>  
                 </div>
             </div><!--end col-->
-   
+            <div class="col-xxl-4 col-md-6">
+                <label for="placeholderInput" class="form-label kuffi">تاريخ تسجيل الشهادة </label>
+                <input type="date" name="dateOfBirth"  ngModel [(ngModel)]="dateOfBirthValue" style="text-align: right;" [ngClass]="{'is-invalid':(dateOfBirth.errors && dateOfBirth.touched)||(dateOfBirth.errors && formSubmitted),
+                'is-valid': (!dateOfBirth.errors && dateOfBirth.touched)||(!dateOfBirth.errors && formSubmitted)}" required   class="form-control kuffi" id="placeholderInput"
+                    placeholder="أدخل تاريخ تسجيل الشهادة    " #dateOfBirth="ngModel">
+                    <div [hidden]="!dateOfBirth.errors?.['required']"  class="invalid-feedback">
+                        المرجو إدخال تاريخ الإزدياد
+                    </div>
+                    
                    
-                  
-                   
+            </div>
+            <div class="col-xxl-4 col-md-6 mt-3">
+            <label for="placeholderInput" class="form-label">الغرض من الشهادة  </label>
+            <input type="text" class="form-control kuffi" [ngClass]="{'is-invalid':(prenomFr.errors && prenomFr.touched)||(prenomFr.errors && formSubmitted),
+            'is-valid': (!prenomFr.errors && prenomFr.touched)||(!prenomFr.errors && formSubmitted)}" required id="placeholderInput"
+            ngModel name="but" placeholder="أدخل الغرض من الشهادة  "  #prenomFr="ngModel">
+            <div class="card-footer">
+            <div class="hstack gap-2">
+            <button class="btn btn-success  kuffi" type="submit" >تسجيل الشهادة</button>
+            <button type="button" class="btn btn-danger kuffi" (click)="reset(f)">إلغاء</button>
+            </div>
+                 </div> 
+                   </div>
             </div>
                 </div>
                 </div>

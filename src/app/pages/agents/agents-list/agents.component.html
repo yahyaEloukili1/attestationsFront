@@ -44,9 +44,9 @@
               <tbody>
                 <tr *ngFor="let p of quartiers; let i = index">
                   <td style="vertical-align: middle;" class="kuffi">{{p.prenom}}</td>
-                  <td style="vertical-align: middle;">{{p.nom}}</td>
+                  <td style="vertical-align: middle;" class="kuffi">{{p.nom}}</td>
                   <td style="vertical-align: middle;">{{p.cin}}</td>
-                  <td style="vertical-align: middle;">{{p.fonction.designation}}</td>
+                  <td style="vertical-align: middle;" class="kuffi">{{p.fonction.designation}}</td>
                
                   <td style="vertical-align: middle;">
                       <button class="btn  btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
