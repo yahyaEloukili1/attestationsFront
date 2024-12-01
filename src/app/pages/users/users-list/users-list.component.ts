@@ -295,5 +295,8 @@ onUpdatePassword(p){
   this.router.navigateByUrl("changePassword/"+p.id)
 
 }
+uploadFile(){
+  
+}
 }
 

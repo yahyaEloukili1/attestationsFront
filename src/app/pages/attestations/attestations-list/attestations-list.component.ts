@@ -60,6 +60,9 @@ addResource(){
     this.router.navigateByUrl("attestations/add")
 
 }
+print(){
+
+}
 onDeleteResource(p){
 this.modelWarning().then(result => {
     if (result.value) {
@@ -180,5 +183,22 @@ getDisplayRange(): string {
 onRowClickCommon(e){
 
 }
+
+
+uploadFile(){
+  this.rnpService.uploadFileWithData3()
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

@@ -94,10 +94,10 @@
                   <td style="vertical-align: middle;" class="kuffi">{{p?.but}}</td>
                
                   <td style="vertical-align: middle;">
-                      <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
+                      <!-- <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button> -->
                       &nbsp;
                       <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>&nbsp;
-                      <button class="btn btn-sm btn-primary" style="width: 150px;height: 30px;">استخراج الشهادة <i class="ri-delete-bin-6-line"></i></button>
+                      <button class="btn btn-sm btn-primary" style="width: 150px;height: 30px;" (click)="uploadFile()">استخراج الشهادة <i class="ri-delete-bin-6-line"></i></button>
                   </td>
               </tr>
               

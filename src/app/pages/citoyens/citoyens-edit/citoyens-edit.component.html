@@ -1,1 +1,471 @@
-<p>citoyens-edit works!</p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1"> تبديل المواطن</h4>
+               
+            </div><!-- end card header -->
+            <form #f="ngForm" (ngSubmit)="uploadPhoto(f)">
+            <div class="card-body">
+                <p></p>
+                <div class="live-preview">
+                    <div class="row gy-4">
+                     
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالعربية</label>
+                                <input type="text" class="form-control" [ngClass]="{'is-invalid':(prenomAr.errors && prenomAr.touched)||(prenomAr.errors && formSubmitted),
+                                'is-valid': (!prenomAr.errors && prenomAr.touched)||(!prenomAr.errors && formSubmitted)}" required id="placeholprenomFrrInput"
+                               pattern="^[\u0600-\u06FF\s]+$"
+                              ngModel name="firstNameAr" placeholder="أدخل الإسم الشخصي بالعربية"  #prenomAr="ngModel">
+                            
+                                <div [hidden]="!prenomAr.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم الشخصي بالعربية 
+                                </div>
+                                <div [hidden]="!prenomAr.errors?.['pattern']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم الشخصي باللغة العربية
+                                </div>
+                            
+                            </div>
+                        </div><!--end col-->
+            
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم الشخصي بالفرنسية</label>
+                                <input type="text" class="form-control" [ngClass]="{'is-invalid':(prenomFr.errors && prenomFr.touched)||(prenomFr.errors && formSubmitted),
+                                'is-valid': (!prenomFr.errors && prenomFr.touched)||(!prenomFr.errors && formSubmitted)}" required id="placeholderInput"
+                                ngModel name="firstNameFr" placeholder="أدخل الإسم الشخصي بالفرنسية"  #prenomFr="ngModel">
+                                <div [hidden]="!prenomFr.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم الشخصي بالفرنسية 
+                                </div>
+                           
+                            </div>
+                        </div><!--end col-->
+
+
+
+
+
+
+
+
+
+
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                    الإسم العائلي بالعربية
+                                </label>
+                                <input type="text" class="form-control"
+                                [ngClass]="{'is-invalid':(nomAR.errors && nomAR.touched)||(nomAR.errors && formSubmitted ),
+                                'is-valid': (!nomAR.errors && nomAR.touched)||(!nomAR.errors && formSubmitted)}"
+                                required id="placeholderInput"   pattern="^[\u0600-\u06FF\s]+$"
+                                ngModel name="lastNameAr"  placeholder="أدخل الإسم العائلي بالعربية" #nomAR="ngModel">
+                                <div [hidden]="!nomAR.errors?.['required'] "  class="invalid-feedback">
+                                    يرجى إدخال الإسم العائلي بالعربية 
+                                </div>
+                                         <div [hidden]="!nomAR.errors?.['pattern']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم العائلي باللغة العربية
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الإسم العائلي بالفرنسية</label>
+                                <input type="text" required
+                                [ngClass]="{'is-invalid':(nomFR.errors && nomFR.touched)||(nomFR.errors && formSubmitted),
+                                'is-valid': (!nomFR.errors && nomFR.touched)||(!nomFR.errors && formSubmitted)}"
+                                class="form-control" id="placeholderInput"
+                                ngModel name="lastNameFr"     placeholder="أدخل الإسم العائلي بالفرنسية" #nomFR="ngModel">
+                                <div [hidden]="!nomFR.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الإسم العائلي بالفرنسية 
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <label for="placeholderInput" class="form-label">الجنس  </label>
+                            <select class="form-select mb-3" [ngClass]="{'is-invalid':(sex.errors && sex.touched)||(sex.errors && formSubmitted),
+                                'is-valid': (!sex.errors && sex.touched)||(!sex.errors && formSubmitted)}" required ngModel #sex="ngModel" aria-label="Default select example" name="sex" [(ngModel)]="sexe">
+                <option value="" disabled selected>أدخل الجنس</option>
+                                    <option value="1">ذكر</option>
+                                    <option value="2">أنثى</option>
+                                  
+                                  </select>
+                                  <div [hidden]="!sex.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الجنس   
+                                </div>
+                              <!-- <div class="invalid-feedback"  *ngIf="f.submitted && role.invalid">
+                                eeded
+                            </div> -->
+                        </div>
+                        <div class="col-xxl-3 col-md-6">
+                            <label for="placeholderInput" class="form-label">الحالة العائلية  </label>
+                            <select class="form-select mb-3" [ngClass]="{'is-invalid':(situation.errors && situation.touched)||(situation.errors && formSubmitted),
+                            'is-valid': (!situation.errors && situation.touched)||(!situation.errors && formSubmitted)}" required ngModel #situation="ngModel" aria-label="Default select example" name="situation" [(ngModel)]="situatione">
+                              <option value="" disabled selected>أدخل الحالة العائلية</option>
+                                    <option value="1">عازب</option>
+                                    <option value="2">متزوج(ة)</option>
+                                    <option value="3">مطلقة(ة) </option>
+                                    <option value="4">أرملة</option>
+                                  </select>
+                                  <div [hidden]="!situation.errors?.['required']"  class="invalid-feedback">
+                                    يرجى إدخال الحالة العائلية   
+                                </div>
+                              <!-- <div class="invalid-feedback"  *ngIf="f.submitted && role.invalid">
+                                eeded
+                            </div> -->
+                        </div>
+
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الصورة الشخصية</label>
+                                <input type="file" ngModel name="fileInput1" (change)="onSelectedFile($event)" class="form-control" id="placeholderInput">
+                              
+                            </div>
+                            
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+
+                            <div>
+                                <label for="placeholderInput" class="form-label">رقم البطاقة الوطنية</label>
+                                <input type="text" required class="form-control" id="placeholderInput"
+                                [(ngModel)]="cinn" name="cin" 
+                                (ngModelChange)="findUserByCin()"
+                                 [ngClass]="{'is-invalid':(cin.errors && cin.touched)
+                                  ||(cin.errors && formSubmitted)
+                               ||   (cinError && cin.touched)
+                               ||   (cinError && formSubmitted),
+                                  'is-valid': (!cin.errors &&!cinError &&  cin.touched)||(!cin.errors &&!cinError&& formSubmitted)}"
+                                pattern="[a-zA-Z]{1,2}[0-9]+"    placeholder="أدخل رقم البطاقة الوطنية" #cin="ngModel">
+                                <div *ngIf="cin.errors?.['required'] && !cinError" class="invalid-feedback">
+                                    يرجى إدخال رقم البطاقة الوطنية 
+                                </div>
+                                <div *ngIf="cin.errors?.['pattern'] && !cinError" class="invalid-feedback">
+                                    يرجى التحقق من رقم البطاقة الوطنية
+                                </div>
+                                <div *ngIf="!cin.errors?.['required'] && cinError" class="invalid-feedback">
+                                      رقم البطاقة الوطنية الذي أدخلته مستخدم في حساب آخر
+                                </div>
+
+
+
+
+                                
+
+
+
+
+                            </div>
+                        </div><!--end col-->
+                     
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                الصورة الأمامية للبطاقة الوطنية</label>
+                                <input type="file" ngModel name="fileInput2" (change)="onSelectedFileCin1($event)" class="form-control" id="placeholderInput">
+                              
+                            </div>
+                            
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                    الصورة الخلفية للبطاقة الوطنية</label>
+                                <input type="file" ngModel name="fileInput3" (change)="onSelectedFileCin2($event)" class="form-control" id="placeholderInput">
+                              
+                            </div>
+                            
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                      عقد الإزدياد </label>
+                                <input type="file" ngModel name="fileInput4" (change)="onSelectedFileExtraitNaissance($event)" class="form-control" id="placeholderInput">
+                              
+                            </div>
+                            
+                        </div><!--end col-->
+                     
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الهاتف</label>
+                                <!-- <input type="text" required [ngClass]="{'is-invalid': (tele.errors && tele.touched) || (tele.errors && formSubmitted),
+                                'is-valid': (!tele.errors && tele.touched) || (!tele.errors && formSubmitted)}"
+                               [(ngModel)]="phone"  (ngModelChange)="findUserTele()" 
+                                class="form-control" id="placeholderInput"  name="phone" placeholder="أدخل الهاتف" #tele="ngModel"
+                                pattern="^(\+?212|0)([ \-_/]*)(\d[ \-_/]*){9}$|^(\+?2120)([ \-_/]*)(\-?\d){9}$"> -->
+
+                               
+                                <input type="text" name="phone" required [(ngModel)]="phone"  class="form-control kuffi" [ngClass]="{'is-invalid':(tele.errors && tele.touched)||(tele.errors && formSubmitted)
+                                
+                                ||   (teleError && tele.touched)
+                             ||   (teleError && formSubmitted),
+                                'is-valid': (!tele.errors &&!teleError &&  tele.touched)||(!tele.errors &&!teleError&& formSubmitted)
+                                
+                                
+                                }" id="placeholderInput"
+                                 (ngModelChange)="findUserTele()"
+                                    placeholder="أدخل الهاتف " #tele="ngModel"
+                                    pattern="^(\+?212|0)([ \-_/]*)(\d[ \-_/]*){9}$|^(\+?2120)([ \-_/]*)(\-?\d){9}$">
+
+                                <!-- <div [hidden]="!tele.errors?.['required']" class="invalid-feedback">
+                                    يرجى إدخال الهاتف 
+                                </div>
+                                <div [hidden]="!tele.errors?.['pattern']" class="invalid-feedback">
+                                    يرجى إدخال هاتف صحيح 
+                                </div>
+                                <div *ngIf="!tele.errors?.['required'] && teleError" class="invalid-feedback">
+                                    البريد الإلكتروني الذي أدخلته مستخدم في حساب آخر
+                                </div> -->
+                                <div *ngIf="tele.errors?.['required'] && !teleError" class="invalid-feedback">
+                                    يرجى إدخال الهاتف 
+                                </div>
+                                <div *ngIf="tele.errors?.['pattern'] && !teleError" class="invalid-feedback">
+                                    يرجى إدخال هاتف صحيح 
+                                </div>
+                                <!-- {{email.errors?.['required']}} {{!teleError}} -->
+                                <div *ngIf="!tele.errors?.['required'] && teleError" class="invalid-feedback">
+                                    الهاتف  الذي أدخلته مستخدم في حساب آخر
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi"> البريد الإلكتروني </label>
+                                <input type="text" name="email" required [(ngModel)]="emaill"  class="form-control kuffi" [ngClass]="{'is-invalid':(email.errors && email.touched)||(email.errors && formSubmitted)
+                                
+                                ||   (emailError && email.touched)
+                             ||   (emailError && formSubmitted),
+                                'is-valid': (!email.errors &&!emailError &&  email.touched)||(!email.errors &&!emailError&& formSubmitted)
+                                
+                                
+                                }" id="placeholderInput"
+                                 (ngModelChange)="findUserByEmail()"
+                                    placeholder="أدخل البريد الإلكتروني" #email="ngModel"
+                                    pattern="[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"
+                                    >
+                                
+                                 <div *ngIf="email.errors?.['required'] && !emailError" class="invalid-feedback">
+                                    يرجى إدخال البريد الإلكتروني  
+                                </div>
+                                <div *ngIf="email.errors?.['pattern'] && !emailError" class="invalid-feedback">
+                                    يرجى إدخال بريد إلكتروني صحيح  
+                                </div>
+                                <!-- {{email.errors?.['required']}} {{!emailError}} -->
+                                <div *ngIf="!email.errors?.['required'] && emailError" class="invalid-feedback">
+                                    البريد الإلكتروني الذي أدخلته مستخدم في حساب آخر
+                                </div>
+                                   
+                            </div>
+                        </div><!--end col-->
+                        <!-- <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">الوظيفة</label>
+                                <input type="text" class="form-control" id="placeholderInput"
+                                ngModel name="job"       placeholder="أدخل الوظيفة">
+                            </div>
+                            
+                        </div>end col -->
+                  
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi">تاريخ الإزدياد</label>
+                                <input type="date" name="dateOfBirth"  ngModel [ngClass]="{'is-invalid':(dateOfBirth.errors && dateOfBirth.touched)||(dateOfBirth.errors && formSubmitted),
+                                'is-valid': (!dateOfBirth.errors && dateOfBirth.touched)||(!dateOfBirth.errors && formSubmitted)}" required   class="form-control kuffi" id="placeholderInput"
+                                    placeholder="أدخل تاريخ الإزدياد   " #dateOfBirth="ngModel">
+                                    <div [hidden]="!dateOfBirth.errors?.['required']"  class="invalid-feedback">
+                                        المرجو إدخال تاريخ الإزدياد
+                                    </div>
+                                   
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">مكان الإزدياد</label>
+                                <input type="text" class="form-control" required id="placeholderInput"
+                                ngModel [ngClass]="{'is-invalid':(city.errors && city.touched)||(city.errors && formSubmitted),
+                                'is-valid': (!city.errors && city.touched)||(!city.errors && formSubmitted)}" name="city"   placeholder="أدخل مكان الإزدياد "  #city="ngModel">
+                                <div [hidden]="!city.errors?.['required']"  class="invalid-feedback">
+                                    المرجو إدخال مكان الإزدياد
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">
+                                    المهنة
+                                </label>
+                                <input type="text" class="form-control"   id="placeholderInput"
+                                ngModel name="job" placeholder="أدخل المهنة"  #job="ngModel">
+                         
+                            </div>
+                        </div><!--end col-->
+
+
+
+
+
+
+
+
+              <div class="row">
+
+          
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label kuffi">رقم جواز السفر</label>
+                                <input type="text" class="form-control"   id="placeholderInput"
+                                ngModel name="passeportId" placeholder="أدخل رقم جواز السفر"  #passeportId="ngModel">
+                                
+                                   
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-xxl-3 col-md-6">
+                            <div>
+                                <label for="placeholderInput" class="form-label">القبيلة </label>
+                                <input type="text"   class="form-control"  id="placeholderInput"
+                                ngModel name="town" placeholder="أدخل القبيلة  ">
+                            
+                            </div>
+                        </div><!--end col-->
+                    </div>
+ <div class="row">
+                        <div class="col-xxl-4 col-md-6">
+                            <label for="placeholderInput" class="form-label kuffi">الباشوية</label>
+                            <select class="form-select mb-3" required aria-label="Default select example" name="pachalik"
+                            [ngClass]="{'is-invalid':(pachalik.errors && pachalik.touched)||(pachalik.errors && formSubmitted),
+                            'is-valid': (!pachalik.errors && pachalik.touched)||(!pachalik.errors && formSubmitted)}"
+                            #pachalik="ngModel" ngModel (ngModelChange)="onPachalikChanged($event)">
+                                <option value="" disabled selected>أدخل الباشوية</option>*
+            
+                                <option *ngFor="let pachalik of pachaliks" [value]="pachalik.id">{{pachalik.designation}}</option>
+                              </select>
+                              <div *ngIf="pachalik.errors?.['required']" class="invalid-feedback">
+                           يرجى إدخال الباشوية
+                            </div>
+                         
+                          
+                        </div>
+                        <div class="col-xxl-4 col-md-6" *ngIf="showDistrict">
+                            <label for="placeholderInput" class="form-label kuffi">الدائرة</label>
+                                <select class="form-select mb-3" required  name="district" #district="ngModel"
+                                [ngClass]="{'is-invalid':(district.errors && district.touched)||(district.errors && formSubmitted),
+                                'is-valid': (!district.errors && district.touched)||(!district.errors && formSubmitted)}"
+                                ngModel [(ngModel)]="d" (ngModelChange)="onDitrictChanged($event)">
+                                <option value="" disabled selected>أدخل الدائرة</option>
+                               
+                                <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
+                              </select>
+                              <div *ngIf="district.errors?.['required']" class="invalid-feedback">
+                                يرجى إدخال الدائرة
+                            </div>
+                           
+                          
+                        </div>
+                        <div class="col-xxl-4 col-md-6" *ngIf="showAnnexe">
+                            <label for="placeholderInput" class="form-label kuffi">الملحقة</label>
+                            <select class="form-select mb-3" required
+                            [ngClass]="{'is-invalid':(annexeSelect.errors && annexeSelect.touched)||(annexeSelect.errors && formSubmitted),
+                            'is-valid': (!annexeSelect.errors && annexeSelect.touched)||(!annexeSelect.errors && formSubmitted)}"
+                            aria-label="Default select example" name="annexe" [(ngModel)]="a" #annexeSelect="ngModel" ngModel>
+                                <option value="" disabled selected>أدخل الملحقة</option>
+                               
+                                <option *ngFor="let annexe of annexes" [value]="annexe.id">{{annexe.designation}}</option>
+                              </select>
+                              <div *ngIf="annexeSelect.errors?.['required']" class="invalid-feedback">
+                                يرجى إدخال الملحقة
+                            </div>
+                             
+                            
+                        </div>
+                
+                    </div> 
+
+                        <!-- <div class="col-xxl-3 col-md-6">
+                            <label for="placeholderInput" class="form-label">الملحقة  </label>
+                            <select class="form-select mb-3 kuffi"  [ngClass]="{
+                                'is-valid': true}" name="annexe" *ngIf="annexes" [(ngModel)]="selectedAnnexe"  #annexe="ngModel">
+                                <option disabled [ngValue]="undefined" selected>أدخل الملحقة</option>
+                                <option *ngFor="let annexe of annexes" [value]="annexe.id">{{annexe.designation}}</option>
+                              </select>
+                               <div class="invalid-feedback"  *ngIf="f.submitted && annexe.invalid">
+                                eeded
+                            </div> -->
+                  
+
+
+
+<div class="row">
+    <div class="col-xxl-4 col-md-6">
+        <label for="placeholderInput" class="form-label kuffi">الحي</label>
+        <select class="form-select mb-3" required aria-label="Default select example" name="quartier"
+        [ngClass]="{'is-invalid':(quartier.errors && quartier.touched)||(quartier.errors && formSubmitted),
+        'is-valid': (!quartier.errors && quartier.touched)||(!quartier.errors && formSubmitted)}"
+        #quartier="ngModel" ngModel (ngModelChange)="onQuartierChanged($event)">
+            <option value="" disabled selected>أدخل الحي</option>*
+
+            <option *ngFor="let quartier of quartiers" [value]="quartier.id">{{quartier.designation}}</option>
+          </select>
+          <div *ngIf="quartier.errors?.['required']" class="invalid-feedback">
+       يرجى إدخال الحي
+        </div>
+     
+      
+    </div>
+    <div class="col-xxl-4 col-md-6" *ngIf="showRue">
+        <label for="placeholderInput" class="form-label kuffi">الشارع</label>
+            <select class="form-select mb-3" required  name="rue" #rue="ngModel"
+            [ngClass]="{'is-invalid':(rue.errors && rue.touched)||(rue.errors && formSubmitted),
+            'is-valid': (!rue.errors && rue.touched)||(!rue.errors && formSubmitted)}"
+            ngModel [(ngModel)]="ruee" (ngModelChange)="onRueChanged($event)">
+            <option value="" disabled selected>أدخل الشارع</option>
+           
+            <option *ngFor="let rue of rues" [value]="rue.id">{{rue.designation}}</option>
+          </select>
+          <div *ngIf="rue.errors?.['required']" class="invalid-feedback">
+            يرجى إدخال الشارع
+        </div>
+       
+      
+    </div>
+    <div class="col-xxl-4 col-md-6" *ngIf="showRuelle">
+        <label for="placeholderInput" class="form-label kuffi">الزنقة</label>
+        <select class="form-select mb-3" required
+        [ngClass]="{'is-invalid':(ruelle.errors && ruelle.touched)||(ruelle.errors && formSubmitted),
+        'is-valid': (!ruelle.errors && ruelle.touched)||(!ruelle.errors && formSubmitted)}"
+        aria-label="Default select example" name="ruelle" [(ngModel)]="ruellee" #ruelle="ngModel" ngModel>
+            <option value="" disabled selected>أدخل الزنقة</option>
+           
+            <option *ngFor="let ruelle of ruelles" [value]="ruelle.id">{{ruelle.designation}}</option>
+          </select>
+          <div *ngIf="ruelle.errors?.['required']" class="invalid-feedback">
+            يرجى إدخال الزنقة
+        </div>
+         
+        
+    </div>
+
+                  
+                    </div> 
+
+
+
+
+
+
+
+            
+                    <div></div>
+                </div>
+                </div>
+                </div>
+                <div class="card-footer">
+                    <div class="hstack gap-2">
+                        <button type="submit"  class="btn btn-success">حفظ</button>
+                        <button type="button" class="btn btn-danger">إلغاء</button>
+                    </div>
+                </div>
+                </form>
+                </div>
+                </div>
+                

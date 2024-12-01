@@ -151,6 +151,7 @@ let newData = data.map(item => {
   let { _links, ...newItem } = item;
   return newItem;
 });
+
 let count = 'المجموع: '+newData.length;
 console.log(newData,"zazazazazazazazazazzzezfff")
   const body = {
@@ -170,6 +171,27 @@ console.log(newData,"zazazazazazazazazazzzezfff")
   });
 }
 
+
+
+uploadFileWithData3(role?: string, pachalik?: string, district?: string, annexe?: string) {
+  const url = `${this.host}/downloadExistingPdf`; // Updated backend endpoint
+
+  // Prepare the request body (if needed)
+  const body = {
+    role: role,
+    pachalik: pachalik,
+    district: district,
+    annexe: annexe
+  };
+
+  // Send a POST request to download the PDF
+  return this.http.post(url, body, {
+    responseType: 'blob' // Expecting a binary file (PDF)
+  }).subscribe((blob: Blob) => {
+    // Save the downloaded PDF to the user's device
+    saveAs(blob, `existing_report.pdf`);
+  });
+}
 
 
 uploadFileArchive(format: string) {
