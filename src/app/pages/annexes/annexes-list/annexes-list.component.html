@@ -19,19 +19,19 @@
             <div>
               2
             </div> -->
-                <select class="form-select mb-3 kuffi" style="width: 200px;" name="district" ngModel (ngModelChange)="onRowClickCommon($event)">
+                <select class="form-select mb-3 kuffi" style="width: 200px;" name="district" ngModel (ngModelChange)="onDistrictClicked($event)">
                   <option disabled value="" selected>أدخل الدائرة</option>
                   <option  [value]="0">-</option>
                   <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
                 </select>
        <div class="flex-container">
         <div class="kuffi pt-2">أظهر</div> &nbsp;&nbsp;&nbsp;&nbsp;
-        <select class="form-select mb-3" style="width: 100px;"  (change)="onSelectedSize($event)">
+         <select class="form-select mb-3" style="width: 100px;"  (change)="onSelectedSize($event)"> 
           <option  [value]="10">10</option>
           <option  [value]="20">20</option>
           <option  [value]="30">30</option>
           
-        </select>
+        </select> 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <div class="kuffi pt-2">مدخلات</div>
     
@@ -66,9 +66,9 @@
                 <td style="vertical-align: middle;" class="kuffi">{{p.district?.designation}}</td>
              
                 <td style="vertical-align: middle;">
-                    <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
-                    &nbsp;
-                    <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                    <!-- <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
+                    &nbsp; -->
+                    <!-- <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button> -->
                 </td>
             </tr>
             
@@ -94,7 +94,7 @@
         </div>
         
         
-     <!-- <span class="kuffi">إظهار {{size}} من أصل {{totalCount}} ملحقات</span> -->
+   
         </div>
       </div><!-- end card-body -->
     </div><!-- end card -->

@@ -36,9 +36,9 @@ export class AnnexesAddComponent {
           this.pdiService.addResource("annexes",f.value).subscribe(data=>{
         this.reset(f)
           this.formSubmitted  = false
-          this.modelSuccess('تم حفظ الدائرة بنجاح')
+          this.modelSuccess('تم حفظ الملحقة بنجاح')
                 },err=>{
-                  this.modelError('يتعذر إضافة الدائرة')
+                  this.modelError('يتعذر إضافة الملحقة')
                 })
         }
  

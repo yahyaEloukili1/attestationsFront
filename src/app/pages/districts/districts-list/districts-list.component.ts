@@ -22,7 +22,6 @@ export class DistrictsListComponent {
 getReources(){
   this.rnpService.getResourceAll('districts').subscribe(data=>{
     this.districts = data['_embedded'].districts
-    console.log(this.districts,"zzzz")
 
 })
 }
