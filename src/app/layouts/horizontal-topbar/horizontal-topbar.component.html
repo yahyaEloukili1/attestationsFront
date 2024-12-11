@@ -19,50 +19,45 @@
                         <span class="droid-arabic-kufi" style="color: white !important;">تدبير المستعملين</span>  
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
-                    <a href="javascript:void(0);" class="is-parent nav-link menu-link"
-                      [routerLink]="['/citoyens/list']" [routerLinkActive]="['is-active']">
-                          <span class="droid-arabic-kufi" style="color: white !important;">تدبير المواطنين</span>  
-                      </a>
-                  </li>
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'">
+             
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/attestations/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الشواهد</span>  
                       </a>
                   </li>
-                <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/citoyens/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير المواطنين</span>  
                       </a>
                   </li>
-                <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/districts/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الدوائر</span>  
                       </a>
                   </li>
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/annexes/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الملحقات</span>  
                       </a>
                   </li>
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/quartiers/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الأحياء</span>  
                       </a>
                   </li>
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/rues/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الشوارع</span>  
                       </a>
                   </li>
                       
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/ruelles/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الأزقة</span>  
@@ -70,7 +65,7 @@
                   </li>
              
                       
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'||getConnectedUserRole()=='USER-DSIT'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/agents/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير أعوان السلطة</span>  

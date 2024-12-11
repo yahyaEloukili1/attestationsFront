@@ -9,6 +9,7 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { CoverComponent } from '../account/auth/signin/cover/cover.component';
 import { WilayaOrAnnexeGuard } from '../core/guards/wilayaOrAnnexe.guard copy';
+import { WilayaOrAnnexeOrAdminGuard } from '../core/guards/wilayaOrAnnexeOrAdminGuard';
 
 
 const routes: Routes = [
@@ -26,16 +27,16 @@ const routes: Routes = [
       path: '', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule)
     },
     {
-      path: 'annexes', loadChildren: () => import('./annexes/annexes.module').then(m => m.AnnexesModule),canActivate:[WilayaOrAdminGuard]
+      path: 'annexes', loadChildren: () => import('./annexes/annexes.module').then(m => m.AnnexesModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
       path: 'agents', loadChildren: () => import('./agents/agents.module').then(m => m.AgentsModule),canActivate:[WilayaOrAdminGuard]
     },
     {
-      path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule),canActivate:[WilayaOrAdminGuard]
+      path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule),canActivate:[WilayaOrAdminGuard]
+      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
       path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canActivate: [AdminGuard]
@@ -44,7 +45,7 @@ const routes: Routes = [
       path: 'usersTest', loadChildren: () => import('./users-test/users-test.module').then(m => m.UsersTestModule), canActivate: [AdminGuard]
     },
     {
-      path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule),canActivate:[WilayaOrAdminGuard]
+      path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
       path: 'quartiers', loadChildren: () => import('./hay/hay.module').then(m => m.HayModule),canActivate:[WilayaOrAdminGuard]

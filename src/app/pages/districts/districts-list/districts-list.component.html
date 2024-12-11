@@ -12,7 +12,7 @@
         <div class="card-body">
           <div class="row g-4 mb-3">
             <div class="col-sm-auto">
-                <button type="button" (click)="addResource()" class="btn btn-success add-btn">دائرة جديدة <i class="ri-add-line align-bottom me-1"></i></button> 
+                <button type="button" *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' " (click)="addResource()" class="btn btn-success add-btn">دائرة جديدة <i class="ri-add-line align-bottom me-1"></i></button> 
              
             </div>
        
@@ -26,15 +26,15 @@
                   <th>الباشوية</th>
              
             
-  <th></th>
+  <th *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' "></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let p of districts; let i = index">
                   <td style="vertical-align: middle;" class="kuffi">{{p.designation}}</td>
                   <td style="vertical-align: middle;">{{p.designationFr}}</td>
-               <td class="kuffi">{{p.pachalik?.designation}}</td>
-                  <td style="vertical-align: middle;">
+               <td class="kuffi" >{{p.pachalik?.designation}}</td>
+                  <td style="vertical-align: middle;" *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' ">
                       <button class="btn  btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
                       &nbsp;
                       <button class="btn  btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p['_links'].self.href)">حذف <i class="ri-delete-bin-6-line"></i></button>

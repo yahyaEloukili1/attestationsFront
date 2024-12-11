@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AttestationsEditComponent } from './attestations-edit/attestations-edit.component';
 import { AddAttestationComponent } from './add-attestation/add-attestation.component';
 import { AttestationsListComponent } from './attestations-list/attestations-list.component';
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 
 const routes: Routes = [

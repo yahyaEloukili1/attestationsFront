@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { number } from 'echarts';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-annexes-list',
@@ -15,7 +16,7 @@ import { number } from 'echarts';
 })
 export class AnnexesListComponent {
 
-  size:number = 10;
+  size:number = 2;
   currentPage:number = 0;
   totalPages: number;
   communes 
@@ -29,7 +30,8 @@ export class AnnexesListComponent {
   selectedE
   totalCount
   districtName: string;
-  constructor(private rnpService: restApiService,private router: Router) { }
+  districtForhtml: string;
+  constructor(private rnpService: restApiService,private router: Router,private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.getAnnexes(this.currentPage)
@@ -42,7 +44,6 @@ getDistricts(){
 
 }
 getAnnexes(page){
-  
  this.setTotalCount()
  this.rnpService.getResource("annexes",page,this.size).subscribe(data=>{
   this.annexes = data['_embedded'].annexes
@@ -69,7 +70,7 @@ addResource(){
   this.router.navigateByUrl("annexes/add")
 
 }
-logique(e){
+getDataWIthFiltersForTotalCount(){
   let d;
 
   d= this.selectedDistrict == 0 || this.selectedDistrict == ""? undefined : this.selectedDistrict;
@@ -87,9 +88,11 @@ logique(e){
      this.rnpService.getOneResource(url).subscribe(
       data => {
        let annexes = data['_embedded'].annexes
+       console.log(annexes,'kxxxxfktgtgj')
       
        if(annexes){
        this.totalCount = annexes.length
+       console.log(this.totalCount,'kfktgtgj')
       
       }
       },
@@ -100,7 +103,7 @@ logique(e){
       
 }
 
-logique2(){
+getDataWIthFiltersAndPageAndSize(){
 
   let d;
  
@@ -123,6 +126,7 @@ logique2(){
   this.rnpService.getOneResource(url).subscribe(
   data => {
    this.annexes = data['_embedded'].annexes;
+  
    console.log(data,"szszeedrr")
    this.totalPages = data['page'].totalPages
    this.pages = new Array<number>(this.totalPages);
@@ -134,26 +138,26 @@ logique2(){
   );
 }
 onDistrictClicked(e, page = 0) {
-  this.getAnnexes(e)
+  // this.getAnnexes(e)
   if(e!=0){
     this.rnpService.getOneResourceById("districts",e).subscribe(data=>{
       console.log(data.designation,"jhjjhjhh")
-      this.districtName = data.designation
+      this.districtForhtml = data.designation
+    
+      this.districtForhtml =  ', التابعين ل: '+ this.districtForhtml
 
     })
   }else{
     this.districtName = ""
+     this.districtForhtml = ""
   
   }
-  this.setTotalCountForDistrictSelected(e)
+   this.setTotalCountForDistrictSelected(e)
  
   this.selectedDistrict = e;
-
- 
   this.districtSelected =true
-
   this.currentPage = page;
- this.logique2()
+   this.getDataWIthFiltersAndPageAndSize()
  
   
  }
@@ -163,7 +167,7 @@ onDistrictClicked(e, page = 0) {
   
   this.districtSelected = true;
   
- this.logique(e)
+ this.getDataWIthFiltersForTotalCount()
 
  
  
@@ -220,7 +224,7 @@ onPageClicked(i:number){
       console.log(startEntry,"ssssssssssssssss")
       console.log(this.size,"size")
        let endEntry = (Math.min((Number(this.currentPage) * Number(this.size))+Number(this.size), Number(this.totalCount)));
-     console.log(this.currentPage,'mmmmmmmmmmmmmm')
+     console.log((Number(this.currentPage) * Number(this.size))+Number(this.size),'mmmmmmmmmmmmmm')
       if (this.annexes?.length==0) {
         return `No entries to display`;
     }
@@ -245,5 +249,53 @@ onPageClicked(i:number){
    
   }
   
+
+
+  onDeleteResource(url:string){
+    if(this.getConnectedUserRole()!='USER-AAL'){
+      Swal.fire({
+        title: 'هل أنت متأكد؟',
+        text: 'سوف يتم الحذف بصفة نهائية!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#364574',
+        cancelButtonColor: 'rgb(243, 78, 78)',
+        cancelButtonText: 'إلغاء',
+        customClass:{
+          title: 'kuffi',
+          confirmButton: 'kuffi',
+          container: 'kuffi'
+        },
+        confirmButtonText: 'حذف'
+      }).then(result => {
+       
+        if (result.value) {
+          this.rnpService.deleteResource('annexes',url).subscribe(data=>{
+           this.onPageClicked(0)
+           this.currentPage = 0
+             },err=>{
+               console.log(err)
+             })
+          Swal.fire({text:'لقد تم حذف الدائرة', confirmButtonColor: '#364574',   customClass:{
+            title: 'kuffi',
+            confirmButton: 'kuffi',
+            container: 'kuffi'
+          }, icon: 'success',});
+        }
+      });
+       
+    }
+
+    }
+    onEditResource(p:any){
+     
+      let url = p['_links'].self.href;
+      this.router.navigateByUrl("annexes/edit/"+btoa(url))
+    } 
+    getConnectedUserRole(){
+      if(this.authService.loadToken()){
+        return JSON.parse(atob(this.authService.loadToken().split('.')[1])).roles[0].authority
+      }
+     }
 }
 

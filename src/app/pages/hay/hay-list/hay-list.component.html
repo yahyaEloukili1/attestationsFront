@@ -5,7 +5,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة الأحياء </h4>
+          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة الأحياء <span style="color: maroon;">{{districtForhtml || ''}}</span></h4>
           <button type="button" (click)="addResource()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp;
           <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">حي جديد <i class="ri-add-line align-bottom me-1"></i></button>
      
@@ -56,23 +56,25 @@
               </tbody>
             </table>
           </div>
-          <div class="row justify-content-md-between align-items-md-center">
-            <!-- <div class="col-sm-12 col-md-5">
-              <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
-                Showing
-                {{service.startIndex}} to
-                {{service.endIndex}} of {{service.totalRecords}}
-                entries
-              </div>
-            </div> -->
-            <!-- Pagination -->
-            <!-- <div class="col-sm-12 col-md-5">
-              <div class="text-md-right float-md-end gridjs-pagination">
-                <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
-                </ngb-pagination>
-              </div>
-            </div> -->
-            <!-- End Pagination -->
+          <div style="text-align: left;">
+            <div style="display: flex; justify-content: space-between;">
+              <p class="kuffi">{{ getDisplayRange() }}</p>
+              <ul *ngIf="pages && pages.length > 0" class="pagination" [ngClass]="selected == true ? 'd-none' : 'd-flex'">
+                  <li class="kuffi">
+                      <a class="clickable page-link" (click)="goToPreviousPage()" [ngClass]="{ 'disabled': currentPage === 0 }">السابق</a>
+                  </li>
+                  <li [ngClass]="i == currentPage ? 'page-item active' : 'page-item'" *ngFor="let p of pages; let i = index">
+                      <a class="clickable page-link" (click)="onPageClicked(i)">{{i}}</a>
+                  </li>
+                  <li class="kuffi">
+                      <a class="clickable page-link" (click)="goToNextPage()" [ngClass]="{ 'disabled': currentPage === pages.length - 1 }">التالي</a>
+                  </li>
+              </ul>
+              
+          </div>
+          
+          
+     
           </div>
         </div><!-- end card-body -->
       </div><!-- end card -->

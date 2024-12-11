@@ -72,6 +72,8 @@ errAuth=0
       this.router.navigateByUrl("users/list")
      }else if(this.getConnectedUserRole()=='USER-DSIT'){
       this.router.navigateByUrl("annexes/list")
+     }else{
+      this.router.navigateByUrl("citoyens/list")
      }
     
       console.log(jwt)
