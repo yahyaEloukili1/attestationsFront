@@ -30,7 +30,7 @@ const routes: Routes = [
       path: 'annexes', loadChildren: () => import('./annexes/annexes.module').then(m => m.AnnexesModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'agents', loadChildren: () => import('./agents/agents.module').then(m => m.AgentsModule),canActivate:[WilayaOrAdminGuard]
+      path: 'agents', loadChildren: () => import('./agents/agents.module').then(m => m.AgentsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
       path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
@@ -48,16 +48,16 @@ const routes: Routes = [
       path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'quartiers', loadChildren: () => import('./hay/hay.module').then(m => m.HayModule),canActivate:[WilayaOrAdminGuard]
+      path: 'quartiers', loadChildren: () => import('./hay/hay.module').then(m => m.HayModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'rues', loadChildren: () => import('./shari3/shari3.module').then(m => m.Shari3Module),canActivate:[WilayaOrAdminGuard]
+      path: 'rues', loadChildren: () => import('./shari3/shari3.module').then(m => m.Shari3Module),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'ruelles', loadChildren: () => import('./zanqa/zanqa.module').then(m => m.ZanqaModule),canActivate:[WilayaOrAdminGuard]
+      path: 'ruelles', loadChildren: () => import('./zanqa/zanqa.module').then(m => m.ZanqaModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'hommesAutorites', loadChildren: () => import('./hommesAutorites/hommesAutorites.module').then(m => m.HommeAutoritesModule),canActivate:[WilayaOrAdminGuard]
+      path: 'hommesAutorites', loadChildren: () => import('./hommesAutorites/hommesAutorites.module').then(m => m.HommeAutoritesModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     }
    
    ,

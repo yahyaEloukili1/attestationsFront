@@ -4,6 +4,7 @@ import { restApiService } from 'src/app/core/services/rest-api.service copy';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-hay-list',
@@ -14,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class HayListComponent {
  
-  size:number = 2;
+  size:number = 10;
   currentPage:number = 0;
   totalPages: number;
   communes 
@@ -30,7 +31,7 @@ export class HayListComponent {
   districtName: string;
   districtForhtml: string;
   designation
-  constructor(private rnpService: restApiService,private router: Router) { }
+  constructor(private rnpService: restApiService,private router: Router,private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.getquartiers(this.currentPage)
@@ -136,7 +137,7 @@ searchByDesignation(page = 0) {
   if(this.designation!="" && this.designation!=undefined){
    
     
-      this.districtForhtml =  ', التابعين ل: '+ this.designation
+      this.districtForhtml =  'بإسم '+ this.designation
 
 
   }else{
@@ -195,7 +196,7 @@ onPageClicked(i:number){
   onSelectedSize(e){
     this.size = e.target.value
     this.getDisplayRange()
-    this.selectedDistrict=""
+  
     
     // this.getUsers(0) 
 
@@ -206,7 +207,7 @@ onPageClicked(i:number){
     
         if(this.districtSelected ==true){
           this.searchByDesignation(0)
-          console.log("districtt")
+    
         }
         
       }
@@ -249,43 +250,91 @@ onPageClicked(i:number){
   
 
 
+
   onDeleteResource(url:string){
-    Swal.fire({
-      title: 'هل أنت متأكد؟',
-      text: 'سوف يتم الحذف بصفة نهائية!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#364574',
-      cancelButtonColor: 'rgb(243, 78, 78)',
-      cancelButtonText: 'إلغاء',
-      customClass:{
-        title: 'kuffi',
-        confirmButton: 'kuffi',
-        container: 'kuffi'
-      },
-      confirmButtonText: 'حذف'
-    }).then(result => {
+    if(this.getConnectedUserRole()!='USER-AAL'){
+      this.modelWarning().then((result) => {
+        if (result.value) {
+          this.rnpService.deleteResource('agentAutorites', url).subscribe({
+            next: (data) => {
+              this.onPageClicked(0); // Refresh the page data
+              this.currentPage = 0; // Reset the current page
+              this.modelSuccess('لقد تم حذف عون السلطة'); // Success feedback
+            },
+            error: (err) => {
+              console.log(err,"eded");
+              if(err!.error!.cause!.cause!.message.includes('Cannot delete or update a parent row: a foreign')){
+                this.modelError("لا يمكن حذف الحي لأنه   مرتبط بشارع مضاف")
+              }else{
+                this.modelError('حدث خطأ أثناء حذف الحي . يرجى المحاولة مرة أخرى.'); // Display error feedback
+              }
+            
+            },
+          });
+        }
+      });
      
-      if (result.value) {
-        this.rnpService.deleteResource('quartiers',url).subscribe(data=>{
-         this.onPageClicked(0)
-         this.currentPage = 0
-           },err=>{
-             console.log(err)
-           })
-        Swal.fire({text:'لقد تم حذف الدائرة', confirmButtonColor: '#364574',   customClass:{
-          title: 'kuffi',
-          confirmButton: 'kuffi',
-          container: 'kuffi'
-        }, icon: 'success',});
-      }
-    });
-     
+       
     }
+
+    }
+       modelError(error) {
+            Swal.fire({
+            
+              title: error,
+              icon: 'error',
+              confirmButtonColor: '#364574',
+              confirmButtonText: 'إغلاق',
+              customClass:{
+                title: 'kuffi',
+                confirmButton: 'kuffi',
+                container: 'kuffi'
+              }
+            });
+            
+          }
+          modelWarning(){
+            return   Swal.fire({
+              title: 'هل أنت متأكد؟',
+              text: 'سوف يتم الحذف بصفة نهائية!',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#364574',
+              cancelButtonColor: 'rgb(243, 78, 78)',
+              cancelButtonText: 'إلغاء',
+              customClass:{
+                title: 'kuffi',
+                confirmButton: 'kuffi',
+                container: 'kuffi'
+              },
+              confirmButtonText: 'حذف'
+            })
+          }
+          modelSuccess(text) {
+            Swal.fire({
+              
+              position: 'center',
+              icon: 'success',
+              title: text,
+              showConfirmButton: true,
+              confirmButtonColor: '#364574',
+              customClass:{
+                title: 'kuffi',
+                confirmButton: 'kuffi',
+                container: 'kuffi'
+              }
+            });
+            
+          }
     onEditResource(p:any){
      
       let url = p['_links'].self.href;
       this.router.navigateByUrl("quartiers/edit/"+btoa(url))
     } 
+    getConnectedUserRole(){
+      if(this.authService.loadToken()){
+        return JSON.parse(atob(this.authService.loadToken().split('.')[1])).roles[0].authority
+      }
+     }
 }
 

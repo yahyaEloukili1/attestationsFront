@@ -6,8 +6,8 @@
       <div class="card">
         <div class="card-header d-flex align-items-center">
           <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة الشوارع </h4>
-          <button type="button" (click)="addResource()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp;
-          <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">شارع جديد <i class="ri-add-line align-bottom me-1"></i></button>
+          <!-- <button type="button" (click)="addResource()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp; -->
+          <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto" *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' ">شارع جديد <i class="ri-add-line align-bottom me-1"></i></button>
      
         </div><!-- end card header -->
       
@@ -15,22 +15,22 @@
           <div class="row g-4 mb-3">
             <div class="col-sm flex-container2">
               <div class="d-flex">
-                <div class="search-box ms-2">
+                <!-- <div class="search-box ms-2">
                   <input type="text" class="form-control search kuffi" placeholder="البحث بإسم الشارع  ...">
                   
-              </div>
+              </div> -->
               &nbsp;
-                    <select class="form-select mb-3 kuffi" style="width: 200px;" name="district" ngModel (ngModelChange)="onRowClickCommon($event)">
+                    <select class="form-select mb-3 kuffi" style="width: 200px;" name="quartier" ngModel (ngModelChange)="onquartierClicked($event)">
                       <option disabled value="" selected>البحث بالحي </option>
                       <option  [value]="0">-</option>
-                      <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
+                      <option *ngFor="let quartier of quartiers" [value]="quartier.id">{{quartier.designation}}</option>
                     </select>
               </div>
           
          <div class="flex-container">
           <div class="kuffi pt-2">أظهر</div> &nbsp;&nbsp;&nbsp;&nbsp;
           <select class="form-select mb-3" style="width: 100px;"  (change)="onSelectedSize($event)">
-            <option  [value]="5">5</option>
+          
             <option  [value]="10">10</option>
             <option  [value]="20">20</option>
             <option  [value]="40">40</option>
@@ -60,7 +60,7 @@
                   <th> الحي </th>
              
             
-  <th></th>
+  <th *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' "></th>
                 </tr>
               </thead>
               <tbody>
@@ -69,10 +69,10 @@
                   <td style="vertical-align: middle;">{{p.designationFr}}</td>
                   <td style="vertical-align: middle;" class="kuffi">{{p.quartier?.designation}}</td>
                
-                  <td style="vertical-align: middle;">
+                  <td style="vertical-align: middle;" *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' ">
                       <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
                       &nbsp;
-                      <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>
+                      <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p['_links'].self.href)">حذف <i class="ri-delete-bin-6-line"></i></button>
                   </td>
               </tr>
               

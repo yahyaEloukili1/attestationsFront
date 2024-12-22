@@ -7,6 +7,41 @@ th,h4,button{
 .kuffi{
     font-family: 'Droid Arabic Kufi', serif;
 }
+/* In your component's style or global styles */
+.disabled {
+    pointer-events: none; /* Disable click events */
+    color: #999; /* Optionally set a different color for a disabled look */
+    /* Add any other styles to indicate the button is disabled */
+}
+
+.clickable{
+    cursor: pointer;
+}
+.select-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .container2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-select {
+    width: 48%; /* Adjust the width as needed */
+}
+
+.right-select {
+    width: 48%; /* Adjust the width as needed */
+}
+.flex-container{
+    display: flex;
+  
+}
+.flex-container2{
+    display: flex;
+    justify-content: space-between;
+}
 table, tr,th,td{
     border: 0.5px solid rgb(213, 209, 209);
     text-align: center;

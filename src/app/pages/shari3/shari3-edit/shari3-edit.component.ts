@@ -26,7 +26,7 @@ export class Shari3EditComponent {
       this.url = atob(this.activatedRoute.snapshot.params['id'])
      this.myService.getOneResource(this.url).subscribe(data=>{
        this.currentResource = data;
-       let inputString = this.currentResource._links.district.href
+       let inputString = this.currentResource._links.quartier.href
 
 
        // Use the replace method to remove "{?projection}"
@@ -71,9 +71,9 @@ console.log(this.quartier,"^^^^^^^^^^^^^^^^")
         }
          this.myService.updateResource(this.url,f.value).subscribe(data=>{
           this.formSubmitted  = false
-          this.modelSuccess('تم تبديل الدائرة بنجاح')
+          this.modelSuccess('تم تبديل الشارع بنجاح')
          },err=>{
-          this.modelError('يتعذر تبديل الدائرة')
+          this.modelError('يتعذر تبديل الشارع')
          })
       }
    

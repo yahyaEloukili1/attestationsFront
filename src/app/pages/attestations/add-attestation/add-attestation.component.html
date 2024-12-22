@@ -124,7 +124,7 @@
              </label>
              <select class="form-select mb-3 kuffi" name="typeAttestation" required  ngModel  #designationInput="ngModel">
                 <option  value="" disabled selected>أدخل  نوع الشهادة</option>
-                <option *ngFor="let pachalik of typeAttestations" [value]="pachalik.id">{{pachalik.designation}}</option>
+                <option *ngFor="let pachalik of typeAttestations" [value]="pachalik.id">{{pachalik.id}}</option>
             
               </select> 
               </div>

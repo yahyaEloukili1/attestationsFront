@@ -44,7 +44,13 @@ export class AddAagentComponent {
           this.formSubmitted  = false
           this.modelSuccess('تم حفظ عوان السلطة بنجاح')
                 },err=>{
-                  this.modelError('يتعذر إضافة عوان السلطة')
+                  console.log(err,"qsq");
+                  if(err!.error!.cause!.cause!.message!.includes("Duplicate entry")){
+                    this.modelError('يوجد عون سلطة آخر بنفس رقم البطاقة الوطنية')
+                  }else{
+                    this.modelError('يتعذر إضافة عوان السلطة')
+                  }
+                  
                 })
         }
  
@@ -83,6 +89,7 @@ export class AddAagentComponent {
   reset(f){
     f.reset()
     f.form.controls['fonction'].setValue('');
+    f.form.controls['annexe'].setValue('');
   }
   gotoList(){
     this.router.navigateByUrl('sgi/agents');

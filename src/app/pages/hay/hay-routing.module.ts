@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HayListComponent } from './hay-list/hay-list.component';
 import { HayAddComponent } from './hay-add/hay-add.component';
 import { HayEditComponent } from './hay-edit/hay-edit.component';
+import { WilayaOrAdminGuard } from 'src/app/core/guards/wilayaOrAdmin.guard';
 
 const routes: Routes = [ {
   path: "list",
@@ -10,11 +11,13 @@ const routes: Routes = [ {
 },
 {
   path: "add",
-  component: HayAddComponent
+  component: HayAddComponent,
+  canActivate: [WilayaOrAdminGuard]
 },
 {
   path: "edit/:id",
-  component: HayEditComponent
+  component: HayEditComponent,
+  canActivate: [WilayaOrAdminGuard]
 }];
 
 @NgModule({

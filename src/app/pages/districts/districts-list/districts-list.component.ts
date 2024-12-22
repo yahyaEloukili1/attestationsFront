@@ -35,42 +35,33 @@ addResource(){
     this.router.navigateByUrl("districts/add")
 
 }
+
 onDeleteResource(url:string){
   if(this.getConnectedUserRole()!='USER-AAL'){
-    Swal.fire({
-      title: 'هل أنت متأكد؟',
-      text: 'سوف يتم الحذف بصفة نهائية!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#364574',
-      cancelButtonColor: 'rgb(243, 78, 78)',
-      cancelButtonText: 'إلغاء',
-      customClass:{
-        title: 'kuffi',
-        confirmButton: 'kuffi',
-        container: 'kuffi'
-      },
-      confirmButtonText: 'حذف'
-    }).then(result => {
-     
+    this.modelWarning().then((result) => {
       if (result.value) {
-        this.rnpService.deleteResource('districts',url).subscribe(data=>{
-          this.getReources()
-          Swal.fire({text:'لقد تم حذف الدائرة', confirmButtonColor: '#364574',   customClass:{
-            title: 'kuffi',
-            confirmButton: 'kuffi',
-            container: 'kuffi'
-          }, icon: 'success',});
-           },err=>{
-            this.modelError('لا يمكن حدف الدائرة')
-           })
-    
+        this.rnpService.deleteResource('agentAutorites', url).subscribe({
+          next: (data) => {
+            this.getReources(); // Refresh the page data
+            this.modelSuccess('لقد تم حذف الدائرة '); // Success feedback
+          },
+          error: (err) => {
+            console.log(err,"eded");
+            if(err!.error!.cause!.cause!.message.includes('Cannot delete or update a parent row: a foreign')){
+              this.modelError("لا يمكن حذف الدائرة لأنها مرتبطة بملحقة أخرى")
+            }else{
+              this.modelError('حدث خطأ أثناء حذف  الدائرة. يرجى المحاولة مرة أخرى.'); // Display error feedback
+            }
+          
+          },
+        });
       }
     });
+   
+     
   }
 
- 
-}
+  }
 onEditResource(p:any){
  
   let url = p['_links'].self.href;

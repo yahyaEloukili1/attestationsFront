@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { restApiService } from 'src/app/core/services/rest-api.service copy';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-shari3-list',
@@ -14,231 +15,329 @@ import { FormsModule } from '@angular/forms';
 })
 export class Shari3ListComponent {
 
-  size:number = 5;
+  size:number = 10;
   currentPage:number = 0;
   totalPages: number;
-  
+  communes 
+  provinces
   pages: Array<number>
   selected: boolean
   rues
-  selectedDistrict = ""
-  districts
-  districtSelected = false
+  selectedquartier:any = ""
+  quartiers
+  quartierselected = false
   selectedE
   totalCount
-  constructor(private rnpService: restApiService,private router: Router) { }
+  quartierName: string;
+  quartierForhtml: string;
+  constructor(private rnpService: restApiService,private router: Router,private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-   this.getResourcesCommon(this.currentPage)
-    this.getDistricts()
+    this.getrues(this.currentPage)
+    this.getquartiers()
 }
-onPageClicked(i:number){
-  this.currentPage = i;
-  if(this.districtSelected==false)
-{this.getResourcesCommon(this.currentPage)
-}
-else{
-this.onRowClickCommon(this.selectedE,this.currentPage)
-}
-}
+getquartiers(){
+  this.rnpService.getResourceAll('quartiers').subscribe(data=>{
+    this.quartiers = data['_embedded'].quartiers
+})
 
-getResourcesCommon(page){
-  if(page==0)
-  {this.currentPage = 0}
+}
+getrues(page){
+ this.setTotalCount()
+ this.rnpService.getResource("rues",page,this.size).subscribe(data=>{
+  this.rues = data['_embedded'].rues
+  console.log(data,"rorfo")
+  console.log(this.rues,"szszsz")
+  this.totalPages = data['page'].totalPages
+  this.pages = new Array<number>(this.totalPages);
+ },err=>{
+   console.log(err)
+ })
+}
+setTotalCount(){
+ 
   this.rnpService.getResourceAll('rues').subscribe(data=>{
     let rues = data['_embedded'].rues
-    if(rues){
-    this.totalCount = rues.length}
-    
-
-
-})
-this.rnpService.getResource("rues",page,this.size).subscribe(data=>{
-  this.rues = data['_embedded'].rues
-  console.log(data,'vvvvv')
- this.totalPages = data['page'].totalPages
- this.pages = new Array<number>(this.totalPages);
- },err=>{
-   console.log(err)
- })
-}
-onRowClick(e){
-this.selectedE = e
-
-this.districtSelected = true
-this.currentPage = 0
-if(e==0){
-this.getResourcesCommon(this.currentPage)
-}else{
-
-
-const url = `quartiers2/${e}/rues?page=${0}&size=${this.size}`;
-
-this.rnpService.getResourceAll2(url).subscribe(data=>{
-  this.rues = data['rues']
-  this.totalPages = Math.ceil(data['totalElements'] / this.size);
-    this.pages = new Array<number>(this.totalPages);
- },err=>{
-   console.log(err)
- })
-}
-}
-
-  onRowClickCommon(e, page = 0) {
-    this.selectedE = e;
-    this.districtSelected = true;
-    this.currentPage = page;
-  
-    if (e == 0) {
-      this.getResourcesCommon(this.currentPage);
    
-      
-    } else {
+    if(rues){
+    this.totalCount = rues.length
 
-      const url = `quartiers2/${e}/rues?page=${this.currentPage}&size=${this.size}`;
-  
-      this.rnpService.getResourceAll2(url).subscribe(
-        data => {
-         
-          this.rues = data['rues'];
-    
-          this.totalPages = Math.ceil(data['totalElements'] / this.size);
-          this.pages = new Array<number>(this.totalPages);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    }
   }
-  
-getDistricts(){
-  this.rnpService.getResourceAll('quartiers').subscribe(data=>{
-    this.districts = data['_embedded'].quartiers
-    console.log(this.districts,)
-
 })
 }
 addResource(){
-    this.router.navigateByUrl("rues/add")
+  this.router.navigateByUrl("rues/add")
 
 }
-onDeleteResource(p){
-this.modelWarning().then(result => {
-    if (result.value) {
-      if(this.districtSelected==false){
-        let url = p['_links'].self.href
-        this.rnpService.deleteResource('rues',url).subscribe(data=>{
-          this.getResourcesCommon(0)
-          this.modelSuccess('لقد تم حذف الملحقة')
+getDataWIthFiltersForTotalCount(){
+  let d;
+
+  d= this.selectedquartier == 0 || this.selectedquartier == ""? undefined : this.selectedquartier;
+  
+    let url = `${this.rnpService.host}/rues/search/findRuesByquartierId2?`;
+
+  if (d !== undefined) {
+    url += `quartierId=${d}`;
+  }
+  
+ 
     
-           },err=>{
-            this.modelError('لا يمكن حدف الملحقة')
-        
-           })
-      }else{
-        
-        this.rnpService.deleteResource('rues',`${this.rnpService.host}/rues/${p.id}`).subscribe(data=>{
-          this.onRowClickCommon(this.selectedE)
-          this.modelSuccess('لقد تم حذف الملحقة')
-           },err=>{
-            this.modelError('لا يمكن حدف الملحقة')
-           })
+
+  
+     this.rnpService.getOneResource(url).subscribe(
+      data => {
+       let rues = data['_embedded'].rues
+       console.log(rues,'kxxxxfktgtgj')
+      
+       if(rues){
+       this.totalCount = rues.length
+       console.log(this.totalCount,'kfktgtgj')
       
       }
+      },
+      err => {
+       console.log(err);
+      }
+      );
+      
+}
+
+getDataWIthFiltersAndPageAndSize(){
+
+  let d;
+ 
+  d= this.selectedquartier == 0 || this.selectedquartier == ""? undefined : this.selectedquartier;
+  
+    let url = `${this.rnpService.host}/rues/search/findRuesByQuartierId?`;
+
+ if (d !== undefined) {
+   url += `quartierId=${d}`;
+ }
+ 
+  
+  
+ 
+ 
+    
+    url+=`&page=${this.currentPage}&size=${this.size}`
+    console.log(url,this.currentPage,'szszszq')
+    
+  this.rnpService.getOneResource(url).subscribe(
+  data => {
+   this.rues = data['_embedded'].rues;
+  
+   console.log(data,"szszeedrr")
+   this.totalPages = data['page'].totalPages
+   this.pages = new Array<number>(this.totalPages);
+
+  },
+  err => {
+   console.log(err);
+  }
+  );
+}
+onquartierClicked(e, page = 0) {
+  // this.getrues(e)
+  if(e!=0){
+    this.rnpService.getOneResourceById("quartiers",e).subscribe(data=>{
+      console.log(data.designation,"jhjjhjhh")
+      this.quartierForhtml = data.designation
+    
+      this.quartierForhtml =  ', التابعين ل: '+ this.quartierForhtml
+
+    })
+  }else{
+    this.quartierName = ""
+     this.quartierForhtml = ""
+  
+  }
+   this.setTotalCountForquartierselected(e)
+ 
+  this.selectedquartier = e;
+  this.quartierselected =true
+  this.currentPage = page;
+   this.getDataWIthFiltersAndPageAndSize()
+ 
+  
+ }
+ setTotalCountForquartierselected(e){
+
+  this.selectedquartier = e;
+  
+  this.quartierselected = true;
+  
+ this.getDataWIthFiltersForTotalCount()
+
+ 
+ 
+}
+onPageClicked(i:number){
+
+  console.log(this.quartierselected,'quartier selected')
+  
+    this.currentPage = i;
+  
+  if(this.quartierselected==false)
+  {this.getrues(i)
+    console.log("rfrfrfrf")
+  }
+  else{
+
+    if(this.quartierselected ==true){
+      this.onquartierClicked(this.selectedquartier,this.currentPage)
+      console.log("quartiert")
+    }
+  
+  
+  }
+  
+  }
+
+  onSelectedSize(e){
+    this.size = e.target.value
+    this.getDisplayRange()
   
     
+    // this.getUsers(0) 
+
+      if(this.quartierselected==false)
+      {this.getrues(0)
+      }
+      else{
+    
+        if(this.quartierselected ==true){
+          this.onquartierClicked(this.selectedquartier,0)
+          console.log("quartiert")
+        }
+        
+      }
     }
-  });
-   
-  }
-  modelError(error) {
-    Swal.fire({
     
-      title: error,
-      icon: 'error',
-      confirmButtonColor: '#364574',
-      confirmButtonText: 'إغلاق',
-      customClass:{
-        title: 'kuffi',
-        confirmButton: 'kuffi',
-        container: 'kuffi'
+
+    getDisplayRange(): string {
+      console.log('size',this.size)
+      console.log('cureet page ',this.currentPage)
+      console.log('Total count ',this.totalCount)
+      let startEntry = ((Number(this.currentPage) - 1) * Number(this.size) + 1)+Number(this.size);
+      let start = startEntry+this.size
+      console.log(startEntry,"ssssssssssssssss")
+      console.log(this.size,"size")
+       let endEntry = (Math.min((Number(this.currentPage) * Number(this.size))+Number(this.size), Number(this.totalCount)));
+     console.log((Number(this.currentPage) * Number(this.size))+Number(this.size),'mmmmmmmmmmmmmm')
+      if (this.rues?.length==0) {
+        return `No entries to display`;
+    }
+    
+      return ` إظهار ${Number(startEntry)} إلى ${Number(endEntry)} من أصل   ${Number(this.totalCount)}`;
+    }
+    
+    goToPreviousPage() {
+      if (this.currentPage > 0) {
+          this.currentPage--;
+          // You can add logic here to update data based on the new current page
       }
-    });
-    
+      this.onPageClicked(this.currentPage)
+      this.getDisplayRange()
   }
-  modelWarning(){
-    return   Swal.fire({
-      title: 'هل أنت متأكد؟',
-      text: 'سوف يتم الحذف بصفة نهائية!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#364574',
-      cancelButtonColor: 'rgb(243, 78, 78)',
-      cancelButtonText: 'إلغاء',
-      customClass:{
-        title: 'kuffi',
-        confirmButton: 'kuffi',
-        container: 'kuffi'
-      },
-      confirmButtonText: 'حذف'
-    })
-  }
-  modelSuccess(text) {
-    Swal.fire({
-      
-      position: 'center',
-      icon: 'success',
-      title: text,
-      showConfirmButton: true,
-      confirmButtonColor: '#364574',
-      customClass:{
-        title: 'kuffi',
-        confirmButton: 'kuffi',
-        container: 'kuffi'
-      }
-    });
-    
-  }
-  onEditResource(p:any){
-    let url = `${this.rnpService.host}/rues/${p.id}`;
-    this.router.navigateByUrl("rues/edit/"+btoa(url))
-  }  
-  onSelectedSize(e){
-this.size = e.target.value
-this.getDisplayRange()
-if(this.districtSelected==false)
-{this.getResourcesCommon(0)
-console.log("lllllllllllllllllllllllllllllll")}
-else{
-  console.log("rrrrrrrrrrrrrrrrrrrrrr")
-this.onRowClickCommon(this.selectedE)
-}
-  }
-  goToPreviousPage() {
-    if (this.currentPage > 0) {
-        this.currentPage--;
+  goToNextPage() {
+    if (this.currentPage < this.pages.length - 1) {
+        this.currentPage++;
         // You can add logic here to update data based on the new current page
     }
     this.onPageClicked(this.currentPage)
-    this.getDisplayRange()
-}
-goToNextPage() {
-  if (this.currentPage < this.pages.length - 1) {
-      this.currentPage++;
-      // You can add logic here to update data based on the new current page
+   
   }
-  this.onPageClicked(this.currentPage)
- 
-}
-getDisplayRange(): string {
-  let startEntry = ((Number(this.currentPage) - 1) * Number(this.size) + 1)+Number(this.size);
-  let start = startEntry+this.size
-   let endEntry = (Math.min((Number(this.currentPage) * Number(this.size))+Number(this.size), Number(this.totalCount)));
-  if (this.rues?.length==0) {
-    return `No entries to display`;
-}
-  return ` إظهار ${Number(startEntry)} إلى ${Number(endEntry)} من أصل  ${Number(this.totalCount)}`;
-}
+  
+
+
+  onDeleteResource(url:string){
+    if(this.getConnectedUserRole()!='USER-AAL'){
+      this.modelWarning().then((result) => {
+        if (result.value) {
+          this.rnpService.deleteResource('agentAutorites', url).subscribe({
+            next: (data) => {
+              this.onPageClicked(0); // Refresh the page data
+              this.currentPage = 0; // Reset the current page
+              this.modelSuccess('لقد تم حذف الشارع '); // Success feedback
+            },
+            error: (err) => {
+              console.log(err,"eded");
+              if(err!.error!.cause!.cause!.message.includes('Cannot delete or update a parent row: a foreign')){
+                this.modelError("لا يمكن حذف الشارع  لأنه مرتبط بزنقة مضافة")
+              }else{
+                this.modelError('حدث خطأ أثناء حذف الشارع . يرجى المحاولة مرة أخرى.'); // Display error feedback
+              }
+            
+            },
+          });
+        }
+      });
+     
+       
+    }
+
+    }
+
+
+
+
+      modelError(error) {
+          Swal.fire({
+          
+            title: error,
+            icon: 'error',
+            confirmButtonColor: '#364574',
+            confirmButtonText: 'إغلاق',
+            customClass:{
+              title: 'kuffi',
+              confirmButton: 'kuffi',
+              container: 'kuffi'
+            }
+          });
+          
+        }
+        modelWarning(){
+          return   Swal.fire({
+            title: 'هل أنت متأكد؟',
+            text: 'سوف يتم الحذف بصفة نهائية!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#364574',
+            cancelButtonColor: 'rgb(243, 78, 78)',
+            cancelButtonText: 'إلغاء',
+            customClass:{
+              title: 'kuffi',
+              confirmButton: 'kuffi',
+              container: 'kuffi'
+            },
+            confirmButtonText: 'حذف'
+          })
+        }
+        modelSuccess(text) {
+          Swal.fire({
+            
+            position: 'center',
+            icon: 'success',
+            title: text,
+            showConfirmButton: true,
+            confirmButtonColor: '#364574',
+            customClass:{
+              title: 'kuffi',
+              confirmButton: 'kuffi',
+              container: 'kuffi'
+            }
+          });
+          
+        } 
+    onEditResource(p:any){
+     
+      let url = p['_links'].self.href;
+      this.router.navigateByUrl("rues/edit/"+btoa(url))
+    } 
+    getConnectedUserRole(){
+      if(this.authService.loadToken()){
+        return JSON.parse(atob(this.authService.loadToken().split('.')[1])).roles[0].authority
+      }
+     }
 }
 

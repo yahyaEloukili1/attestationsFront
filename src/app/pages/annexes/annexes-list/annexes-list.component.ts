@@ -16,7 +16,7 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 })
 export class AnnexesListComponent {
 
-  size:number = 2;
+  size:number = 5;
   currentPage:number = 0;
   totalPages: number;
   communes 
@@ -144,7 +144,7 @@ onDistrictClicked(e, page = 0) {
       console.log(data.designation,"jhjjhjhh")
       this.districtForhtml = data.designation
     
-      this.districtForhtml =  ', التابعين ل: '+ this.districtForhtml
+      this.districtForhtml =  ' التابعة ل: '+ this.districtForhtml
 
     })
   }else{
@@ -174,7 +174,7 @@ onDistrictClicked(e, page = 0) {
 }
 onPageClicked(i:number){
 
-  console.log(this.districtSelected,'district selected')
+  
   
     this.currentPage = i;
   
@@ -197,7 +197,7 @@ onPageClicked(i:number){
   onSelectedSize(e){
     this.size = e.target.value
     this.getDisplayRange()
-    this.selectedDistrict=""
+    
     
     // this.getUsers(0) 
 
@@ -276,7 +276,7 @@ onPageClicked(i:number){
              },err=>{
                console.log(err)
              })
-          Swal.fire({text:'لقد تم حذف الدائرة', confirmButtonColor: '#364574',   customClass:{
+          Swal.fire({text:'لقد تم حذف الملحقة', confirmButtonColor: '#364574',   customClass:{
             title: 'kuffi',
             confirmButton: 'kuffi',
             container: 'kuffi'

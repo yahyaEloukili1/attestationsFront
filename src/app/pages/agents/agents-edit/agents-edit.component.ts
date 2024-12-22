@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { restApiService } from 'src/app/core/services/rest-api.service copy';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-annexes-edit',
+  selector: 'app-agents-edit',
   standalone: true,
   imports: [CommonModule,FormsModule],
-  templateUrl: './annexes-edit.component.html',
-  styleUrl: './annexes-edit.component.scss'
+  templateUrl: './agents-edit.component.html',
+  styleUrl: './agents-edit.component.scss'
 })
-export class AnnexesEditComponent {
-  url
+export class AgentsEditComponent {
+ url
   currentResource
-  districts
-  district
-  selectedDistrict
+  annexes
+  annexe
+  selectedannexe
   formSubmitted
+  fonctions: any;
+  selectedFonction: any;
+  fonction: any;
     constructor(private router:Router,private activatedRoute: ActivatedRoute,private myService: restApiService) { }
   
     ngOnInit(): void {
@@ -26,15 +29,18 @@ export class AnnexesEditComponent {
       this.url = atob(this.activatedRoute.snapshot.params['id'])
      this.myService.getOneResource(this.url).subscribe(data=>{
        this.currentResource = data;
-       let inputString = this.currentResource._links.district.href
+       let inputString = this.currentResource._links.annexe.href
+       let inputStringFonction = this.currentResource._links.fonction.href
 
 
        // Use the replace method to remove "{?projection}"
        let outputString = inputString.replace('{?projection}', '');
+       let outputStringFonction = inputStringFonction.replace('{?projection}', '');
        
        console.log(outputString);
        
         this.getId(outputString)
+        this.getIdFonction(outputStringFonction)
      },err=>{
        console.log(err)
      })
@@ -43,20 +49,36 @@ export class AnnexesEditComponent {
    getId(url){
     console.log(url,'pppppppppppppppppppppp')
     this.myService.getOneResource(url).subscribe(data=>{
-    this.district = data.id
-console.log(this.district,"^^^^^^^^^^^^^^^^")
+    this.annexe = data.id
+console.log(this.annexe,"^^^^^^^^^^^^^^^^")
     })
 
  
  
   }
-  onRowClick(e){
-    this.selectedDistrict = e
+  getIdFonction(url){
+    console.log(url,'pppppppppppppppppppppp')
+    this.myService.getOneResource(url).subscribe(data=>{
+    this.fonction = data.id
+console.log(this.fonction,"^^^^^^^^^^^^^^^^")
+    })
+
+ 
+ 
+  }
+  onAnnexeClicked(e){
+    this.selectedannexe = e
+}
+onFonctionClicked(e){
+  this.selectedFonction = e
 }
    getReources(){
-    this.myService.getResourceAll('districts').subscribe(data=>{
-      this.districts = data['_embedded'].districts  
+    this.myService.getResourceAll('annexes').subscribe(data=>{
+      this.annexes = data['_embedded'].annexes  
   })
+  this.myService.getResourceAll('fonctions').subscribe(data=>{
+    this.fonctions = data['_embedded'].fonctions  
+})
   }
   onUpdateResource(f: any){
     this.formSubmitted = true;
@@ -64,18 +86,21 @@ console.log(this.district,"^^^^^^^^^^^^^^^^")
       this.modelError( 'يرجى التأكد من البيانات وإعادة المحاولة')
       }
       else{
-        if(this.selectedDistrict){
-          f.value.district = `${this.myService.host}/districts/${this.selectedDistrict}`
+        if(this.selectedannexe){
+          f.value.annexe = `${this.myService.host}/annexes/${this.selectedannexe}`
         }else{
-          f.value.district = `${this.myService.host}/districts/${this.district}`
+          f.value.annexe = `${this.myService.host}/annexes/${this.annexe}`
         }
-        console.log(f.value,"qqsqss");
+        if(this.selectedFonction){
+          f.value.fonction = `${this.myService.host}/fonctions/${this.selectedFonction}`
+        }else{
+          f.value.fonction = `${this.myService.host}/fonctions/${this.fonction}`
+        }
          this.myService.updateResource(this.url,f.value).subscribe(data=>{
           this.formSubmitted  = false
-         
-          this.modelSuccess('تم تبديل الملحقة بنجاح')
+          this.modelSuccess('تم تبديل عون السلطة بنجاح')
          },err=>{
-          this.modelError('يتعذر تبديل الملحقة')
+          this.modelError('يتعذر تبديل عون السلطة')
          })
       }
    
@@ -113,12 +138,11 @@ console.log(this.district,"^^^^^^^^^^^^^^^^")
     
   }
    gotoList(){
-     this.router.navigateByUrl('sgi/districts');
+     this.router.navigateByUrl('sgi/annexes');
    }
    reset(f){
-    f.form.controls['designation'].setValue(this.currentResource.designation)
-    f.form.controls['designationFr'].setValue(this.currentResource.designationFr)
-    f.form.controls['district'].setValue(this.district);
+    f.reset()
+    f.form.controls['fonction'].setValue('');
+    f.form.controls['annexe'].setValue('');
   }
   }
-  

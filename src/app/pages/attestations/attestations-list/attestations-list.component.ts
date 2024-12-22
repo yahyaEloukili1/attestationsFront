@@ -66,26 +66,15 @@ print(){
 onDeleteResource(p){
 this.modelWarning().then(result => {
     if (result.value) {
-      if(this.districtSelected==false){
-        let url = p['_links'].self.href
-        this.rnpService.deleteResource('attestations',url).subscribe(data=>{
-         
-          this.modelSuccess('لقد تم حذف الملحقة')
-    
-           },err=>{
-            this.modelError('لا يمكن حدف الملحقة')
-        
-           })
-      }else{
-        
+   
         this.rnpService.deleteResource('attestations',`${this.rnpService.host}/attestations/${p.id}`).subscribe(data=>{
-         
+         this.getAttestations()
           this.modelSuccess('لقد تم حذف الملحقة')
            },err=>{
             this.modelError('لا يمكن حدف الملحقة')
            })
       
-      }
+      
   
     
     }

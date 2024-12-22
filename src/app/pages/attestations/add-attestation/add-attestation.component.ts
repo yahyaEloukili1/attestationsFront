@@ -97,7 +97,7 @@ export class AddAttestationComponent {
   }
   onSaveResource(f:NgForm){
     this.formSubmitted = true;
-    console.log(f.value,"leleldr");
+    // console.log(f.value,"leleldr");
     // if(!f.valid){
     // this.modelError( 'يرجى التأكد من البيانات وإعادة المحاولة')
     // }
@@ -107,6 +107,7 @@ export class AddAttestationComponent {
        f.value.agentAutorite= `${this.pdiService.host}/agentAutorites/${f.value.agentAutorite}`
       f.value.citoyen= `${this.pdiService.host}/citoyens/${this.citoyen['id']}`
       f.value.cin = this.cin
+       console.log(f.value,'krkrkrk');
       this.pdiService.addResource("attestations",f.value).subscribe(data=>{
       this.reset(f)
       this.display = false
