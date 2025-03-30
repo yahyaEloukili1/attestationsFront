@@ -63,13 +63,23 @@
                         </div>
                         <div class="col-xxl-2 col-md-2">
                             <label for="placeholderInput" class="form-label kuffi">الملحقة</label>
-                              <select class="form-select mb-2 kuffi" name="annexe"  required [ngModel]="annexe" #annexeSelected="ngModel" (ngModelChange)="onAnnexeClicked($event)">
-                                <option  value="" disabled selected>أدخل الملحقة</option>
-                                <option *ngFor="let pachalik of annexes" [value]="pachalik.id">{{pachalik.designation}}</option>
-                              </select> 
-                              <div class="invalid-feedback kuffi" *ngIf="f.submitted && (annexeSelected.invalid)">
-                                يرجى إدخال الملحقة
+                            <div *ngIf="getConnectedUserRole()=='USER-AAL'">
+                                <select *ngIf="getConnectedUserRole()=='USER-AAL'" [disabled]="true" class="form-select mb-2 kuffi" name="annexe"  required [ngModel]="annexe" #annexeSelected="ngModel" (ngModelChange)="onAnnexeClicked($event)">
+                                    <option  value="" disabled selected>أدخل الملحقة</option>
+                                    <option *ngFor="let pachalik of annexes" [value]="pachalik.id">{{pachalik.designation}}</option>
+                                  </select> 
                             </div>
+                       
+                              <div *ngIf="getConnectedUserRole()!='USER-AAL'">
+                                <select  class="form-select mb-2 kuffi" name="annexe"  required [ngModel]="annexe" #annexeSelected="ngModel" (ngModelChange)="onAnnexeClicked($event)">
+                                    <option  value="" disabled selected>أدخل الملحقة</option>
+                                    <option *ngFor="let pachalik of annexes" [value]="pachalik.id">{{pachalik.designation}}</option>
+                                  </select> 
+                                  <div class="invalid-feedback kuffi" *ngIf="f.submitted && (annexeSelected.invalid)">
+                                    يرجى إدخال الملحقة
+                                </div> 
+                              </div>
+                         
                     
                         </div>
                         <div>

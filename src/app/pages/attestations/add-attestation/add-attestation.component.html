@@ -124,7 +124,7 @@
              </label>
              <select class="form-select mb-3 kuffi" name="typeAttestation" required  ngModel  #designationInput="ngModel">
                 <option  value="" disabled selected>أدخل  نوع الشهادة</option>
-                <option *ngFor="let pachalik of typeAttestations" [value]="pachalik.id">{{pachalik.id}}</option>
+                <option *ngFor="let pachalik of typeAttestations" [value]="pachalik.id">{{pachalik.designation}}</option>
             
               </select> 
               </div>
@@ -137,7 +137,7 @@
                     <label for="placeholderInput" class="form-label kuffi"> بحث عون السلطة </label>
                     <select class="form-select mb-3 kuffi" name="agentAutorite"  required ngModel #designationFrInput="ngModel">
                         <option  value="" disabled selected>أدخل عون السلطة</option>
-                        <option *ngFor="let pachalik of agentAutorites" [value]="pachalik.id">{{pachalik.cin}}-{{pachalik.nom}}-{{pachalik.prenom}}</option>
+                        <option *ngFor="let agent of agentAutorites" [value]="agent.id">{{agent.cin}}-{{agent.nom}}-{{agent.prenom}}</option>
                       </select> 
                     <div class="invalid-feedback kuffi" *ngIf="f.submitted && designationFrInput.invalid">
                         يرجى إدخال إسم الدائرة بالفرنسية

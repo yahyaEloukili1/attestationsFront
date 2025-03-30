@@ -114,7 +114,7 @@ onQuartierChanged(e){
   this.quartier = e
   this.showRuelle = false
   this.ruee = ""
-  this.restService.getOneResource(`${this.restService.host}/rues/search/findRuesByquartierId?quartierId=${e}`).subscribe(data => {
+  this.restService.getOneResource(`${this.restService.host}/rues/search/findRuesByQuartierId2?quartierId=${e}`).subscribe(data => {
     this.rues = data['_embedded'].rues;
   });
   }
@@ -163,7 +163,7 @@ this.showRuelle = false
   onRueChanged(e){
     this.ruellee = ""
     this.showRuelle = true
-    this.restService.getOneResource(`${this.restService.host}/ruelles/search/findRuellesByRueId?rueId=${e}`).subscribe(data => {
+    this.restService.getOneResource(`${this.restService.host}/ruelles/search/findRuellesByRueId2?rueId=${e}`).subscribe(data => {
       this.ruelles = data['_embedded'].ruelles;
     
     });

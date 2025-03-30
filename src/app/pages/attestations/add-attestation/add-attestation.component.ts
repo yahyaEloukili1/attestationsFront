@@ -22,18 +22,54 @@ export class AddAttestationComponent {
   dateOfBirthValue
   typeAttestations: any;
   citoyen: any;
+  annexeIdOfUserConnected: any;
   constructor(private pdiService: restApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.getReources()
     const today = new Date();
     this.dateOfBirthValue = today.toISOString().split('T')[0];
+    this.getConnectedUserAnnexeAndAnnexeNameOfUSerAalConnected()
+    this.getConnectedUserRole()
+  }
+  getConnectedUserRole(){
+    if(this.pdiService.loadToken()){
+      return JSON.parse(atob(this.pdiService.loadToken().split('.')[1])).roles[0].authority
+    }
+   }
+   getConnectedUserAnnexeAndAnnexeNameOfUSerAalConnected(){
+    let user;
+    if(this.pdiService.loadToken())
+        user=  JSON.parse(atob(this.pdiService.loadToken().split('.')[1])).sub;
+      
+    
+      this.pdiService.getOneResource(`${this.pdiService.host}/appUsers/search/findByUsername?username=${user}`).subscribe(data => {
+    this.annexeIdOfUserConnected = data['_embedded'].appUsers[0].annexe.id
+    console.log(this.annexeIdOfUserConnected,"zszszsz");
+    let url = `${this.pdiService.host}/agentAutorites/search/findAgentAutoritesByAnnexeId2?annexeId=${this.annexeIdOfUserConnected}`;
+    console.log(url,"nednen");
+    this.pdiService.getOneResource(url).subscribe(
+      data => {
+       this.agentAutorites = data['_embedded'].agentAutorites;
+    
+      
+      console.log(this.annexeIdOfUserConnected,"edechedh");
+    
+      },
+      err => {
+       console.log(err);
+      }
+      );
+
+
+    })
+   
   }
   getReources(){
-    this.pdiService.getResourceAll('agentAutorites').subscribe(data=>{
-      this.agentAutorites = data['_embedded'].agentAutorites 
-      console.log(this.agentAutorites,"77777777"); 
-    })
+    // this.pdiService.getResourceAll('agentAutorites').subscribe(data=>{
+    //   this.agentAutorites = data['_embedded'].agentAutorites 
+    //   console.log(this.agentAutorites,"77777777"); 
+    // })
     this.pdiService.getResourceAll('typeAttestations').subscribe(data=>{
       this.typeAttestations = data['_embedded'].typeAttestations 
       console.log(this.typeAttestations,"77777777"); 

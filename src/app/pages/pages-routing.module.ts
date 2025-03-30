@@ -10,6 +10,7 @@ import { ErrorComponent } from './error/error.component';
 import { CoverComponent } from '../account/auth/signin/cover/cover.component';
 import { WilayaOrAnnexeGuard } from '../core/guards/wilayaOrAnnexe.guard copy';
 import { WilayaOrAnnexeOrAdminGuard } from '../core/guards/wilayaOrAnnexeOrAdminGuard';
+import { AnnexeGuard } from '../core/guards/AnnexeGuard';
 
 
 const routes: Routes = [
@@ -36,7 +37,7 @@ const routes: Routes = [
       path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {
-      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule),canActivate:[AnnexeGuard]
     },
     {
       path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canActivate: [AdminGuard]

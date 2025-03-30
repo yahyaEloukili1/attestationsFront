@@ -38,13 +38,13 @@
                         </div><!--end col-->
             
                         <div class="col-xxl-4 col-md-6">
-                            <label for="placeholderInput" class="form-label kuffi">الحي </label>
+                            <label for="placeholderInput" class="form-label kuffi">الشارع </label>
                               <select class="form-select mb-3 kuffi" name="rue"  required ngModel #districtSelect="ngModel">
-                                <option  value="" disabled selected>أدخل الحي </option>
+                                <option  value="" disabled selected>أدخل الشارع </option>
                                 <option *ngFor="let rue of rues" [value]="rue.id">{{rue.designation}}</option>
                               </select> 
                               <div class="invalid-feedback kuffi" *ngIf="f.submitted && (districtSelect.invalid)">
-                                يرجى إدخال الحي 
+                                يرجى إدخال الشارع 
                             </div>
                     
                         </div>

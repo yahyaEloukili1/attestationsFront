@@ -16,12 +16,34 @@ export class AddAagentComponent {
   fonctions
   formSubmitted: boolean = false;
   annexes: any;
+  annexeIdOfUserConnected: any;
+  
   constructor(private pdiService: restApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.getReources()
+    this.getConnectedUserAnnexeAndAnnexeNameOfUSerAalConnected()
   }
+  getConnectedUserRole(){
+    if(this.pdiService.loadToken()){
+      return JSON.parse(atob(this.pdiService.loadToken().split('.')[1])).roles[0].authority
+    }
+   }
+   getConnectedUserAnnexeAndAnnexeNameOfUSerAalConnected(){
+    let user;
+    if(this.pdiService.loadToken())
+        user=  JSON.parse(atob(this.pdiService.loadToken().split('.')[1])).sub;
+      console.log(user);
+      this.pdiService.getOneResource(`${this.pdiService.host}/appUsers/search/findByUsername?username=${user}`).subscribe(data => {
+this.annexeIdOfUserConnected = data['_embedded'].appUsers[0].annexe.id
 
+
+
+
+    })
+   
+  }
+ 
   getReources(){
     this.pdiService.getResourceAll('fonctions').subscribe(data=>{
       this.fonctions = data['_embedded'].fonctions  
@@ -36,9 +58,15 @@ export class AddAagentComponent {
         this.modelError( 'يرجى التأكد من البيانات وإعادة المحاولة')
         }
         else{
-          console.log(f.value,"sqqs")
-          f.value.fonction = `${this.pdiService.host}/fonctions/${f.value.fonction}`
+         if(this.getConnectedUserRole()=='USER-AAL'){
+             f.value.annexe = `${this.pdiService.host}/annexes/${this.annexeIdOfUserConnected}`
+              f.value.fonction = `${this.pdiService.host}/fonctions/${f.value.fonction}`
+             console.log(f.value,"ededpoiu");
+         }else{
+  f.value.fonction = `${this.pdiService.host}/fonctions/${f.value.fonction}`
                     f.value.annexe = `${this.pdiService.host}/annexes/${f.value.annexe}`
+         }
+        
           this.pdiService.addResource("agentAutorites",f.value).subscribe(data=>{
         this.reset(f)
           this.formSubmitted  = false

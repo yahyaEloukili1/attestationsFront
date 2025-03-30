@@ -259,7 +259,7 @@ onPageClicked(i:number){
             next: (data) => {
               this.onPageClicked(0); // Refresh the page data
               this.currentPage = 0; // Reset the current page
-              this.modelSuccess('لقد تم حذف عون السلطة'); // Success feedback
+              this.modelSuccess('لقد تم حذف  الحي'); // Success feedback
             },
             error: (err) => {
               console.log(err,"eded");

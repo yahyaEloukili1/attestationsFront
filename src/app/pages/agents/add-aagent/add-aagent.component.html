@@ -63,13 +63,22 @@
                         </div>
                         <div class="col-xxl-2 col-md-2">
                             <label for="placeholderInput" class="form-label kuffi">الملحقة</label>
-                              <select class="form-select mb-2 kuffi" name="annexe"  required ngModel #annexeSelected="ngModel">
+                            <div *ngIf="getConnectedUserRole()=='USER-AAL'" >
+                                <select [disabled]="true" class="form-select mb-2 kuffi" name="annexe"  required [ngModel]="annexeIdOfUserConnected">
+                                    <option  value="" disabled selected>أدخل الملحقة</option>
+                                    <option *ngFor="let pachalik of annexes" [value]="pachalik.id">{{pachalik.designation}}</option>
+                                  </select> 
+                            </div>
+                         <div *ngIf="getConnectedUserRole()!='USER-AAL'"> 
+                            <select   class="form-select mb-2 kuffi" name="annexe"  required ngModel #annexeSelected="ngModel">
                                 <option  value="" disabled selected>أدخل الملحقة</option>
                                 <option *ngFor="let pachalik of annexes" [value]="pachalik.id">{{pachalik.designation}}</option>
                               </select> 
                               <div class="invalid-feedback kuffi" *ngIf="f.submitted && (annexeSelected.invalid)">
                                 يرجى إدخال الملحقة
                             </div>
+                         </div>
+                           
                     
                         </div>
                         <div>

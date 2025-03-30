@@ -267,7 +267,7 @@ onPageClicked(i:number){
              },err=>{
                console.log(err)
              })
-          Swal.fire({text:'لقد تم حذف الحي', confirmButtonColor: '#364574',   customClass:{
+          Swal.fire({text:'لقد تم حذف الزنقة', confirmButtonColor: '#364574',   customClass:{
             title: 'kuffi',
             confirmButton: 'kuffi',
             container: 'kuffi'

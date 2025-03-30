@@ -253,40 +253,79 @@ onPageClicked(i:number){
 
   onDeleteResource(url:string){
     if(this.getConnectedUserRole()!='USER-AAL'){
-      Swal.fire({
-        title: 'هل أنت متأكد؟',
-        text: 'سوف يتم الحذف بصفة نهائية!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#364574',
-        cancelButtonColor: 'rgb(243, 78, 78)',
-        cancelButtonText: 'إلغاء',
-        customClass:{
-          title: 'kuffi',
-          confirmButton: 'kuffi',
-          container: 'kuffi'
-        },
-        confirmButtonText: 'حذف'
-      }).then(result => {
-       
+      this.modelWarning().then((result) => {
         if (result.value) {
-          this.rnpService.deleteResource('annexes',url).subscribe(data=>{
-           this.onPageClicked(0)
-           this.currentPage = 0
-             },err=>{
-               console.log(err)
-             })
-          Swal.fire({text:'لقد تم حذف الملحقة', confirmButtonColor: '#364574',   customClass:{
-            title: 'kuffi',
-            confirmButton: 'kuffi',
-            container: 'kuffi'
-          }, icon: 'success',});
+          this.rnpService.deleteResource('annexes', url).subscribe({
+            next: (data) => {
+              this.onPageClicked(0); // Refresh the page data
+              this.currentPage = 0; // Reset the current page
+              this.modelSuccess('لقد تم حذف  الملحقة'); // Success feedback
+            },
+            error: (err) => {
+              console.log(err,"eded");
+              if(err!.error!.cause!.cause!.message.includes('Cannot delete or update a parent row: a foreign')){
+                this.modelError("لا يمكن حذف الملحقة لأنه   مرتبط بشارع مضاف")
+              }else{
+                this.modelError('حدث خطأ أثناء حذف الملحقة . يرجى المحاولة مرة أخرى.'); // Display error feedback
+              }
+            
+            },
+          });
         }
       });
+     
        
     }
 
     }
+     modelError(error) {
+                Swal.fire({
+                
+                  title: error,
+                  icon: 'error',
+                  confirmButtonColor: '#364574',
+                  confirmButtonText: 'إغلاق',
+                  customClass:{
+                    title: 'kuffi',
+                    confirmButton: 'kuffi',
+                    container: 'kuffi'
+                  }
+                });
+                
+              }
+              modelWarning(){
+                return   Swal.fire({
+                  title: 'هل أنت متأكد؟',
+                  text: 'سوف يتم الحذف بصفة نهائية!',
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#364574',
+                  cancelButtonColor: 'rgb(243, 78, 78)',
+                  cancelButtonText: 'إلغاء',
+                  customClass:{
+                    title: 'kuffi',
+                    confirmButton: 'kuffi',
+                    container: 'kuffi'
+                  },
+                  confirmButtonText: 'حذف'
+                })
+              }
+              modelSuccess(text) {
+                Swal.fire({
+                  
+                  position: 'center',
+                  icon: 'success',
+                  title: text,
+                  showConfirmButton: true,
+                  confirmButtonColor: '#364574',
+                  customClass:{
+                    title: 'kuffi',
+                    confirmButton: 'kuffi',
+                    container: 'kuffi'
+                  }
+                });
+                
+              }
     onEditResource(p:any){
      
       let url = p['_links'].self.href;

@@ -27,7 +27,7 @@
                   placeholder="البحث بالبطاقة الوطنية..."
                 />
                 <button class="btn btn-primary"><i class="ri-search-line"></i></button>&nbsp;
-                <select
+                <!-- <select
                   class="form-select me-2 kuffi"
                   style="width: 200px;"
                   name="district"
@@ -39,7 +39,7 @@
                   <option *ngFor="let district of typeAttestations" [value]="district.id">
                     {{ district.designation }}
                   </option>
-                </select>
+                </select> -->
                
               </div>
               
@@ -97,7 +97,7 @@
                       <!-- <button class="btn btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button> -->
                       &nbsp;
                       <button class="btn btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>&nbsp;
-                      <button class="btn btn-sm btn-primary" style="width: 150px;height: 30px;" (click)="uploadFile()">استخراج الشهادة <i class="ri-delete-bin-6-line"></i></button>
+                      <button class="btn btn-sm btn-primary" style="width: 150px;height: 30px;" (click)="openFile()">استخراج الشهادة <i class="ri-delete-bin-6-line"></i></button>
                   </td>
               </tr>
               

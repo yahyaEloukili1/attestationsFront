@@ -46,6 +46,11 @@ export class AgentsEditComponent {
      })
 
    }
+   getConnectedUserRole(){
+    if(this.myService.loadToken()){
+      return JSON.parse(atob(this.myService.loadToken().split('.')[1])).roles[0].authority
+    }
+   }
    getId(url){
     console.log(url,'pppppppppppppppppppppp')
     this.myService.getOneResource(url).subscribe(data=>{

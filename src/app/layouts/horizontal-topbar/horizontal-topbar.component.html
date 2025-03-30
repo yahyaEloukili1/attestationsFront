@@ -20,7 +20,7 @@
                     </a>
                 </li>
              
-                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'||getConnectedUserRole()=='USER-DSIT'||getConnectedUserRole()=='USER-AAL'">
+                  <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                       [routerLink]="['/attestations/list']" [routerLinkActive]="['is-active']">
                           <span class="droid-arabic-kufi" style="color: white !important;">تدبير الشواهد</span>  

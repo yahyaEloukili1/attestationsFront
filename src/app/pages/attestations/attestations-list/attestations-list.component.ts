@@ -178,7 +178,10 @@ uploadFile(){
   this.rnpService.uploadFileWithData3()
 }
 
-
+openFile() {
+  const fileUrl = '/assets/file.pdf'; // Replace with your file path
+  window.open(fileUrl, '_blank'); // Open in a new tab
+}
 
 
 

@@ -5,9 +5,9 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header d-flex align-items-center">
-          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة أعوان السلطة <span style="color: green;">{{annexeForhtml || ''}}</span> </h4>
+          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة أعوان السلطة <span *ngIf="getConnectedUserRole()!='USER-AAL'" style="color: green;">{{annexeForhtml || ''}}</span><span *ngIf="getConnectedUserRole()=='USER-AAL'" style="color: green;">{{annexeNameOfUserConnected || ''}}</span> </h4>
           <!-- <button type="button" (click)="addResource()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp; -->
-          <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto" *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' ">عون سلطة جديد <i class="ri-add-line align-bottom me-1"></i></button>
+          <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto" >عون سلطة جديد <i class="ri-add-line align-bottom me-1"></i></button>
      
         </div><!-- end card header -->
       
@@ -20,7 +20,7 @@
                   
               </div> -->
               &nbsp;
-                    <select class="form-select mb-3 kuffi" style="width: 200px;" name="annexe" ngModel (ngModelChange)="onannexeClicked($event)">
+                    <select class="form-select mb-3 kuffi" style="width: 200px;" *ngIf="getConnectedUserRole()!='USER-AAL'" name="annexe" ngModel (ngModelChange)="onannexeClicked($event)">
                       <option disabled value="" selected>البحث بالملحقة </option>
                       <option  [value]="0">-</option>
                       <option *ngFor="let annexe of annexes" [value]="annexe.id">{{annexe.designation}}</option>
@@ -69,7 +69,7 @@
                   <td style="vertical-align: middle;" class="kuffi">{{p.fonction.designation}}</td>
                   <td style="vertical-align: middle;" class="kuffi">{{p.annexe.designation}}</td>
                
-                  <td style="vertical-align: middle;" *ngIf="getConnectedUserRole()=='ADMIN' || getConnectedUserRole()=='USER-DSIT' ">
+                  <td style="vertical-align: middle;">
                       <button class="btn  btn-sm btn-warning" style="width: 80px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
                       &nbsp;
                       <button class="btn  btn-sm btn-danger" style="width: 80px;height: 30px;" (click)="onDeleteResource(p['_links'].self.href)">حذف <i class="ri-delete-bin-6-line"></i></button>

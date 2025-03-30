@@ -1032,19 +1032,19 @@ onDeleteResource(p){
           let url = p['_links'].self.href
           this.rnpService.deleteResource('citoyens',url).subscribe(data=>{
            
-            this.modelSuccess('لقد تم حذف الملحقة')
+            this.modelSuccess('لقد تم حذف المواطن')
       
              },err=>{
-              this.modelError('لا يمكن حدف الملحقة')
+              this.modelError('لا يمكن حدف المواطن')
           
              })
         }else{
           
           this.rnpService.deleteResource('citoyens',`${this.rnpService.host}/citoyens/${p.id}`).subscribe(data=>{
            
-            this.modelSuccess('لقد تم حذف الملحقة')
+            this.modelSuccess('لقد تم حذف المواطن')
              },err=>{
-              this.modelError('لا يمكن حدف الملحقة')
+              this.modelError('لا يمكن حدف المواطن')
              })
         
         }
@@ -1103,9 +1103,9 @@ onDeleteResource(p){
     
   }
   onEditResource(p:any){
-    console.log(p.id,";;;;;;;;;;;;;;")
-    let url = `${this.rnpService.host}/citoyens/${p.id}`;
-     this.router.navigateByUrl("citoyens/edit/1")
+    // console.log(p.id,";;;;;;;;;;;;;;")
+    // let url = `${this.rnpService.host}/citoyens/${p.id}`;
+    //  this.router.navigateByUrl("citoyens/edit/1")
   }  
 
 

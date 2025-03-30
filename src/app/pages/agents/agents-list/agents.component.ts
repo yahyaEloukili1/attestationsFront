@@ -30,11 +30,18 @@ export class AgentsComponent {
   totalCount
   annexeName: string;
   annexeForhtml: string;
+  annexeOfUserConnected: any;
+  annexeIdOfUserConnected: any;
+  annexeNameOfUserConnected: any;
   constructor(private rnpService: restApiService,private router: Router,private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.getagentAutorites(this.currentPage)
+    if(this.getConnectedUserRole()!="USER-AAL"){
+      this.getagentAutorites(this.currentPage)
+    }
+   
     this.getannexes()
+    this.getConnectedUserAnnexeAndAnnexeNameOfUSerAalConnected()
 }
 getannexes(){
   this.rnpService.getResourceAll('annexes').subscribe(data=>{
@@ -63,6 +70,7 @@ setTotalCount(){
 
   }
 })
+
 }
 addResource(){
   this.router.navigateByUrl("agents/add")
@@ -134,7 +142,79 @@ getDataWIthFiltersAndPageAndSize(){
    console.log(err);
   }
   );
+
+
 }
+getDataWIthFiltersAndPageAndSize2(e){
+let d;
+d=e
+    let url = `${this.rnpService.host}/agentAutorites/search/findAgentAutoritesByAnnexeId?`;
+
+ if (d !== undefined) {
+   url += `annexeId=${d}`;
+ }
+ 
+  
+  
+ 
+ 
+    
+    url+=`&page=${this.currentPage}&size=${this.size}`
+    console.log(url,this.currentPage,'szszszq')
+    
+  this.rnpService.getOneResource(url).subscribe(
+  data => {
+   this.agentAutorites = data['_embedded'].agentAutorites;
+  
+   console.log(data,"szszeedrr")
+   this.totalPages = data['page'].totalPages
+   this.totalCount = this.agentAutorites.length
+   
+   this.pages = new Array<number>(this.totalPages);
+
+  },
+  err => {
+   console.log(err);
+  }
+  );
+
+
+}
+getDataWIthFiltersAndPageAndSize3(e){
+  let d;
+  d=e
+      let url = `${this.rnpService.host}/agentAutorites/search/findAgentAutoritesByAnnexeId?`;
+  
+   if (d !== undefined) {
+     url += `annexeId=${d}`;
+   }
+   
+    
+    
+   
+   
+      
+      url+=`&page=0&size=${this.size}`
+      console.log(url,this.currentPage,'szszszq')
+      
+    this.rnpService.getOneResource(url).subscribe(
+    data => {
+     this.agentAutorites = data['_embedded'].agentAutorites;
+    
+     console.log(data,"szszeedrr")
+     this.totalPages = data['page'].totalPages
+     this.totalCount = this.agentAutorites.length
+     
+     this.pages = new Array<number>(this.totalPages);
+  
+    },
+    err => {
+     console.log(err);
+    }
+    );
+  
+  
+  }
 onannexeClicked(e, page = 0) {
   // this.getagentAutorites(e)
   if(e!=0){
@@ -177,19 +257,26 @@ onPageClicked(i:number){
   
     this.currentPage = i;
   
-  if(this.annexeselected==false)
-  {this.getagentAutorites(i)
-    console.log("rfrfrfrf")
-  }
-  else{
 
-    if(this.annexeselected ==true){
-      this.onannexeClicked(this.selectedannexe,this.currentPage)
-      console.log("annexet")
+if(this.getConnectedUserRole()=='USER-AAL'){
+  this.onannexeClicked(this.annexeIdOfUserConnected,this.currentPage)
+  console.log("ededede");
+}else{
+  if(this.annexeselected==false)
+    {this.getagentAutorites(i)
+      console.log("rfrfrfrf")
     }
+    else{
   
-  
-  }
+      if(this.annexeselected ==true){
+        this.onannexeClicked(this.selectedannexe,this.currentPage)
+       
+      }
+    
+    
+    }
+}
+
   
   }
 
@@ -197,20 +284,27 @@ onPageClicked(i:number){
     this.size = e.target.value
     this.getDisplayRange()
    
-    
+    this.currentPage = 0
     // this.getUsers(0) 
-
+    if(this.getConnectedUserRole()=='USER-AAL'){
+      this.onannexeClicked(this.annexeIdOfUserConnected,this.currentPage)
+      console.log("ededede");
+    }
+    else{
+  
       if(this.annexeselected==false)
-      {this.getagentAutorites(0)
-      }
-      else{
-    
-        if(this.annexeselected ==true){
-          this.onannexeClicked(this.selectedannexe,0)
-          console.log(this.selectedannexe,"annexet")
+        {this.getagentAutorites(0)
         }
-        
-      }
+        else{
+      
+          if(this.annexeselected ==true){
+            this.onannexeClicked(this.selectedannexe,0)
+            console.log(this.selectedannexe,"annexet")
+          }
+          
+        }
+    }
+     
     }
     
 
@@ -251,12 +345,17 @@ onPageClicked(i:number){
 
 
   onDeleteResource(url:string){
-    if(this.getConnectedUserRole()!='USER-AAL'){
+    
       this.modelWarning().then((result) => {
         if (result.value) {
           this.rnpService.deleteResource('agentAutorites', url).subscribe({
             next: (data) => {
-              this.onPageClicked(0); // Refresh the page data
+              if(this.getConnectedUserRole()=='USER-AAL'){
+                this.getDataWIthFiltersAndPageAndSize3(this.annexeIdOfUserConnected)
+              }else{
+                this.onPageClicked(0); // Refresh the page data
+              }
+             
               this.currentPage = 0; // Reset the current page
               this.modelSuccess('لقد تم حذف عون السلطة'); // Success feedback
             },
@@ -274,7 +373,7 @@ onPageClicked(i:number){
       });
      
        
-    }
+    
 
     }
      modelError(error) {
@@ -335,5 +434,27 @@ onPageClicked(i:number){
         return JSON.parse(atob(this.authService.loadToken().split('.')[1])).roles[0].authority
       }
      }
+     getConnectedUserAnnexeAndAnnexeNameOfUSerAalConnected(){
+      let user;
+      if(this.authService.loadToken())
+          user=  JSON.parse(atob(this.authService.loadToken().split('.')[1])).sub;
+        console.log(user);
+        this.rnpService.getOneResource(`${this.rnpService.host}/appUsers/search/findByUsername?username=${user}`).subscribe(data => {
+  this.annexeIdOfUserConnected = data['_embedded'].appUsers[0].annexe.id
+  
+  console.log(this.annexeIdOfUserConnected,"sxsxs");
+  this.rnpService.getOneResource(`${this.rnpService.host}/annexes/${this.annexeIdOfUserConnected}`).subscribe(data => {
+    console.log(data,"sqsq");
+    this.annexeNameOfUserConnected = ' التابعين ل: '+ data.designation
+    if(this.getConnectedUserRole()=="USER-AAL"){
+    
+      this.getDataWIthFiltersAndPageAndSize2(this.annexeIdOfUserConnected)
+    }
+          })
+  
+      })
+     
+    }
+   
 }
 
