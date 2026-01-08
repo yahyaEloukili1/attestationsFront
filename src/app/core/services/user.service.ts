@@ -18,4 +18,23 @@ export class UserProfileService {
     register(user: User) {
         return this.http.post(`/users/register`, user);
     }
+      getCommunes() {
+    return this.http.get<any>('assets/communes.geojson');
+  }
+  getColleges() {
+  return this.http.get<GeoJSON.FeatureCollection>(
+    'assets/colleges.geojson'
+  );
+}
+getCHRs() {
+  return this.http.get<GeoJSON.FeatureCollection>(
+    'assets/CHR.geojson'
+  );
+}
+getSanteExistants() {
+  return this.http.get<GeoJSON.FeatureCollection>(
+    'assets/santeExistant.geojson'
+  );
+}
+
 }

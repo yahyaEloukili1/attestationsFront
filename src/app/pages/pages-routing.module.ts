@@ -28,6 +28,21 @@ const routes: Routes = [
       path: '', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule)
     },
     {
+      path: 'boucraa', loadChildren: () => import('./boucraa/boucraa.module').then(m => m.BoucraaModule),canActivate:[AdminGuard]
+    },
+      {
+      path: 'dcheira', loadChildren: () => import('./decheira/dcheira.module').then(m => m.DcheiraModule),canActivate:[AdminGuard]
+    },
+        {
+      path: 'laayoune', loadChildren: () => import('./laayoune/laayoune.module').then(m => m.LaayouneModule),canActivate:[AdminGuard]
+    },
+     {
+      path: 'foumelouad', loadChildren: () => import('./foumelouad/foumelouad-routing.module').then(m => m.FoumelouadRoutingModule),canActivate:[AdminGuard]
+    },
+     {
+      path: 'elmarsa', loadChildren: () => import('./elmarsa/elmarsa-routing.module').then(m => m.ElmarsaRoutingModule),canActivate:[AdminGuard]
+    },
+        {
       path: 'annexes', loadChildren: () => import('./annexes/annexes.module').then(m => m.AnnexesModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
     },
     {

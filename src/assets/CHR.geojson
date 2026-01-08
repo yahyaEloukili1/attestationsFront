@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "CHR",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "N°": 1, "Région": "NVs Projets", "Province": "LAAYOUNE", "ESSP/CVR": "ESSP DOUIRAT", "Longitude": -13.1756272, "Latitude": 27.1380931 }, "geometry": { "type": "Point", "coordinates": [ -13.1756272, 27.1380931 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "N°": 2, "Région": "NVs Projets", "Province": "LAAYOUNE", "ESSP/CVR": "Hôpital Hassan II ", "Longitude": -13.1906292, "Latitude": 27.1451814 }, "geometry": { "type": "Point", "coordinates": [ -13.1906292, 27.1451814 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "N°": 3, "Région": "NVs Projets", "Province": "LAAYOUNE", "ESSP/CVR": "CHR Laâyoune", "Longitude": -13.1892064, "Latitude": 27.1567276 }, "geometry": { "type": "Point", "coordinates": [ -13.1892064, 27.1567276 ] } }
+]
+}

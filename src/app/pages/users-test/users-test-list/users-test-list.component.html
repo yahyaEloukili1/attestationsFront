@@ -1,275 +1,114 @@
 
-<!-- End Breadcrumbs -->
+  <div class="row justify-content-center dashboard-container" style="height: 700px;" >
+    
+    <div class="col-md-8">
+    <div class="border p-0 h-100" >
+  <!-- Container de la carte Leaflet -->
+  <!-- <div id="map" style="width: 100%; height: 100%;"></div> -->
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-header d-flex align-items-center">
-        <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> لائحة مستعملي النظام<span style="color: maroon;">{{roleName || ''}}</span> <span style="color: green;">{{pachalikForhtml || ''}}</span> <span style="color: red;">{{districForHtml || ''}}</span> {{annexeForHtml || ''}}</h4>
-        <button type="button" (click)="export()" class="btn btn-soft-info add-btn ms-auto">تصدير  <i class="ri-file-download-line align-bottom me-1"></i></button>&nbsp;
-        <button type="button" (click)="addResource()" class="btn btn-success add-btn ms-auto">مستعمل جديد <i class="ri-add-line align-bottom me-1"></i></button>
-      
-   
-      </div><!-- end card header -->
-    
-      <div class="card-body">
-        <div class="row g-4 mb-3">
-          <div class="col-sm flex-container2">
-            <div class="d-flex">
-              <div class="search-box">
-                <input type="text" class="form-control search kuffi" [(ngModel)]="cin" placeholder="البحث بالبطاقة الوطنية...">
-              </div>&nbsp;
-              <div> <button class="btn btn-primary" (click)="searchUser()"><i class="ri-search-line"></i></button></div>
-               
-           
-                <!-- <div>
-                  1
-                </div>
-              <div>
-                2
-              </div> -->&nbsp;
-                  <select class="form-select mb-3 kuffi" style="width: 200px;" name="appRole" #role="ngModel" ngModel (ngModelChange)="onRoleClicked($event)" >
-                    <option disabled value="" selected>  البحث بصلاحيات النظام </option>
-                 
-                    <option  [value]="0" [selected]="cinSelected">-</option>
-                    <option *ngFor="let appRole of appRoles" [value]="appRole.id">
-                        {{appRole.roleNameAr}}
-                    
-                    </option>
-                    
-                   
-                  </select>&nbsp;&nbsp;
-                  <select class="form-select mb-3 kuffi" style="width: 200px;" name="pachalik" #pachalik="ngModel" ngModel (ngModelChange)="onPachalikClicked($event)" *ngIf="showPachalik">
-                    <option disabled value="" selected>  البحث بالباشويات </option>
-                    <option  [value]="0">-</option>
-                    <option *ngFor="let pachalik of pachaliks" [value]="pachalik.id">{{pachalik.designation}}</option>
-                  </select>&nbsp;&nbsp;
-                  <select class="form-select mb-3 kuffi" style="width: 200px;" name="district" #district="ngModel" [(ngModel)]="d" (ngModelChange)="onDistrictClicked($event)" *ngIf="showDistrict">
-                    <option disabled value="" selected>  البحث بالدوائر </option>
-                    <option  [value]="0">-</option>
-                    <option *ngFor="let district of districts" [value]="district.id">{{district.designation}}</option>
-                  </select>&nbsp;&nbsp;
-                  <select class="form-select mb-3 kuffi" style="width: 200px;" name="annexe" #annexe="ngModel" ngModel  [(ngModel)]="a" (ngModelChange)="onAnnexeClicked($event)" *ngIf="showAnnexe">
-                    <option disabled value="" selected>  البحث بالملحقات </option>
-                    <option  [value]="0">-</option>
-                    <option *ngFor="let annexe of annexes" [value]="annexe.id">{{annexe.designation}}</option>
-                  </select>
-            </div>
-      
-       <div class="flex-container">
-        <div class="kuffi pt-2">أظهر</div> &nbsp;&nbsp;&nbsp;&nbsp;
-        <select class="form-select mb-3" style="width: 100px;"  (change)="onSelectedSize($event)">
-          <option  [value]="8">8</option>
-          <option  [value]="10">10</option>
-          <option  [value]="20">20</option>
-          <option  [value]="40">40</option>
-          <option  [value]="60">60</option>
-          <option  [value]="80">80</option>
-          <option  [value]="100">100</option>
-          
-        </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="kuffi pt-2">مدخلات</div>
-    
-     
-       </div>
-           
-              
-           
-         
+<div #mapContainer id="map"></div>
+
+       <map  name="image-map">
+
+
+    <!-- Foum El Oued -->
+
+
+   <area target="" title="جماعة المرسى"  (click)="goToElmarsa($event)" alt=""  coords="319,497,344,506,368,512,392,525,407,454,418,415,423,391,428,356,437,308,448,265,456,237,441,235,433,228,409,223,382,219,352,217,341,254,331,281,316,322,300,363,278,405,257,426,254,431,267,454,281,475" shape="poly">
+     <area target="" title="جماعة بوكراع" (click)="goToBoucraa($event)"  coords="398,500,393,519,434,541,482,558,509,569,538,601,582,634,620,661,676,690,705,702,724,734,754,740,778,710,783,700,758,570,767,509,808,452,771,452,692,428,613,402,564,353,510,315,488,302,465,288,448,280,427,364,438,313" shape="poly">
+    <area target="" alt="" title="جماعة العيون" (click)="goToLaayoune($event)" coords="457,237,480,236,495,221,488,205,467,198,445,196,433,206,431,216,438,230,447,232" shape="poly">
+    <area target="" alt="" title="جماعة الدشيرة"  (click)="goToDcheira($event)"  coords="454,235,475,235,493,221,500,202,472,190,481,168,512,138,545,140,607,128,714,86,692,132,687,177,720,227,798,264,827,299,880,342,850,387,809,441,713,436,632,397,501,307,452,278" shape="poly">  
+    <area target="" alt="" title="جماعة فم الواد"  (click)="goToFoumelouad($event)"      coords="356,213,384,221,405,220,425,207,444,196,467,177,482,150,501,131,515,129,498,113,478,91,459,75,432,57,415,103,401,133" shape="poly">
+  </map>
+
+
+</div>
+    </div>
+<div class="col-md-4">
+  <div class="border border-dark p-4" style="height: 790px;">
+    <h5 class="text-center mb-4">Indicateurs provinciaux</h5>
+
+    <div class="row g-3">
+
+      <!-- Population totale -->
+      <div class="col-md-6">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-people-fill fs-2 text-primary"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Population totale</div>
+            <div class="fs-3 fw-bold">15 847</div>
           </div>
-     
+        </div>
       </div>
-        <div class="table-responsive">
-          <div class="table-container">
 
-      
-          <table class="table table-sm">
-            <thead>
-              <tr>
-                <th>الإسم الشخصي</th>
-                <th>الإسم العائلي</th>
-                <th>إسم المرور</th>
-                <th>رقم البطاقة الوطنية</th>
-                <!-- <th>البريد الإلكتروني</th> -->
-                <th>الهاتف</th>
-                <th>الباشوية</th>
-                <th>الدائرة</th>
-                <th>الملحقة</th>
-              
-              <th>صلاحيات النظام</th>
-<th>
-
-  
-</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let p of appUsers; let i = index">
-                <td style="vertical-align: middle;" class="kuffi">{{p.firstNameAr}}</td>
-                <td style="vertical-align: middle;" class="kuffi">{{p.lastNameAr}}</td>
-                <td style="vertical-align: middle;">{{p.username}}</td>
-                <td style="vertical-align: middle;">{{p.cin}}</td>
-                <!-- <td style="vertical-align: middle;">{{p.email}}</td> -->
-                <td style="vertical-align: middle;">{{p.phone}}</td>
-                <td style="vertical-align: middle;" class="kuffi">{{ p.pachalik?.designation || '-' }}</td>
-                <td style="vertical-align: middle;" class="kuffi">{{ p.district?.designation || '-' }}</td>
-                <td style="vertical-align: middle;" class="kuffi">{{ p.annexe?.designation || '-' }}</td>
-
-                <td style="vertical-align: middle;" class="kuffi">{{p.role?.roleNameAr}}</td>
-                <td style="vertical-align: middle;">
-                    <button class="btn btn-sm btn-warning" style="width: 60px;height: 30px;" (click)="onEditResource(p)">تبديل <i class="ri-edit-line"></i></button>
-                    &nbsp;
-                    <button class="btn  btn-sm btn-secondary" style="width: 65px;height: 30px;" (click)="onDetailResource(p)">إظهار <i class="ri-eye-line"></i></button>
-                    &nbsp;
-
-
-                    <button class="btn  btn-sm btn-danger" style="width: 60px;height: 30px;" (click)="onDeleteResource(p)">حذف <i class="ri-delete-bin-6-line"></i></button>
-                    &nbsp;
-
-
-                    <button class="btn btn-sm" style="width: 120px;height: 30px;background-color: #5d7bc6;color: white;" (click)="onUpdatePassword(p)">تبديل كلمة السر <i class="ri-lock-2-line"></i></button>
-                </td>
-            </tr>
-            
-            </tbody>
-          </table>
+      <!-- Superficie -->
+      <div class="col-md-6">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-aspect-ratio fs-2 text-secondary"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Superficie (km²)</div>
+            <div class="fs-3 fw-bold">1 245</div>
+          </div>
         </div>
+      </div>
+
+      <!-- Femmes -->
+      <div class="col-md-6">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-gender-female fs-2 text-danger"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Femmes</div>
+            <div class="fs-3 fw-bold">7 920</div>
+          </div>
         </div>
-        <div style="text-align: left;">
-          <div style="display: flex; justify-content: space-between;">
-            <p class="kuffi">{{ getDisplayRange() }}</p>
-            <ul *ngIf="pages && pages.length > 0" class="pagination" [ngClass]="selected == true ? 'd-none' : 'd-flex'">
-                <li class="kuffi">
-                    <a class="clickable page-link" (click)="goToPreviousPage()" [ngClass]="{ 'disabled': currentPage === 0 }">السابق</a>
-                </li>
-                <li [ngClass]="i == currentPage ? 'page-item active' : 'page-item'" *ngFor="let p of pages; let i = index">
-                    <a class="clickable page-link" (click)="onPageClicked(i)">{{i}}</a>
-                </li>
-                <li class="kuffi">
-                    <a class="clickable page-link" (click)="goToNextPage()" [ngClass]="{ 'disabled': currentPage === pages.length - 1 }">التالي</a>
-                </li>
-            </ul>
-            
+      </div>
+
+      <!-- Hommes -->
+      <div class="col-md-6">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-gender-male fs-2 text-primary"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Hommes</div>
+            <div class="fs-3 fw-bold">7 927</div>
+          </div>
         </div>
-        
-        
-     <!-- <span class="kuffi">إظهار {{size}} من أصل {{totalCount}} ملحقات</span> -->
+      </div>
+
+      <!-- Marocains -->
+      <div class="col-md-6">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-flag-fill fs-2 text-success"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Marocains</div>
+            <div class="fs-3 fw-bold">15 200</div>
+          </div>
         </div>
-      </div><!-- end card-body -->
-    </div><!-- end card -->
+      </div>
+
+      <!-- Étrangers -->
+      <div class="col-md-6">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-globe fs-2 text-warning"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Étrangers</div>
+            <div class="fs-3 fw-bold">647</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nombre de ménages -->
+      <div class="col-md-12">
+        <div class="border p-3 d-flex align-items-center gap-3">
+          <i class="bi bi-house-door-fill fs-2 text-dark"></i>
+          <div class="text-center w-100">
+            <div class="fw-semibold fs-5">Nombre de ménages</div>
+            <div class="fs-3 fw-bold">3 820</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <!-- end col -->
 </div>
 
-<!-- end row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-
-<div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title mb-0 flex-grow-1"><i class="ri-line-chart-fill" style="color: #364574;"></i> 
-            لائحة مستعملي النظام  </h4>
-        </div>
-  
-        <div class="card-body">
-          <div class="row g-4 mb-3">
-            <div class="col-sm-auto">
-              <div class="search-box ms-2">
-                <input type="text" class="form-control search kuffi" placeholder="بحث...">
-                <i class="ri-search-line search-icon"></i>
-            </div> 
-             
-            </div>
-            <div class="col-sm">
-                <div class="d-flex justify-content-sm-end">
-                  <button type="button" (click)="withimage()"   class="btn btn-soft-info add-btn"> <i class=" ri-eye-line me-1"></i></button>&nbsp;
-                    <button type="button" (click)="addResource()" class="btn btn-success add-btn">مستعمل جديد <i class="ri-add-line align-bottom me-1"></i></button> 
-  
-                </div>
-                
-            </div>
-        </div>
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>الإسم الشخصي</th>
-                  <th>الإسم العائلي</th>
-                  <th>إسم المرور</th>
-                  <th>رقم البطاقة الوطنية</th>
-                  <th>البريد الإلكتروني</th>
-                  <th>الهاتف</th>
-                <th>الوظيفة</th>
-  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let p of users; let i = index">
-                  <td style="vertical-align: middle;" class="kuffi">{{p.firstNameAr}}</td>
-                  <td style="vertical-align: middle;" class="kuffi">{{p.lastNameAr}}</td>
-                  <td style="vertical-align: middle;">{{p.username}}</td>
-                  <td style="vertical-align: middle;">{{p.cin}}</td>
-                  <td style="vertical-align: middle;">{{p.email}}</td>
-                  <td style="vertical-align: middle;">{{p.phone}}</td>
-                  <td style="vertical-align: middle;" class="kuffi">{{p.job}}</td>
-                  <td style="vertical-align: middle;">
-                      <button class="btn btn-warning" (click)="onEditResource(p.id)">تبديل <i class="ri-edit-line"></i></button>
-                      &nbsp;
-                      <button class="btn btn-secondary" (click)="onDeleteResource(p.id)">إظهار <i class="ri-eye-line"></i></button>
-                      &nbsp;
-
-
-                      <button class="btn btn-danger" (click)="onDeleteResource(p.id)">حذف <i class="ri-delete-bin-6-line"></i></button>
-                  </td>
-              </tr>
-              
-              </tbody>
-            </table>
-          </div>
-          <div class="row justify-content-md-between align-items-md-center">
-       
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
-    -->
