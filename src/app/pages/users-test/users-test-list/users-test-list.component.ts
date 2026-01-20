@@ -1,4 +1,3 @@
-// users-test-list.component.ts
 import {
   Component,
   AfterViewInit,
@@ -27,6 +26,27 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
 
   map!: L.Map;
   selectedLayer: L.Path | null = null;
+
+  // =========================
+  // ✅ INDICATEURS (STATE)
+  // =========================
+  indicateursDemo = {
+    population: 0,
+    hommes: 0,
+    femmes: 0,
+    marocains: 0,
+    etrangers: 0,
+    menages: 0
+  };
+
+  // ✅ TERRITOIRE (NEW IMAGE)
+  indicateursTerritoire = {
+    superficieKm2: 0,
+    communesTerritoriales: 0,
+    grandMassifPct: 0,
+    plaineSoussPct: 0,
+    littoralKm: 0
+  };
 
   // 👉 Santé
   santeLayer = L.layerGroup();
@@ -92,13 +112,33 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   });
 
   miseIcon = L.icon({
-    iconUrl: 'assets/icons/way.png', // ✅ add this icon (or change path)
+    iconUrl: 'assets/icons/way.png',
     iconSize: [28, 28],
     iconAnchor: [14, 28],
     popupAnchor: [0, -28]
   });
 
+  // =========================
+  // ✅ SAFE HELPERS
+  // =========================
+  private n(v: any): number {
+    const x = Number(v);
+    return Number.isFinite(x) ? x : 0;
+  }
+
+  // Get first available property from feature.properties using multiple keys
+  private pick(p: any, keys: string[]): any {
+    for (const k of keys) {
+      if (p && p[k] !== undefined && p[k] !== null && p[k] !== '') return p[k];
+    }
+    return undefined;
+  }
+
+  // =========================
+  // ✅ MAIN
+  // =========================
   ngAfterViewInit(): void {
+
     /* =========================
        1️⃣ INIT MAP
     ========================= */
@@ -116,6 +156,67 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
        2️⃣ LOAD COMMUNES
     ========================= */
     this.mapService.getCommunes().subscribe((data: GeoJSON.FeatureCollection) => {
+
+      console.log(data.features,'spspspsp');
+      // ✅ reset
+      this.resetIndicators();
+
+      // ✅ communes territoriales = nombre de features
+      this.indicateursTerritoire.communesTerritoriales = data.features.length;
+
+      // ✅ On va essayer d'extraire aussi grandMassifPct & plaineSoussPct
+      // (souvent ce genre de données est globale et répétée sur chaque feature)
+      let foundMassif = false;
+      let foundPlaine = false;
+
+      data.features.forEach((feature: any) => {
+        const p = feature.properties || {};
+
+
+
+        // -------------------------
+        // ✅ DEMO (sum)
+        // -------------------------
+        this.indicateursDemo.population += this.n(p.Population);
+        console.log(this.indicateursDemo.population,'bbbbbbb');
+        this.indicateursDemo.hommes     += this.n(p.Hommes);
+        this.indicateursDemo.femmes     += this.n(p.Femmes);
+        this.indicateursDemo.marocains  += this.n(p.Marocains);
+        this.indicateursDemo.etrangers  += this.n(p.Etrangers);
+        this.indicateursDemo.menages    += this.n(p.Nb_Menages);
+
+        // -------------------------
+        // ✅ TERRITOIRE (sum / pick)
+        // -------------------------
+        
+        // Superficie km² (sum if exists per feature)
+        const sup = this.pick(p, ['Superficie', 'superficie', 'Area_km2', 'area_km2', 'SUP_KM2']);
+        this.indicateursTerritoire.superficieKm2 += this.n(sup);
+
+        // Littoral km (sum if exists per feature)
+        const lit = this.pick(p, ['Littoral_km', 'littoral_km', 'LITTORAL_KM', 'longueur_littoral', 'LITTORAL']);
+        this.indicateursTerritoire.littoralKm += this.n(lit);
+
+        // Grand massif % (take first non-zero)
+        if (!foundMassif) {
+          const massif = this.pick(p, ['Grand_massif_pct', 'grandMassifPct', 'GRAND_MASSIF_PCT', 'GRAND_MASSIF']);
+          const mv = this.n(massif);
+          if (mv > 0) {
+            this.indicateursTerritoire.grandMassifPct = mv;
+            foundMassif = true;
+          }
+        }
+
+        // Plaine Souss % (take first non-zero)
+        if (!foundPlaine) {
+          const plaine = this.pick(p, ['Plaine_souss_pct', 'plaineSoussPct', 'PLAINE_SOUS_PCT', 'PLAINE_SOUS']);
+          const pv = this.n(plaine);
+          if (pv > 0) {
+            this.indicateursTerritoire.plaineSoussPct = pv;
+            foundPlaine = true;
+          }
+        }
+      });
 
       const communesLayer = L.geoJSON(data, {
         style: (feature: any) => ({
@@ -201,7 +302,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
           pointToLayer: (_feature, latlng) =>
             L.marker(latlng, { icon: this.hopitauxExistantsIcon }),
           onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<b>CHR</b><br>${feature.properties?.nom || ''}`);
+            layer.bindPopup(`<b>CHR</b><br>${(feature.properties as any)?.nom || ''}`);
           }
         }).addTo(this.santeLayer);
       });
@@ -211,7 +312,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
           pointToLayer: (_feature, latlng) =>
             L.marker(latlng, { icon: this.chrIcon }),
           onEachFeature: (feature, layer) => {
-            layer.bindPopup(`<b>Centre de santé</b><br>${feature.properties?.nom || ''}`);
+            layer.bindPopup(`<b>Centre de santé</b><br>${(feature.properties as any)?.nom || ''}`);
           }
         }).addTo(this.santeLayer);
       });
@@ -342,6 +443,28 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.map) this.map.remove();
+  }
+
+  // =========================
+  // HELPERS
+  // =========================
+  resetIndicators() {
+    this.indicateursDemo = {
+      population: 0,
+      hommes: 0,
+      femmes: 0,
+      marocains: 0,
+      etrangers: 0,
+      menages: 0
+    };
+
+    this.indicateursTerritoire = {
+      superficieKm2: 0,
+      communesTerritoriales: 0,
+      grandMassifPct: 0,
+      plaineSoussPct: 0,
+      littoralKm: 0
+    };
   }
 
   /* =========================
