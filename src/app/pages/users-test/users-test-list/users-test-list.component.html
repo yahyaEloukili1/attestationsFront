@@ -1,114 +1,200 @@
+<!-- users-test-list.component.html -->
+<div class="province-page">
 
-  <div class="row justify-content-center dashboard-container" style="height: 700px;" >
-    
+  <div class="row g-4 align-items-stretch">
+    <div class="col-md-4">
+      <div class="panel-card indicators-card">
+        <div class="panel-header text-center">
+          Indicateurs provinciaux
+        </div>
+
+        <div class="panel-body">
+          <div class="row g-3">
+
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="indicator-item">
+                <div class="indicator-text">
+                  <div class="indicator-title">Superficie (km²)</div>
+                  <div class="indicator-value">2451</div>
+                </div>
+                <div class="indicator-icon soft-blue">
+                  <i class="bi bi-aspect-ratio"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="indicator-item">
+                <div class="indicator-text">
+                  <div class="indicator-title">Population totale</div>
+                  <div class="indicator-value">84715</div>
+                </div>
+                <div class="indicator-icon soft-indigo">
+                  <i class="bi bi-people-fill"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="indicator-item">
+                <div class="indicator-text">
+                  <div class="indicator-title">Hommes</div>
+                  <div class="indicator-value">9277</div>
+                </div>
+                <div class="indicator-icon soft-indigo">
+                  <i class="bi bi-gender-male"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="indicator-item">
+                <div class="indicator-text">
+                  <div class="indicator-title">Femmes</div>
+                  <div class="indicator-value">9207</div>
+                </div>
+                <div class="indicator-icon soft-red">
+                  <i class="bi bi-gender-female"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="indicator-item">
+                <div class="indicator-text">
+                  <div class="indicator-title">Étrangers</div>
+                  <div class="indicator-value">647</div>
+                </div>
+                <div class="indicator-icon soft-yellow">
+                  <i class="bi bi-globe"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-6">
+              <div class="indicator-item">
+                <div class="indicator-text">
+                  <div class="indicator-title">Marocains</div>
+                  <div class="indicator-value">20015</div>
+                </div>
+                <div class="indicator-icon soft-green">
+                  <i class="bi bi-flag-fill"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="indicator-item indicator-item-wide">
+                <div class="indicator-text">
+                  <div class="indicator-title">Nombre de ménages</div>
+                  <div class="indicator-value">8203</div>
+                </div>
+                <div class="indicator-icon soft-gray">
+                  <i class="bi bi-house-door-fill"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LEFT: MAP -->
     <div class="col-md-8">
-    <div class="border p-0 h-100" >
-  <!-- Container de la carte Leaflet -->
-  <!-- <div id="map" style="width: 100%; height: 100%;"></div> -->
-
-<div #mapContainer id="map"></div>
-
-       <map  name="image-map">
-
-
-    <!-- Foum El Oued -->
-
-
-   <area target="" title="جماعة المرسى"  (click)="goToElmarsa($event)" alt=""  coords="319,497,344,506,368,512,392,525,407,454,418,415,423,391,428,356,437,308,448,265,456,237,441,235,433,228,409,223,382,219,352,217,341,254,331,281,316,322,300,363,278,405,257,426,254,431,267,454,281,475" shape="poly">
-     <area target="" title="جماعة بوكراع" (click)="goToBoucraa($event)"  coords="398,500,393,519,434,541,482,558,509,569,538,601,582,634,620,661,676,690,705,702,724,734,754,740,778,710,783,700,758,570,767,509,808,452,771,452,692,428,613,402,564,353,510,315,488,302,465,288,448,280,427,364,438,313" shape="poly">
-    <area target="" alt="" title="جماعة العيون" (click)="goToLaayoune($event)" coords="457,237,480,236,495,221,488,205,467,198,445,196,433,206,431,216,438,230,447,232" shape="poly">
-    <area target="" alt="" title="جماعة الدشيرة"  (click)="goToDcheira($event)"  coords="454,235,475,235,493,221,500,202,472,190,481,168,512,138,545,140,607,128,714,86,692,132,687,177,720,227,798,264,827,299,880,342,850,387,809,441,713,436,632,397,501,307,452,278" shape="poly">  
-    <area target="" alt="" title="جماعة فم الواد"  (click)="goToFoumelouad($event)"      coords="356,213,384,221,405,220,425,207,444,196,467,177,482,150,501,131,515,129,498,113,478,91,459,75,432,57,415,103,401,133" shape="poly">
-  </map>
-
-
-</div>
-    </div>
-<div class="col-md-4">
-  <div class="border border-dark p-4" style="height: 790px;">
-    <h5 class="text-center mb-4">Indicateurs provinciaux</h5>
-
-    <div class="row g-3">
-
-      <!-- Population totale -->
-      <div class="col-md-6">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-people-fill fs-2 text-primary"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Population totale</div>
-            <div class="fs-3 fw-bold">15 847</div>
-          </div>
+      <div class="panel-card map-card">
+        <div class="panel-header text-center">
+          <span style="font-size: 25px;">Province de Laayoune</span>
         </div>
-      </div>
 
-      <!-- Superficie -->
-      <div class="col-md-6">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-aspect-ratio fs-2 text-secondary"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Superficie (km²)</div>
-            <div class="fs-3 fw-bold">1 245</div>
-          </div>
+        <div class="panel-body map-body">
+          <div #mapContainer id="map"></div>
+
+          <map name="image-map">
+            <area target="" title="جماعة المرسى" (click)="goToElmarsa($event)" alt=""
+              coords="319,497,344,506,368,512,392,525,407,454,418,415,423,391,428,356,437,308,448,265,456,237,441,235,433,228,409,223,382,219,352,217,341,254,331,281,316,322,300,363,278,405,257,426,254,431,267,454,281,475"
+              shape="poly">
+
+            <area target="" title="جماعة بوكراع" (click)="goToBoucraa($event)"
+              coords="398,500,393,519,434,541,482,558,509,569,538,601,582,634,620,661,676,690,705,702,724,734,754,740,778,710,783,700,758,570,767,509,808,452,771,452,692,428,613,402,564,353,510,315,488,302,465,288,448,280,427,364,438,313"
+              shape="poly">
+
+            <area target="" alt="" title="جماعة العيون" (click)="goToLaayoune($event)"
+              coords="457,237,480,236,495,221,488,205,467,198,445,196,433,206,431,216,438,230,447,232"
+              shape="poly">
+
+            <area target="" alt="" title="جماعة الدشيرة" (click)="goToDcheira($event)"
+              coords="454,235,475,235,493,221,500,202,472,190,481,168,512,138,545,140,607,128,714,86,692,132,687,177,720,227,798,264,827,299,880,342,850,387,809,441,713,436,632,397,501,307,452,278"
+              shape="poly">
+
+            <area target="" alt="" title="جماعة فم الواد" (click)="goToFoumelouad($event)"
+              coords="356,213,384,221,405,220,425,207,444,196,467,177,482,150,501,131,515,129,498,113,478,91,459,75,432,57,415,103,401,133"
+              shape="poly">
+          </map>
         </div>
-      </div>
 
-      <!-- Femmes -->
-      <div class="col-md-6">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-gender-female fs-2 text-danger"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Femmes</div>
-            <div class="fs-3 fw-bold">7 920</div>
-          </div>
-        </div>
       </div>
-
-      <!-- Hommes -->
-      <div class="col-md-6">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-gender-male fs-2 text-primary"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Hommes</div>
-            <div class="fs-3 fw-bold">7 927</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Marocains -->
-      <div class="col-md-6">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-flag-fill fs-2 text-success"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Marocains</div>
-            <div class="fs-3 fw-bold">15 200</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Étrangers -->
-      <div class="col-md-6">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-globe fs-2 text-warning"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Étrangers</div>
-            <div class="fs-3 fw-bold">647</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Nombre de ménages -->
-      <div class="col-md-12">
-        <div class="border p-3 d-flex align-items-center gap-3">
-          <i class="bi bi-house-door-fill fs-2 text-dark"></i>
-          <div class="text-center w-100">
-            <div class="fw-semibold fs-5">Nombre de ménages</div>
-            <div class="fs-3 fw-bold">3 820</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
+
+  <!-- BUTTONS -->
+  <div class="hstack gap-2 mt-5 justify-content-center">
+
+  <button
+    type="button"
+    class="btn btn-lg mise-btn text-center"
+    [class.is-active]="miseVisible"
+    (click)="toggleMise()"
+  >
+    <i class="bi" [ngClass]="miseVisible ? 'bi-check-circle-fill' : 'bi-geo-alt-fill'"></i>
+    Mise à niveau 
+  </button>
+
+    <!-- ✅ EDUCATION TOGGLE -->
+<!-- ✅ EDUCATION TOGGLE (same logic as santé) -->
+<button
+  type="button"
+  class="btn btn-lg education-btn text-center"
+  [class.is-active]="educationVisible"
+  (click)="toggleEducation()"
+>
+  <i class="bi" [ngClass]="educationVisible ? 'bi-check-circle-fill' : 'bi-book-fill'"></i>
+  Education
+</button>
+
+
+    <!-- ✅ SANTE TOGGLE -->
+    <button
+      type="button"
+      class="btn btn-lg health-btn text-center"
+      [class.is-active]="santeVisible"
+      (click)="toggleSante()"
+    >
+      <i class="bi" [ngClass]="santeVisible ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
+      Santé
+    </button>
+
+     <button
+      type="button"
+      class="btn btn-lg eau-btn text-center"
+      [class.is-active]="eauPotableVisible"
+      (click)="toggleEauPotable()"
+    >
+      <i class="bi" [ngClass]="eauPotableVisible ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
+      Eau potable
+    </button>
+
+  <button
+    type="button"
+    class="btn btn-lg emploi-btn text-center"
+    [class.is-active]="emploiVisible"
+    (click)="toggleEmploi()"
+  >
+    <i class="bi" [ngClass]="emploiVisible ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
+    Emploi
+  </button>
 
   </div>
+
+</div>

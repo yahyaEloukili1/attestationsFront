@@ -45,7 +45,9 @@
               "src/assets/scss/config/default/app.scss",
               "src/assets/scss/icons.scss",
                 "node_modules/leaflet/dist/leaflet.css",
-  "src/styles.scss"
+                  "src/styles.scss",
+  "node_modules/leaflet/dist/leaflet.css"
+
             ],
             "scripts":[
               "node_modules/jquery/dist/jquery.min.js",

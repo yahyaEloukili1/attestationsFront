@@ -1,3 +1,4 @@
+// users-test-list.component.ts
 import {
   Component,
   AfterViewInit,
@@ -27,6 +28,26 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   map!: L.Map;
   selectedLayer: L.Path | null = null;
 
+  // 👉 Santé
+  santeLayer = L.layerGroup();
+  santeVisible = false;
+
+  // 👉 Education
+  educationLayer = L.layerGroup();
+  educationVisible = false;
+
+  // 👉 Eau potable
+  eauPotableLayer = L.layerGroup();
+  eauPotableVisible = false;
+
+  // 👉 Emploi
+  emploiLayer = L.layerGroup();
+  emploiVisible = false;
+
+  // 👉 Mise à niveau
+  miseLayer = L.layerGroup();
+  miseVisible = false;
+
   constructor(
     private router: Router,
     private mapService: UserProfileService
@@ -35,28 +56,49 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   /* =========================
      ICONS
   ========================= */
-  collegeIcon = L.icon({
-    iconUrl: 'assets/icons/college.png',
-    iconSize: [28, 28],
-    iconAnchor: [14, 28],
-    popupAnchor: [0, -28]
-  });
-
   chrIcon = L.icon({
     iconUrl: 'assets/icons/hopital1.png',
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30]
   });
-    hopitauxExistantsIcon = L.icon({
+
+  hopitauxExistantsIcon = L.icon({
     iconUrl: 'assets/icons/hopital3.png',
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30]
   });
 
-  ngAfterViewInit(): void {
+  educationIcon = L.icon({
+    iconUrl: 'assets/icons/education.png',
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -28]
+  });
 
+  eauIcon = L.icon({
+    iconUrl: 'assets/icons/water.png',
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -28]
+  });
+
+  emploiIcon = L.icon({
+    iconUrl: 'assets/icons/job.png',
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -28]
+  });
+
+  miseIcon = L.icon({
+    iconUrl: 'assets/icons/way.png', // ✅ add this icon (or change path)
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -28]
+  });
+
+  ngAfterViewInit(): void {
     /* =========================
        1️⃣ INIT MAP
     ========================= */
@@ -74,7 +116,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
        2️⃣ LOAD COMMUNES
     ========================= */
     this.mapService.getCommunes().subscribe((data: GeoJSON.FeatureCollection) => {
-console.log(data,"oeooooo");
+
       const communesLayer = L.geoJSON(data, {
         style: (feature: any) => ({
           color: '#888',
@@ -86,7 +128,6 @@ console.log(data,"oeooooo");
         onEachFeature: (feature: any, layer: L.Layer) => {
           const polygon = layer as L.Path;
 
-          /* LABEL */
           const bounds = (polygon as any).getBounds();
           const area = bounds.getNorthEast().distanceTo(bounds.getSouthWest());
 
@@ -101,7 +142,6 @@ console.log(data,"oeooooo");
               .addTo(this.map);
           }
 
-          /* POPUP */
           const popup = L.popup({ closeButton: false, offset: [0, -5] })
             .setContent(`
               <div class="popup-content">
@@ -136,7 +176,6 @@ console.log(data,"oeooooo");
 
           polygon.on('mouseout', () => this.map.closePopup());
 
-          /* ROUTING */
           const routes: Record<string, string> = {
             'DCHEIRA': '/dcheira',
             'BOUKRAA': '/boucraa',
@@ -155,35 +194,97 @@ console.log(data,"oeooooo");
       }).addTo(this.map);
 
       /* =========================
-         3️⃣ CHR LAYER (CORRECT)
+         3️⃣ SANTÉ (HIDDEN)
       ========================= */
       this.mapService.getCHRs().subscribe(chrs => {
         L.geoJSON(chrs, {
-          pointToLayer: (feature, latlng) =>
+          pointToLayer: (_feature, latlng) =>
             L.marker(latlng, { icon: this.hopitauxExistantsIcon }),
-
           onEachFeature: (feature, layer) => {
-            layer.bindPopup(`
-              <b>Centre Hospitalier Régional</b><br>
-              ${feature.properties?.nom || ''}
-            `);
+            layer.bindPopup(`<b>CHR</b><br>${feature.properties?.nom || ''}`);
           }
-        }).addTo(this.map);
+        }).addTo(this.santeLayer);
       });
 
-        this.mapService.getSanteExistants().subscribe(chrs => {
-        L.geoJSON(chrs, {
-          pointToLayer: (feature, latlng) =>
+      this.mapService.getSanteExistants().subscribe(cs => {
+        L.geoJSON(cs, {
+          pointToLayer: (_feature, latlng) =>
             L.marker(latlng, { icon: this.chrIcon }),
-
           onEachFeature: (feature, layer) => {
-            layer.bindPopup(`
-              <b>Centre Hospitalier Régional</b><br>
-              ${feature.properties?.nom || ''}
-            `);
+            layer.bindPopup(`<b>Centre de santé</b><br>${feature.properties?.nom || ''}`);
           }
-        }).addTo(this.map);
+        }).addTo(this.santeLayer);
       });
+
+      /* =========================
+         3️⃣bis EDUCATION (HIDDEN)
+      ========================= */
+      const addEducation = (fc: GeoJSON.FeatureCollection, label: string) => {
+        L.geoJSON(fc, {
+          pointToLayer: (_feature, latlng) =>
+            L.marker(latlng, { icon: this.educationIcon }),
+          onEachFeature: (feature, layer) => {
+            const nom = (feature.properties as any)?.nom || (feature.properties as any)?.name || '';
+            layer.bindPopup(`<b>${label}</b><br>${nom}`);
+          }
+        }).addTo(this.educationLayer);
+      };
+
+      this.mapService.getEducationExistants1().subscribe(fc => addEducation(fc, 'Education 1'));
+      this.mapService.getEducationExistants2().subscribe(fc => addEducation(fc, 'Education 2'));
+      this.mapService.getEducationExistants3().subscribe(fc => addEducation(fc, 'Education 3'));
+      this.mapService.getEducationExistants4().subscribe(fc => addEducation(fc, 'Education 4'));
+
+      /* =========================
+         3️⃣ter EAU POTABLE (HIDDEN)
+      ========================= */
+      this.mapService.getEauPotable().subscribe((fc: GeoJSON.FeatureCollection) => {
+        L.geoJSON(fc, {
+          pointToLayer: (_feature, latlng) =>
+            L.marker(latlng, { icon: this.eauIcon }),
+          onEachFeature: (feature, layer) => {
+            const nom = (feature.properties as any)?.nom || (feature.properties as any)?.name || '';
+            layer.bindPopup(`<b>Eau potable</b><br>${nom}`);
+          }
+        }).addTo(this.eauPotableLayer);
+      });
+
+      /* =========================
+         3️⃣quater EMPLOI (HIDDEN)
+      ========================= */
+      const addEmploi = (fc: GeoJSON.FeatureCollection, label: string) => {
+        L.geoJSON(fc, {
+          pointToLayer: (_feature, latlng) =>
+            L.marker(latlng, { icon: this.emploiIcon }),
+          onEachFeature: (feature, layer) => {
+            const nom = (feature.properties as any)?.nom || (feature.properties as any)?.name || '';
+            layer.bindPopup(`<b>${label}</b><br>${nom}`);
+          }
+        }).addTo(this.emploiLayer);
+      };
+
+      this.mapService.getEmploi1().subscribe(fc => addEmploi(fc, 'Emploi 1'));
+      this.mapService.getEmploi2().subscribe(fc => addEmploi(fc, 'Emploi 2'));
+      this.mapService.getEmploi3().subscribe(fc => addEmploi(fc, 'Emploi 3'));
+
+      /* =========================
+         3️⃣quinquies MISE A NIVEAU (HIDDEN)
+      ========================= */
+      const addMise = (fc: GeoJSON.FeatureCollection, label: string) => {
+        L.geoJSON(fc, {
+          pointToLayer: (_feature, latlng) =>
+            L.marker(latlng, { icon: this.miseIcon }),
+          onEachFeature: (feature, layer) => {
+            const nom = (feature.properties as any)?.nom || (feature.properties as any)?.name || '';
+            layer.bindPopup(`<b>${label}</b><br>${nom}`);
+          }
+        }).addTo(this.miseLayer);
+      };
+
+      this.mapService.getMise1().subscribe(fc => addMise(fc, 'Mise à niveau 1'));
+      this.mapService.getMise2().subscribe(fc => addMise(fc, 'Mise à niveau 2'));
+      this.mapService.getMise3().subscribe(fc => addMise(fc, 'Mise à niveau 3'));
+
       /* =========================
          4️⃣ MASK
       ========================= */
@@ -201,15 +302,8 @@ console.log(data,"oeooooo");
         const g = f.geometry;
         if (!g) return;
 
-        if (g.type === 'Polygon') {
-          g.coordinates.forEach(r => provinceRings.push(r));
-        }
-
-        if (g.type === 'MultiPolygon') {
-          g.coordinates.forEach(p =>
-            p.forEach(r => provinceRings.push(r))
-          );
-        }
+        if (g.type === 'Polygon') g.coordinates.forEach(r => provinceRings.push(r));
+        if (g.type === 'MultiPolygon') g.coordinates.forEach(p => p.forEach(r => provinceRings.push(r)));
       });
 
       const maskFeature: GeoJSON.Feature<GeoJSON.Polygon> = {
@@ -222,11 +316,7 @@ console.log(data,"oeooooo");
       };
 
       L.geoJSON(maskFeature, {
-        style: {
-          fillColor: '#f5f7fa',
-          fillOpacity: 0.85,
-          stroke: false
-        },
+        style: { fillColor: '#f5f7fa', fillOpacity: 0.85, stroke: false },
         interactive: false
       }).addTo(this.map);
 
@@ -234,11 +324,7 @@ console.log(data,"oeooooo");
          5️⃣ OUTLINE
       ========================= */
       L.geoJSON(data, {
-        style: {
-          color: '#263238',
-          weight: 3,
-          fillOpacity: 0
-        },
+        style: { color: '#263238', weight: 3, fillOpacity: 0 },
         interactive: false
       }).addTo(this.map);
 
@@ -256,6 +342,39 @@ console.log(data,"oeooooo");
 
   ngOnDestroy(): void {
     if (this.map) this.map.remove();
+  }
+
+  /* =========================
+     TOGGLES
+  ========================= */
+  toggleSante() {
+    if (this.santeVisible) this.map.removeLayer(this.santeLayer);
+    else this.santeLayer.addTo(this.map);
+    this.santeVisible = !this.santeVisible;
+  }
+
+  toggleEducation() {
+    if (this.educationVisible) this.map.removeLayer(this.educationLayer);
+    else this.educationLayer.addTo(this.map);
+    this.educationVisible = !this.educationVisible;
+  }
+
+  toggleEauPotable() {
+    if (this.eauPotableVisible) this.map.removeLayer(this.eauPotableLayer);
+    else this.eauPotableLayer.addTo(this.map);
+    this.eauPotableVisible = !this.eauPotableVisible;
+  }
+
+  toggleEmploi() {
+    if (this.emploiVisible) this.map.removeLayer(this.emploiLayer);
+    else this.emploiLayer.addTo(this.map);
+    this.emploiVisible = !this.emploiVisible;
+  }
+
+  toggleMise() {
+    if (this.miseVisible) this.map.removeLayer(this.miseLayer);
+    else this.miseLayer.addTo(this.map);
+    this.miseVisible = !this.miseVisible;
   }
 
   /* =========================

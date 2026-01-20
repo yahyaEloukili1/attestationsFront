@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "mise3",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:ESRI::102193" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Axe": "mise a niveau teritorial", "Commune": "Laâyoune", "Projet": "Aménagement d’une voie latérale le long de l’Oued Sakia Al Hamra (5 Km)", "Longitude x": "430138.33", "Longitude y": "544403.98", "Longitude": null }, "geometry": { "type": "Point", "coordinates": [ 430138.330000000016298, 544403.979999999981374 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "Axe": null, "Commune": null, "Projet": null, "Longitude x": "429922.76", "Longitude y": "540798.56", "Longitude": null }, "geometry": { "type": "Point", "coordinates": [ 429922.76, 540798.560000000055879 ] } }
+]
+}

@@ -1,57 +1,46 @@
 @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
 
+th, h4 {
+  font-family: 'Droid Arabic Kufi', serif;
+}
+.kuffi {
+  font-family: 'Droid Arabic Kufi', serif;
+}
 
-th,h4,button{
-    font-family: 'Droid Arabic Kufi', serif;
-}
-.kuffi{
-    font-family: 'Droid Arabic Kufi', serif;
-}
 /* In your component's style or global styles */
 .disabled {
-    pointer-events: none; /* Disable click events */
-    color: #999; /* Optionally set a different color for a disabled look */
-    /* Add any other styles to indicate the button is disabled */
+  pointer-events: none;
+  color: #999;
 }
 
-.clickable{
-    cursor: pointer;
+.clickable {
+  cursor: pointer;
 }
+
 .select-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .container2 {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-.left-select {
-    width: 48%; /* Adjust the width as needed */
+.container2 {
+  display: flex;
+  justify-content: space-between;
 }
 
-.right-select {
-    width: 48%; /* Adjust the width as needed */
-}
-.flex-container{
-    display: flex;
-  
-}
-.flex-container2{
-    display: flex;
-    justify-content: space-between;
-}
-table, tr,th,td{
-    border: 0.5px solid rgb(213, 209, 209);
-    text-align: center;
-    vertical-align: middle;
-}
-tr,td,th{
-    height: 45px;
-}
+.left-select { width: 48%; }
+.right-select { width: 48%; }
 
+.flex-container { display: flex; }
+.flex-container2 { display: flex; justify-content: space-between; }
 
+table, tr, th, td {
+  border: 0.5px solid rgb(213, 209, 209);
+  text-align: center;
+  vertical-align: middle;
+}
+tr, td, th { height: 45px; }
+
+/* Tooltip label */
 .map-label {
   position: fixed;
   bottom: 20px;
@@ -68,18 +57,12 @@ tr,td,th{
   z-index: 99999;
   animation: fadeIn 0.15s ease-in-out;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-#map {
-  width: 100%;
-  height: 800px;
-  background: #f5f7fa;
-}
-
+/* Leaflet */
 .leaflet-interactive {
   transition: fill-opacity 0.2s ease, stroke 0.2s ease;
 }
@@ -95,9 +78,7 @@ tr,td,th{
   box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
-.popup-content {
-  font-size: 13px;
-}
+.popup-content { font-size: 13px; }
 
 .legend {
   background: white;
@@ -106,7 +87,6 @@ tr,td,th{
   border-radius: 6px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.2);
 }
-
 .legend i {
   width: 12px;
   height: 12px;
@@ -115,11 +95,10 @@ tr,td,th{
   opacity: 0.9;
 }
 
-
 .sante-badge {
   width: 34px;
   height: 34px;
-  background: #e53935; /* rouge dashboard */
+  background: #e53935;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -127,8 +106,397 @@ tr,td,th{
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
   border: 2px solid white;
 }
-
 .sante-badge i {
   color: white;
   font-size: 16px;
+}
+
+/* ============================
+   ✅ PROVINCE LAYOUT (COMMUNE LOOK)
+   ============================ */
+
+/* IMPORTANT: no gap here (gap breaks bootstrap grid and causes wrap) */
+.province-page {
+  padding: 22px 18px;
+  background: #eef1f6;
+}
+
+/* Big rounded panels like commune */
+.panel-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Header inside panels */
+.panel-header {
+  padding: 14px 18px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: .5px;
+  color: #1f2937;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* body spacing */
+.panel-body {
+  padding: 18px;
+}
+
+/* Make map panel height similar to commune */
+.map-card {
+  height: 790px;           /* you can change this */
+  display: flex;
+  flex-direction: column;
+}
+
+.map-body {
+  flex: 1;                 /* fill remaining height under header */
+  padding: 12px;
+}
+
+/* ✅ Map must fill the map-body */
+#map {
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  background: #f5f7fa;
+  border-radius: 14px;
+}
+
+/* Indicator cards */
+.indicators-card {
+  height: 790px;           /* match left for perfect alignment */
+}
+
+.indicator-item {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 14px;
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.indicator-item-wide {
+  width: 100%;
+}
+
+.indicator-text {
+  flex: 1;
+  text-align: center;
+}
+
+.indicator-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.indicator-value {
+  font-size: 22px;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.indicator-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex: 0 0 40px;
+  margin-left: 10px;
+}
+
+/* Soft icon backgrounds like commune */
+.soft-blue   { background: rgba(59, 130, 246, 0.10); color: #3b82f6; }
+.soft-indigo { background: rgba(99, 102, 241, 0.10); color: #6366f1; }
+.soft-red    { background: rgba(239, 68, 68, 0.10); color: #ef4444; }
+.soft-yellow { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.soft-green  { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+.soft-gray   { background: rgba(17, 24, 39, 0.08);  color: #111827; }
+button{
+  width: 280px;
+
+}
+/* =========================
+   HEALTH TOGGLE BUTTON
+========================= */
+/* =========================
+   HEALTH SECTOR TOGGLE
+========================= */
+
+.health-btn {
+  background: transparent;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+ 
+
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  /* ✅ Center content */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /* keep spacing between icon & text */
+  gap: 10px;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+
+.health-btn:hover {
+  background: rgba(220, 53, 69, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* ACTIVE STATE */
+.health-btn.is-active {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  color: #fff;
+  border-color: transparent;
+
+  box-shadow:
+    0 14px 30px rgba(220,53,69,0.35),
+    0 0 0 4px rgba(220,53,69,0.25);
+}
+
+/* Icon polish */
+.health-btn i {
+  font-size: 1.2rem;
+}
+
+/* Subtle professional pulse only when active */
+.health-btn.is-active i {
+  animation: softPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+/* =========================
+   EDUCATION TOGGLE BUTTON
+   (same logic as santé: transparent when OFF, filled when ON)
+========================= */
+/* =========================
+   EDUCATION TOGGLE BUTTON
+========================= */
+.education-btn {
+  background: transparent;
+  color: #198754;             /* bootstrap success green */
+  border: 2px solid #198754;
+
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  gap: 10px;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.education-btn:hover {
+  background: rgba(25, 135, 84, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* ACTIVE STATE */
+.education-btn.is-active {
+  background: linear-gradient(135deg, #198754, #146c43);
+  color: #fff;
+  border-color: transparent;
+
+  box-shadow:
+    0 14px 30px rgba(25,135,84,0.35),
+    0 0 0 4px rgba(25,135,84,0.25);
+}
+
+.education-btn i {
+  font-size: 1.2rem;
+}
+
+.education-btn.is-active i {
+  animation: softPulseEdu 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulseEdu {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+/* =========================
+   EAU POTABLE TOGGLE BUTTON
+========================= */
+.eau-btn {
+  background: transparent;
+  color: #0d6efd;          /* bootstrap primary blue (water look) */
+  border: 2px solid #0d6efd;
+
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  gap: 10px;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.eau-btn:hover {
+  background: rgba(13, 110, 253, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.eau-btn.is-active {
+  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+  color: #fff;
+  border-color: transparent;
+
+  box-shadow:
+    0 14px 30px rgba(13,110,253,0.35),
+    0 0 0 4px rgba(13,110,253,0.25);
+}
+
+.eau-btn i {
+  font-size: 1.2rem;
+}
+
+.eau-btn.is-active i {
+  animation: softPulseEau 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulseEau {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.emploi-btn {
+  background: transparent;
+  color: #6f42c1;               /* purple (distinct from others) */
+  border: 2px solid #6f42c1;
+
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  gap: 10px;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.emploi-btn:hover {
+  background: rgba(111, 66, 193, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.emploi-btn.is-active {
+  background: linear-gradient(135deg, #6f42c1, #4b2a87);
+  color: #fff;
+  border-color: transparent;
+
+  box-shadow:
+    0 14px 30px rgba(111,66,193,0.35),
+    0 0 0 4px rgba(111,66,193,0.25);
+}
+
+.emploi-btn i {
+  font-size: 1.2rem;
+}
+
+.emploi-btn.is-active i {
+  animation: softPulseEmploi 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulseEmploi {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* users-test-list.component.scss */
+/* add this at the end (keep your existing css) */
+
+/* =========================
+   MISE A NIVEAU TOGGLE BUTTON
+========================= */
+.mise-btn {
+  background: transparent;
+  color: #fd7e14;            /* bootstrap orange */
+  border: 2px solid #fd7e14;
+
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  gap: 10px;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.mise-btn:hover {
+  background: rgba(253, 126, 20, 0.10);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.mise-btn.is-active {
+  background: linear-gradient(135deg, #fd7e14, #c65f0a);
+  color: #fff;
+  border-color: transparent;
+
+  box-shadow:
+    0 14px 30px rgba(253,126,20,0.35),
+    0 0 0 4px rgba(253,126,20,0.25);
+}
+
+.mise-btn i {
+  font-size: 1.2rem;
+}
+
+.mise-btn.is-active i {
+  animation: softPulseMise 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulseMise {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }

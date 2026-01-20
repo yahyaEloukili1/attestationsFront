@@ -136,3 +136,98 @@
   text-transform: uppercase;
   color: #1f2a44;
 }
+
+button { width: 280px; }
+
+/* =========================
+   TOGGLE BUTTONS (same as province)
+========================= */
+
+.health-btn,
+.education-btn,
+.water-btn,
+.emploi-btn,
+.mise-btn {
+  background: transparent;
+  border-width: 2px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  gap: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.health-btn i,
+.education-btn i,
+.water-btn i,
+.emploi-btn i,
+.mise-btn i {
+  font-size: 1.2rem;
+}
+
+/* Base colors */
+.health-btn     { color: #dc3545; border: 2px solid #dc3545; }
+.education-btn  { color: #198754; border: 2px solid #198754; }
+.water-btn      { color: #6c757d; border: 2px solid #6c757d; } /* same as province */
+.emploi-btn     { color: #0d6efd; border: 2px solid #0d6efd; }
+.mise-btn       { color: #ffc107; border: 2px solid #ffc107; }
+
+/* Hover */
+.health-btn:hover    { background: rgba(220,53,69,0.08); transform: translateY(-2px); }
+.education-btn:hover { background: rgba(25,135,84,0.08); transform: translateY(-2px); }
+.water-btn:hover     { background: rgba(108,117,125,0.10); transform: translateY(-2px); }
+.emploi-btn:hover    { background: rgba(13,110,253,0.08); transform: translateY(-2px); }
+.mise-btn:hover      { background: rgba(255,193,7,0.14); transform: translateY(-2px); }
+
+/* Active */
+.health-btn.is-active {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(220,53,69,0.35), 0 0 0 4px rgba(220,53,69,0.25);
+}
+.education-btn.is-active {
+  background: linear-gradient(135deg, #198754, #146c43);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(25,135,84,0.35), 0 0 0 4px rgba(25,135,84,0.25);
+}
+.water-btn.is-active {
+  background: linear-gradient(135deg, #6c757d, #4f565c);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(108,117,125,0.30), 0 0 0 4px rgba(108,117,125,0.22);
+}
+.emploi-btn.is-active {
+  background: linear-gradient(135deg, #0d6efd, #084298);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(13,110,253,0.35), 0 0 0 4px rgba(13,110,253,0.25);
+}
+.mise-btn.is-active {
+  background: linear-gradient(135deg, #ffc107, #d39e00);
+  color: #111;
+  border-color: transparent;
+  box-shadow: 0 14px 30px rgba(255,193,7,0.35), 0 0 0 4px rgba(255,193,7,0.25);
+}
+
+/* Pulse */
+.health-btn.is-active i,
+.education-btn.is-active i,
+.water-btn.is-active i,
+.emploi-btn.is-active i,
+.mise-btn.is-active i {
+  animation: softPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}

@@ -87,26 +87,57 @@
     </div>
   </div>
 <!-- 🔘 ACTION BUTTONS -->
-<div class="hstack gap-2 mt-5 justify-content-center">
+<!-- 🔘 ACTION BUTTONS -->
+<div class="hstack gap-2 mt-5 justify-content-center flex-wrap">
 
-  <button class="btn btn-lg btn-warning">
-    <i class="bi bi-geo-alt-fill"></i> Mise à niveau territoriale
+  <button
+    type="button"
+    class="btn btn-lg mise-btn text-center"
+    [class.is-active]="miseVisible"
+    (click)="toggleMise()"
+  >
+    <i class="bi" [ngClass]="miseVisible ? 'bi-check-circle-fill' : 'bi-geo-alt-fill'"></i>
+    Mise à niveau 
   </button>
 
-  <button class="btn btn-lg btn-success">
-    <i class="bi bi-book-fill"></i> Education
+  <button
+    type="button"
+    class="btn btn-lg education-btn text-center"
+    [class.is-active]="educationVisible"
+    (click)="toggleEducation()"
+  >
+    <i class="bi" [ngClass]="educationVisible ? 'bi-check-circle-fill' : 'bi-book-fill'"></i>
+    Education
   </button>
 
-  <button class="btn btn-lg btn-danger">
-    <i class="bi bi-heart-pulse-fill"></i> Santé
+  <button
+    type="button"
+    class="btn btn-lg health-btn text-center"
+    [class.is-active]="santeVisible"
+    (click)="toggleSante()"
+  >
+    <i class="bi" [ngClass]="santeVisible ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
+    Santé
   </button>
 
-  <button class="btn btn-lg btn-secondary">
-    <i class="bi bi-droplet-fill"></i> Eau potable
+  <button
+    type="button"
+    class="btn btn-lg water-btn text-center"
+    [class.is-active]="eauPotableVisible"
+    (click)="toggleEauPotable()"
+  >
+    <i class="bi" [ngClass]="eauPotableVisible ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
+    Eau potable
   </button>
 
-  <button class="btn btn-lg btn-primary">
-    <i class="bi bi-briefcase-fill"></i> Emploi
+  <button
+    type="button"
+    class="btn btn-lg emploi-btn text-center"
+    [class.is-active]="emploiVisible"
+    (click)="toggleEmploi()"
+  >
+    <i class="bi" [ngClass]="emploiVisible ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
+    Emploi
   </button>
 
 </div>

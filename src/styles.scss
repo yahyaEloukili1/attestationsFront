@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 // Swiper
+@import "leaflet/dist/leaflet.css";
+
 .coverflowslide .slide {
     position: relative;
     transition: transform 0.3s;

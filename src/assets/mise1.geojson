@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "mise1",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:ESRI::102193" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Axe": null, "Commune": "Laâyoune", "Projet": "Construction de la voie de contournement Est de la ville de Laâyoune sur 17Km", "Longitude x": "432279.910", "Longitude y": "533805.728", "Longitude": null }, "geometry": { "type": "Point", "coordinates": [ 432279.909999999974389, 533805.728 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "Axe": null, "Commune": null, "Projet": null, "Longitude x": "421156.503", "Longitude y": "538443.575", "Longitude": null }, "geometry": { "type": "Point", "coordinates": [ 421156.503000000026077, 538443.574999999953434 ] } }
+]
+}
