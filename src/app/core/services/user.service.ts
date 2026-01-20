@@ -22,7 +22,7 @@ export class UserProfileService {
   }
 
   getCommunes() {
-    return this.http.get<any>('assets/communes.geojson');
+    return this.http.get<any>('assets/communesTS.geojson');
   }
 
   getColleges() {

@@ -168,7 +168,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // (souvent ce genre de données est globale et répétée sur chaque feature)
       let foundMassif = false;
       let foundPlaine = false;
-
+console.log(data.features,'qsss');
       data.features.forEach((feature: any) => {
         const p = feature.properties || {};
 
@@ -222,7 +222,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
         style: (feature: any) => ({
           color: '#888',
           weight: 1,
-          fillColor: this.getCommuneColor(feature.properties.Nom_Comm_1),
+          fillColor: this.getCommuneColor(feature.properties.id_objet),
           fillOpacity: 0.55
         }),
 
@@ -238,25 +238,25 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
               direction: 'center',
               className: 'commune-label'
             })
-              .setContent(feature.properties.Nom_Comm_1)
+              .setContent(feature.properties.COMMUNE)
               .setLatLng(bounds.getCenter())
               .addTo(this.map);
           }
 
-          const popup = L.popup({ closeButton: false, offset: [0, -5] })
-            .setContent(`
-              <div class="popup-content">
-                <b>${feature.properties.Nom_Com_Ol}</b><hr>
-                👥 Population : ${feature.properties.Population}<br>
-                🏠 Ménages : ${feature.properties.Nb_Menages}<br>
-                🇲🇦 Marocains : ${feature.properties.Marocains}<br>
-                🌍 Étrangers : ${feature.properties.Etrangers}
-              </div>
-            `);
+          // const popup = L.popup({ closeButton: false, offset: [0, -5] })
+          //   .setContent(`
+          //     <div class="popup-content">
+          //       <b>${feature.properties.Nom_Com_Ol}</b><hr>
+          //       👥 Population : ${feature.properties.Population}<br>
+          //       🏠 Ménages : ${feature.properties.Nb_Menages}<br>
+          //       🇲🇦 Marocains : ${feature.properties.Marocains}<br>
+          //       🌍 Étrangers : ${feature.properties.Etrangers}
+          //     </div>
+          //   `);
 
           polygon.on('mouseover', (e: any) => {
-            popup.setLatLng(e.latlng);
-            popup.openOn(this.map);
+            // popup.setLatLng(e.latlng);
+            // popup.openOn(this.map);
 
             if (this.selectedLayer) {
               this.selectedLayer.setStyle({
@@ -286,7 +286,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
           };
 
           polygon.on('click', () => {
-            const key = feature.properties.Nom_Com_Ol?.toUpperCase().trim();
+            const key = feature.properties.COMMUNE?.toUpperCase().trim();
             if (routes[key]) {
               this.router.navigate([routes[key]]);
             }
@@ -505,12 +505,12 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   ========================= */
   getCommuneColor(nom: string): string {
     switch (nom) {
-      case 'العيون': return '#f2b6b6';
-      case 'المرسى': return '#b8d9f2';
-      case 'فم الواد': return '#c7e3c1';
-      case 'بوكراع': return '#f6edb1';
-      case 'الدشيرة': return '#dbc6e8';
-      default: return '#e0e0e0';
+      case '1080204': return '#7e89b3';//boucraa
+      case '1080202': return '#7e89b3';//elmarsa
+      case '1080206': return '#7e89b3';//Foumelouad
+      case '1080203': return '#7e89b3';//laayoune
+      case '1080205': return '#7e89b3';//dcheira
+      default: return '#e6dbdb';
     }
   }
 
