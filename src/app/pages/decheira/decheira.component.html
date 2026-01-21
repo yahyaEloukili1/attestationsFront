@@ -1,95 +1,188 @@
 <div class="row justify-content-center dashboard-container">
 
-  <!-- 🔹 INDICATEURS (LEFT) -->
-  <div class="col-md-4">
-    <div class="indicator-card">
+  <!-- 🔹 INDICATEURS GAUCHE -->
+  <div class="col-md-3 d-flex flex-column gap-4">
 
+    <!-- 🔹 INDICATEURS DÉMOGRAPHIQUES -->
+    <div class="indicator-card">
       <h5 class="text-center mb-4 indicator-title">
-        Indicateurs Communaux
+        Indicateurs démographiques
       </h5>
 
       <div class="row g-3">
 
         <div class="col-md-6">
           <div class="kpi">
-            <i class="bi bi-building text-primary"></i>
+            <i class="bi bi-people-fill text-primary"></i>
             <div class="kpi-content">
-              <div class="kpi-label">Population urbaine</div>
-              <div class="kpi-value">68%</div>
+              <div class="kpi-label">Population</div>
+              <div class="kpi-value">901</div>
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="kpi">
-            <i class="bi bi-people-fill text-success"></i>
+            <i class="bi bi-house-door-fill text-success"></i>
             <div class="kpi-content">
-              <div class="kpi-label">Population totale</div>
-              <div class="kpi-value">15 847</div>
+              <div class="kpi-label">Ménages</div>
+              <div class="kpi-value">371</div>
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="kpi">
-            <i class="bi bi-person-x text-danger"></i>
+            <i class="bi bi-gender-male text-info"></i>
             <div class="kpi-content">
-              <div class="kpi-label">Taux de chômage</div>
-              <div class="kpi-value">0.23%</div>
+              <div class="kpi-label">Hommes</div>
+              <div class="kpi-value">45,5%</div>
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="kpi">
-            <i class="bi bi-tree-fill text-success"></i>
+            <i class="bi bi-gender-female text-danger"></i>
             <div class="kpi-content">
-              <div class="kpi-label">Population rurale</div>
-              <div class="kpi-value">32%</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-hospital text-danger"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Centres de santé</div>
-              <div class="kpi-value">2</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-mortarboard-fill text-warning"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Écoles publiques</div>
-              <div class="kpi-value">54</div>
+              <div class="kpi-label">Femmes</div>
+              <div class="kpi-value">54,5%</div>
             </div>
           </div>
         </div>
 
       </div>
     </div>
+
+    <!-- 🔹 INDICATEURS TERRITORIAUX -->
+    <div class="indicator-card">
+      <h5 class="text-center mb-4 indicator-title">
+        Indicateurs territoriaux
+      </h5>
+
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-aspect-ratio-fill text-secondary"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Superficie</div>
+              <div class="kpi-value">3 637 km²</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-people-fill text-warning"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Densité</div>
+              <div class="kpi-value">0,24 Hab./Km²</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 🔹 INDICATEURS SOCIO-ÉCONOMIQUES -->
+
   </div>
 
-  <!-- 🔹 MAP (RIGHT) -->
-  <div class="col-md-8">
+  <!-- 🔹 MAP DROITE -->
+  <div class="col-md-6">
     <div class="map-card">
-
       <div class="map-title">
         Commune de Dcheira
       </div>
-
       <div #mapContainer class="map-only"></div>
-
     </div>
   </div>
-<!-- 🔘 ACTION BUTTONS -->
-<!-- 🔘 ACTION BUTTONS -->
-<div class="hstack gap-2 mt-5 justify-content-center flex-wrap">
+  <div class="col-md-3">
+        <div class="indicator-card">
+      <h5 class="text-center mb-4 indicator-title">
+        Indicateurs socio-économiques
+      </h5>
 
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-activity text-primary"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Taux d’activité</div>
+              <div class="kpi-value">45,1%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-people text-danger"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Pauvreté multidimensionnelle</div>
+              <div class="kpi-value">4%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-briefcase-fill text-dark"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Taux de chômage</div>
+              <div class="kpi-value">45,1%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-shield-exclamation text-warning"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Taux de vulnérabilité</div>
+              <div class="kpi-value">24,4%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-people-fill text-info"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Préscolarisation</div>
+              <div class="kpi-value">16,67%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="kpi">
+            <i class="bi bi-mortarboard-fill text-success"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Scolarisation (6+)</div>
+              <div class="kpi-value">100%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="kpi kpi-full">
+            <i class="bi bi-book-fill text-secondary"></i>
+            <div class="kpi-content">
+              <div class="kpi-label">Analphabétisme (10+)</div>
+              <div class="kpi-value">32,9%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+ <div class="hstack gap-2 mt-2 justify-content-center mt-5 flex-wrap">
+
+  <!-- ✅ MISE TOGGLE -->
   <button
     type="button"
     class="btn btn-lg mise-btn text-center"
@@ -100,6 +193,7 @@
     Mise à niveau 
   </button>
 
+  <!-- ✅ EDUCATION TOGGLE -->
   <button
     type="button"
     class="btn btn-lg education-btn text-center"
@@ -110,6 +204,7 @@
     Education
   </button>
 
+  <!-- ✅ SANTE TOGGLE -->
   <button
     type="button"
     class="btn btn-lg health-btn text-center"
@@ -120,16 +215,18 @@
     Santé
   </button>
 
-  <button
-    type="button"
-    class="btn btn-lg water-btn text-center"
-    [class.is-active]="eauPotableVisible"
-    (click)="toggleEauPotable()"
-  >
-    <i class="bi" [ngClass]="eauPotableVisible ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
-    Eau potable
-  </button>
+  <!-- ✅ EAU TOGGLE -->
+<button
+  type="button"
+  class="btn btn-lg water-btn text-center"
+  [class.is-active]="eauPotableVisible"
+  (click)="toggleEauPotable()"
+>
+  <i class="bi" [ngClass]="eauPotableVisible ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
+  Eau potable
+</button>
 
+  <!-- ✅ EMPLOI TOGGLE -->
   <button
     type="button"
     class="btn btn-lg emploi-btn text-center"
@@ -141,6 +238,4 @@
   </button>
 
 </div>
-
 </div>
-

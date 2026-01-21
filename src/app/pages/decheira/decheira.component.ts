@@ -118,7 +118,7 @@ export class DecheiraComponent implements AfterViewInit, OnDestroy {
 
     this.mapService.getCommunes().subscribe((data: FeatureCollection) => {
       const features: Feature[] = data.features.filter(
-        f => normalize((f.properties as any)?.Nom_Com_Ol) === target
+        f => normalize((f.properties as any)?.COMMUNE) === target
       );
 
       if (!features.length) {

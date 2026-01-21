@@ -1,91 +1,115 @@
 <div class="row justify-content-center dashboard-container">
 
   <!-- 🔹 INDICATEURS (LEFT) -->
-  <div class="col-md-4">
-    <div class="indicator-card">
+<div class="col-md-3 d-flex flex-column gap-4">
 
-      <h5 class="text-center mb-4 indicator-title">
-        Indicateurs Communaux
-      </h5>
+  <!-- 🔹 INDICATEURS DÉMOGRAPHIQUES -->
+  <div class="indicator-card">
 
-      <div class="row g-3">
+    <h5 class="text-center mb-4 indicator-title">
+      Indicateurs démographiques
+    </h5>
 
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-people-fill text-primary"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Population totale</div>
-              <div class="kpi-value">84715</div>
-            </div>
+    <div class="row g-3">
+
+      <!-- Population -->
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-people-fill text-primary"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Population</div>
+            <div class="kpi-value">1 171</div>
           </div>
         </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-aspect-ratio text-secondary"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Superficie (km²)</div>
-              <div class="kpi-value">2451</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-gender-female text-danger"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Femmes</div>
-              <div class="kpi-value">9207</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-gender-male text-primary"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Hommes</div>
-              <div class="kpi-value">9277</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-flag-fill text-success"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Marocains</div>
-              <div class="kpi-value">20015</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="kpi">
-            <i class="bi bi-globe text-warning"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Étrangers</div>
-              <div class="kpi-value">647</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="kpi kpi-full">
-            <i class="bi bi-house-door-fill text-dark"></i>
-            <div class="kpi-content">
-              <div class="kpi-label">Nombre de ménages</div>
-              <div class="kpi-value">8203</div>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <!-- Ménages -->
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-house-door-fill text-success"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Ménages</div>
+            <div class="kpi-value">396</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Genre -->
+      <!-- <div class="col-md-12">
+        <div class="kpi kpi-full">
+          <i class="bi bi-gender-ambiguous text-secondary"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Genre</div>
+            <div class="kpi-value">
+              Hommes : 44,9% &nbsp; | &nbsp; Femmes : 55,1%
+            </div>
+            
+          </div>
+        </div>
+      </div>
+       -->
+           <div class="col-md-6">
+        <div class="kpi">
+            <i class="bi bi-gender-male"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Homme</div>
+            <div class="kpi-value">44,9%</div>
+          </div>
+        </div>
+      </div>
+           <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-gender-female"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Femmes</div>
+            <div class="kpi-value">55,1%</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
+  <!-- 🔹 INDICATEURS TERRITORIAUX -->
+  <div class="indicator-card">
+
+    <h5 class="text-center mb-4 indicator-title">
+      Indicateurs territoriaux
+    </h5>
+
+    <div class="row g-3">
+
+      <!-- Superficie -->
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-aspect-ratio-fill text-secondary"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Superficie</div>
+            <div class="kpi-value">6 216 km²</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Densité -->
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-people-fill text-warning"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Densité</div>
+            <div class="kpi-value">0,18 Hab./Km²</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
   <!-- 🔹 MAP (RIGHT) -->
-  <div class="col-md-8">
+  <div class="col-md-6">
     <div class="map-card">
 
       <div class="map-title">
@@ -97,6 +121,90 @@
       
 
     </div>
+  </div>
+  <div class="col-md-3">
+      <!-- 🔹 INDICATEURS SOCIO-ÉCONOMIQUES -->
+  <div class="indicator-card">
+
+    <h5 class="text-center mb-4 indicator-title">
+      Indicateurs socio-économiques
+    </h5>
+
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-activity text-primary"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux d’activité</div>
+            <div class="kpi-value">50,3%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-people text-danger"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux de pauvreté multidimensionnel</div>
+            <div class="kpi-value">4,4%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-briefcase-fill text-dark"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux de chômage</div>
+            <div class="kpi-value">18,1%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-shield-exclamation text-warning"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux de vulnérabilité</div>
+            <div class="kpi-value">6,8%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-people-fill text-info"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux de préscolarisation</div>
+            <div class="kpi-value">37,93%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="kpi">
+          <i class="bi bi-mortarboard-fill text-success"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux de scolarisation (6 ans et +)</div>
+            <div class="kpi-value">89,6%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="kpi kpi-full">
+          <i class="bi bi-book-fill text-secondary"></i>
+          <div class="kpi-content">
+            <div class="kpi-label">Taux d’analphabétisme (10 ans et +)</div>
+            <div class="kpi-value">19,6%</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   </div>
  <div class="hstack gap-2 mt-2 justify-content-center mt-5 flex-wrap">
 

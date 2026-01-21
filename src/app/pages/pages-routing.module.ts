@@ -36,6 +36,12 @@ const routes: Routes = [
         {
       path: 'laayoune', loadChildren: () => import('./laayoune/laayoune.module').then(m => m.LaayouneModule),canActivate:[AdminGuard]
     },
+       {
+      path: 'maroc', loadChildren: () => import('./region/region.module').then(m => m.RegionModule),canActivate:[AdminGuard]
+    },
+      {
+      path: 'regionLaayoune', loadChildren: () => import('./region-laayoune/regionLaayoune.module').then(m => m.RegionLaayouneModule),canActivate:[AdminGuard]
+    },
      {
       path: 'foumelouad', loadChildren: () => import('./foumelouad/foumelouad-routing.module').then(m => m.FoumelouadRoutingModule),canActivate:[AdminGuard]
     },

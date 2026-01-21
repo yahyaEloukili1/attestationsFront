@@ -25,6 +25,13 @@ export class UserProfileService {
     return this.http.get<any>('assets/communesTS.geojson');
   }
 
+    getMaroc() {
+    return this.http.get<any>('assets/region.geojson');
+  }
+
+getRegionLaayoune() {
+    return this.http.get<any>('assets/regionLaayoune.geojson');
+  }
   getColleges() {
     return this.http.get<GeoJSON.FeatureCollection>('assets/colleges.geojson');
   }

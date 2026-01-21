@@ -10,16 +10,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as L from 'leaflet';
-import { UserProfileService } from '../../../../app/core/services/user.service';
+import { UserProfileService } from 'src/app/core/services/user.service';
+
+
 
 @Component({
-  selector: 'app-users-test-list',
+  selector: 'app-region-laayoune',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './users-test-list.component.html',
-  styleUrl: './users-test-list.component.scss'
+  imports: [CommonModule],
+  templateUrl: './region-laayoune.component.html',
+  styleUrl: './region-laayoune.component.scss'
 })
-export class UsersTestListComponent implements AfterViewInit, OnDestroy {
+export class RegionLaayouneComponent {
 
   @ViewChild('mapContainer', { static: true })
   mapContainer!: ElementRef<HTMLDivElement>;
@@ -155,7 +157,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
     /* =========================
        2️⃣ LOAD COMMUNES
     ========================= */
-    this.mapService.getCommunes().subscribe((data: GeoJSON.FeatureCollection) => {
+    this.mapService.getRegionLaayoune().subscribe((data: GeoJSON.FeatureCollection) => {
 
       console.log(data.features,'spspspsp');
       // ✅ reset

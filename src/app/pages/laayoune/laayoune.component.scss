@@ -8,7 +8,7 @@
 /* ================= INDICATEURS ================= */
 
 .indicator-card {
-  height: 760px;
+  // height: 760px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
@@ -230,3 +230,13 @@ button { width: 280px; }
   50%  { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
+/* Force les nombres à s'afficher correctement (LTR) même si la page est RTL */
+
+.kpi-value {
+  direction: ltr;
+  unicode-bidi: bidi-override;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+

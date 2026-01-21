@@ -10,16 +10,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as L from 'leaflet';
-import { UserProfileService } from '../../../../app/core/services/user.service';
+import { UserProfileService } from 'src/app/core/services/user.service';
+
 
 @Component({
-  selector: 'app-users-test-list',
+  selector: 'app-region',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './users-test-list.component.html',
-  styleUrl: './users-test-list.component.scss'
+  imports: [CommonModule],
+  templateUrl: './region.component.html',
+  styleUrl: './region.component.scss'
 })
-export class UsersTestListComponent implements AfterViewInit, OnDestroy {
+export class RegionComponent {
 
   @ViewChild('mapContainer', { static: true })
   mapContainer!: ElementRef<HTMLDivElement>;
@@ -142,10 +143,17 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
     /* =========================
        1️⃣ INIT MAP
     ========================= */
-    this.map = L.map(this.mapContainer.nativeElement, {
-      zoomControl: false,
-      attributionControl: false
-    });
+this.map = L.map(this.mapContainer.nativeElement, {
+  zoomControl: false,        // ❌ زر + -
+  attributionControl: false,
+
+  scrollWheelZoom: false,   // ❌ zoom بالماوس
+  doubleClickZoom: false,   // ❌ double click
+  boxZoom: false,           // ❌ drag box
+  keyboard: false,          // ❌ clavier
+  touchZoom: false,         // ❌ mobile pinch
+  dragging: false            // ✅ نخلّي غير التحريك
+});
 
     L.tileLayer(
       'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
@@ -155,7 +163,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
     /* =========================
        2️⃣ LOAD COMMUNES
     ========================= */
-    this.mapService.getCommunes().subscribe((data: GeoJSON.FeatureCollection) => {
+    this.mapService.getMaroc().subscribe((data: GeoJSON.FeatureCollection) => {
 
       console.log(data.features,'spspspsp');
       // ✅ reset
@@ -218,83 +226,46 @@ console.log(data.features,'qsss');
         }
       });
 
-      const communesLayer = L.geoJSON(data, {
-        style: (feature: any) => ({
-          color: '#888',
-          weight: 1,
-          fillColor: this.getCommuneColor(feature.properties.id_objet),
-          fillOpacity: 0.55
-        }),
+const communesLayer = L.geoJSON(data, {
+  style: (feature: any) => {
+    const isLaayoune = feature.properties?.CODE_REGIO === '11';
 
-        onEachFeature: (feature: any, layer: L.Layer) => {
-          const polygon = layer as L.Path;
+    return {
+      color: '#263238',
+      weight: 2,
+      fillOpacity: 0.65,
+      fillColor: isLaayoune ? '#7e89b3' : '#e6dbdb'
+    };
+  },
 
-          const bounds = (polygon as any).getBounds();
-          const area = bounds.getNorthEast().distanceTo(bounds.getSouthWest());
+  onEachFeature: (feature: any, layer: L.Layer) => {
+    const polygon = layer as L.Path;
 
-          if (area > 15000) {
-            L.tooltip({
-              permanent: true,
-              direction: 'center',
-              className: 'commune-label'
-            })
-              .setContent(feature.properties.COMMUNE)
-              .setLatLng(bounds.getCenter())
-              .addTo(this.map);
-          }
+    // 👉 CLICK
+    polygon.on('click', () => {
+      const codeRegion = feature.properties?.CODE_REGIO;
 
-          // const popup = L.popup({ closeButton: false, offset: [0, -5] })
-          //   .setContent(`
-          //     <div class="popup-content">
-          //       <b>${feature.properties.Nom_Com_Ol}</b><hr>
-          //       👥 Population : ${feature.properties.Population}<br>
-          //       🏠 Ménages : ${feature.properties.Nb_Menages}<br>
-          //       🇲🇦 Marocains : ${feature.properties.Marocains}<br>
-          //       🌍 Étrangers : ${feature.properties.Etrangers}
-          //     </div>
-          //   `);
+      if (codeRegion === '11') {
+        // ✅ navigation vers users list
+        this.router.navigate(['/users/list']);
+      }
+    });
 
-          polygon.on('mouseover', (e: any) => {
-            // popup.setLatLng(e.latlng);
-            // popup.openOn(this.map);
+    // (optionnel) hover
+    polygon.on('mouseover', () => {
+      polygon.setStyle({
+        weight: 3,
+        fillOpacity: 0.85
+      });
+    });
 
-            if (this.selectedLayer) {
-              this.selectedLayer.setStyle({
-                color: '#888',
-                weight: 1,
-                fillOpacity: 0.55
-              });
-            }
+    polygon.on('mouseout', () => {
+      communesLayer.resetStyle(polygon);
+    });
+  }
+}).addTo(this.map);
 
-            polygon.setStyle({
-              color: '#1565c0',
-              weight: 3,
-              fillOpacity: 0.85
-            });
 
-            this.selectedLayer = polygon;
-          });
-
-          polygon.on('mouseout', () => this.map.closePopup());
-
-          const routes: Record<string, string> = {
-            'DCHEIRA': '/dcheira',
-            'BOUKRAA': '/boucraa',
-            'FOUM EL OUED': '/foumelouad',
-            'LAAYOUNE': '/laayoune',
-            'EL MARSA': '/elmarsa'
-          };
-
-          polygon.on('click', () => {
-            const key = feature.properties.COMMUNE?.toUpperCase().trim();
-            if (routes[key]) {
-              this.router.navigate([routes[key]]);
-          
-            }
-                console.log(feature.properties.COMMUNE?.toUpperCase().trim());
-          });
-        }
-      }).addTo(this.map);
 
       /* =========================
          3️⃣ SANTÉ (HIDDEN)
@@ -434,10 +405,26 @@ console.log(data.features,'qsss');
       /* =========================
          6️⃣ ZOOM
       ========================= */
-      this.map.fitBounds(communesLayer.getBounds(), {
-        paddingTopLeft: [80, 40],
-        paddingBottomRight: [40, 40]
-      });
+/* =========================
+   6️⃣ ZOOM (CORRECT)
+========================= */
+
+// zoom strict sur les communes uniquement
+const bounds = communesLayer.getBounds();
+
+this.map.fitBounds(bounds, {
+  padding: [20, 20],
+  maxZoom: 8
+});
+
+// 🔍 petit zoom en plus pour le rendu
+setTimeout(() => {
+
+  this.map.invalidateSize();
+}, 200);
+
+
+// 🔍 zoom supplémentaire
 
       setTimeout(() => this.map.invalidateSize(), 0);
     });

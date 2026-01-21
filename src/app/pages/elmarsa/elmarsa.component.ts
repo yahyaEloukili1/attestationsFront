@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as L from 'leaflet';
-import { FeatureCollection, Feature } from 'geojson';
+import { FeatureCollection, Feature, Point } from 'geojson';
 import { UserProfileService } from '../../../app/core/services/user.service';
 
 @Component({
@@ -19,37 +19,47 @@ import { UserProfileService } from '../../../app/core/services/user.service';
 })
 export class ElmarsaComponent implements AfterViewInit, OnDestroy {
 
+  /* =========================
+     MAP
+  ========================= */
   @ViewChild('mapContainer', { static: true })
   mapContainer!: ElementRef<HTMLDivElement>;
 
   map!: L.Map;
 
-  // ✅ polygon latlngs for filtering
+  /* =========================
+     POPUP + CHARTS
+  ========================= */
+  showEducationCharts = false;
+  private charts: any[] = [];
+
+  /* =========================
+     POLYGON COMMUNE
+  ========================= */
   private communePolygonLatLngs:
     | L.LatLngExpression[]
     | L.LatLngExpression[][]
     | L.LatLngExpression[][][] = [];
 
-  // ✅ Layers + states
+  /* =========================
+     LAYERS + STATES
+  ========================= */
   santeLayer = L.layerGroup();
-  santeVisible = false;
-
   educationLayer = L.layerGroup();
-  educationVisible = false;
-
   eauPotableLayer = L.layerGroup();
-  eauPotableVisible = false;
-
   emploiLayer = L.layerGroup();
-  emploiVisible = false;
-
   miseLayer = L.layerGroup();
+
+  santeVisible = false;
+  educationVisible = false;
+  eauPotableVisible = false;
+  emploiVisible = false;
   miseVisible = false;
 
   constructor(private mapService: UserProfileService) {}
 
   /* =========================
-     ICONS (same as province)
+     ICONS (comme Laayoune)
   ========================= */
   chrIcon = L.icon({
     iconUrl: 'assets/icons/hopital1.png',
@@ -93,20 +103,19 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     popupAnchor: [0, -28]
   });
 
+  /* =========================
+     INIT MAP
+  ========================= */
   ngAfterViewInit(): void {
 
-    /* =========================
-       INIT MAP (NO BACKGROUND)
-    ========================= */
     this.map = L.map(this.mapContainer.nativeElement, {
       zoomControl: false,
       attributionControl: false
     });
 
-    const normalize = (value?: string): string =>
-      value
-        ? value
-            .normalize('NFD')
+    const normalize = (v?: string): string =>
+      v
+        ? v.normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .replace(/-/g, ' ')
             .toUpperCase()
@@ -118,19 +127,16 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     this.mapService.getCommunes().subscribe((data: FeatureCollection) => {
 
       const features: Feature[] = data.features.filter(
-        f => normalize((f.properties as any)?.Nom_Com_Ol) === target
+        f => normalize((f.properties as any)?.COMMUNE) === target
       );
 
       if (!features.length) {
-        console.error('❌ El Marsa not found in GeoJSON');
+        console.error('❌ EL MARSA not found in GeoJSON');
         return;
       }
 
       const elmarsaFC: FeatureCollection = { type: 'FeatureCollection', features };
 
-      /* =========================
-         DRAW EL MARSA ONLY
-      ========================= */
       const elmarsaLayer = L.geoJSON(elmarsaFC, {
         style: {
           color: '#263238',
@@ -144,9 +150,6 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
       const leafLayer: any = elmarsaLayer.getLayers()[0];
       this.communePolygonLatLngs = leafLayer.getLatLngs();
 
-      /* =========================
-         LABEL
-      ========================= */
       const bounds = elmarsaLayer.getBounds();
 
       L.tooltip({
@@ -158,26 +161,128 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
         .setLatLng(bounds.getCenter())
         .addTo(this.map);
 
-      /* =========================
-         FIT
-      ========================= */
       this.map.fitBounds(bounds, { padding: [40, 40] });
       setTimeout(() => this.map.invalidateSize(), 0);
 
-      // ✅ load all layers (hidden)
+      // ✅ IMPORTANT: charger toutes les couches (cachées)
       this.loadAllCommuneLayers();
     });
   }
 
   ngOnDestroy(): void {
-    if (this.map) this.map.remove();
+    this.charts.forEach(c => c.destroy());
+    this.map?.remove();
+  }
+
+  /* =========================
+     POPUP CONTROLS
+  ========================= */
+  openEducationCharts() {
+    this.showEducationCharts = true;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.initEducationCharts();
+      });
+    });
+  }
+
+  closeEducationCharts() {
+    this.showEducationCharts = false;
+    this.charts.forEach(c => c.destroy());
+    this.charts = [];
+  }
+
+  /* =========================
+     CHARTS
+  ========================= */
+  private initEducationCharts() {
+    this.charts.forEach(c => c.destroy());
+    this.charts = [];
+
+    const labels = ['Primaire', 'Collégial', 'Qualifiant'];
+
+    this.charts.push(
+      new (window as any).Chart('encombrementChart', {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Provincial', data: [3.98, 0.25, 3.07], backgroundColor: '#e6b89c' },
+            { label: 'El Marsa', data: [22.58, 0.25, 3.45], backgroundColor: '#3fa7d6' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: "Taux d’encombrement",
+              font: { size: 16, weight: 'bold' },
+              padding: { top: 10, bottom: 20 }
+            }
+          }
+        }
+      })
+    );
+
+    this.charts.push(
+      new (window as any).Chart('abandonChart', {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Provincial', data: [1.28, 3.85, 6.03], backgroundColor: '#e6b89c' },
+            { label: 'El Marsa', data: [1.09, 5.75, 6.96], backgroundColor: '#3fa7d6' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: "Taux d’abandon scolaire",
+              font: { size: 16, weight: 'bold' },
+              padding: { top: 10, bottom: 20 }
+            }
+          }
+        }
+      })
+    );
+
+    this.charts.push(
+      new (window as any).Chart('redoublementChart', {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Provincial', data: [4.42, 9.98, 11.34], backgroundColor: '#e6b89c' },
+            { label: 'El Marsa', data: [5.47, 9.54, 15.34], backgroundColor: '#3fa7d6' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            title: {
+              display: true,
+              text: "Taux de redoublement",
+              font: { size: 16, weight: 'bold' },
+              padding: { top: 10, bottom: 20 }
+            }
+          }
+        }
+      })
+    );
   }
 
   /* =========================
      LOAD + FILTER POINTS INSIDE COMMUNE
+     (comme Laayoune)
   ========================= */
   private loadAllCommuneLayers() {
-
     // Santé
     this.mapService.getCHRs().subscribe(fc =>
       this.addFilteredPointsToLayer(fc, this.santeLayer, this.hopitauxExistantsIcon, 'CHR')
@@ -201,9 +306,16 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     );
 
     // Eau potable
-    this.mapService.getEauPotable().subscribe(fc =>
-      this.addFilteredPointsToLayer(fc, this.eauPotableLayer, this.eauIcon, 'Eau potable')
-    );
+   this.mapService.getEauPotable().subscribe((fc: GeoJSON.FeatureCollection) => {
+        L.geoJSON(fc, {
+          pointToLayer: (_feature, latlng) =>
+            L.marker(latlng, { icon: this.eauIcon }),
+          onEachFeature: (feature, layer) => {
+            const nom = (feature.properties as any)?.nom || (feature.properties as any)?.name || '';
+            layer.bindPopup(`<b>Eau potable</b><br>${nom}`);
+          }
+        }).addTo(this.eauPotableLayer);
+      });
 
     // Emploi 1..3
     this.mapService.getEmploi1().subscribe(fc =>
@@ -236,14 +348,9 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   ) {
     if (!fc?.features?.length) return;
 
-    const filtered: Feature[] = fc.features.filter((f: Feature) => {
-      if (!f.geometry) return false;
-      if (f.geometry.type !== 'Point') return false;
-
-      const coords = f.geometry.coordinates as number[];
-      const lng = coords[0];
-      const lat = coords[1];
-
+    const filtered = fc.features.filter((f): f is Feature<Point> => {
+      if (!f.geometry || f.geometry.type !== 'Point') return false;
+      const [lng, lat] = f.geometry.coordinates;
       return this.isLatLngInsideCommune(lat, lng);
     });
 
@@ -252,7 +359,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     const filteredFC: FeatureCollection = { type: 'FeatureCollection', features: filtered };
 
     L.geoJSON(filteredFC, {
-      pointToLayer: (_feature, latlng) => L.marker(latlng, { icon }),
+      pointToLayer: (_, latlng) => L.marker(latlng, { icon }),
       onEachFeature: (feature, layer) => {
         const props: any = feature.properties || {};
         const nom = props.nom || props.name || props.type || '';
@@ -261,9 +368,9 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     }).addTo(targetLayer);
   }
 
-  // =========================
-  // Point-in-polygon
-  // =========================
+  /* =========================
+     POINT IN POLYGON
+  ========================= */
   private isLatLngInsideCommune(lat: number, lng: number): boolean {
     const p = L.latLng(lat, lng);
 
@@ -306,35 +413,16 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   }
 
   /* =========================
-     TOGGLES
+     TOGGLES (comme Laayoune)
   ========================= */
-  toggleMise() {
-    if (this.miseVisible) this.map.removeLayer(this.miseLayer);
-    else this.miseLayer.addTo(this.map);
-    this.miseVisible = !this.miseVisible;
-  }
+  toggleMise() { this.toggle(this.miseLayer, 'miseVisible'); }
+  toggleEducation() { this.toggle(this.educationLayer, 'educationVisible'); }
+  toggleSante() { this.toggle(this.santeLayer, 'santeVisible'); }
+  toggleEauPotable() { this.toggle(this.eauPotableLayer, 'eauPotableVisible'); }
+  toggleEmploi() { this.toggle(this.emploiLayer, 'emploiVisible'); }
 
-  toggleEducation() {
-    if (this.educationVisible) this.map.removeLayer(this.educationLayer);
-    else this.educationLayer.addTo(this.map);
-    this.educationVisible = !this.educationVisible;
-  }
-
-  toggleSante() {
-    if (this.santeVisible) this.map.removeLayer(this.santeLayer);
-    else this.santeLayer.addTo(this.map);
-    this.santeVisible = !this.santeVisible;
-  }
-
-  toggleEauPotable() {
-    if (this.eauPotableVisible) this.map.removeLayer(this.eauPotableLayer);
-    else this.eauPotableLayer.addTo(this.map);
-    this.eauPotableVisible = !this.eauPotableVisible;
-  }
-
-  toggleEmploi() {
-    if (this.emploiVisible) this.map.removeLayer(this.emploiLayer);
-    else this.emploiLayer.addTo(this.map);
-    this.emploiVisible = !this.emploiVisible;
+  private toggle(layer: L.LayerGroup, prop: keyof ElmarsaComponent) {
+    this[prop] ? this.map.removeLayer(layer) : layer.addTo(this.map);
+    this[prop] = !this[prop] as any;
   }
 }
