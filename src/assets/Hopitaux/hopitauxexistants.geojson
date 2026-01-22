@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "existants",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Hopital": "Hôpital Militaire Hassan II", "abrv": "HM", "x": "-13.195351239278896", "y": "27.16148506697028" }, "geometry": { "type": "Point", "coordinates": [ -13.195351239278896, 27.161485066970279 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "Hopital": "Hôpital Hassan Ben Al Mehdi", "abrv": "CHR", "x": "-13.189238798295811", "y": "27.156827891336192" }, "geometry": { "type": "Point", "coordinates": [ -13.189238798295811, 27.156827891336192 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "Hopital": "Hôpital Hassan II", "abrv": "CHR", "x": "-13.190648198338081", "y": "27.145216042528396" }, "geometry": { "type": "Point", "coordinates": [ -13.190648198338081, 27.145216042528396 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "Hopital": "CHU", "abrv": "CHU", "x": " -13.141940311994725", "y": "27.13427510553737" }, "geometry": { "type": "Point", "coordinates": [ -13.141940311994725, 27.13427510553737 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "Hopital": "Centre Régional d’Oncologie", "abrv": "CROL", "x": "-13.142043413087658", "y": "27.129881003261016" }, "geometry": { "type": "Point", "coordinates": [ -13.142043413087658, 27.129881003261016 ] } }
+]
+}

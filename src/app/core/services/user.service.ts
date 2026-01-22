@@ -37,15 +37,27 @@ getRegionLaayoune() {
   }
 
   getCHRs() {
-    return this.http.get<GeoJSON.FeatureCollection>('assets/CHR.geojson');
+    return this.http.get<GeoJSON.FeatureCollection>('assets/Hopitaux/Extension CHR.geojson');
+  }
+    getCHR2s() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/Hopitaux/Construction ESSP - Doirat.geojson');
+  }
+   getCHR3s() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/Hopitaux/Amenagemet et equipement.geojson');
   }
 
   getSanteExistants() {
-    return this.http.get<GeoJSON.FeatureCollection>('assets/santeExistant.geojson');
+    return this.http.get<GeoJSON.FeatureCollection>('assets/Hopitaux/hopitauxexistants.geojson');
+  }
+    getSanteESSPExistants() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/Hopitaux/ESSP.geojson');
   }
 
   getEducationExistants1() {
     return this.http.get<GeoJSON.FeatureCollection>('assets/education1.geojson');
+  }
+    getZoneDouirat() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/Hopitaux/Zone_DOuirat.geojson');
   }
   getEducationExistants2() {
     return this.http.get<GeoJSON.FeatureCollection>('assets/education2.geojson');
@@ -59,8 +71,39 @@ getRegionLaayoune() {
     getEauPotable() {
     return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/P7-Extension de la station dessalement.geojson');
   }
+      getEauPotable2() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/p6.geojson');
+  }
+     getEauPotable3() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/p5.geojson');
+  }
+       getEauPotable4() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/p4.geojson');
+  }
+    getEauPotable5() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/p3.geojson');
+  }
+
+     getEauPotable6() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/p2.geojson');
+  }
+    getEauPotable7() {
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/p1.geojson');
+  }
+getEmploiZone1() {
+  return this.http.get<GeoJSON.FeatureCollection>('assets/emploi/Emploi1.geojson');
+}
+getEmploiZoneHizam() {
+  return this.http.get<GeoJSON.FeatureCollection>('assets/emploi/Hizam.geojson');
+}
+getAtelierArtisonaux() {
+  return this.http.get<GeoJSON.FeatureCollection>('assets/emploi/Ateliers_artisonaux.geojson');
+}
+getSitesTouristiques() {
+  return this.http.get<GeoJSON.FeatureCollection>('assets/emploi/Sites_touristiques.geojson');
+}
 getEmploi1() {
-  return this.http.get<GeoJSON.FeatureCollection>('assets/emploi1.geojson');
+  return this.http.get<GeoJSON.FeatureCollection>('assets/emploi/emploi2.geojson');
 }
 getEmploi2() {
   return this.http.get<GeoJSON.FeatureCollection>('assets/emploi2.geojson');

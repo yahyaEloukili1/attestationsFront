@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Ateliers artisonaux",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "begin": "1", "end": "4", "Lien_Image": "000_Media/Projets/002_Images/JPG/Action/Emploi/Ateliers Artisanaux.jpeg" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -13.205503, 27.12721 ], [ -13.205728, 27.126058 ], [ -13.20464, 27.125919 ], [ -13.204453, 27.127053 ], [ -13.205503, 27.12721 ] ] ] ] } }
+]
+}

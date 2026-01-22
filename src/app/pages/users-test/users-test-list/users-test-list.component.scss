@@ -115,7 +115,6 @@ tr, td, th { height: 45px; }
    ✅ PROVINCE LAYOUT (COMMUNE LOOK)
    ============================ */
 
-/* IMPORTANT: no gap here (gap breaks bootstrap grid and causes wrap) */
 .province-page {
   padding: 22px 18px;
   background: #eef1f6;
@@ -148,13 +147,13 @@ tr, td, th { height: 45px; }
 
 /* Make map panel height similar to commune */
 .map-card {
-  height: 790px;           /* you can change this */
+  height: 790px;
   display: flex;
   flex-direction: column;
 }
 
 .map-body {
-  flex: 1;                 /* fill remaining height under header */
+  flex: 1;
   padding: 12px;
 }
 
@@ -169,9 +168,8 @@ tr, td, th { height: 45px; }
 
 /* Indicator cards */
 .indicators-card {
-  height: auto; /* ❗ au lieu de 790px */
+  height: auto;
 }
-
 
 .indicator-item {
   background: #fff;
@@ -225,39 +223,32 @@ tr, td, th { height: 45px; }
 .soft-yellow { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
 .soft-green  { background: rgba(16, 185, 129, 0.12); color: #10b981; }
 .soft-gray   { background: rgba(17, 24, 39, 0.08);  color: #111827; }
+
 button{
   width: 280px;
-
 }
+
 /* =========================
    HEALTH TOGGLE BUTTON
 ========================= */
-/* =========================
-   HEALTH SECTOR TOGGLE
-========================= */
-
 .health-btn {
   background: transparent;
   color: #dc3545;
   border: 2px solid #dc3545;
- 
 
   font-weight: 600;
   letter-spacing: 0.3px;
 
-  /* ✅ Center content */
   display: inline-flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 
-  /* keep spacing between icon & text */
   gap: 10px;
 
   transition: all 0.25s ease;
   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
 }
-
 
 .health-btn:hover {
   background: rgba(220, 53, 69, 0.08);
@@ -265,7 +256,6 @@ button{
   box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
-/* ACTIVE STATE */
 .health-btn.is-active {
   background: linear-gradient(135deg, #dc3545, #b02a37);
   color: #fff;
@@ -276,12 +266,10 @@ button{
     0 0 0 4px rgba(220,53,69,0.25);
 }
 
-/* Icon polish */
 .health-btn i {
   font-size: 1.2rem;
 }
 
-/* Subtle professional pulse only when active */
 .health-btn.is-active i {
   animation: softPulse 1.4s ease-in-out infinite;
 }
@@ -291,16 +279,13 @@ button{
   50%  { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
-/* =========================
-   EDUCATION TOGGLE BUTTON
-   (same logic as santé: transparent when OFF, filled when ON)
-========================= */
+
 /* =========================
    EDUCATION TOGGLE BUTTON
 ========================= */
 .education-btn {
   background: transparent;
-  color: #198754;             /* bootstrap success green */
+  color: #198754;
   border: 2px solid #198754;
 
   font-weight: 600;
@@ -323,7 +308,6 @@ button{
   box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
-/* ACTIVE STATE */
 .education-btn.is-active {
   background: linear-gradient(135deg, #198754, #146c43);
   color: #fff;
@@ -347,12 +331,13 @@ button{
   50%  { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
+
 /* =========================
    EAU POTABLE TOGGLE BUTTON
 ========================= */
 .eau-btn {
   background: transparent;
-  color: #0d6efd;          /* bootstrap primary blue (water look) */
+  color: #0d6efd;
   border: 2px solid #0d6efd;
 
   font-weight: 600;
@@ -398,9 +383,13 @@ button{
   50%  { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
+
+/* =========================
+   EMPLOI TOGGLE BUTTON
+========================= */
 .emploi-btn {
   background: transparent;
-  color: #6f42c1;               /* purple (distinct from others) */
+  color: #6f42c1;
   border: 2px solid #6f42c1;
 
   font-weight: 600;
@@ -447,15 +436,12 @@ button{
   100% { transform: scale(1); }
 }
 
-/* users-test-list.component.scss */
-/* add this at the end (keep your existing css) */
-
 /* =========================
    MISE A NIVEAU TOGGLE BUTTON
 ========================= */
 .mise-btn {
   background: transparent;
-  color: #fd7e14;            /* bootstrap orange */
+  color: #fd7e14;
   border: 2px solid #fd7e14;
 
   font-weight: 600;
@@ -501,11 +487,12 @@ button{
   50%  { transform: scale(1.12); }
   100% { transform: scale(1); }
 }
+
 /* mini text under value */
 .mini-note{
   font-size: 11px;
   font-weight: 700;
-  color: #d11; /* rouge comme dans image 1 (petit) */
+  color: #d11;
   margin-top: 2px;
 }
 
@@ -572,6 +559,7 @@ button{
   font-weight: 800;
   color: #6b7280;
 }
+
 /* Force les nombres à s'afficher correctement (LTR) même si la page est RTL */
 .indicator-value,
 .split-mini-val,
@@ -584,13 +572,9 @@ button{
   font-variant-numeric: tabular-nums;
 }
 
-
-
-
 /* =========================
    EVOLUTION POPULATION PANEL
 ========================= */
-
 .evolution-card{
   height: auto;
 }
@@ -627,7 +611,7 @@ button{
 /* line */
 .evo-line{
   fill: none;
-  stroke: #1f3aa8;          /* bleu proche */
+  stroke: #1f3aa8;
   stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -635,7 +619,7 @@ button{
 
 /* dots */
 .evo-dot{
-  fill: #ffd400;            /* jaune marker */
+  fill: #ffd400;
   stroke: #1f3aa8;
   stroke-width: 2;
 }
@@ -663,4 +647,281 @@ button{
 .evo-val, .evo-x, .evo-y{
   direction: ltr;
   unicode-bidi: bidi-override;
+}
+
+.eau-tooltip {
+  background: #0ea5e9;
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   ✅ EAU DROPDOWN MENU (ABOVE BUTTON)
+========================= */
+/* users-test-list.component.scss */
+
+/* =========================
+   ✅ Dropdown (Eau + Emploi)
+========================= */
+
+.eau-dropdown,
+.emploi-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* menu hidden by default */
+.eau-menu,
+.emploi-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(100% + 10px);
+
+  min-width: 260px;
+  padding: 10px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+
+  display: none;
+  z-index: 9999;
+}
+
+/* show on hover */
+.eau-dropdown:hover .eau-menu {
+  display: block;
+}
+.emploi-dropdown:hover .emploi-menu {
+  display: block;
+}
+
+/* items */
+.eau-item,
+.emploi-item {
+  width: 100%;
+  text-align: left;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.15s ease;
+}
+
+.eau-item:hover,
+.emploi-item:hover {
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.eau-item.active,
+.emploi-item.active {
+  background: rgba(2, 132, 199, 0.12);
+  outline: 1px solid rgba(2, 132, 199, 0.25);
+}
+
+/* danger / hide */
+.eau-item.danger,
+.emploi-item.danger {
+  margin-top: 6px;
+  background: rgba(239, 68, 68, 0.10);
+}
+.eau-item.danger:hover,
+.emploi-item.danger:hover {
+  background: rgba(239, 68, 68, 0.16);
+}
+
+/* =========================
+   ✅ Map container fix (important)
+========================= */
+#map {
+  width: 100%;
+  height: 520px; /* adapte حسب تصميمك */
+  border-radius: 14px;
+}
+
+/* (optionnel) tooltip label style */
+.commune-label {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 13px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+/* =========================
+   ✅ Dropdown (Eau + Emploi) - ABOVE BUTTONS
+========================= */
+
+.eau-dropdown,
+.emploi-dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 10000; /* important */
+}
+
+/* menu hidden by default */
+.eau-menu,
+.emploi-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* ✅ show ABOVE the button */
+  bottom: calc(100% + 10px);
+  top: auto;
+
+  min-width: 260px;
+  padding: 10px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+
+  display: none;
+  z-index: 20000; /* higher than buttons */
+}
+
+/* show on hover */
+.eau-dropdown:hover .eau-menu {
+  display: block;
+}
+.emploi-dropdown:hover .emploi-menu {
+  display: block;
+}
+.eau-dropdown,
+.emploi-dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+/* caché */
+.eau-menu,
+.emploi-menu{
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% + 10px);
+  top: auto;
+  z-index: 20000;
+}
+
+/* ✅ reste ouvert quand tu passes du bouton au menu */
+.eau-dropdown:hover .eau-menu,
+.eau-dropdown:focus-within .eau-menu{
+  display: block;
+}
+
+.emploi-dropdown:hover .emploi-menu,
+.emploi-dropdown:focus-within .emploi-menu{
+  display: block;
+}
+.eau-menu::before,
+.emploi-menu::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  /* ✅ zone invisible entre bouton et menu */
+  height: 14px;
+  bottom: -14px;
+
+  background: transparent;
+}
+/* =========================
+   ✅ SANTE DROPDOWN MENU (comme eau/emploi)
+========================= */
+
+.sante-dropdown{
+  position: relative;
+  display: inline-block;
+  z-index: 10000;
+}
+
+/* menu */
+.sante-menu{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* ✅ menu au-dessus du bouton */
+  bottom: calc(100% + 10px);
+  top: auto;
+
+  min-width: 260px;
+  padding: 10px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+
+  display: none;
+  z-index: 20000;
+}
+
+/* show on hover + focus */
+.sante-dropdown:hover .sante-menu,
+.sante-dropdown:focus-within .sante-menu{
+  display: block;
+}
+
+/* zone invisible pour éviter fermeture quand tu passes au menu */
+.sante-menu::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 14px;
+  bottom: -14px;
+  background: transparent;
+}
+
+/* items */
+.sante-item{
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.sante-item:hover{
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.sante-item.active{
+  background: rgba(220, 53, 69, 0.12);
+  outline: 1px solid rgba(220, 53, 69, 0.25);
+}
+
+/* danger */
+.sante-item.danger{
+  margin-top: 6px;
+  background: rgba(239, 68, 68, 0.10);
+}
+.sante-item.danger:hover{
+  background: rgba(239, 68, 68, 0.16);
 }

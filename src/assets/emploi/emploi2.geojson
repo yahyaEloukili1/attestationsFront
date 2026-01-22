@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "emploi2",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Axe": null, "Commune": "Laâyoune", "Projet": "Viabilisation des Unités de valorisation des produits agricoles à la commune territoriale de Laâyoune.", "Longitude x": "-13.236787", "Longitude y": "27.153999", "Longitude": null, "Lien_Image": "000_Media/Projets/002_Images/JPG/Action/Emploi/Unites de Valorisation.jpeg" }, "geometry": { "type": "Point", "coordinates": [ -13.236787, 27.153999 ] } }
+]
+}

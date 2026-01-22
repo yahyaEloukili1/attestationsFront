@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Amenagemet et equipement",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 2, "N°": 2, "Région": "Hôpital Hassan II ", "Province": "LAAYOUNE", "ESSP/CVR": "Hôpital Hassan II ", "Longitude": -13.1906292, "Latitude": 27.1451814, "Path_Image": "000_Media/Projets/002_Images/JPG/Action/Sante/Hopital Hassan II.jpeg" }, "geometry": { "type": "Point", "coordinates": [ -13.190656493762456, 27.145250792677409 ] } }
+]
+}
