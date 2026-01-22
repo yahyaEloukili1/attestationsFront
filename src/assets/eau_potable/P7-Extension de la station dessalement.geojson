@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "P7-Extension de la station dessalement",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:ESRI::102193" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Commune": "Province Laayoune", "Projet": "Extension de la station de dessalement et financement complémentaire de l ouvrage de prise d eau de mer", "Longitude x": "405910.97", "Longitude y": "536011.59", "Lien_Image": "000_Media/Projets/002_Images/JPG/Action/Eau/P7 - Extension station de dessalement.jpeg" }, "geometry": { "type": "Point", "coordinates": [ 405910.96999999997206, 536011.589999999967404 ] } }
+]
+}

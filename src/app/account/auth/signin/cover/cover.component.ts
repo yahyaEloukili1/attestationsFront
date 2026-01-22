@@ -69,7 +69,7 @@ errAuth=0
      this.authenticationService.saveToken(jwt);
      console.log(this.getConnectedUserRole(),"vvvvvvvvvvvv")
      if(this.getConnectedUserRole()=='ADMIN'){
-      this.router.navigateByUrl("users/list")
+      this.router.navigateByUrl("maroc")
      }else if(this.getConnectedUserRole()=='USER-DSIT'){
       this.router.navigateByUrl("annexes/list")
      }else{

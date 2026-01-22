@@ -57,7 +57,7 @@ getRegionLaayoune() {
     return this.http.get<GeoJSON.FeatureCollection>('assets/education4.geojson');
   }
     getEauPotable() {
-    return this.http.get<GeoJSON.FeatureCollection>('assets/eaupotable.geojson');
+    return this.http.get<GeoJSON.FeatureCollection>('assets/eau_potable/P7-Extension de la station dessalement.geojson');
   }
 getEmploi1() {
   return this.http.get<GeoJSON.FeatureCollection>('assets/emploi1.geojson');

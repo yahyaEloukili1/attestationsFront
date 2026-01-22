@@ -226,15 +226,19 @@ console.log(data.features,'qsss');
         }
       });
 
+
+
 const communesLayer = L.geoJSON(data, {
   style: (feature: any) => {
     const isLaayoune = feature.properties?.CODE_REGIO === '11';
 
     return {
-      color: '#263238',
-      weight: 2,
-      fillOpacity: 0.65,
-      fillColor: isLaayoune ? '#7e89b3' : '#e6dbdb'
+      color: '#6b7280',                 // contour
+      weight: 1.5,
+      fillOpacity: 1,
+      fillColor: isLaayoune
+        ? '#0b3d6e'                     // 🔵 Laâyoune
+        : '#9bbce6'                     // 🔹 autres régions
     };
   },
 
@@ -244,18 +248,15 @@ const communesLayer = L.geoJSON(data, {
     // 👉 CLICK
     polygon.on('click', () => {
       const codeRegion = feature.properties?.CODE_REGIO;
-
       if (codeRegion === '11') {
-        // ✅ navigation vers users list
-        this.router.navigate(['/users/list']);
+        this.router.navigate(['/regionLaayoune']);
       }
     });
 
-    // (optionnel) hover
+    // 👉 HOVER (soft)
     polygon.on('mouseover', () => {
       polygon.setStyle({
-        weight: 3,
-        fillOpacity: 0.85
+        weight: 3
       });
     });
 
@@ -264,6 +265,23 @@ const communesLayer = L.geoJSON(data, {
     });
   }
 }).addTo(this.map);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

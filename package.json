@@ -93,6 +93,7 @@
     "ngx-ui-switch": "^15.0.0",
     "polylabel": "^2.0.1",
     "prismjs": "^1.29.0",
+    "proj4": "^2.20.2",
     "rxjs": "^7.8.1",
     "simplebar-angular": "^3.2.4",
     "slick-carousel": "^1.8.1",
