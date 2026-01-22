@@ -941,17 +941,17 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   getCommuneColor(nom: string): string {
     switch (nom) {
       case '1080204':
-        return '#7e89b3';
+        return '#f6edb1';
       case '1080202':
-        return '#7e89b3';
+        return '#b8d9f2';
       case '1080206':
-        return '#7e89b3';
+        return '#c7e3c1';
       case '1080203':
-        return '#7e89b3';
+        return '#f2b6b6';
       case '1080205':
-        return '#7e89b3';
+        return '#dbc6e8';
       default:
-        return '#e6dbdb';
+        return '#c7e3c1';
     }
   }
 

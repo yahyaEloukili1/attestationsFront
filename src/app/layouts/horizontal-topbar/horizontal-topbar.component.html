@@ -19,14 +19,33 @@
                         <span class="droid-arabic-kufi" style="color: white !important;">تدبير المستعملين</span>  
                     </a>
                 </li> -->
-                   <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
+                <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
                   <a href="javascript:void(0);" class="is-parent nav-link menu-link"
-                    [routerLink]="['/users/list']" [routerLinkActive]="['is-active']">
-                        <!-- <span class="droid-arabic-kufi" style="color: white !important;">مخطط التنمية الترابية المندمجة </span>   -->
-                         <i class="bi bi-house-fill text-white fs-1"></i>
+                    [routerLink]="['/maroc']" [routerLinkActive]="['is-active']">
+                        <span class="droid-arabic-kufi" style="color: white !important;">المغرب</span>  
+                        
 
                     </a>
                 </li>
+            
+          
+                 <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
+                  <a href="javascript:void(0);" class="is-parent nav-link menu-link"
+                    [routerLink]="['/regionLaayoune']" [routerLinkActive]="['is-active']">
+                        <span class="droid-arabic-kufi" style="color: white !important;">الجهة</span>  
+                        
+
+                    </a>
+                </li>
+                 <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
+                  <a href="javascript:void(0);" class="is-parent nav-link menu-link"
+                    [routerLink]="['/users/list']" [routerLinkActive]="['is-active']">
+                        <span class="droid-arabic-kufi" style="color: white !important;">الولاية</span>  
+                        
+
+                    </a>
+                </li>
+                 
           
                   <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'">
                     <a href="javascript:void(0);" class="is-parent nav-link menu-link"
