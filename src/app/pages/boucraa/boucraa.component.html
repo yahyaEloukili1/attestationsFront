@@ -1,281 +1,293 @@
-<div class="row justify-content-center dashboard-container">
+<!-- boucraa.component.html -->
+<div class="dashboard-container">
 
-  <!-- 🔹 INDICATEURS (LEFT) -->
-<div class="col-md-3 d-flex flex-column gap-4">
+  <div class="row justify-content-center g-3">
 
-  <!-- 🔹 INDICATEURS DÉMOGRAPHIQUES -->
-  <div class="indicator-card">
+    <!-- 🔹 INDICATEURS GAUCHE -->
+    <div class="col-12 col-lg-3 d-flex flex-column gap-4">
 
-    <h5 class="text-center mb-4 indicator-title">
-      Indicateurs démographiques
-    </h5>
+      <!-- Démographiques -->
+      <div class="indicator-card">
+        <h5 class="text-center mb-4 indicator-title">Indicateurs démographiques</h5>
 
-    <div class="row g-3">
-
-      <!-- Population -->
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-people-fill text-primary"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Population</div>
-            <div class="kpi-value">1 171</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ménages -->
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-house-door-fill text-success"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Ménages</div>
-            <div class="kpi-value">396</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Genre -->
-      <!-- <div class="col-md-12">
-        <div class="kpi kpi-full">
-          <i class="bi bi-gender-ambiguous text-secondary"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Genre</div>
-            <div class="kpi-value">
-              Hommes : 44,9% &nbsp; | &nbsp; Femmes : 55,1%
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-people-fill text-primary"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Population</div>
+                <div class="kpi-value">1 171</div>
+              </div>
             </div>
-            
           </div>
-        </div>
-      </div>
-       -->
-           <div class="col-md-6">
-        <div class="kpi">
-            <i class="bi bi-gender-male"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Homme</div>
-            <div class="kpi-value">44,9%</div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-house-door-fill text-success"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Ménages</div>
+                <div class="kpi-value">396</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-           <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-gender-female"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Femmes</div>
-            <div class="kpi-value">55,1%</div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-gender-male"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Homme</div>
+                <div class="kpi-value">44,9%</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-    </div>
-  </div>
-
-  <!-- 🔹 INDICATEURS TERRITORIAUX -->
-  <div class="indicator-card">
-
-    <h5 class="text-center mb-4 indicator-title">
-      Indicateurs territoriaux
-    </h5>
-
-    <div class="row g-3">
-
-      <!-- Superficie -->
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-aspect-ratio-fill text-secondary"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Superficie</div>
-            <div class="kpi-value">6 216 km²</div>
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-gender-female"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Femmes</div>
+                <div class="kpi-value">55,1%</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Densité -->
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-people-fill text-warning"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Densité</div>
-            <div class="kpi-value">0,18 Hab./Km²</div>
+      <!-- Territoriaux -->
+      <div class="indicator-card">
+        <h5 class="text-center mb-4 indicator-title">Indicateurs territoriaux</h5>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-aspect-ratio-fill text-secondary"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Superficie</div>
+                <div class="kpi-value">6 216 km²</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-    </div>
-  </div>
-
-
-</div>
-
-
-  <!-- 🔹 MAP (RIGHT) -->
-  <div class="col-md-6">
-    <div class="map-card">
-
-      <div class="map-title">
-        Commune de Boucraa
-      </div>
-
-      <div #mapContainer class="map-only"></div>
-
-      
-
-    </div>
-  </div>
-  <div class="col-md-3">
-      <!-- 🔹 INDICATEURS SOCIO-ÉCONOMIQUES -->
-  <div class="indicator-card">
-
-    <h5 class="text-center mb-4 indicator-title">
-      Indicateurs socio-économiques
-    </h5>
-
-    <div class="row g-3">
-
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-activity text-primary"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux d’activité</div>
-            <div class="kpi-value">50,3%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-people text-danger"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux de pauvreté multidimensionnel</div>
-            <div class="kpi-value">4,4%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-briefcase-fill text-dark"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux de chômage</div>
-            <div class="kpi-value">18,1%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-shield-exclamation text-warning"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux de vulnérabilité</div>
-            <div class="kpi-value">6,8%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-people-fill text-info"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux de préscolarisation</div>
-            <div class="kpi-value">37,93%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="kpi">
-          <i class="bi bi-mortarboard-fill text-success"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux de scolarisation (6 ans et +)</div>
-            <div class="kpi-value">89,6%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="kpi kpi-full">
-          <i class="bi bi-book-fill text-secondary"></i>
-          <div class="kpi-content">
-            <div class="kpi-label">Taux d’analphabétisme (10 ans et +)</div>
-            <div class="kpi-value">19,6%</div>
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-people-fill text-warning"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Densité</div>
+                <div class="kpi-value">0,18 Hab./Km²</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
-  </div>
+
+    <!-- 🔹 MAP CENTRE -->
+    <div class="col-12 col-lg-6">
+      <div class="map-card">
+        <div class="map-title">Commune de Boucraa</div>
+        <div #mapContainer class="map-only"></div>
+      </div>
+    </div>
+
+    <!-- 🔹 INDICATEURS DROITE -->
+    <div class="col-12 col-lg-3 d-flex flex-column gap-4">
+      <div class="indicator-card back-card">
+        <button type="button" class="btn btn-lg back-btn w-100" (click)="goToProvince()">
+          <i class="bi bi-arrow-left-circle me-2"></i>
+          Retour à la province
+        </button>
+      </div>
+
+      <div class="indicator-card">
+        <h5 class="text-center mb-4 indicator-title">Indicateurs socio-économiques</h5>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-activity text-primary"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux d’activité</div>
+                <div class="kpi-value">50,3%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-people text-danger"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux de pauvreté multidimensionnel</div>
+                <div class="kpi-value">4,4%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-briefcase-fill text-dark"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux de chômage</div>
+                <div class="kpi-value">18,1%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-shield-exclamation text-warning"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux de vulnérabilité</div>
+                <div class="kpi-value">6,8%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-people-fill text-info"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux de préscolarisation</div>
+                <div class="kpi-value">37,93%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-mortarboard-fill text-success"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux de scolarisation (6 ans et +)</div>
+                <div class="kpi-value">89,6%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+            <div class="kpi">
+              <i class="bi bi-book-fill text-secondary"></i>
+              <div class="kpi-content">
+                <div class="kpi-label">Taux d’analphabétisme (10 ans et +)</div>
+                <div class="kpi-value">19,6%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="text-center mt-3">
+        <button
+          type="button"
+          class="btn btn-lg education-btn text-center"
+          style="width: 400px;"
+        >
+          <i class="bi bi-bar-chart-fill me-1"></i>
+          Voir indicateurs éducatifs
+        </button>
+      </div>
+    </div>
 
-     <button
-    type="button"
-    class="btn btn-lg education-btn text-center"
-   
-  
-    style="width: 400px;"
-  >
-    <i class="bi bi-bar-chart-fill me-1"></i>
-    Voir indicateurs éducatifs
-  </button>
-</div>
   </div>
- <div class="hstack gap-2 mt-2 justify-content-center mt-5 flex-wrap">
 
-  <!-- ✅ MISE TOGGLE -->
-  <button
-    type="button"
-    class="btn btn-lg mise-btn text-center"
-    [class.is-active]="miseVisible"
-    (click)="toggleMise()"
-  >
-    <i class="bi" [ngClass]="miseVisible ? 'bi-check-circle-fill' : 'bi-geo-alt-fill'"></i>
-    Mise à niveau 
-  </button>
+  <!-- ✅ MENUS BAR (comme province) -->
+  <div class="menus-bar">
 
-  <!-- ✅ EDUCATION TOGGLE -->
-  <button
-    type="button"
-    class="btn btn-lg education-btn text-center"
-    [class.is-active]="educationVisible"
-    (click)="toggleEducation()"
-  >
-    <i class="bi" [ngClass]="educationVisible ? 'bi-check-circle-fill' : 'bi-book-fill'"></i>
-    Education
-  </button>
+    <!-- MISE -->
+    <div class="menu-wrap" (click)="$event.stopPropagation()">
+      <button class="btn btn-lg mise-btn"
+              [class.is-active]="activeMiseProject !== null"
+              (click)="toggleMenu('mise', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('mise')"></i>
+        <span>Mise à niveau</span>
+        <i class="bi" [ngClass]="openMenu==='mise' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </button>
 
-  <!-- ✅ SANTE TOGGLE -->
-  <button
-    type="button"
-    class="btn btn-lg health-btn text-center"
-    [class.is-active]="santeVisible"
-    (click)="toggleSante()"
-  >
-    <i class="bi" [ngClass]="santeVisible ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
-    Santé
-  </button>
+      <div class="menu-pop" *ngIf="openMenu==='mise'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeMiseProject==='M1'" (click)="selectMise('M1', $event)">Mise 1</button>
+        <button class="menu-item" [class.active]="activeMiseProject==='M2'" (click)="selectMise('M2', $event)">Mise 2</button>
+        <button class="menu-item" [class.active]="activeMiseProject==='M3'" (click)="selectMise('M3', $event)">Mise 3</button>
+        <button class="menu-hide" (click)="hideMenu('mise', $event)">Masquer</button>
+      </div>
+    </div>
 
-  <!-- ✅ EAU TOGGLE -->
-<button
-  type="button"
-  class="btn btn-lg water-btn text-center"
-  [class.is-active]="eauPotableVisible"
-  (click)="toggleEauPotable()"
->
-  <i class="bi" [ngClass]="eauPotableVisible ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
-  Eau potable
-</button>
+    <!-- EDUCATION -->
+    <div class="menu-wrap" (click)="$event.stopPropagation()">
+      <button class="btn btn-lg education-btn"
+              [class.is-active]="activeEducationProject !== null"
+              (click)="toggleMenu('education', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('education')"></i>
+        <span>Education</span>
+        <i class="bi" [ngClass]="openMenu==='education' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </button>
 
-  <!-- ✅ EMPLOI TOGGLE -->
-  <button
-    type="button"
-    class="btn btn-lg emploi-btn text-center"
-    [class.is-active]="emploiVisible"
-    (click)="toggleEmploi()"
-  >
-    <i class="bi" [ngClass]="emploiVisible ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
-    Emploi
-  </button>
+      <div class="menu-pop" *ngIf="openMenu==='education'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeEducationProject==='E1'" (click)="selectEducation('E1', $event)">Education 1</button>
+        <button class="menu-item" [class.active]="activeEducationProject==='E2'" (click)="selectEducation('E2', $event)">Education 2</button>
+        <button class="menu-item" [class.active]="activeEducationProject==='E3'" (click)="selectEducation('E3', $event)">Education 3</button>
+        <button class="menu-item" [class.active]="activeEducationProject==='E4'" (click)="selectEducation('E4', $event)">Education 4</button>
+        <button class="menu-hide" (click)="hideMenu('education', $event)">Masquer</button>
+      </div>
+    </div>
 
+    <!-- SANTÉ -->
+    <div class="menu-wrap" (click)="$event.stopPropagation()">
+      <button class="btn btn-lg health-btn"
+              [class.is-active]="activeSanteProject !== null"
+              (click)="toggleMenu('sante', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('sante')"></i>
+        <span>Santé</span>
+        <i class="bi" [ngClass]="openMenu==='sante' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </button>
+
+      <div class="menu-pop" *ngIf="openMenu==='sante'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeSanteProject==='NOUVEAUX'" (click)="selectSante('NOUVEAUX', $event)">Nouveaux centres de santé</button>
+        <button class="menu-item" [class.active]="activeSanteProject==='HOPITAUX_EXISTANTS'" (click)="selectSante('HOPITAUX_EXISTANTS', $event)">Hôpitaux existants</button>
+        <button class="menu-item" [class.active]="activeSanteProject==='ESSP_EXISTANTS'" (click)="selectSante('ESSP_EXISTANTS', $event)">ESSP existants</button>
+        <button class="menu-item" [class.active]="activeSanteProject==='DOUIRAT'" (click)="selectSante('DOUIRAT', $event)">Zone Douirat</button>
+        <button class="menu-hide" (click)="hideMenu('sante', $event)">Masquer</button>
+      </div>
+    </div>
+
+    <!-- EAU -->
+    <div class="menu-wrap" (click)="$event.stopPropagation()">
+      <button class="btn btn-lg water-btn"
+              [class.is-active]="activeEauProject !== null"
+              (click)="toggleMenu('eau', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('eau')"></i>
+        <span>Eau potable</span>
+        <i class="bi" [ngClass]="openMenu==='eau' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </button>
+
+      <div class="menu-pop" *ngIf="openMenu==='eau'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeEauProject==='P1'" (click)="selectEau('P1', $event)">Réhabilitation du réseau AEP</button>
+        <button class="menu-item" [class.active]="activeEauProject==='P2'" (click)="selectEau('P2', $event)">AEP – Zone Industrielle El Marsa</button>
+        <button class="menu-item" [class.active]="activeEauProject==='P3'" (click)="selectEau('P3', $event)">STEP – Zone Industrielle El Marsa</button>
+        <button class="menu-item" [class.active]="activeEauProject==='P4'" (click)="selectEau('P4', $event)">Assainissement – Laayoune</button>
+        <button class="menu-item" [class.active]="activeEauProject==='P5'" (click)="selectEau('P5', $event)">Renforcement du stockage d’eau</button>
+        <button class="menu-item" [class.active]="activeEauProject==='P6'" (click)="selectEau('P6', $event)">Assainissement – Foum El Oued</button>
+        <button class="menu-hide" (click)="hideMenu('eau', $event)">Masquer</button>
+      </div>
+    </div>
+
+    <!-- EMPLOI -->
+    <div class="menu-wrap" (click)="$event.stopPropagation()">
+      <button class="btn btn-lg emploi-btn"
+              [class.is-active]="activeEmploiProject !== null"
+              (click)="toggleMenu('emploi', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('emploi')"></i>
+        <span>Emploi</span>
+        <i class="bi" [ngClass]="openMenu==='emploi' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+      </button>
+
+      <div class="menu-pop" *ngIf="openMenu==='emploi'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeEmploiProject==='POINTS'" (click)="selectEmploi('POINTS', $event)">Unités de valorisation (points)</button>
+        <button class="menu-item" [class.active]="activeEmploiProject==='ZONE1'" (click)="selectEmploi('ZONE1', $event)">Extension zone d’activité (52Ha)</button>
+        <button class="menu-item" [class.active]="activeEmploiProject==='HIZAM'" (click)="selectEmploi('HIZAM', $event)">Zone d’activité Al Hizam (70Ha)</button>
+        <button class="menu-item" [class.active]="activeEmploiProject==='ATELIERS'" (click)="selectEmploi('ATELIERS', $event)">Ateliers artisanaux</button>
+        <button class="menu-item" [class.active]="activeEmploiProject==='SITES'" (click)="selectEmploi('SITES', $event)">Sites touristiques</button>
+        <button class="menu-hide" (click)="hideMenu('emploi', $event)">Masquer</button>
+      </div>
+    </div>
+
+  </div>
 </div>
-
-</div>
-

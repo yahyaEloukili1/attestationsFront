@@ -117,7 +117,7 @@ this.modelWarning().then(result => {
         this.restService.deleteResource('appUsers',`${this.restService.host}/appUsers/${p.id}`).subscribe(data=>{
         
           this.modelSuccess('لقد تم حذف المستعمل')
-          this.router.navigateByUrl("usersTest")
+          this.router.navigateByUrl("/provinceLaayoune")
            },err=>{
             this.modelError('لا يمكن حدف المستعمل')
            })

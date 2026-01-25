@@ -8,6 +8,7 @@ import {
   HostListener
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import * as L from 'leaflet';
 import * as proj4 from 'proj4';
 import type { FeatureCollection, Feature, Geometry } from 'geojson';
@@ -85,7 +86,10 @@ export class LaayouneComponent implements AfterViewInit, OnDestroy {
   mise2Layer = L.layerGroup();
   mise3Layer = L.layerGroup();
 
-  constructor(private mapService: UserProfileService) {}
+  constructor(
+    private mapService: UserProfileService,
+    private router: Router
+  ) {}
 
   /* =========================
      ICONS (Leaflet markers)
@@ -223,6 +227,10 @@ export class LaayouneComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.map) this.map.remove();
+  }
+
+  goToProvince() {
+    this.router.navigate(['/users/list']);
   }
 
   // ✅ fermer le dropdown si tu cliques ailleurs (MAIS garder le projet affiché)

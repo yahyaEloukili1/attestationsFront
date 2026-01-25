@@ -26,3 +26,34 @@
     display: none;
   }
 }
+
+/* Pin user menu to the far right */
+.navbar-header {
+  position: relative;
+}
+
+.topbar-user-right {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.topbar-user-right .dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* Force user dropdown to open on the right side */
+.topbar-user-dropend {
+  position: relative;
+}
+
+.topbar-user-dropend .dropdown-menu {
+  left: 100% !important;
+  right: auto !important;
+  top: 0 !important;
+  transform: none !important;
+  margin-left: 8px;
+}
+

@@ -344,7 +344,7 @@ onSelectedFileCin1(event){
       
         this.modelSuccess('dتم حفظ المستعمل بنجاح')
         this.formSubmitted = false
-        // this.router.navigateByUrl("usersTest")
+        // this.router.navigateByUrl("/provinceLaayoune")
         // this.reset(f)
         this.reset(f)
             },err=>{

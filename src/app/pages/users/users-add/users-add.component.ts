@@ -203,7 +203,7 @@ this.showDistrict=false
 this.showAnnexe=false
 this.modelSuccess('تم حفظ المستعمل بنجاح')
 this.formSubmitted = false
-this.router.navigateByUrl("usersTest")
+this.router.navigateByUrl("/provinceLaayoune")
 this.reset(f)
 }
 },err=>{
@@ -235,7 +235,7 @@ f.value.role = {id: f.value.role}
 
   this.modelSuccess('تم حفظ المستعمل بنجاح')
   this.formSubmitted = false
-  // this.router.navigateByUrl("usersTest")
+  // this.router.navigateByUrl("/provinceLaayoune")
   this.reset(f)
       },err=>{
       

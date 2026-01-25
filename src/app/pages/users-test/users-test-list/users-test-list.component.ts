@@ -602,9 +602,15 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // =========================
       const addMise = (fc: FeatureCollection, label: string) => {
         L.geoJSON(fc as any, {
+          coordsToLatLng: (coords: any) => {
+            const x = Number(coords[0]);
+            const y = Number(coords[1]);
+            if (Math.abs(x) <= 180 && Math.abs(y) <= 90) return L.latLng(y, x);
+            return this.meters26194ToLatLngObj(coords);
+          },
           pointToLayer: (_f, latlng) => L.marker(latlng, { icon: this.miseIcon }),
           onEachFeature: (f: any, layer) => {
-            const nom = f?.properties?.nom || f?.properties?.name || '';
+            const nom = f?.properties?.Projet || f?.properties?.nom || f?.properties?.name || '';
             layer.bindPopup(`<b>${label}</b><br>${nom}`);
           }
         }).addTo(this.miseLayer);

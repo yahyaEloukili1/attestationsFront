@@ -39,7 +39,7 @@ const routes: Routes = [
        {
       path: 'maroc', loadChildren: () => import('./region/region.module').then(m => m.RegionModule),canActivate:[AdminGuard]
     },
-      {
+    {
       path: 'regionLaayoune', loadChildren: () => import('./region-laayoune/regionLaayoune.module').then(m => m.RegionLaayouneModule),canActivate:[AdminGuard]
     },
      {
@@ -64,7 +64,7 @@ const routes: Routes = [
       path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canActivate: [AdminGuard]
     },
     {
-      path: 'usersTest', loadChildren: () => import('./users-test/users-test.module').then(m => m.UsersTestModule), canActivate: [AdminGuard]
+      path: 'provinceLaayoune', loadChildren: () => import('./users-test/users-test.module').then(m => m.UsersTestModule), canActivate: [AdminGuard]
     },
     {
       path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]

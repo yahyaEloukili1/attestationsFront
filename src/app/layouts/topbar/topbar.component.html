@@ -2,9 +2,10 @@
   id="page-topbar"
   data-scroll-header
   (window:scroll)="windowScroll()"
+  dir="ltr"
 >
   <div class="layout-width position-relative">
-    <div class="navbar-header d-flex justify-content-between align-items-center">
+    <div class="navbar-header d-flex justify-content-between align-items-center" dir="ltr">
 
       <!-- ================= LEFT SIDE ================= -->
       <div class="d-flex align-items-center">
@@ -16,8 +17,8 @@
               <img src="assets/images/mi.webp" alt="Logo" height="35" />
             </span>
             &nbsp;&nbsp;
-            <span class="droid-arabic-kufi">
-              ولاية جهة العيون الساقية الحمراء
+            <span class="text-start" dir="ltr">
+              Wilaya de la région de Laâyoune-Sakia El Hamra
             </span>
           </a>
         </div>
@@ -39,15 +40,15 @@
       </div>
 
       <!-- ================= CENTER TITLE ================= -->
-      <div class="topbar-center-title droid-arabic-kufi">
-        مخطط التنمية الترابية المندمجة
+    <div class="topbar-center-title text-start" dir="ltr">
+        Plan de développement territorial intégré
       </div>
 
       <!-- ================= RIGHT SIDE ================= -->
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center ms-auto justify-content-end" style="margin-left: auto;">
 
         <!-- USER DROPDOWN -->
-        <div class="dropdown ms-sm-3 header-item topbar-user" ngbDropdown>
+        <div class="dropdown ms-sm-3 header-item topbar-user topbar-user-right" ngbDropdown>
           <button
             type="button"
             class="btn"
@@ -79,9 +80,9 @@
           </button>
 
           <!-- DROPDOWN MENU -->
-          <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-            <h6 class="dropdown-header droid-arabic-kufi2">
-              مرحبا {{ firstNameAr }}!
+          <div class="dropdown-menu text-start" dir="ltr" ngbDropdownMenu>
+            <h6 class="dropdown-header text-start">
+              Bonjour {{ userData.first_name }} !
             </h6>
 
             <a
@@ -90,8 +91,8 @@
               (click)="logout()"
             >
               <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
-              <span class="align-middle droid-arabic-kufi2">
-                تسجيل الخروج
+              <span class="align-middle text-start">
+                Se déconnecter
               </span>
             </a>
           </div>
