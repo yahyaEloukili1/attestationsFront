@@ -8,6 +8,7 @@ import { WilayaOrAdminGuard } from '../core/guards/wilayaOrAdmin.guard';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { CoverComponent } from '../account/auth/signin/cover/cover.component';
+import { ProvinceLaayoune2Component } from './province-laayoune2/province-laayoune2.component';
 import { WilayaOrAnnexeGuard } from '../core/guards/wilayaOrAnnexe.guard copy';
 import { WilayaOrAnnexeOrAdminGuard } from '../core/guards/wilayaOrAnnexeOrAdminGuard';
 import { AnnexeGuard } from '../core/guards/AnnexeGuard';
@@ -65,6 +66,9 @@ const routes: Routes = [
     },
     {
       path: 'provinceLaayoune', loadChildren: () => import('./users-test/users-test.module').then(m => m.UsersTestModule), canActivate: [AdminGuard]
+    },
+    {
+      path: 'province', component: ProvinceLaayoune2Component, canActivate:[AdminGuard]
     },
     {
       path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]

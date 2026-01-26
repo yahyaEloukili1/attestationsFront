@@ -1,0 +1,27 @@
+/* Force left alignment for the login form */
+.auth-form-left {
+  text-align: left;
+  direction: ltr;
+}
+
+.auth-form-left .form-label {
+  display: block;
+  text-align: left !important;
+}
+
+.auth-form-left .input-group {
+  direction: ltr;
+}
+
+.auth-form-left .form-control {
+  text-align: left;
+}
+
+.auth-form-left .invalid-feedback {
+  text-align: left;
+}
+
+.auth-form-left h5,
+.auth-form-left p {
+  text-align: left !important;
+}

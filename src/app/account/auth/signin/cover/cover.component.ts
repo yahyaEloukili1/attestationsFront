@@ -87,11 +87,11 @@ errAuth=0
 
   modelTitle() {
     Swal.fire({
-      title: 'بيانات الدخول غير صحيحة ',
-      text: ' يرجى التأكد من البيانات وإعادة المحاولة',
+      title: 'Identifiants incorrects',
+      text: 'Veuillez vérifier vos informations et réessayer.',
       icon: 'error',
       confirmButtonColor: '#364574',
-      confirmButtonText: 'إغلاق',
+      confirmButtonText: 'Fermer',
       customClass:{
         title: 'kuffi',
         confirmButton: 'kuffi',

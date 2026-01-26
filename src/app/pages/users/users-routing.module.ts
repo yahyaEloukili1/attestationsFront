@@ -6,14 +6,13 @@ import { UsersEditComponent } from './users-edit/users-edit.component';
 import { UsersChangePasswordComponent } from './users-change-password/users-change-password.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
-import { UsersTestListComponent } from '../users-test/users-test-list/users-test-list.component';
 
 
 
 const routes: Routes = [
   {
     path: "list",
-    component: UsersTestListComponent
+    component: UsersListComponent
   },
   {
     path: "add",

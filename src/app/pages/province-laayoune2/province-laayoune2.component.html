@@ -1,0 +1,783 @@
+<div class="province-page">
+
+  <div class="row g-4 align-items-stretch">
+
+    <!-- ✅ COLONNE GAUCHE : INDICATEURS -->
+    <div class="col-md-3 d-flex flex-column gap-4">
+
+      <ng-container *ngIf="!showSanteIndicators">
+        <!-- ✅ INDICATEURS TERRITORIAUX -->
+        <div class="panel-card indicators-card">
+          <div class="panel-header text-center">Indicateurs territoriaux</div>
+
+          <div class="panel-body">
+            <div class="row g-3">
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Superficie (km²)</div>
+                    <div class="indicator-value">140 018</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-map"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Densité (Hab./Km²)</div>
+                    <div class="indicator-value">3,2</div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-people"></i>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ✅ INDICATEURS DÉMOGRAPHIQUES -->
+        <div class="panel-card indicators-card">
+          <div class="panel-header text-center">Indicateurs démographiques</div>
+
+          <div class="panel-body">
+            <div class="row g-3">
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Population totale</div>
+                    <div class="indicator-value">451 028</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Répartition (Urbaine / Rurale)</div>
+
+                    <div class="split-mini">
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Urbaine</div>
+                        <div class="split-mini-val">416 636</div>
+                        <div class="split-mini-pct">92,37%</div>
+                      </div>
+
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Rurale</div>
+                        <div class="split-mini-val">34 392</div>
+                        <div class="split-mini-pct">7,62%</div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="indicator-icon soft-gray">
+                    <i class="bi bi-diagram-2-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Ménages</div>
+                    <div class="indicator-value">106 751</div>
+                  </div>
+                  <div class="indicator-icon soft-gray">
+                    <i class="bi bi-house-door-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Taille du ménage</div>
+                    <div class="indicator-value">3,9</div>
+                    <div class="mini-note">personnes/ménage</div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-people"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Femmes</div>
+                    <div class="indicator-value">49%</div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-gender-female"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Hommes</div>
+                    <div class="indicator-value">51%</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-gender-male"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Taux d’urbanisation</div>
+                    <div class="indicator-value">92,4%</div>
+                  </div>
+                  <div class="indicator-icon soft-green">
+                    <i class="bi bi-building"></i>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
+        <!-- (tu peux ajouter ici si tu veux) -->
+      </ng-container>
+
+      <ng-container *ngIf="showSanteIndicators">
+        <ng-container *ngIf="!showSanteDiagnostic">
+          <div class="panel-card indicators-card health-card">
+            <div class="panel-header text-center">Réseau et infrastructures de santé</div>
+            <div class="panel-body">
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="indicator-item">
+                    <div class="indicator-text">
+                      <div class="indicator-title">ESSP</div>
+                      <div class="indicator-value">17</div>
+                    </div>
+                    <div class="indicator-icon soft-blue">
+                      <i class="bi bi-hospital"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="indicator-item">
+                    <div class="indicator-text">
+                      <div class="indicator-title">Hôpitaux</div>
+                      <div class="indicator-value">3</div>
+                    </div>
+                    <div class="indicator-icon soft-indigo">
+                      <i class="bi bi-building"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="indicator-item">
+                    <div class="indicator-text">
+                      <div class="indicator-title">Ambulances</div>
+                      <div class="indicator-value">9</div>
+                    </div>
+                    <div class="indicator-icon soft-red">
+                      <i class="bi bi-truck-front-fill"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="indicator-item">
+                    <div class="indicator-text">
+                      <div class="indicator-title">Lits hospitaliers</div>
+                      <div class="indicator-value">267</div>
+                    </div>
+                    <div class="indicator-icon soft-gray">
+                      <i class="bi bi-h-square-fill"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-card indicators-card health-card">
+            <div class="panel-header text-center">Ressources humaines (Effectifs)</div>
+            <div class="panel-body">
+              <div class="row g-3">
+                <div class="col-6">
+                  <div class="indicator-item">
+                    <div class="indicator-text">
+                      <div class="indicator-title">Médecins spécialistes</div>
+                      <div class="indicator-value">90</div>
+                    </div>
+                    <div class="indicator-icon soft-indigo">
+                      <i class="bi bi-person-badge"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="indicator-item">
+                    <div class="indicator-text">
+                      <div class="indicator-title">Médecins généralistes</div>
+                      <div class="indicator-value">24</div>
+                    </div>
+                    <div class="indicator-icon soft-blue">
+                      <i class="bi bi-person-check"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="indicator-item indicator-item-wide">
+                    <div class="indicator-text">
+                      <div class="indicator-title">Personnels infirmiers</div>
+                      <div class="indicator-value">344</div>
+                    </div>
+                    <div class="indicator-icon soft-green">
+                      <i class="bi bi-person-hearts"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+    </div>
+
+    <!-- ✅ COLONNE DROITE : MAP -->
+    <div class="col-md-6">
+      <div class="panel-card map-card">
+        <div class="panel-header text-center">Province de Laayoune</div>
+        <div class="panel-body map-body">
+          <div #mapContainer id="map"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ COLONNE DROITE : INDICATEURS -->
+    <div class="col-md-3 d-flex flex-column gap-4">
+
+      <ng-container *ngIf="!showSanteIndicators">
+        <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
+        <div class="panel-card indicators-card">
+          <div class="panel-header text-center">Indicateurs socio-économiques</div>
+
+          <div class="panel-body">
+            <div class="row g-3">
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Taux d’activité</div>
+                    <div class="indicator-value">46,4%</div>
+                    <div class="mini-note">(41,6% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-briefcase-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Pauvreté multi-dimensionnelle</div>
+                    <div class="indicator-value">2,40%</div>
+                    <div class="mini-note">(6,8% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-gray">
+                    <i class="bi bi-cash-coin"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Taux de chômage</div>
+                    <div class="indicator-value">26,6%</div>
+                    <div class="mini-note">(21,3% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Taux de vulnérabilité</div>
+                    <div class="indicator-value">1,3%</div>
+                    <div class="mini-note">(12,9% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-yellow">
+                    <i class="bi bi-shield-fill-exclamation"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Préscolarisation</div>
+                    <div class="indicator-value">…%</div>
+                    <div class="mini-note">(62,7% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-green">
+                    <i class="bi bi-mortarboard-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Scolarisation (6 ans et +)</div>
+                    <div class="indicator-value">96,6%</div>
+                    <div class="mini-note">(95,8% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-book-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Analphabétisme (10 ans et +)</div>
+                    <div class="indicator-value">15,3%</div>
+                    <div class="mini-note">(24,8% National)</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-journal-text"></i>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ✅ Evolution -->
+        <div class="panel-card evolution-card">
+          <div class="panel-header text-center">Evolution de la population de la région</div>
+
+          <div class="panel-body evo-body">
+            <div class="evo-chart">
+              <svg class="evo-svg" viewBox="0 0 520 170" preserveAspectRatio="none">
+                <rect x="45" y="18" width="455" height="105" class="evo-area"/>
+
+                <line x1="45" y1="123" x2="500" y2="123" class="evo-grid"/>
+                <line x1="45" y1="88"  x2="500" y2="88"  class="evo-grid"/>
+                <line x1="45" y1="53"  x2="500" y2="53"  class="evo-grid"/>
+
+                <text x="10" y="127" class="evo-y">0</text>
+                <text x="10" y="92"  class="evo-y">200000</text>
+                <text x="10" y="57"  class="evo-y">400000</text>
+                <text x="10" y="22"  class="evo-y">600000</text>
+
+                <circle cx="120" cy="66" r="7" class="evo-dot"/>
+                <text x="120" y="45" text-anchor="middle" class="evo-val">316578</text>
+
+                <circle cx="285" cy="58" r="7" class="evo-dot"/>
+                <text x="285" y="37" text-anchor="middle" class="evo-val">367758</text>
+
+                <circle cx="450" cy="44" r="7" class="evo-dot"/>
+                <text x="450" y="23" text-anchor="middle" class="evo-val">451028</text>
+
+                <polyline points="120,66 285,58 450,44" class="evo-line"/>
+
+                <text x="120" y="155" text-anchor="middle" class="evo-x">2004</text>
+                <text x="285" y="155" text-anchor="middle" class="evo-x">2014</text>
+                <text x="450" y="155" text-anchor="middle" class="evo-x">2024</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="showSanteIndicators && !showSanteDiagnostic">
+        <div class="panel-card indicators-card ratio-card">
+          <div class="panel-header text-center">Ratios de couverture</div>
+          <div class="panel-body">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Habitants par lit</div>
+                    <div class="split-mini">
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Provincial</div>
+                        <div class="split-mini-val">1 106</div>
+                      </div>
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">National</div>
+                        <div class="split-mini-val">1 364</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-hospital"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Habitants par ESSP</div>
+                    <div class="split-mini">
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Provincial</div>
+                        <div class="split-mini-val">17 385</div>
+                      </div>
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">National</div>
+                        <div class="split-mini-val">12 300</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-people"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Habitants par médecin</div>
+                    <div class="split-mini">
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Provincial</div>
+                        <div class="split-mini-val">2 463</div>
+                      </div>
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">National</div>
+                        <div class="split-mini-val">2 588</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-green">
+                    <i class="bi bi-person-badge"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Habitants par infirmière</div>
+                    <div class="split-mini">
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Provincial</div>
+                        <div class="split-mini-val">431</div>
+                      </div>
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">National</div>
+                        <div class="split-mini-val">969</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-heart-pulse"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Habitants par ambulance</div>
+                    <div class="split-mini">
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">Provincial</div>
+                        <div class="split-mini-val">32 839</div>
+                      </div>
+                      <div class="split-mini-box">
+                        <div class="split-mini-label">National</div>
+                        <div class="split-mini-val">29 571</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-yellow">
+                    <i class="bi bi-truck-front-fill"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showSanteDiagnostic"
+            (click)="toggleSanteDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="showSanteIndicators && showSanteDiagnostic">
+        <div class="panel-card diagnostic-card">
+          <div class="panel-header diagnostic-header text-center">Diagnostic</div>
+          <div class="panel-body diagnostic-body">
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Déficit en soins de proximité :</span>
+                ratio ESSP/habitants trop élevé
+                <span class="diagnostic-highlight">(1 pour 17 385 habitants contre 1 pour 12 300 au national)</span>.
+                Les quartiers comme Douirat
+                <span class="diagnostic-highlight">(&gt;15 000 habitants)</span> restent sans centre de santé adapté.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">CHR Laâyoune vétuste et sous dimensionné :</span>
+                bloc opératoire et service de stérilisation inadaptés, maternité saturée
+                <span class="diagnostic-highlight">(30 lits)</span>, réanimation insuffisante
+                <span class="diagnostic-highlight">(5 lits)</span>.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Absence d’unité cardio vasculaire :</span>
+                malgré une mortalité évitable
+                <span class="diagnostic-highlight">(3–5 décès/mois)</span>,
+                les patients sont transférés vers Agadir ou Marrakech.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Pannes récurrentes d’équipements :</span>
+                <span class="diagnostic-highlight">3 fois/an</span>, durée moyenne
+                <span class="diagnostic-highlight">&gt;21 jours</span>,
+                entraînant des délais de rendez-vous de
+                <span class="diagnostic-highlight">2 mois</span> et
+                <span class="diagnostic-highlight">100 transferts</span> de patients/an.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Prévalence élevée des maladies chroniques :</span>
+                <span class="diagnostic-highlight">10 736</span> diabétiques et
+                <span class="diagnostic-highlight">3 023</span> hypertendus dans la province.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showSanteDiagnostic"
+            (click)="toggleSanteDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+
+  <!-- ✅ BUTTONS (no menus / no logic) -->
+  <div class="hstack gap-2 mt-5 justify-content-center">
+    <button type="button" class="btn btn-lg mise-btn text-center">
+      <i class="bi bi-geo-alt-fill"></i>
+      Mise à niveau
+    </button>
+
+    <button type="button" class="btn btn-lg education-btn text-center">
+      <i class="bi bi-book-fill"></i>
+      Education
+    </button>
+
+    <button type="button" class="btn btn-lg health-btn text-center" [class.is-active]="showSanteIndicators" (click)="toggleSanteIndicators()">
+      <i class="bi bi-heart-pulse-fill" [class.d-none]="showSanteIndicators"></i>
+      Santé
+      <span class="active-check" *ngIf="showSanteIndicators">
+        <i class="bi bi-check-lg"></i>
+      </span>
+    </button>
+
+    <button type="button" class="btn btn-lg eau-btn text-center">
+      <i class="bi bi-droplet-fill"></i>
+      Eau potable
+    </button>
+
+    <button type="button" class="btn btn-lg emploi-btn text-center">
+      <i class="bi bi-briefcase-fill"></i>
+      Emploi
+    </button>
+  </div>
+
+</div>
+
+<!-- POPUP MISE À NIVEAU (style like image 1) -->
+<!-- POPUP MISE À NIVEAU -->
+<div class="mise-modal" *ngIf="showDiagnosticPopup">
+  <div class="mise-backdrop" (click)="closeDiagnosticPopup()"></div>
+
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeDiagnosticPopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune Laâyoune
+        </div>
+      </div>
+
+      <div class="mise-title">
+        <span>Mise à niveau du territoire</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+   <!-- RIGHT -->
+   <div class="mise-right">
+    <div class="mise-map-wrap">
+      <img src="assets/projects/sante1.png" alt="Mise à niveau - Laayoune" />
+    </div>
+  </div>
+      <!-- LEFT -->
+      <div class="mise-left">
+
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Réduire la congestion du centre-ville, notamment celle provoquée par le transit des poids lourds et des véhicules de passage.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Améliorer la sécurité routière en limitant les risques d'accidents, en particulier pour les piétons et les usagers vulnérables en milieu urbain.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Accompagner le développement urbain en aménageant des zones d’activités et de services aux abords de la voie de contournement.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Renforcer la compétitivité logistique en facilitant l’accès aux zones industrielles tout en préservant la fluidité de la circulation locale.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Assurer un accès au barrage sur oued Sakia El Hamra.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Assurer une meilleure connectivité entre deux grands axes structurants à l’échelle nationale.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+
+              <div class="action-title">
+                Construction et aménagement environnemental et écologique de la route de la berge de l’oued Sakia Al Hamra (5 Km)
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Valoriser l’entrée nord de la ville de Laâyoune.</span>
+              </div>
+
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Protéger l’aspect écologique de l’Oued Sakia Al Hamra.</span>
+              </div>
+
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Faciliter l’accès aux anciens quartiers de la ville.</span>
+              </div>
+
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Population de la ville de Laâyoune <b class="red">(295 555 Habitants)</b>.</span>
+              </div>
+
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Aménagement d’un lotissement dédié aux activités, avec l’injection des équipements de proximité nécessaires.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   
+
+      <!-- ✅ NAV (centrée sur tout le popup) -->
+      <div class="mise-nav">
+        <div class="mise-page">1/2</div>
+        <button type="button" class="mise-nav-btn ok">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
