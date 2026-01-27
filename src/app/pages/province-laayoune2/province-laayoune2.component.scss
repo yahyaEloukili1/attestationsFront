@@ -186,6 +186,11 @@ tr, td, th { height: 45px; }
   width: 100%;
 }
 
+.indicator-item.red-panel {
+  background: #fee2e2;
+  border-color: rgba(220, 53, 69, 0.2);
+}
+
 .indicator-text {
   flex: 1;
   text-align: center;
@@ -202,6 +207,23 @@ tr, td, th { height: 45px; }
   font-weight: 900;
   color: #111827;
   line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.indicator-value .plus-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 .indicator-icon {
@@ -954,10 +976,8 @@ button{
   align-items: center;
   justify-content: center;
   font-size: 10px;
-  position: absolute;
-  right: 3px;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-left: 6px;
+  vertical-align: middle;
 }
 
 /* Add space between icon and values (Ratios de couverture) */
@@ -965,6 +985,11 @@ button{
   justify-content: flex-start;
   gap: 12px;
   direction: ltr;
+}
+
+.ratio-card .indicator-item.red-panel {
+  background: #fee2e2;
+  border-color: rgba(220, 53, 69, 0.2);
 }
 
 .ratio-card .indicator-icon {
@@ -992,6 +1017,13 @@ button{
   font-size: 18px;
   font-weight: 900;
   color: #111827;
+}
+.ratio-card .split-mini-val.red {
+  background: #dc3545;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
 }
 .ratio-card .split-mini-label {
   font-size: 13px;
@@ -1369,18 +1401,21 @@ button{
   background: #fff;
   border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.12);
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 10px 26px rgba(0,0,0,0.10);
   padding: 10px;
-  height: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mise-map-wrap img{
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* ===== BOXES ===== */
@@ -1527,9 +1562,10 @@ button{
   background: #fff;
   border: 1px solid rgba(0,0,0,0.18);
   border-radius: 20px;
-  padding: 8px 18px;
+  padding: 12px 24px;
   font-weight: 900;
-  min-width: 90px;
+  font-size: 18px;
+  min-width: 110px;
   text-align: center;
   box-shadow: 0 6px 14px rgba(0,0,0,0.10);
 }
@@ -1551,6 +1587,12 @@ button{
   background: #3fbf6f;
   color: #fff;
   border: none;
+}
+.mise-nav-btn.disabled,
+.mise-nav-btn:disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 .mise-nav-btn.home{
   background: #b91c1c;
@@ -1696,21 +1738,24 @@ button{
 /* ✅ MAP : même hauteur que left */
 .mise-map-wrap{
   width: 100%;
-  height: 100%;                  /* ✅ fill column height */
+  height: auto;
   background: #fff;
   border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.12);
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 10px 26px rgba(0,0,0,0.10);
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mise-map-wrap img{
   width: 100%;
-  height: 100%;                  /* ✅ fill wrap */
+  height: auto;
   display: block;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* ===== BOXES ===== */
@@ -1847,9 +1892,10 @@ button{
   background: #fff;
   border: 1px solid rgba(0,0,0,0.18);
   border-radius: 20px;
-  padding: 8px 18px;
+  padding: 12px 24px;
   font-weight: 900;
-  min-width: 90px;
+  font-size: 18px;
+  min-width: 110px;
   text-align: center;
   box-shadow: 0 6px 14px rgba(0,0,0,0.10);
 }

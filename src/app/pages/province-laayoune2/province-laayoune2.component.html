@@ -229,7 +229,12 @@
                   <div class="indicator-item">
                     <div class="indicator-text">
                       <div class="indicator-title">Médecins généralistes</div>
-                      <div class="indicator-value">24</div>
+                      <div class="indicator-value">
+                        24
+                        <span class="plus-icon">
+                          <i class="bi bi-plus-lg"></i>
+                        </span>
+                      </div>
                     </div>
                     <div class="indicator-icon soft-blue">
                       <i class="bi bi-person-check"></i>
@@ -436,7 +441,7 @@
               </div>
 
               <div class="col-12">
-                <div class="indicator-item indicator-item-wide">
+                <div class="indicator-item indicator-item-wide red-panel">
                   <div class="indicator-text">
                     <div class="indicator-title">Habitants par ESSP</div>
                     <div class="split-mini">
@@ -499,7 +504,7 @@
               </div>
 
               <div class="col-12">
-                <div class="indicator-item indicator-item-wide">
+                <div class="indicator-item indicator-item-wide red-panel">
                   <div class="indicator-text">
                     <div class="indicator-title">Habitants par ambulance</div>
                     <div class="split-mini">
@@ -663,7 +668,7 @@
       </div>
 
       <div class="mise-title">
-        <span>Mise à niveau du territoire</span>
+        <span>Santé</span>
       </div>
     </div>
 
@@ -672,7 +677,7 @@
    <!-- RIGHT -->
    <div class="mise-right">
     <div class="mise-map-wrap">
-      <img src="assets/projects/sante1.png" alt="Mise à niveau - Laayoune" />
+      <img [src]="getCurrentSanteImage()" alt="Mise à niveau - Laayoune" />
     </div>
   </div>
       <!-- LEFT -->
@@ -685,35 +690,157 @@
           </div>
 
           <div class="mise-box-body mise-scroll">
+            <!-- PROJECT 1 -->
+            <ng-container *ngIf="currentSanteProjectPage === 1">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La population urbaine du quartier <u>Douirat</u> connaît une augmentation démographique notable, dépassant <b class="red">15 000 habitants</b>.</span>
+              </div>
+
             <div class="etat-line">
               <span class="etat-bullet"></span>
-              <span>Réduire la congestion du centre-ville, notamment celle provoquée par le transit des poids lourds et des véhicules de passage.</span>
+              <span>De nombreuses doléances de la population ont été enregistrées concernant la construction du centre de santé de niveau 1.</span>
             </div>
 
             <div class="etat-line">
               <span class="etat-bullet"></span>
-              <span>Améliorer la sécurité routière en limitant les risques d'accidents, en particulier pour les piétons et les usagers vulnérables en milieu urbain.</span>
+              <span>Les infrastructures de santé de proximité sont insuffisantes.</span>
             </div>
 
             <div class="etat-line">
               <span class="etat-bullet"></span>
-              <span>Accompagner le développement urbain en aménageant des zones d’activités et de services aux abords de la voie de contournement.</span>
+              <span>Taux d’habitant par Etablissement de soin primaires <b class="red">(ESSP)</b> élevé par rapport au national :</span>
             </div>
 
             <div class="etat-line">
               <span class="etat-bullet"></span>
-              <span>Renforcer la compétitivité logistique en facilitant l’accès aux zones industrielles tout en préservant la fluidité de la circulation locale.</span>
+              <span class="red">Provincial : 1 ESSP pour 17 385 habitants.</span>
             </div>
 
             <div class="etat-line">
               <span class="etat-bullet"></span>
-              <span>Assurer un accès au barrage sur oued Sakia El Hamra.</span>
+              <span class="red">National : 1 ESSP pour 12 300 habitants.</span>
             </div>
+            </ng-container>
 
-            <div class="etat-line">
-              <span class="etat-bullet"></span>
-              <span>Assurer une meilleure connectivité entre deux grands axes structurants à l’échelle nationale.</span>
-            </div>
+            <!-- PROJECT 2 -->
+            <ng-container *ngIf="currentSanteProjectPage === 2">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Disponibilité d'un médecin spécialisé en chirurgie cardio-vasculaire.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre élevé des décès par des maladies cardiovasculaires <b class="red">(de 3 à 5 cas par mois)</b> ces décès sont évitables.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Transfert de tous les cas vers Agadir ou Marrakech.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La présence d'un nombre non négligeable des maladies chroniques telles que :</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span><b class="red">Diabète</b> : <b class="red">15 473</b> cas au niveau régional et <b class="red">10 736</b> cas dans la province de Laâyoune.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span><b class="red">Hypertension</b> : <b class="red">5 130</b> cas au niveau régional et <b class="red">3 023</b> cas dans la province de Laâyoune.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 3 -->
+            <ng-container *ngIf="currentSanteProjectPage === 3">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Délais de rendez-vous est très allongés (<b class="red">2 mois</b>).</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Augmentation de nombre de patient référés pour prise en charge.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Certains actes chirurgicaux sont indisponibles.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre de panne est de <b class="red">3 fois/an</b> pour chaque appareil.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La durée moyenne de panne dépasse les <b class="red">21 jours</b>.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre de transfert des patients est environ <b class="red">100 patients/an</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 4 -->
+            <ng-container *ngIf="currentSanteProjectPage === 4">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Augmentation de la population de la région Laâyoune Sakia El Hamra (<b class="red">451 028</b> habitants).</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Bâtiment hospitalier vétuste (hôpital Moulay Hassan Ben Mehdi).</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance des lits de maternité (<b class="red">30 lits</b>) et du service de réanimation (<b class="red">5 lits</b>).</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Bloc opératoire et service de stérilisation inadaptés.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Absence de service de réanimation adéquat dans les trois hôpitaux provinciaux.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Taux d'occupation des lits de maternité proche de <b class="red">100 %</b>.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Évacuations inter-hospitalières (<b class="red">3 à 4 cas / mois</b> vers d'autres hôpitaux : Agadir, Marrakech, hôpital militaire).</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Présence d'un nombre élevé de maladies chroniques :</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span><b class="red">Diabète</b> : <b class="red">15 473</b> cas au niveau de la région LSH et <b class="red">10 736</b> cas dans la province de Laâyoune.</span>
+              </div>
+
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span><b class="red">Hypertension</b> : <b class="red">5 130</b> cas au niveau de la région LSH et <b class="red">3 023</b> cas dans la province de Laâyoune.</span>
+              </div>
+            </ng-container>
           </div>
         </div>
 
@@ -728,7 +855,18 @@
               <div class="s1-pill">S1</div>
 
               <div class="action-title">
-                Construction et aménagement environnemental et écologique de la route de la berge de l’oued Sakia Al Hamra (5 Km)
+                <ng-container *ngIf="currentSanteProjectPage === 1">
+                  Construction et équipement du Centre de santé Urbain Niveau 1 DOUIRAT
+                </ng-container>
+                <ng-container *ngIf="currentSanteProjectPage === 2">
+                  Aménagement et équipement de l'Unité de chirurgie Cardio-Vasculaire à l'hôpital Hassan II de Laâyoune
+                </ng-container>
+                <ng-container *ngIf="currentSanteProjectPage === 3">
+                  Équipement de l'hôpital Hassan II de Laâyoune
+                </ng-container>
+                <ng-container *ngIf="currentSanteProjectPage === 4">
+                  Extension et équipement du CHR Laâyoune
+                </ng-container>
               </div>
             </div>
           </div>
@@ -738,30 +876,92 @@
             <div class="mise-box-header ciblage-header">Ciblage</div>
 
             <div class="mise-box-body ciblage-body mise-scroll">
-              <div class="ciblage-line">
-                <span class="ciblage-bullet"></span>
-                <span>Valoriser l’entrée nord de la ville de Laâyoune.</span>
-              </div>
+              <!-- PROJECT 1 -->
+              <ng-container *ngIf="currentSanteProjectPage === 1">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Accès complet aux soins de santé pour la population de Douirat.</span>
+                </div>
 
-              <div class="ciblage-line">
-                <span class="ciblage-bullet"></span>
-                <span>Protéger l’aspect écologique de l’Oued Sakia Al Hamra.</span>
-              </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Amélioration du ratio <b class="red">ESSP</b>/habitants : passer de <b class="red">1 ESSP pour 17 385 habitants</b> à <b class="red">1 ESSP pour 12 300 habitants</b>, conforme à la moyenne nationale.</span>
+                </div>
 
-              <div class="ciblage-line">
-                <span class="ciblage-bullet"></span>
-                <span>Faciliter l’accès aux anciens quartiers de la ville.</span>
-              </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Couverture sanitaire totale de la population urbaine du quartier Douirat (<b class="red">&gt;15 000 habitants</b>).</span>
+                </div>
 
-              <div class="ciblage-line">
-                <span class="ciblage-bullet"></span>
-                <span>Population de la ville de Laâyoune <b class="red">(295 555 Habitants)</b>.</span>
-              </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Couverture géographique : garantir un accès aux soins dans un rayon inférieur à <b class="red">2 km</b> pour tous les habitants du quartier.</span>
+                </div>
 
-              <div class="ciblage-line">
-                <span class="ciblage-bullet"></span>
-                <span>Aménagement d’un lotissement dédié aux activités, avec l’injection des équipements de proximité nécessaires.</span>
-              </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Intégration communautaire : sensibiliser et impliquer <b class="red">100 %</b> <b class="red">des foyers</b> dans les programmes de prévention et de santé publique.</span>
+                </div>
+              </ng-container>
+
+              <!-- PROJECT 2 -->
+              <ng-container *ngIf="currentSanteProjectPage === 2">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Créer une unité de chirurgie cardio-vasculaire.</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Prendre en charge chirurgicalement les cas de maladies cardiovasculaires au niveau régional.</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Améliorer l'offre de soins de santé spécialisés dans la région.</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Équiper l'unité de chirurgie cardio-vasculaire. Hôpital Hassan II de laâyoune par l'angio scanner.</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Une population de la région Laâyoune Sakia El Hamra d'environ (<b class="red">451 028 habitants</b>).</span>
+                </div>
+              </ng-container>
+
+              <!-- PROJECT 3 -->
+              <ng-container *ngIf="currentSanteProjectPage === 3">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Amélioration de l'offre de soins.</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>La population de la province de Laâyoune, estimée à <b class="red">295 555 habitants</b>.</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Ainsi que la prise en charge des spécialités médicales non disponibles au niveau des trois provinces, au profit de l'ensemble de la population de la Région Laâyoune-Sakia El Hamra, estimée à <b class="red">451 028 habitants</b>.</span>
+                </div>
+              </ng-container>
+
+              <!-- PROJECT 4 -->
+              <ng-container *ngIf="currentSanteProjectPage === 4">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Renforcer et moderniser les prestations sanitaires au niveau régional (<b class="red">451 028 habitants</b>) et provincial (<b class="red">295 555 habitants</b>).</span>
+                </div>
+
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Améliorer l'équité territoriale et les indicateurs sanitaires.</span>
+                </div>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -771,8 +971,21 @@
 
       <!-- ✅ NAV (centrée sur tout le popup) -->
       <div class="mise-nav">
-        <div class="mise-page">1/2</div>
-        <button type="button" class="mise-nav-btn ok">
+        <button 
+          type="button" 
+          class="mise-nav-btn" 
+          [class.disabled]="currentSanteProjectPage === 1"
+          [disabled]="currentSanteProjectPage === 1"
+          (click)="prevSanteProjectPage()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="mise-page">{{ currentSanteProjectPage }}/4</div>
+        <button 
+          type="button" 
+          class="mise-nav-btn ok"
+          [class.disabled]="currentSanteProjectPage === 4"
+          [disabled]="currentSanteProjectPage === 4"
+          (click)="nextSanteProjectPage()">
           <i class="bi bi-arrow-right"></i>
         </button>
       </div>

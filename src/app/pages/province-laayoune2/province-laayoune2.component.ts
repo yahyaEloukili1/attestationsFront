@@ -140,6 +140,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   showSanteIndicators = false;
   showSanteDiagnostic = false;
   showDiagnosticPopup = false;
+  currentSanteProjectPage = 1; // 1, 2, 3, or 4
 
   // =========================
   // ✅ ICONS
@@ -726,6 +727,34 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   closeDiagnosticPopup() {
     this.showDiagnosticPopup = false;
+    this.currentSanteProjectPage = 1; // Reset to first page when closing
+  }
+
+  nextSanteProjectPage() {
+    if (this.currentSanteProjectPage < 4) {
+      this.currentSanteProjectPage++;
+    }
+  }
+
+  prevSanteProjectPage() {
+    if (this.currentSanteProjectPage > 1) {
+      this.currentSanteProjectPage--;
+    }
+  }
+
+  getCurrentSanteImage(): string {
+    switch (this.currentSanteProjectPage) {
+      case 1:
+        return 'assets/projects/sante1.png';
+      case 2:
+        return 'assets/projects/sante2.png';
+      case 3:
+        return 'assets/projects/sante3.png';
+      case 4:
+        return 'assets/projects/sante4.png';
+      default:
+        return 'assets/projects/sante1.png';
+    }
   }
 
   // =========================
