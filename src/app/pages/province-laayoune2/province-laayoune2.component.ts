@@ -141,6 +141,9 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   showSanteDiagnostic = false;
   showDiagnosticPopup = false;
   currentSanteProjectPage = 1; // 1, 2, 3, or 4
+  showEducationIndicators = false;
+  showEducationDiagnostic = false;
+  showEducationPopup = false;
 
   // =========================
   // ✅ ICONS
@@ -461,6 +464,12 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
               }
               return;
             }
+            if (this.showEducationIndicators) {
+              if (key === 'EL MARSA' && this.showEducationDiagnostic) {
+                this.showEducationPopup = true;
+              }
+              return;
+            }
             if (routes[key]) this.router.navigate([routes[key]]);
           });
         }
@@ -715,7 +724,29 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   toggleSanteIndicators() {
     this.showSanteIndicators = !this.showSanteIndicators;
-    if (!this.showSanteIndicators) this.showSanteDiagnostic = false;
+    if (!this.showSanteIndicators) {
+      this.showSanteDiagnostic = false;
+    } else {
+      this.showEducationIndicators = false; // Mutually exclusive
+    }
+    this.updateCommuneStyles();
+  }
+
+  toggleEducationIndicators() {
+    this.showEducationIndicators = !this.showEducationIndicators;
+    if (this.showEducationIndicators) {
+      this.showSanteIndicators = false; // Mutually exclusive
+      this.showSanteDiagnostic = false;
+    } else {
+      this.showEducationDiagnostic = false;
+      this.showEducationPopup = false;
+    }
+    this.updateCommuneStyles();
+  }
+
+  toggleEducationDiagnostic() {
+    this.showEducationDiagnostic = !this.showEducationDiagnostic;
+    if (!this.showEducationDiagnostic) this.showEducationPopup = false;
     this.updateCommuneStyles();
   }
 
@@ -728,6 +759,10 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   closeDiagnosticPopup() {
     this.showDiagnosticPopup = false;
     this.currentSanteProjectPage = 1; // Reset to first page when closing
+  }
+
+  closeEducationPopup() {
+    this.showEducationPopup = false;
   }
 
   nextSanteProjectPage() {
@@ -1005,11 +1040,13 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       case '1080204':
         return '#f6edb1';
       case '1080202':
-        return '#b8d9f2';
+        // El Marsa - red when Education Diagnostic is active
+        return this.showEducationDiagnostic ? '#e53935' : '#b8d9f2';
       case '1080206':
         return '#c7e3c1';
       case '1080203':
-        return this.showSanteDiagnostic ? '#e53935' : '#f2b6b6';
+        // Laayoune - red when Santé or Education Diagnostic is active
+        return (this.showSanteDiagnostic || this.showEducationDiagnostic) ? '#e53935' : '#f2b6b6';
       case '1080205':
         return '#dbc6e8';
       default:

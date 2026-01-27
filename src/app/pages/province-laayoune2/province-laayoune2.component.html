@@ -5,7 +5,7 @@
     <!-- ✅ COLONNE GAUCHE : INDICATEURS -->
     <div class="col-md-3 d-flex flex-column gap-4">
 
-      <ng-container *ngIf="!showSanteIndicators">
+      <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators">
         <!-- ✅ INDICATEURS TERRITORIAUX -->
         <div class="panel-card indicators-card">
           <div class="panel-header text-center">Indicateurs territoriaux</div>
@@ -156,6 +156,117 @@
         <!-- (tu peux ajouter ici si tu veux) -->
       </ng-container>
 
+      <ng-container *ngIf="showEducationIndicators && !showEducationDiagnostic">
+        <!-- ✅ INDICATEURS ÉDUCATION - LEFT COLUMN (One tall card like image) -->
+        <div class="panel-card indicators-card education-tall-card education-no-header-blue">
+          <div class="panel-body education-scroll-body">
+            
+            <!-- Taux de préscolarisation -->
+            <div class="edu-section">
+              <div class="edu-section-title">Taux de préscolarisation</div>
+              <div class="edu-split-row">
+                <div class="edu-split-box">
+                  <div class="edu-split-label">Provincial</div>
+                  <div class="edu-split-value">89,09%</div>
+                </div>
+                <div class="edu-split-box">
+                  <div class="edu-split-label">National</div>
+                  <div class="edu-split-value red">62,7%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taux de scolarisation (6-11 ans) -->
+            <div class="edu-section">
+              <div class="edu-section-title">Taux de scolarisation (6-11 ans)</div>
+              <div class="edu-split-row">
+                <div class="edu-split-box">
+                  <div class="edu-split-label">Provincial</div>
+                  <div class="edu-split-value">96,8%</div>
+                </div>
+                <div class="edu-split-box">
+                  <div class="edu-split-label">National</div>
+                  <div class="edu-split-value red">95,8%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taux d'analphabétisme -->
+            <div class="edu-section">
+              <div class="edu-section-title">Taux d'analphabétisme (10 ans et plus)</div>
+              <div class="edu-split-row">
+                <div class="edu-split-box">
+                  <div class="edu-split-label">Provincial</div>
+                  <div class="edu-split-value">13,3%</div>
+                </div>
+                <div class="edu-split-box">
+                  <div class="edu-split-label">National</div>
+                  <div class="edu-split-value red">24,8%</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Effectif total des élèves -->
+            <div class="edu-section">
+              <div class="edu-section-title">Effectif total des élèves</div>
+              <div class="edu-effectif-total"><span class="red">51 865</span> élèves répartis comme suit</div>
+              <div class="edu-effectif-table">
+                <div class="edu-effectif-row">
+                  <div class="edu-effectif-label">Préscolaire</div>
+                  <div class="edu-effectif-value">4 578</div>
+                </div>
+                <div class="edu-effectif-row">
+                  <div class="edu-effectif-label">Primaire</div>
+                  <div class="edu-effectif-value">24 879</div>
+                </div>
+                <div class="edu-effectif-row">
+                  <div class="edu-effectif-label">Collégial</div>
+                  <div class="edu-effectif-value">13 368</div>
+                </div>
+                <div class="edu-effectif-row">
+                  <div class="edu-effectif-label">Qualifiant</div>
+                  <div class="edu-effectif-value">9 040</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enseignement Préscolaire -->
+            <div class="edu-section">
+              <div class="edu-section-title">Enseignement Préscolaire</div>
+              <div class="edu-info-text">
+                Un total de <span class="red">264</span> structures, incluant <span class="red">76</span> privées, 
+                <span class="red">65</span> non structurées, <span class="red">49</span> publiques et <span class="red">74</span> via des partenaires.
+              </div>
+            </div>
+
+            <!-- Enseignement Primaire -->
+            <div class="edu-section">
+              <div class="edu-section-title">Enseignement Primaire</div>
+              <div class="edu-info-text">
+                <span class="red">120</span> écoles au total (<span class="red">49</span> publiques et <span class="red">71</span> privées)
+              </div>
+            </div>
+
+            <!-- Enseignement Secondaire Collégial -->
+            <div class="edu-section">
+              <div class="edu-section-title">Enseignement Secondaire Collégial</div>
+              <div class="edu-info-text">
+                <span class="red">79</span> collèges ( <span class="red">20</span> publics et <span class="red">59</span> privés )
+              </div>
+            </div>
+
+            <!-- Enseignement Secondaire Qualifiant -->
+            <div class="edu-section">
+              <div class="edu-section-title">Enseignement Secondaire Qualifiant</div>
+              <div class="edu-info-text">
+                <span class="red">59</span> lycées  ( <span class="red">16</span> publics et <span class="red">43</span> privés )
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+
       <ng-container *ngIf="showSanteIndicators">
         <ng-container *ngIf="!showSanteDiagnostic">
           <div class="panel-card indicators-card health-card">
@@ -273,7 +384,207 @@
     <!-- ✅ COLONNE DROITE : INDICATEURS -->
     <div class="col-md-3 d-flex flex-column gap-4">
 
-      <ng-container *ngIf="!showSanteIndicators">
+      <ng-container *ngIf="showEducationIndicators && !showEducationDiagnostic">
+        <!-- ✅ INDICATEURS ÉDUCATION - RIGHT COLUMN (One tall card with all tables) -->
+        <div class="panel-card indicators-card education-tall-card education-no-header">
+          <div class="panel-body education-scroll-body">
+
+            <!-- Enseignement Secondaire Collégial -->
+            <div class="edu-table-section">
+              <div class="edu-table-title">Enseignement Secondaire Collégial</div>
+              <div class="edu-table-subtitle">collèges ( <span class="red">20</span> publics et <span class="red">59</span> privés ) <span class="red">79</span></div>
+            </div>
+
+            <!-- Enseignement Secondaire Qualifiant -->
+            <div class="edu-table-section">
+              <div class="edu-table-title">Enseignement Secondaire Qualifiant</div>
+              <div class="edu-table-subtitle">lycées ( <span class="red">16</span> publics et <span class="red">43</span> privés ) <span class="red">59</span></div>
+            </div>
+
+            <!-- Nombre d'élèves par enseignant -->
+            <div class="edu-table-section">
+              <div class="edu-table-title">Nombre d'élèves par enseignant</div>
+              <div class="education-table">
+                <div class="education-table-row education-table-header">
+                  <div class="education-table-cell">National</div>
+                  <div class="education-table-cell">Provincial</div>
+                  <div class="education-table-cell"></div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">23</div>
+                  <div class="education-table-cell blue-text">24</div>
+                  <div class="education-table-cell">Primaire</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">25</div>
+                  <div class="education-table-cell blue-text">17</div>
+                  <div class="education-table-cell">Collégial</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">15</div>
+                  <div class="education-table-cell blue-text">13</div>
+                  <div class="education-table-cell">Qualifiant</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taux d'encombrement des classes -->
+            <div class="edu-table-section">
+              <div class="edu-table-title">Taux d'encombrement des classes</div>
+              <div class="education-table">
+                <div class="education-table-row education-table-header">
+                  <div class="education-table-cell">National</div>
+                  <div class="education-table-cell">Provincial</div>
+                  <div class="education-table-cell"></div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell red-text red-bg-very-light">1,66%</div>
+                  <div class="education-table-cell red-text red-bg-light">3,98%</div>
+                  <div class="education-table-cell">Primaire</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">15,48%</div>
+                  <div class="education-table-cell">0,25%</div>
+                  <div class="education-table-cell">Collégial</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">12,93%</div>
+                  <div class="education-table-cell">3,07%</div>
+                  <div class="education-table-cell">Qualifiant</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taux d'abandon scolaire -->
+            <div class="edu-table-section">
+              <div class="edu-table-title">Taux d'abandon scolaire</div>
+              <div class="education-table">
+                <div class="education-table-row education-table-header">
+                  <div class="education-table-cell">National</div>
+                  <div class="education-table-cell">Provincial</div>
+                  <div class="education-table-cell"></div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">1,94%</div>
+                  <div class="education-table-cell blue-text blue-bg-light">1,28%</div>
+                  <div class="education-table-cell">Primaire</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">7,55%</div>
+                  <div class="education-table-cell blue-text blue-bg-light">3,85%</div>
+                  <div class="education-table-cell">Collégial</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell red-text red-bg-very-light">5,35%</div>
+                  <div class="education-table-cell red-text red-bg-light">6,03%</div>
+                  <div class="education-table-cell">Qualifiant</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taux de redoublement -->
+            <div class="edu-table-section">
+              <div class="edu-table-title">Taux de redoublement</div>
+              <div class="education-table">
+                <div class="education-table-row education-table-header">
+                  <div class="education-table-cell">National</div>
+                  <div class="education-table-cell">Provincial</div>
+                  <div class="education-table-cell"></div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg-light">5,81%</div>
+                  <div class="education-table-cell blue-text blue-bg-medium">4,42%</div>
+                  <div class="education-table-cell">Primaire</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell blue-text blue-bg">11,98%</div>
+                  <div class="education-table-cell blue-text blue-bg-medium">9,98%</div>
+                  <div class="education-table-cell">Collégial</div>
+                </div>
+                <div class="education-table-row">
+                  <div class="education-table-cell red-text red-bg-very-light">7,12%</div>
+                  <div class="education-table-cell red-text red-bg-light">11,34%</div>
+                  <div class="education-table-cell">Qualifiant</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showEducationDiagnostic"
+            (click)="toggleEducationDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- Education Diagnostic PANEL (left of map visually) -->
+      <ng-container *ngIf="showEducationIndicators && showEducationDiagnostic">
+        <div class="panel-card diagnostic-card">
+          <div class="panel-header diagnostic-header text-center">Diagnostic</div>
+          <div class="panel-body diagnostic-body">
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Saturation des établissements existants :</span>
+                au <span class="diagnostic-highlight">collège 25 Mars</span>,
+                l'encombrement atteindra <span class="diagnostic-highlight">45 élèves/classe en 2027</span>.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Nouveaux lotissements non desservis (Sûreté, Edooha, Al Khayr) :</span>
+                absence totale d'écoles primaires, collèges et lycées → distances
+                de <span class="diagnostic-highlight">1–1,8 km</span> pour les enfants.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Préscolaire non structuré élevé :</span>
+                à El Marsa, <span class="diagnostic-highlight">38 %</span> des enfants sont
+                dans des structures non encadrées, contre seulement <span class="diagnostic-highlight">26 %</span> dans le
+                public.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Risque d'inégalités scolaires :</span>
+                les enfants des nouveaux quartiers
+                sont défavorisés, ce qui peut accroître le décrochage et
+                l'analphabétisme.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showEducationDiagnostic"
+            (click)="toggleEducationDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+
+      <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators">
         <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
         <div class="panel-card indicators-card">
           <div class="panel-header text-center">Indicateurs socio-économiques</div>
@@ -621,9 +932,12 @@
       Mise à niveau
     </button>
 
-    <button type="button" class="btn btn-lg education-btn text-center">
-      <i class="bi bi-book-fill"></i>
+    <button type="button" class="btn btn-lg education-btn text-center" [class.is-active]="showEducationIndicators" (click)="toggleEducationIndicators()">
+      <i class="bi bi-book-fill" [class.d-none]="showEducationIndicators"></i>
       Education
+      <span class="active-check" *ngIf="showEducationIndicators">
+        <i class="bi bi-check-lg"></i>
+      </span>
     </button>
 
     <button type="button" class="btn btn-lg health-btn text-center" [class.is-active]="showSanteIndicators" (click)="toggleSanteIndicators()">
@@ -990,6 +1304,117 @@
         </button>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- POPUP EDUCATION - EL MARSA -->
+<div class="mise-modal" *ngIf="showEducationPopup">
+  <div class="mise-backdrop" (click)="closeEducationPopup()"></div>
+
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeEducationPopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune El Marsa
+        </div>
+      </div>
+
+      <div class="mise-title">
+        <span>Éducation</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+      <!-- RIGHT -->
+      <div class="mise-right">
+        <div class="mise-map-wrap">
+          <img src="assets/projects/educationElmarsa.png" alt="Éducation - El Marsa" />
+        </div>
+      </div>
+
+      <!-- LEFT -->
+      <div class="mise-left">
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Taux de préscolarisation de la commune d’El Marsa : <b class="red">97,49%</b>.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Forte densité de population scolaire dans le secteur concerné.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>La généralisation et le développement de l’enseignement préscolaire public.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Accroître la part du préscolaire public afin de garantir un enseignement préscolaire de meilleure qualité.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>L’établissement dispose d’une seule salle de préscolaire.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>L’établissement enregistre un effectif de <b class="red">84 enfants</b> en enseignement préscolaire, comparativement à <b class="red">148 élèves</b> au niveau du cycle primaire.</span>
+            </div>
+
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>La part de l’enseignement préscolaire non structuré s’élève à <b class="red">38%</b>, contre <b class="red">26%</b> dans l’enseignement public dans la commune de El Marsa.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+              <div class="action-title">
+                Construction de deux salles de préscolaire au sein de l'école Mohammed VI
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Les enfants en âge de préscolarisation (<b class="red">4–5 ans</b>) de la commune El Marsa.</span>
+              </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Atteindre un taux de préscolarisation de <b class="red">100%</b>.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
