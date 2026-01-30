@@ -21,28 +21,17 @@
                 </li> -->
                 <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
                   <a href="javascript:void(0);" class="is-parent nav-link menu-link"
-                    [routerLink]="['/maroc']" [routerLinkActive]="['is-active']">
-                        <span class="text-start" style="color: white !important;">Maroc</span>
-                        
-
+                    [routerLink]="['/province']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">
+                        <span class="text-start menu-label">Diagnostique</span>
                     </a>
                 </li>
-            
-          
-                 <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
+                <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
                   <a href="javascript:void(0);" class="is-parent nav-link menu-link"
-                    [routerLink]="['/regionLaayoune']" [routerLinkActive]="['is-active']">
-                        <span class="text-start" style="color: white !important;">Région</span>
-                        
-
-                    </a>
-                </li>
-                 <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
-                  <a href="javascript:void(0);" class="is-parent nav-link menu-link"
-                    [routerLink]="['/provinceLaayoune']" [routerLinkActive]="['is-active']">
-                        <span class="text-start" style="color: white !important;">Province</span>
-                        
-
+                    [routerLink]="['/provinceLaayoune']"
+                    [routerLinkActive]="['is-active']"
+                    [routerLinkActiveOptions]="{ exact: false }"
+                    [class.is-active]="isProjectsRoute()">
+                        <span class="text-start menu-label">Projects</span>
                     </a>
                 </li>
                  

@@ -264,6 +264,8 @@ button{
   box-shadow:
     0 14px 30px rgba(220,53,69,0.35),
     0 0 0 4px rgba(220,53,69,0.25);
+  transform: scale(1.05);
+  font-size: 1.05rem;
 }
 
 .health-btn i {
@@ -368,6 +370,8 @@ button{
   box-shadow:
     0 14px 30px rgba(13,110,253,0.35),
     0 0 0 4px rgba(13,110,253,0.25);
+  transform: scale(1.05);
+  font-size: 1.05rem;
 }
 
 .eau-btn i {
@@ -420,6 +424,8 @@ button{
   box-shadow:
     0 14px 30px rgba(111,66,193,0.35),
     0 0 0 4px rgba(111,66,193,0.25);
+  transform: scale(1.05);
+  font-size: 1.05rem;
 }
 
 .emploi-btn i {
@@ -924,4 +930,118 @@ button{
 }
 .sante-item.danger:hover{
   background: rgba(239, 68, 68, 0.16);
+}
+
+/* Santé project buttons (right of map) */
+.sante-project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.sante-project-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sante-project-btn:hover {
+  background: rgba(220, 53, 69, 0.08);
+  border-color: rgba(220, 53, 69, 0.3);
+  color: #b91c1c;
+}
+
+.sante-project-btn.active {
+  background: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+
+.sante-project-btn-tout {
+  font-weight: 700;
+}
+
+/* Emploi project buttons (right of map) – same look as Santé */
+.emploi-project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.emploi-project-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.emploi-project-btn:hover {
+  background: rgba(111, 66, 193, 0.08);
+  border-color: rgba(111, 66, 193, 0.3);
+  color: #4b2a87;
+}
+
+.emploi-project-btn.active {
+  background: #6f42c1;
+  border-color: #6f42c1;
+  color: #fff;
+}
+
+.emploi-project-btn-tout {
+  font-weight: 700;
+}
+
+/* Eau potable project buttons (right of map) – same look as Santé */
+.eau-project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.eau-project-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.eau-project-btn:hover {
+  background: rgba(13, 110, 253, 0.08);
+  border-color: rgba(13, 110, 253, 0.3);
+  color: #0a58ca;
+}
+
+.eau-project-btn.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+.eau-project-btn-tout {
+  font-weight: 700;
 }

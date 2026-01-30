@@ -2,9 +2,9 @@
 
   <div class="row g-4 align-items-stretch">
 
-    <!-- ✅ COLONNE GAUCHE : INDICATEURS -->
+    <!-- ✅ COLONNE GAUCHE : INDICATEURS (hidden when Santé / Emploi / Eau active) -->
     <div class="col-md-3 d-flex flex-column gap-4">
-
+      <ng-container *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
       <!-- ✅ INDICATEURS TERRITORIAUX -->
       <div class="panel-card indicators-card">
         <div class="panel-header text-center">Indicateurs territoriaux</div>
@@ -154,6 +154,7 @@
       <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
       <!-- (tu peux ajouter ici si tu veux) -->
 
+      </ng-container>
     </div>
 
     <!-- ✅ COLONNE DROITE : MAP -->
@@ -166,10 +167,89 @@
       </div>
     </div>
 
-    <!-- ✅ COLONNE DROITE : INDICATEURS -->
+    <!-- ✅ COLONNE DROITE : INDICATEURS (or Santé project buttons when Santé active) -->
     <div class="col-md-3 d-flex flex-column gap-4">
 
-      <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
+      <!-- Santé: Tout button + project buttons with counts -->
+      <ng-container *ngIf="showSanteActive">
+        <div class="sante-project-buttons">
+          <button type="button" class="sante-project-btn sante-project-btn-tout"
+            [class.active]="activeSanteProject === 'TOUT'"
+            (click)="showAllSanteProjects()">
+            <span dir="ltr">{{ santeTotalCount }} Tout</span>
+          </button>
+          <button type="button" class="sante-project-btn"
+            [class.active]="activeSanteProject === 'NOUVEAUX'"
+            (click)="showSanteNouveaux()"><span dir="ltr">{{ santeNouveauxCount }} Nouveaux</span></button>
+          <button type="button" class="sante-project-btn"
+            [class.active]="activeSanteProject === 'HOPITAUX_EXISTANTS'"
+            (click)="showSanteHopitauxExistants()"><span dir="ltr">{{ santeHopitauxCount }} Hôpitaux existants</span></button>
+          <button type="button" class="sante-project-btn"
+            [class.active]="activeSanteProject === 'ESSP_EXISTANTS'"
+            (click)="showSanteESSPExistants()"><span dir="ltr">{{ santeESSPCount }} ESSP existants</span></button>
+          <button type="button" class="sante-project-btn"
+            [class.active]="activeSanteProject === 'DOUIRAT'"
+            (click)="showSanteZoneDouirat()"><span dir="ltr">{{ santeDouiratCount }} Douirat</span></button>
+        </div>
+      </ng-container>
+
+      <!-- Emploi: Tout button + project buttons with counts -->
+      <ng-container *ngIf="showEmploiActive">
+        <div class="emploi-project-buttons">
+          <button type="button" class="emploi-project-btn emploi-project-btn-tout"
+            [class.active]="activeEmploiProject === 'TOUT'"
+            (click)="showAllEmploiProjects()">
+            <span dir="ltr">{{ emploiTotalCount }} Tout</span>
+          </button>
+          <button type="button" class="emploi-project-btn"
+            [class.active]="activeEmploiProject === 'ZONE1'"
+            (click)="showEmploiZone1()"><span dir="ltr">{{ emploiZone1Count }} Extension zone (52Ha)</span></button>
+          <button type="button" class="emploi-project-btn"
+            [class.active]="activeEmploiProject === 'HIZAM'"
+            (click)="showEmploiHizam()"><span dir="ltr">{{ emploiHizamCount }} Zone Al Hizam (70Ha)</span></button>
+          <button type="button" class="emploi-project-btn"
+            [class.active]="activeEmploiProject === 'ATELIERS'"
+            (click)="showEmploiAteliers()"><span dir="ltr">{{ emploiAteliersCount }} Ateliers artisanaux</span></button>
+          <button type="button" class="emploi-project-btn"
+            [class.active]="activeEmploiProject === 'SITES'"
+            (click)="showEmploiSites()"><span dir="ltr">{{ emploiSitesCount }} Sites touristiques</span></button>
+          <button type="button" class="emploi-project-btn"
+            [class.active]="activeEmploiProject === 'POINTS'"
+            (click)="showEmploiPoints()"><span dir="ltr">{{ emploiPointsCount }} Unités de valorisation</span></button>
+        </div>
+      </ng-container>
+
+      <!-- Eau potable: Tout button + project buttons with counts -->
+      <ng-container *ngIf="showEauActive">
+        <div class="eau-project-buttons">
+          <button type="button" class="eau-project-btn eau-project-btn-tout"
+            [class.active]="activeEauProject === 'TOUT'"
+            (click)="showAllEauProjects()">
+            <span dir="ltr">{{ eauTotalCount }} Tout</span>
+          </button>
+          <button type="button" class="eau-project-btn"
+            [class.active]="activeEauProject === 'P1'"
+            (click)="showEauP1()"><span dir="ltr">{{ eauP1Count }} P1 – Eau potable</span></button>
+          <button type="button" class="eau-project-btn"
+            [class.active]="activeEauProject === 'P2'"
+            (click)="showEauP2()"><span dir="ltr">{{ eauP2Count }} P2 – Eau potable</span></button>
+          <button type="button" class="eau-project-btn"
+            [class.active]="activeEauProject === 'P3'"
+            (click)="showEauP3()"><span dir="ltr">{{ eauP3Count }} P3 – Eau potable</span></button>
+          <button type="button" class="eau-project-btn"
+            [class.active]="activeEauProject === 'P4'"
+            (click)="showEauP4()"><span dir="ltr">{{ eauP4Count }} P4 – Eau potable</span></button>
+          <button type="button" class="eau-project-btn"
+            [class.active]="activeEauProject === 'P5'"
+            (click)="showEauP5()"><span dir="ltr">{{ eauP5Count }} P5 – Renforcement stockage</span></button>
+          <button type="button" class="eau-project-btn"
+            [class.active]="activeEauProject === 'P6'"
+            (click)="showEauP6()"><span dir="ltr">{{ eauP6Count }} P6 – Assainissement Foum El Oued</span></button>
+        </div>
+      </ng-container>
+
+      <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES (hidden when Santé / Emploi / Eau active) -->
+      <ng-container *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
       <div class="panel-card indicators-card">
         <div class="panel-header text-center">Indicateurs socio-économiques</div>
 
@@ -308,6 +388,7 @@
         </div>
       </div>
 
+      </ng-container>
     </div>
   </div>
 
@@ -326,127 +407,30 @@
       Education
     </button>
 
- <!-- ✅ Santé: menu au hover (comme eau potable / emploi) -->
-<div class="sante-dropdown">
-  <button type="button" class="btn btn-lg health-btn text-center"
-    [class.is-active]="santeProjectsVisible"
-    (click)="toggleSante()">
-
-    <i class="bi" [ngClass]="santeProjectsVisible ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
-    Santé
-  </button>
-
-  <div class="sante-menu">
-
-    <button type="button" class="sante-item"
-      (click)="showSanteNouveaux()" [class.active]="activeSanteProject === 'NOUVEAUX'">
-      Centres nouveaux de santé
+    <!-- Santé: no menu; click toggles mode → hide indicators, show project buttons on the right -->
+    <button type="button" class="btn btn-lg health-btn text-center"
+      [class.is-active]="showSanteActive"
+      (click)="toggleSante()">
+      <i class="bi" [ngClass]="showSanteActive ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
+      Santé
     </button>
 
-    <button type="button" class="sante-item"
-      (click)="showSanteHopitauxExistants()" [class.active]="activeSanteProject === 'HOPITAUX_EXISTANTS'">
-      Hôpitaux existants
+
+    <!-- Eau potable: same as Santé – toggle mode, project buttons on the right -->
+    <button type="button" class="btn btn-lg eau-btn text-center"
+      [class.is-active]="showEauActive"
+      (click)="toggleEauPotable()">
+      <i class="bi" [ngClass]="showEauActive ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
+      Eau potable
     </button>
 
-    <button type="button" class="sante-item"
-      (click)="showSanteESSPExistants()" [class.active]="activeSanteProject === 'ESSP_EXISTANTS'">
-      ESSP existants
+    <!-- Emploi: same as Santé – toggle mode, project buttons on the right -->
+    <button type="button" class="btn btn-lg emploi-btn text-center"
+      [class.is-active]="showEmploiActive"
+      (click)="toggleEmploi()">
+      <i class="bi" [ngClass]="showEmploiActive ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
+      Emploi
     </button>
-
-    <button type="button" class="sante-item"
-      (click)="showSanteZoneDouirat()" [class.active]="activeSanteProject === 'DOUIRAT'">
-      Zone Douirat
-    </button>
-
-    <button type="button" class="sante-item danger" (click)="hideAllSanteProjects()">
-      Masquer
-    </button>
-
-  </div>
-</div>
-
-
-    <!-- ✅ Eau potable avec menu au hover -->
-    <div class="eau-dropdown">
-      <button type="button" class="btn btn-lg eau-btn text-center"
-        [class.is-active]="eauPotableVisible" (click)="toggleEauPotable()">
-
-        <i class="bi" [ngClass]="eauPotableVisible ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
-        Eau potable
-      </button>
-
-      <div class="eau-menu">
-        <button type="button" class="eau-item" (click)="showEauP1()" [class.active]="activeEauProject === 'P1'">
-          Réabilitation du réseau AEP
-        </button>
-
-        <button type="button" class="eau-item" (click)="showEauP2()" [class.active]="activeEauProject === 'P2'">
-          <span>AEP – Zone Industrielle El marsa</span>
-        </button>
-
-        <button type="button" class="eau-item" (click)="showEauP3()" [class.active]="activeEauProject === 'P3'">
-          <span>STEP – Zone Industrielle El marsa</span>
-        </button>
-
-        <button type="button" class="eau-item" (click)="showEauP4()" [class.active]="activeEauProject === 'P4'">
-          <span>Assainissement – Laayoune</span>
-        </button>
-
-        <button type="button" class="eau-item" (click)="showEauP5()" [class.active]="activeEauProject === 'P5'">
-          <span>Renforcement du stockage d’eau</span>
-        </button>
-
-        <button type="button" class="eau-item" (click)="showEauP6()" [class.active]="activeEauProject === 'P6'">
-          <span>Assainissement – Foum El Oued</span>
-        </button>
-
-        <button type="button" class="eau-item danger" (click)="hideAllEauProjects()">
-          Masquer
-        </button>
-      </div>
-    </div>
-
-    <!-- ✅ Emploi: menu au hover (comme eau potable) -->
-    <div class="emploi-dropdown">
-      <button type="button" class="btn btn-lg emploi-btn text-center"
-        [class.is-active]="emploiProjectsVisible"
-        (click)="toggleEmploi()">
-
-        <i class="bi" [ngClass]="emploiProjectsVisible ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
-        Emploi
-      </button>
-
-      <div class="emploi-menu">
-        <button type="button" class="emploi-item"
-          (click)="showEmploiZone1()" [class.active]="activeEmploiProject === 'ZONE1'">
-          Extension zone d’activité (52Ha)
-        </button>
-
-        <button type="button" class="emploi-item"
-          (click)="showEmploiHizam()" [class.active]="activeEmploiProject === 'HIZAM'">
-          Zone d’activité Al Hizam (70Ha)
-        </button>
-
-        <button type="button" class="emploi-item"
-          (click)="showEmploiAteliers()" [class.active]="activeEmploiProject === 'ATELIERS'">
-          Ateliers artisanaux
-        </button>
-
-        <button type="button" class="emploi-item"
-          (click)="showEmploiSites()" [class.active]="activeEmploiProject === 'SITES'">
-          Sites touristiques
-        </button>
-
-        <button type="button" class="emploi-item"
-          (click)="showEmploiPoints()" [class.active]="activeEmploiProject === 'POINTS'">
-          Unités de valorisation (points)
-        </button>
-
-        <button type="button" class="emploi-item danger" (click)="hideAllEmploiProjects()">
-          Masquer
-        </button>
-      </div>
-    </div>
 
   </div>
 

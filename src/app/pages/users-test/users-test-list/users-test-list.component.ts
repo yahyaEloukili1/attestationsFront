@@ -87,15 +87,29 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   santeDouiratLayer = L.layerGroup(); // getZoneDouirat
 
   activeSanteProject:
+    | 'TOUT'
     | 'NOUVEAUX'
     | 'HOPITAUX_EXISTANTS'
     | 'ESSP_EXISTANTS'
     | 'DOUIRAT'
     | null = null;
 
+  /** Counts from loaded data (exact numbers from code/API) */
+  santeNouveauxCount = 0;
+  santeHopitauxCount = 0;
+  santeESSPCount = 0;
+  santeDouiratCount = 0;
+
   get santeProjectsVisible(): boolean {
     return this.activeSanteProject !== null;
   }
+
+  get santeTotalCount(): number {
+    return this.santeNouveauxCount + this.santeHopitauxCount + this.santeESSPCount + this.santeDouiratCount;
+  }
+
+  /** When true: hide left/right indicators and show Santé project buttons on the right */
+  showSanteActive = false;
 
   // Education
   educationLayer = L.layerGroup();
@@ -122,20 +136,49 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   eauP5Layer = L.layerGroup();
   eauP6Layer = L.layerGroup();
 
-  activeEauProject: 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | null = null;
+  activeEauProject: 'TOUT' | 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | null = null;
+
+  /** Counts from loaded Eau data */
+  eauP1Count = 0;
+  eauP2Count = 0;
+  eauP3Count = 0;
+  eauP4Count = 0;
+  eauP5Count = 0;
+  eauP6Count = 0;
 
   get eauPotableVisible(): boolean {
     return this.activeEauProject !== null;
   }
 
+  get eauTotalCount(): number {
+    return this.eauP1Count + this.eauP2Count + this.eauP3Count + this.eauP4Count + this.eauP5Count + this.eauP6Count;
+  }
+
+  /** When true: hide indicators and show Eau project buttons on the right */
+  showEauActive = false;
+
   // =========================
-  // ✅ EMPLOI: 1 projet à la fois
+  // ✅ EMPLOI: 1 projet à la fois (or TOUT)
   // =========================
-  activeEmploiProject: 'ZONE1' | 'HIZAM' | 'ATELIERS' | 'SITES' | 'POINTS' | null = null;
+  activeEmploiProject: 'TOUT' | 'ZONE1' | 'HIZAM' | 'ATELIERS' | 'SITES' | 'POINTS' | null = null;
+
+  /** Counts from loaded Emploi data */
+  emploiZone1Count = 0;
+  emploiHizamCount = 0;
+  emploiAteliersCount = 0;
+  emploiSitesCount = 0;
+  emploiPointsCount = 0;
 
   get emploiProjectsVisible(): boolean {
     return this.activeEmploiProject !== null;
   }
+
+  get emploiTotalCount(): number {
+    return this.emploiZone1Count + this.emploiHizamCount + this.emploiAteliersCount + this.emploiSitesCount + this.emploiPointsCount;
+  }
+
+  /** When true: hide indicators and show Emploi project buttons on the right */
+  showEmploiActive = false;
 
   // =========================
   // ✅ ICONS
@@ -466,6 +509,8 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // Centres nouveaux de santé (3 services)
       this.mapService.getCHRs().subscribe({
         next: (chrs: any) => {
+          const n = chrs?.features?.length ?? 0;
+          this.santeNouveauxCount += n;
           L.geoJSON(chrs, {
             pointToLayer: (_f, latlng) => L.marker(latlng, { icon: this.hopitauxExistantsIcon }),
             onEachFeature: (f: any, layer) =>
@@ -477,6 +522,8 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
 
       this.mapService.getCHR2s().subscribe({
         next: (chrs: any) => {
+          const n = chrs?.features?.length ?? 0;
+          this.santeNouveauxCount += n;
           L.geoJSON(chrs, {
             pointToLayer: (_f, latlng) => L.marker(latlng, { icon: this.hopitauxExistantsIcon }),
             onEachFeature: (f: any, layer) =>
@@ -488,6 +535,8 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
 
       this.mapService.getCHR3s().subscribe({
         next: (chrs: any) => {
+          const n = chrs?.features?.length ?? 0;
+          this.santeNouveauxCount += n;
           L.geoJSON(chrs, {
             pointToLayer: (_f, latlng) => L.marker(latlng, { icon: this.hopitauxExistantsIcon }),
             onEachFeature: (_f: any, layer) =>
@@ -500,6 +549,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // Hôpitaux existants
       this.mapService.getSanteExistants().subscribe({
         next: (cs: any) => {
+          this.santeHopitauxCount = cs?.features?.length ?? 0;
           L.geoJSON(cs, {
             pointToLayer: (_f, latlng) => L.marker(latlng, { icon: this.chrIcon }),
             onEachFeature: (f: any, layer) => layer.bindPopup(`${f?.properties?.Hopital || ''}`)
@@ -511,6 +561,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // ESSP existants
       this.mapService.getSanteESSPExistants().subscribe({
         next: (cs: any) => {
+          this.santeESSPCount = cs?.features?.length ?? 0;
           L.geoJSON(cs, {
             pointToLayer: (_f, latlng) => L.marker(latlng, { icon: this.chrIcon }),
             onEachFeature: (f: any, layer) => layer.bindPopup(`${f?.properties?.ESSP || ''}`)
@@ -522,6 +573,7 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // Zone Douirat
       this.mapService.getZoneDouirat().subscribe({
         next: (fc: any) => {
+          this.santeDouiratCount = fc?.features?.length ?? 0;
           this.buildZoneLayerAuto(fc, 'Zone Douirat', '#22c55e').addTo(this.santeDouiratLayer);
         },
         error: (e) => console.error('getZoneDouirat error', e)
@@ -571,29 +623,42 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       };
 
       this.mapService.getEmploi1().subscribe({
-        next: (fc: any) => addEmploiPoints(fc, 'Unités de valorization'),
+        next: (fc: any) => {
+          this.emploiPointsCount = fc?.features?.length ?? 0;
+          addEmploiPoints(fc, 'Unités de valorization');
+        },
         error: (e) => console.error('getEmploi1 error', e)
       });
 
       this.mapService.getEmploiZone1().subscribe({
-        next: (fc: any) =>
-          this.buildZoneLayerAuto(fc, "Extension de la zone d'activité - 52Ha", '#f59e0b').addTo(this.emploiZonesLayer),
+        next: (fc: any) => {
+          this.emploiZone1Count = fc?.features?.length ?? 0;
+          this.buildZoneLayerAuto(fc, "Extension de la zone d'activité - 52Ha", '#f59e0b').addTo(this.emploiZonesLayer);
+        },
         error: (e) => console.error('getEmploiZone1 error', e)
       });
 
       this.mapService.getEmploiZoneHizam().subscribe({
-        next: (fc: any) =>
-          this.buildZoneLayerAuto(fc, "Zone d'activité Al Hizam - 70ha", '#f59e0b').addTo(this.emploiHizamLayer),
+        next: (fc: any) => {
+          this.emploiHizamCount = fc?.features?.length ?? 0;
+          this.buildZoneLayerAuto(fc, "Zone d'activité Al Hizam - 70ha", '#f59e0b').addTo(this.emploiHizamLayer);
+        },
         error: (e) => console.error('getEmploiZoneHizam error', e)
       });
 
       this.mapService.getAtelierArtisonaux().subscribe({
-        next: (fc: any) => this.buildZoneLayerAuto(fc, 'Ateliers artisanaux', '#f59e0b').addTo(this.atelierArtisanauxLayer),
+        next: (fc: any) => {
+          this.emploiAteliersCount = fc?.features?.length ?? 0;
+          this.buildZoneLayerAuto(fc, 'Ateliers artisanaux', '#f59e0b').addTo(this.atelierArtisanauxLayer);
+        },
         error: (e) => console.error('getAtelierArtisonaux error', e)
       });
 
       this.mapService.getSitesTouristiques().subscribe({
-        next: (fc: any) => this.buildZoneLayerAuto(fc, 'Sites touristiques', '#f59e0b').addTo(this.sitesTouristiquesLayer),
+        next: (fc: any) => {
+          this.emploiSitesCount = fc?.features?.length ?? 0;
+          this.buildZoneLayerAuto(fc, 'Sites touristiques', '#f59e0b').addTo(this.sitesTouristiquesLayer);
+        },
         error: (e) => console.error('getSitesTouristiques error', e)
       });
 
@@ -624,27 +689,45 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
       // ✅ EAU POTABLE (ZONES)
       // =========================
       this.mapService.getEauPotable7().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P1 – Eau potable').addTo(this.eauP1Layer),
+        next: (fc: any) => {
+          this.eauP1Count = fc?.features?.length ?? 0;
+          this.buildEauZoneLayer(fc, 'P1 – Eau potable').addTo(this.eauP1Layer);
+        },
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable6().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P2 – Eau potable').addTo(this.eauP2Layer),
+        next: (fc: any) => {
+          this.eauP2Count = fc?.features?.length ?? 0;
+          this.buildEauZoneLayer(fc, 'P2 – Eau potable').addTo(this.eauP2Layer);
+        },
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable5().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P3 – Eau potable').addTo(this.eauP3Layer),
+        next: (fc: any) => {
+          this.eauP3Count = fc?.features?.length ?? 0;
+          this.buildEauZoneLayer(fc, 'P3 – Eau potable').addTo(this.eauP3Layer);
+        },
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable4().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P4 – Eau potable').addTo(this.eauP4Layer),
+        next: (fc: any) => {
+          this.eauP4Count = fc?.features?.length ?? 0;
+          this.buildEauZoneLayer(fc, 'P4 – Eau potable').addTo(this.eauP4Layer);
+        },
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable3().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P5 – Renforcement du stockage d’eau').addTo(this.eauP5Layer),
+        next: (fc: any) => {
+          this.eauP5Count = fc?.features?.length ?? 0;
+          this.buildEauZoneLayer(fc, 'P5 – Renforcement du stockage d’eau').addTo(this.eauP5Layer);
+        },
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable2().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P6 – Assainissement – Foum El Oued').addTo(this.eauP6Layer),
+        next: (fc: any) => {
+          this.eauP6Count = fc?.features?.length ?? 0;
+          this.buildEauZoneLayer(fc, 'P6 – Assainissement – Foum El Oued').addTo(this.eauP6Layer);
+        },
         error: (e) => console.error(e)
       });
 
@@ -705,9 +788,32 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   // ✅ TOGGLES (SECTEURS)
   // =========================
 
-  // ✅ SANTÉ (menu + 1 projet à la fois)
+  // ✅ SANTÉ: toggle mode → hide indicators, show project buttons on the right
   toggleSante() {
-    if (this.activeSanteProject) this.hideAllSanteProjects();
+    this.showSanteActive = !this.showSanteActive;
+    if (this.showSanteActive) {
+      this.showEmploiActive = false;
+      this.showEauActive = false;
+      this.hideAllEmploiProjects();
+      this.hideAllEauProjects();
+    } else {
+      this.hideAllSanteProjects();
+    }
+  }
+
+  /** Show all Santé project layers on the map */
+  showAllSanteProjects() {
+    if (!this.map) return;
+    if (this.activeSanteProject === 'TOUT') {
+      this.hideAllSanteProjects();
+      return;
+    }
+    this.hideAllSanteProjects();
+    this.santeNouveauxLayer.addTo(this.map);
+    this.santeHopitauxLayer.addTo(this.map);
+    this.santeESSPLayer.addTo(this.map);
+    this.santeDouiratLayer.addTo(this.map);
+    this.activeSanteProject = 'TOUT';
   }
 
   showSanteNouveaux() {
@@ -782,10 +888,34 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   }
 
   // =========================
-  // ✅ EAU POTABLE
+  // ✅ EAU POTABLE (same logic as Santé: toggle mode, project buttons on right)
   // =========================
   toggleEauPotable() {
-    if (this.activeEauProject) this.hideAllEauProjects();
+    this.showEauActive = !this.showEauActive;
+    if (this.showEauActive) {
+      this.showSanteActive = false;
+      this.showEmploiActive = false;
+      this.hideAllSanteProjects();
+      this.hideAllEmploiProjects();
+    } else {
+      this.hideAllEauProjects();
+    }
+  }
+
+  showAllEauProjects() {
+    if (!this.map) return;
+    if (this.activeEauProject === 'TOUT') {
+      this.hideAllEauProjects();
+      return;
+    }
+    this.hideAllEauProjects();
+    this.eauP1Layer.addTo(this.map);
+    this.eauP2Layer.addTo(this.map);
+    this.eauP3Layer.addTo(this.map);
+    this.eauP4Layer.addTo(this.map);
+    this.eauP5Layer.addTo(this.map);
+    this.eauP6Layer.addTo(this.map);
+    this.activeEauProject = 'TOUT';
   }
 
   showEauP1() {
@@ -868,10 +998,33 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   }
 
   // =========================
-  // ✅ EMPLOI: menu + 1 projet à la fois
+  // ✅ EMPLOI (same logic as Santé: toggle mode, project buttons on right)
   // =========================
   toggleEmploi() {
-    if (this.activeEmploiProject) this.hideAllEmploiProjects();
+    this.showEmploiActive = !this.showEmploiActive;
+    if (this.showEmploiActive) {
+      this.showSanteActive = false;
+      this.showEauActive = false;
+      this.hideAllSanteProjects();
+      this.hideAllEauProjects();
+    } else {
+      this.hideAllEmploiProjects();
+    }
+  }
+
+  showAllEmploiProjects() {
+    if (!this.map) return;
+    if (this.activeEmploiProject === 'TOUT') {
+      this.hideAllEmploiProjects();
+      return;
+    }
+    this.hideAllEmploiProjects();
+    this.emploiZonesLayer.addTo(this.map);
+    this.emploiHizamLayer.addTo(this.map);
+    this.atelierArtisanauxLayer.addTo(this.map);
+    this.sitesTouristiquesLayer.addTo(this.map);
+    this.emploiLayer.addTo(this.map);
+    this.activeEmploiProject = 'TOUT';
   }
 
   showEmploiZone1() {

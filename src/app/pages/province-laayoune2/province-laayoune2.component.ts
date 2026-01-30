@@ -121,8 +121,9 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   eauP4Layer = L.layerGroup();
   eauP5Layer = L.layerGroup();
   eauP6Layer = L.layerGroup();
+  eauP7Layer = L.layerGroup();
 
-  activeEauProject: 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | null = null;
+  activeEauProject: 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6' | 'P7' | null = null;
 
   get eauPotableVisible(): boolean {
     return this.activeEauProject !== null;
@@ -144,6 +145,19 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   showEducationIndicators = false;
   showEducationDiagnostic = false;
   showEducationPopup = false;
+  showEducationLaayounePopup = false;
+  currentEducationProjectPage = 1; // 1 to 6
+  showEmploiIndicators = false;
+  showEmploiDiagnostic = false;
+  showEmploiPopup = false;
+  currentEmploiProjectPage = 1; // 1 to 5
+  showEauIndicators = false;
+  showEauDiagnostic = false;
+  showEauPopup = false;
+  showEauElmarsaPopup = false;
+  showEauLaayounePopup = false;
+  currentEauElmarsaPage = 1; // 1 or 2
+  currentEauLaayounePage = 1; // 1 to 4
 
   // =========================
   // ✅ ICONS
@@ -465,8 +479,45 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
               return;
             }
             if (this.showEducationIndicators) {
-              if (key === 'EL MARSA' && this.showEducationDiagnostic) {
-                this.showEducationPopup = true;
+              if (this.showEducationDiagnostic) {
+                if (key === 'EL MARSA') {
+                  this.showEducationPopup = true;
+                  this.showEducationLaayounePopup = false;
+                }
+                if (key === 'LAAYOUNE') {
+                  this.showEducationLaayounePopup = true;
+                  this.showEducationPopup = false;
+                  this.currentEducationProjectPage = 1;
+                }
+              }
+              return;
+            }
+            if (this.showEmploiIndicators) {
+              if (this.showEmploiDiagnostic && key === 'LAAYOUNE') {
+                this.showEmploiPopup = true;
+                this.currentEmploiProjectPage = 1;
+              }
+              return;
+            }
+            if (this.showEauIndicators) {
+              if (this.showEauDiagnostic) {
+                if (key === 'FOUM EL OUED') {
+                  this.showEauPopup = true;
+                  this.showEauElmarsaPopup = false;
+                  this.showEauLaayounePopup = false;
+                }
+                if (key === 'EL MARSA') {
+                  this.showEauElmarsaPopup = true;
+                  this.showEauPopup = false;
+                  this.showEauLaayounePopup = false;
+                  this.currentEauElmarsaPage = 1;
+                }
+                if (key === 'LAAYOUNE') {
+                  this.showEauLaayounePopup = true;
+                  this.showEauPopup = false;
+                  this.showEauElmarsaPopup = false;
+                  this.currentEauLaayounePage = 1;
+                }
               }
               return;
             }
@@ -645,19 +696,19 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       // ✅ EAU POTABLE (ZONES)
       // =========================
       this.mapService.getEauPotable7().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P1 – Eau potable').addTo(this.eauP1Layer),
+        next: (fc: any) => this.buildEauZoneLayer(fc, 'P1 – Réhabilitation du réseau AEP').addTo(this.eauP1Layer),
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable6().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P2 – Eau potable').addTo(this.eauP2Layer),
+        next: (fc: any) => this.buildEauZoneLayer(fc, 'P2 – AEP – Zone Industrielle El Marsa').addTo(this.eauP2Layer),
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable5().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P3 – Eau potable').addTo(this.eauP3Layer),
+        next: (fc: any) => this.buildEauZoneLayer(fc, 'P3 – STEP – Zone Industrielle El Marsa').addTo(this.eauP3Layer),
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable4().subscribe({
-        next: (fc: any) => this.buildEauZoneLayer(fc, 'P4 – Eau potable').addTo(this.eauP4Layer),
+        next: (fc: any) => this.buildEauZoneLayer(fc, 'P4 – Assainissement – Ville de Laâyoune').addTo(this.eauP4Layer),
         error: (e) => console.error(e)
       });
       this.mapService.getEauPotable3().subscribe({
@@ -666,6 +717,10 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       });
       this.mapService.getEauPotable2().subscribe({
         next: (fc: any) => this.buildEauZoneLayer(fc, 'P6 – Assainissement – Foum El Oued').addTo(this.eauP6Layer),
+        error: (e) => console.error(e)
+      });
+      this.mapService.getEauPotable().subscribe({
+        next: (fc: any) => this.buildEauZoneLayer(fc, 'P7 – Extension de la station de dessalement').addTo(this.eauP7Layer),
         error: (e) => console.error(e)
       });
 
@@ -728,6 +783,13 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showSanteDiagnostic = false;
     } else {
       this.showEducationIndicators = false; // Mutually exclusive
+      this.showEmploiIndicators = false;
+      this.showEmploiDiagnostic = false;
+      this.showEauIndicators = false;
+      this.showEauDiagnostic = false;
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
     }
     this.updateCommuneStyles();
   }
@@ -737,16 +799,96 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     if (this.showEducationIndicators) {
       this.showSanteIndicators = false; // Mutually exclusive
       this.showSanteDiagnostic = false;
+      this.showEmploiIndicators = false;
+      this.showEmploiDiagnostic = false;
+      this.showEmploiPopup = false;
+      this.showEauIndicators = false;
+      this.showEauDiagnostic = false;
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
     } else {
       this.showEducationDiagnostic = false;
       this.showEducationPopup = false;
+      this.showEducationLaayounePopup = false;
     }
+    this.updateCommuneStyles();
+  }
+
+  toggleEmploiIndicators() {
+    this.showEmploiIndicators = !this.showEmploiIndicators;
+    if (this.showEmploiIndicators) {
+      this.showSanteIndicators = false;
+      this.showSanteDiagnostic = false;
+      this.showEducationIndicators = false;
+      this.showEducationDiagnostic = false;
+      this.showEducationPopup = false;
+      this.showEducationLaayounePopup = false;
+      this.showEmploiDiagnostic = false;
+      this.showEmploiPopup = false;
+      this.showEauIndicators = false;
+      this.showEauDiagnostic = false;
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
+    } else {
+      this.showEmploiDiagnostic = false;
+      this.showEmploiPopup = false;
+      this.showEauDiagnostic = false;
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
+    }
+    this.updateCommuneStyles();
+  }
+
+  toggleEauIndicators() {
+    this.showEauIndicators = !this.showEauIndicators;
+    if (this.showEauIndicators) {
+      this.showSanteIndicators = false;
+      this.showSanteDiagnostic = false;
+      this.showEducationIndicators = false;
+      this.showEducationDiagnostic = false;
+      this.showEducationPopup = false;
+      this.showEducationLaayounePopup = false;
+      this.showEmploiIndicators = false;
+      this.showEmploiDiagnostic = false;
+      this.showEmploiPopup = false;
+      this.showEauDiagnostic = false;
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
+    } else {
+      this.showEauDiagnostic = false;
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
+    }
+    this.updateCommuneStyles();
+  }
+
+  toggleEauDiagnostic() {
+    this.showEauDiagnostic = !this.showEauDiagnostic;
+    if (!this.showEauDiagnostic) {
+      this.showEauPopup = false;
+      this.showEauElmarsaPopup = false;
+      this.showEauLaayounePopup = false;
+    }
+    this.updateCommuneStyles();
+  }
+
+  toggleEmploiDiagnostic() {
+    this.showEmploiDiagnostic = !this.showEmploiDiagnostic;
+    if (!this.showEmploiDiagnostic) this.showEmploiPopup = false;
     this.updateCommuneStyles();
   }
 
   toggleEducationDiagnostic() {
     this.showEducationDiagnostic = !this.showEducationDiagnostic;
-    if (!this.showEducationDiagnostic) this.showEducationPopup = false;
+    if (!this.showEducationDiagnostic) {
+      this.showEducationPopup = false;
+      this.showEducationLaayounePopup = false;
+    }
     this.updateCommuneStyles();
   }
 
@@ -763,6 +905,127 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   closeEducationPopup() {
     this.showEducationPopup = false;
+  }
+
+  closeEducationLaayounePopup() {
+    this.showEducationLaayounePopup = false;
+    this.currentEducationProjectPage = 1;
+  }
+
+  closeEauPopup() {
+    this.showEauPopup = false;
+  }
+
+  closeEauElmarsaPopup() {
+    this.showEauElmarsaPopup = false;
+    this.currentEauElmarsaPage = 1;
+  }
+
+  closeEauLaayounePopup() {
+    this.showEauLaayounePopup = false;
+    this.currentEauLaayounePage = 1;
+  }
+
+  nextEauLaayounePage() {
+    if (this.currentEauLaayounePage < 4) {
+      this.currentEauLaayounePage++;
+    }
+  }
+
+  prevEauLaayounePage() {
+    if (this.currentEauLaayounePage > 1) {
+      this.currentEauLaayounePage--;
+    }
+  }
+
+  getCurrentEauLaayouneImage(): string {
+    if (this.currentEauLaayounePage === 2) {
+      return 'assets/projects/eau2.png';
+    } else if (this.currentEauLaayounePage === 3) {
+      return 'assets/projects/eau3.png';
+    } else if (this.currentEauLaayounePage === 4) {
+      return 'assets/projects/eau4.png';
+    }
+    return 'assets/projects/eau1.png';
+  }
+
+  closeEmploiPopup() {
+    this.showEmploiPopup = false;
+    this.currentEmploiProjectPage = 1;
+  }
+
+  nextEmploiProjectPage() {
+    if (this.currentEmploiProjectPage < 5) {
+      this.currentEmploiProjectPage++;
+    }
+  }
+
+  prevEmploiProjectPage() {
+    if (this.currentEmploiProjectPage > 1) {
+      this.currentEmploiProjectPage--;
+    }
+  }
+
+  getCurrentEmploiImage(): string {
+    switch (this.currentEmploiProjectPage) {
+      case 2:
+        return 'assets/projects/emploi2.png';
+      case 3:
+        return 'assets/projects/emploi3.png';
+      case 4:
+        return 'assets/projects/emploi4.png';
+      case 5:
+        return 'assets/projects/emploi5.png';
+      default:
+        return 'assets/projects/Emploi1.png';
+    }
+  }
+
+  nextEauElmarsaPage() {
+    if (this.currentEauElmarsaPage < 2) {
+      this.currentEauElmarsaPage++;
+    }
+  }
+
+  prevEauElmarsaPage() {
+    if (this.currentEauElmarsaPage > 1) {
+      this.currentEauElmarsaPage--;
+    }
+  }
+
+  getCurrentEauElmarsaImage(): string {
+    return this.currentEauElmarsaPage === 2
+      ? 'assets/projects/eauElmarsa2.png'
+      : 'assets/projects/eauElmarsa.png';
+  }
+
+  nextEducationProjectPage() {
+    if (this.currentEducationProjectPage < 6) {
+      this.currentEducationProjectPage++;
+    }
+  }
+
+  prevEducationProjectPage() {
+    if (this.currentEducationProjectPage > 1) {
+      this.currentEducationProjectPage--;
+    }
+  }
+
+  getCurrentEducationImage(): string {
+    switch (this.currentEducationProjectPage) {
+      case 2:
+        return 'assets/projects/education2.png';
+      case 3:
+        return 'assets/projects/education3.png';
+      case 4:
+        return 'assets/projects/education4.png';
+      case 5:
+        return 'assets/projects/education5.png';
+      case 6:
+        return 'assets/projects/education6.png';
+      default:
+        return 'assets/projects/education1.png';
+    }
   }
 
   nextSanteProjectPage() {
@@ -945,6 +1208,17 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     this.activeEauProject = 'P6';
   }
 
+  showEauP7() {
+    if (!this.map) return;
+    if (this.activeEauProject === 'P7') {
+      this.hideAllEauProjects();
+      return;
+    }
+    this.hideAllEauProjects();
+    this.eauP7Layer.addTo(this.map);
+    this.activeEauProject = 'P7';
+  }
+
   hideAllEauProjects() {
     if (!this.map) return;
 
@@ -954,6 +1228,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     if (this.map.hasLayer(this.eauP4Layer)) this.map.removeLayer(this.eauP4Layer);
     if (this.map.hasLayer(this.eauP5Layer)) this.map.removeLayer(this.eauP5Layer);
     if (this.map.hasLayer(this.eauP6Layer)) this.map.removeLayer(this.eauP6Layer);
+    if (this.map.hasLayer(this.eauP7Layer)) this.map.removeLayer(this.eauP7Layer);
 
     this.activeEauProject = null;
   }
@@ -1041,12 +1316,15 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
         return '#f6edb1';
       case '1080202':
         // El Marsa - red when Education Diagnostic is active
-        return this.showEducationDiagnostic ? '#e53935' : '#b8d9f2';
+        return (this.showEducationDiagnostic || this.showEauDiagnostic) ? '#e53935' : '#b8d9f2';
       case '1080206':
-        return '#c7e3c1';
+        // Foum El Oued - red when Eau Diagnostic is active
+        return this.showEauDiagnostic ? '#e53935' : '#c7e3c1';
       case '1080203':
         // Laayoune - red when Santé or Education Diagnostic is active
-        return (this.showSanteDiagnostic || this.showEducationDiagnostic) ? '#e53935' : '#f2b6b6';
+        return (this.showSanteDiagnostic || this.showEducationDiagnostic || this.showEmploiDiagnostic || this.showEauDiagnostic)
+          ? '#e53935'
+          : '#f2b6b6';
       case '1080205':
         return '#dbc6e8';
       default:

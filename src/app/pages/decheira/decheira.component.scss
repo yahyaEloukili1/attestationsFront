@@ -211,17 +211,17 @@
 }
 
 .mise-btn {
-  color: #ffc107;
-  border: 2px solid #ffc107;
+  color: #fd7e14;
+  border: 2px solid #fd7e14;
 }
 
 
 /* Hover */
 .health-btn:hover { background: rgba(220, 53, 69, 0.08); transform: translateY(-2px); }
-.education-btn:hover { background: rgba(25, 135, 84, 0.08); transform: translateY(-2px); }
+.education-btn:hover { background: rgba(25, 135, 84, 0.08); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
 .water-btn:hover { background: rgba(108, 117, 125, 0.10); transform: translateY(-2px); }
 .emploi-btn:hover { background: rgba(13, 110, 253, 0.08); transform: translateY(-2px); }
-.mise-btn:hover { background: rgba(255, 193, 7, 0.14); transform: translateY(-2px); }
+.mise-btn:hover { background: rgba(253, 126, 20, 0.10); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
 
 /* Active */
 .health-btn.is-active {
@@ -233,6 +233,9 @@
   background: linear-gradient(135deg, #198754, #146c43);
   color: #fff;
   border-color: transparent;
+  box-shadow:
+    0 14px 30px rgba(25,135,84,0.35),
+    0 0 0 4px rgba(25,135,84,0.25);
 }
 .water-btn.is-active {
   background: linear-gradient(135deg, #6c757d, #4f565c);
@@ -245,9 +248,37 @@
   border-color: transparent;
 }
 .mise-btn.is-active {
-  background: linear-gradient(135deg, #ffc107, #d39e00);
-  color: #111;
+  background: linear-gradient(135deg, #fd7e14, #c65f0a);
+  color: #fff;
   border-color: transparent;
+  box-shadow:
+    0 14px 30px rgba(253,126,20,0.35),
+    0 0 0 4px rgba(253,126,20,0.25);
+}
+
+.education-btn i,
+.mise-btn i {
+  font-size: 1.2rem;
+}
+
+.education-btn.is-active i {
+  animation: softPulseEdu 1.4s ease-in-out infinite;
+}
+
+.mise-btn.is-active i {
+  animation: softPulseMise 1.4s ease-in-out infinite;
+}
+
+@keyframes softPulseEdu {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes softPulseMise {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
 }
 
 /* ================= MENU POP (AU DESSUS) ================= */
@@ -319,6 +350,77 @@
 .menu-hide:hover {
   background: #f1bfc6;
 }
+
+.health-btn.is-active,
+.water-btn.is-active,
+.emploi-btn.is-active {
+  transform: scale(1.05);
+  font-size: 1.05rem;
+}
+
+.sante-project-buttons,
+.emploi-project-buttons,
+.eau-project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.sante-project-btn,
+.emploi-project-btn,
+.eau-project-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sante-project-btn:hover {
+  background: rgba(220, 53, 69, 0.08);
+  border-color: rgba(220, 53, 69, 0.3);
+  color: #b91c1c;
+}
+.emploi-project-btn:hover {
+  background: rgba(111, 66, 193, 0.08);
+  border-color: rgba(111, 66, 193, 0.3);
+  color: #4b2a87;
+}
+.eau-project-btn:hover {
+  background: rgba(13, 110, 253, 0.08);
+  border-color: rgba(13, 110, 253, 0.3);
+  color: #0a58ca;
+}
+
+.sante-project-btn.active {
+  background: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+.emploi-project-btn.active {
+  background: #6f42c1;
+  border-color: #6f42c1;
+  color: #fff;
+}
+.eau-project-btn.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+.sante-project-btn-tout,
+.emploi-project-btn-tout,
+.eau-project-btn-tout {
+  font-weight: 700;
+}
+
 .water-btn.is-active {
   background: linear-gradient(135deg, #0d6efd, #0a58ca);
   color: #fff;

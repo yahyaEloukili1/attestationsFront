@@ -16,10 +16,10 @@ import { UserProfileService } from '../../../app/core/services/user.service';
 
 type MenuKey = 'emploi' | 'eau' | 'sante' | 'education' | 'mise';
 
-type SanteProject = 'NOUVEAUX' | 'HOPITAUX_EXISTANTS' | 'ESSP_EXISTANTS' | 'DOUIRAT';
+type SanteProject = 'TOUT' | 'NOUVEAUX' | 'HOPITAUX_EXISTANTS' | 'ESSP_EXISTANTS' | 'DOUIRAT';
 type EducationProject = 'E1' | 'E2' | 'E3' | 'E4';
-type EauProject = 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6';
-type EmploiProject = 'ZONE1' | 'HIZAM' | 'ATELIERS' | 'SITES' | 'POINTS';
+type EauProject = 'TOUT' | 'P1' | 'P2' | 'P3' | 'P4' | 'P5' | 'P6';
+type EmploiProject = 'TOUT' | 'ZONE1' | 'HIZAM' | 'ATELIERS' | 'SITES' | 'POINTS';
 type MiseProject = 'M1' | 'M2' | 'M3';
 
 @Component({
@@ -54,6 +54,36 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   activeEauProject: EauProject | null = null;
   activeEmploiProject: EmploiProject | null = null;
   activeMiseProject: MiseProject | null = null;
+
+  showSanteActive = false;
+  showEmploiActive = false;
+  showEauActive = false;
+
+  santeNouveauxCount = 0;
+  santeHopitauxCount = 0;
+  santeESSPCount = 0;
+  santeDouiratCount = 0;
+  emploiZone1Count = 0;
+  emploiHizamCount = 0;
+  emploiAteliersCount = 0;
+  emploiSitesCount = 0;
+  emploiPointsCount = 0;
+  eauP1Count = 0;
+  eauP2Count = 0;
+  eauP3Count = 0;
+  eauP4Count = 0;
+  eauP5Count = 0;
+  eauP6Count = 0;
+
+  get santeTotalCount(): number {
+    return this.santeNouveauxCount + this.santeHopitauxCount + this.santeESSPCount + this.santeDouiratCount;
+  }
+  get emploiTotalCount(): number {
+    return this.emploiZone1Count + this.emploiHizamCount + this.emploiAteliersCount + this.emploiSitesCount + this.emploiPointsCount;
+  }
+  get eauTotalCount(): number {
+    return this.eauP1Count + this.eauP2Count + this.eauP3Count + this.eauP4Count + this.eauP5Count + this.eauP6Count;
+  }
 
   // =========================
   // ✅ LAYERS (BY PROJECT)
@@ -235,7 +265,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   }
 
   goToProvince() {
-    this.router.navigate(['/province']);
+    this.router.navigate(['/provinceLaayoune']);
   }
 
   // ✅ fermer le dropdown si tu cliques ailleurs (MAIS garder le projet affiché)
@@ -394,6 +424,49 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   }
 
   // ✅ sélectionner projet : afficher layer + fermer dropdown (bouton reste actif)
+  toggleSanteMode(ev?: MouseEvent) {
+    ev?.stopPropagation();
+    this.showSanteActive = !this.showSanteActive;
+    if (this.showSanteActive) {
+      this.showEmploiActive = false;
+      this.showEauActive = false;
+      this.hideAllEmploiProjects();
+      this.hideAllEauProjects();
+      this.openMenu = null;
+    } else {
+      this.hideAllSanteProjects();
+    }
+  }
+  toggleEmploiMode(ev?: MouseEvent) {
+    ev?.stopPropagation();
+    this.showEmploiActive = !this.showEmploiActive;
+    if (this.showEmploiActive) {
+      this.showSanteActive = false;
+      this.showEauActive = false;
+      this.hideAllSanteProjects();
+      this.hideAllEauProjects();
+      this.openMenu = null;
+    } else {
+      this.hideAllEmploiProjects();
+    }
+  }
+  toggleEauMode(ev?: MouseEvent) {
+    ev?.stopPropagation();
+    this.showEauActive = !this.showEauActive;
+    if (this.showEauActive) {
+      this.showSanteActive = false;
+      this.showEmploiActive = false;
+      this.hideAllSanteProjects();
+      this.hideAllEmploiProjects();
+      this.openMenu = null;
+    } else {
+      this.hideAllEauProjects();
+    }
+  }
+  showAllSanteProjects() { this.showSante('TOUT'); }
+  showAllEmploiProjects() { this.showEmploi('TOUT'); }
+  showAllEauProjects() { this.showEau('TOUT'); }
+
   selectSante(p: SanteProject, ev?: MouseEvent) { ev?.stopPropagation(); this.showSante(p); this.openMenu = null; }
   selectEducation(p: EducationProject, ev?: MouseEvent) { ev?.stopPropagation(); this.showEducation(p); this.openMenu = null; }
   selectEau(p: EauProject, ev?: MouseEvent) { ev?.stopPropagation(); this.showEau(p); this.openMenu = null; }
@@ -405,26 +478,26 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   // ======================================================
   private loadAllProjects() {
     // ---------- SANTÉ ----------
-    this.mapService.getCHRs().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.santeNouveauxLayer, this.hopitauxExistantsIcon, 'Extension CHR')
-    );
-    (this.mapService as any).getCHR2s?.().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.santeNouveauxLayer, this.hopitauxExistantsIcon, 'Construction ESSP - Douirat')
-    );
-    (this.mapService as any).getCHR3s?.().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.santeNouveauxLayer, this.hopitauxExistantsIcon, 'UCCV – Hôpital Hassan II')
-    );
+    this.mapService.getCHRs().subscribe((fc: any) => {
+      this.santeNouveauxCount += this.addFilteredPointsToLayer(fc, this.santeNouveauxLayer, this.hopitauxExistantsIcon, 'Extension CHR');
+    });
+    (this.mapService as any).getCHR2s?.().subscribe((fc: any) => {
+      this.santeNouveauxCount += this.addFilteredPointsToLayer(fc, this.santeNouveauxLayer, this.hopitauxExistantsIcon, 'Construction ESSP - Douirat');
+    });
+    (this.mapService as any).getCHR3s?.().subscribe((fc: any) => {
+      this.santeNouveauxCount += this.addFilteredPointsToLayer(fc, this.santeNouveauxLayer, this.hopitauxExistantsIcon, 'UCCV – Hôpital Hassan II');
+    });
 
-    this.mapService.getSanteExistants().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.santeHopitauxLayer, this.chrIcon, 'Centre de santé')
-    );
+    this.mapService.getSanteExistants().subscribe((fc: any) => {
+      this.santeHopitauxCount = this.addFilteredPointsToLayer(fc, this.santeHopitauxLayer, this.chrIcon, 'Centre de santé');
+    });
 
-    (this.mapService as any).getSanteESSPExistants?.().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.santeESSPLayer, this.chrIcon, 'ESSP existant')
-    );
+    (this.mapService as any).getSanteESSPExistants?.().subscribe((fc: any) => {
+      this.santeESSPCount = this.addFilteredPointsToLayer(fc, this.santeESSPLayer, this.chrIcon, 'ESSP existant');
+    });
 
     (this.mapService as any).getZoneDouirat?.().subscribe((fc: any) => {
-      this.buildFilteredPolygonLayer(fc, 'Zone Douirat', '#22c55e').addTo(this.santeDouiratLayer);
+      this.buildFilteredPolygonLayer(fc, 'Zone Douirat', '#22c55e', (n) => (this.santeDouiratCount = n)).addTo(this.santeDouiratLayer);
     });
 
     // ---------- EDUCATION ----------
@@ -443,40 +516,40 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
 
     // ---------- EAU ----------
     (this.mapService as any).getEauPotable7?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, 'P1 – Eau potable', '#ef4444').addTo(this.eauP1Layer)
+      this.buildFilteredPolygonLayer(fc, 'P1 – Eau potable', '#ef4444', (n) => (this.eauP1Count = n)).addTo(this.eauP1Layer)
     );
     (this.mapService as any).getEauPotable6?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, 'P2 – Eau potable', '#ef4444').addTo(this.eauP2Layer)
+      this.buildFilteredPolygonLayer(fc, 'P2 – Eau potable', '#ef4444', (n) => (this.eauP2Count = n)).addTo(this.eauP2Layer)
     );
     (this.mapService as any).getEauPotable5?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, 'P3 – Eau potable', '#ef4444').addTo(this.eauP3Layer)
+      this.buildFilteredPolygonLayer(fc, 'P3 – Eau potable', '#ef4444', (n) => (this.eauP3Count = n)).addTo(this.eauP3Layer)
     );
     (this.mapService as any).getEauPotable4?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, 'P4 – Eau potable', '#ef4444').addTo(this.eauP4Layer)
+      this.buildFilteredPolygonLayer(fc, 'P4 – Eau potable', '#ef4444', (n) => (this.eauP4Count = n)).addTo(this.eauP4Layer)
     );
     (this.mapService as any).getEauPotable3?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, 'P5 – Stockage d’eau', '#ef4444').addTo(this.eauP5Layer)
+      this.buildFilteredPolygonLayer(fc, 'P5 – Stockage d’eau', '#ef4444', (n) => (this.eauP5Count = n)).addTo(this.eauP5Layer)
     );
     (this.mapService as any).getEauPotable2?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, 'P6 – Assainissement', '#ef4444').addTo(this.eauP6Layer)
+      this.buildFilteredPolygonLayer(fc, 'P6 – Assainissement', '#ef4444', (n) => (this.eauP6Count = n)).addTo(this.eauP6Layer)
     );
 
     // ---------- EMPLOI ----------
-    this.mapService.getEmploi1().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.emploiPointsLayer, this.emploiIcon, 'Emploi')
-    );
+    this.mapService.getEmploi1().subscribe((fc: any) => {
+      this.emploiPointsCount = this.addFilteredPointsToLayer(fc, this.emploiPointsLayer, this.emploiIcon, 'Emploi');
+    });
 
     (this.mapService as any).getEmploiZone1?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, "Extension zone d’activité", '#f59e0b').addTo(this.emploiZone1Layer)
+      this.buildFilteredPolygonLayer(fc, "Extension zone d’activité", '#f59e0b', (n) => (this.emploiZone1Count = n)).addTo(this.emploiZone1Layer)
     );
     (this.mapService as any).getEmploiZoneHizam?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, "Zone d’activité Al Hizam", '#f59e0b').addTo(this.emploiHizamLayer)
+      this.buildFilteredPolygonLayer(fc, "Zone d’activité Al Hizam", '#f59e0b', (n) => (this.emploiHizamCount = n)).addTo(this.emploiHizamLayer)
     );
     (this.mapService as any).getAtelierArtisonaux?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, "Ateliers artisanaux", '#f59e0b').addTo(this.emploiAteliersLayer)
+      this.buildFilteredPolygonLayer(fc, "Ateliers artisanaux", '#f59e0b', (n) => (this.emploiAteliersCount = n)).addTo(this.emploiAteliersLayer)
     );
     (this.mapService as any).getSitesTouristiques?.().subscribe((fc: any) =>
-      this.buildFilteredPolygonLayer(fc, "Sites touristiques", '#f59e0b').addTo(this.emploiSitesLayer)
+      this.buildFilteredPolygonLayer(fc, "Sites touristiques", '#f59e0b', (n) => (this.emploiSitesCount = n)).addTo(this.emploiSitesLayer)
     );
 
     // ---------- MISE ----------
@@ -499,8 +572,8 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     targetLayer: L.LayerGroup,
     icon: L.Icon,
     label: string
-  ) {
-    if (!fc?.features?.length) return;
+  ): number {
+    if (!fc?.features?.length) return 0;
 
     const kept: Feature[] = [];
 
@@ -512,7 +585,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
       if (this.isLatLngInsideCommune(ll.lat, ll.lng)) kept.push(f);
     }
 
-    if (!kept.length) return;
+    if (!kept.length) return 0;
 
     const filteredFC: FeatureCollection = { type: 'FeatureCollection', features: kept };
 
@@ -525,12 +598,14 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
         layer.bindPopup(`<b>${this.escapeHtml(label)}</b><br>${this.escapeHtml(nom)}`);
       }
     }).addTo(targetLayer);
+
+    return kept.length;
   }
 
   // ======================================================
   // ✅ FILTER POLYGONS INSIDE COMMUNE (centroid test)
   // ======================================================
-  private buildFilteredPolygonLayer(fc: FeatureCollection, title: string, fillColor = '#ef4444'): L.GeoJSON {
+  private buildFilteredPolygonLayer(fc: FeatureCollection, title: string, fillColor = '#ef4444', onCount?: (n: number) => void): L.GeoJSON {
     const kept: Feature[] = [];
 
     for (const f of (fc?.features || []) as Feature[]) {
@@ -541,6 +616,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
       if (this.isLatLngInsideCommune(c.lat, c.lng)) kept.push(f);
     }
 
+    if (onCount) onCount(kept.length);
     const filteredFC: FeatureCollection = { type: 'FeatureCollection', features: kept };
 
     return L.geoJSON(filteredFC as any, {
@@ -653,17 +729,29 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   // ======================================================
   showSante(project: SanteProject) {
     if (!this.map) return;
+    if (this.activeSanteProject === project) {
+      this.hideAllSanteProjects();
+      return;
+    }
     this.hideAllSanteProjects();
-
+    if (project === 'TOUT') {
+      this.santeNouveauxLayer.addTo(this.map);
+      this.santeHopitauxLayer.addTo(this.map);
+      this.santeESSPLayer.addTo(this.map);
+      this.santeDouiratLayer.addTo(this.map);
+      this.activeSanteProject = 'TOUT';
+      return;
+    }
     const layer = {
       NOUVEAUX: this.santeNouveauxLayer,
       HOPITAUX_EXISTANTS: this.santeHopitauxLayer,
       ESSP_EXISTANTS: this.santeESSPLayer,
       DOUIRAT: this.santeDouiratLayer
     }[project];
-
-    layer.addTo(this.map);
-    this.activeSanteProject = project;
+    if (layer) {
+      layer.addTo(this.map);
+      this.activeSanteProject = project;
+    }
   }
 
   private hideAllSanteProjects() {
@@ -701,8 +789,21 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
 
   showEau(project: EauProject) {
     if (!this.map) return;
+    if (this.activeEauProject === project) {
+      this.hideAllEauProjects();
+      return;
+    }
     this.hideAllEauProjects();
-
+    if (project === 'TOUT') {
+      this.eauP1Layer.addTo(this.map);
+      this.eauP2Layer.addTo(this.map);
+      this.eauP3Layer.addTo(this.map);
+      this.eauP4Layer.addTo(this.map);
+      this.eauP5Layer.addTo(this.map);
+      this.eauP6Layer.addTo(this.map);
+      this.activeEauProject = 'TOUT';
+      return;
+    }
     const layer = {
       P1: this.eauP1Layer,
       P2: this.eauP2Layer,
@@ -711,9 +812,10 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
       P5: this.eauP5Layer,
       P6: this.eauP6Layer
     }[project];
-
-    layer.addTo(this.map);
-    this.activeEauProject = project;
+    if (layer) {
+      layer.addTo(this.map);
+      this.activeEauProject = project;
+    }
   }
 
   private hideAllEauProjects() {
@@ -729,8 +831,20 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
 
   showEmploi(project: EmploiProject) {
     if (!this.map) return;
+    if (this.activeEmploiProject === project) {
+      this.hideAllEmploiProjects();
+      return;
+    }
     this.hideAllEmploiProjects();
-
+    if (project === 'TOUT') {
+      this.emploiPointsLayer.addTo(this.map);
+      this.emploiZone1Layer.addTo(this.map);
+      this.emploiHizamLayer.addTo(this.map);
+      this.emploiAteliersLayer.addTo(this.map);
+      this.emploiSitesLayer.addTo(this.map);
+      this.activeEmploiProject = 'TOUT';
+      return;
+    }
     const layer = {
       POINTS: this.emploiPointsLayer,
       ZONE1: this.emploiZone1Layer,
@@ -738,9 +852,10 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
       ATELIERS: this.emploiAteliersLayer,
       SITES: this.emploiSitesLayer
     }[project];
-
-    layer.addTo(this.map);
-    this.activeEmploiProject = project;
+    if (layer) {
+      layer.addTo(this.map);
+      this.activeEmploiProject = project;
+    }
   }
 
   private hideAllEmploiProjects() {

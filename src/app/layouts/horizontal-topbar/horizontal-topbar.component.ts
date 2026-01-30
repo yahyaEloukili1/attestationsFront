@@ -41,6 +41,18 @@ console.log(this.getConnectedUserRole(),"jejejejejej")
     this.menuItems = MENU;
   }
 
+  isProjectsRoute(): boolean {
+    const url = this.router.url || '';
+    return [
+      '/provinceLaayoune',
+      '/boucraa',
+      '/dcheira',
+      '/laayoune',
+      '/elmarsa',
+      '/foumelouad'
+    ].some((path) => url.startsWith(path));
+  }
+
   /***
    * Activate droup down set
    */

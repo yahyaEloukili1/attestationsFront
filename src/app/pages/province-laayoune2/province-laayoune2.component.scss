@@ -1227,6 +1227,23 @@ button{
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
+
+/* =========================
+   EMPLOI INDICATORS (RIGHT)
+========================= */
+.emploi-indicators-card .panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.emploi-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1f2937;
+  margin-top: 4px;
+  text-align: center;
+}
 .action-left {
   background: #e5e5e5;
   padding: 10px 8px;

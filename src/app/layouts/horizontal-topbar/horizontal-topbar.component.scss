@@ -3,3 +3,39 @@
 .droid-arabic-kufi {
   font-family: 'Droid Arabic Kufi', serif;
 }
+
+/* Diagnostique / Projects menu: inactive link – slightly muted */
+.app-menu.navbar-menu .navbar-nav .nav-link.menu-link {
+  padding: 0.45rem 1.1rem;
+  border-radius: 10px 10px 0 0;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  border: 1px solid transparent;
+  border-bottom: 0;
+}
+
+.app-menu.navbar-menu .navbar-nav .nav-link.menu-link:not(.is-active) .menu-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.app-menu.navbar-menu .navbar-nav .nav-link.menu-link:not(.is-active):hover .menu-label {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Subtle hover for inactive tabs */
+.app-menu.navbar-menu .navbar-nav .nav-link.menu-link:not(.is-active):hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Active state – clean professional tab */
+.app-menu.navbar-menu .navbar-nav .nav-link.menu-link.is-active {
+  background-color: #fff !important;
+  font-weight: 700;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-bottom-color: #fff;
+  box-shadow: none;
+  margin: 4px;
+}
+
+.app-menu.navbar-menu .navbar-nav .nav-link.menu-link.is-active .menu-label {
+  color: #405189;
+}

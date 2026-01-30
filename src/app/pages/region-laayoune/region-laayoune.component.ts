@@ -103,7 +103,7 @@ export class RegionLaayouneComponent implements AfterViewInit, OnDestroy {
           ?.trim();
 
       if (province === 'LAAYOUNE') {
-        this.router.navigate(['/users/list']);
+        this.router.navigate(['/province']);
       }
     });
   }

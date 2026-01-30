@@ -5,6 +5,7 @@
 
     <!-- 🔹 INDICATEURS GAUCHE -->
     <div class="col-12 col-lg-3 d-flex flex-column gap-4">
+      <ng-container *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
 
       <!-- Démographiques -->
       <div class="indicator-card">
@@ -80,6 +81,7 @@
         </div>
       </div>
 
+      </ng-container>
     </div>
 
     <!-- 🔹 MAP CENTRE -->
@@ -232,62 +234,34 @@
     <!-- SANTÉ -->
     <div class="menu-wrap" (click)="$event.stopPropagation()">
       <button class="btn btn-lg health-btn"
-              [class.is-active]="activeSanteProject !== null"
-              (click)="toggleMenu('sante', $event)">
-        <i class="bi" [ngClass]="getMenuLeftIcon('sante')"></i>
+              [class.is-active]="showSanteActive"
+              (click)="toggleSanteMode($event)">
+        <i class="bi" [ngClass]="showSanteActive ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
         <span>Santé</span>
-        <i class="bi" [ngClass]="openMenu==='sante' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu==='sante'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeSanteProject==='NOUVEAUX'" (click)="selectSante('NOUVEAUX', $event)">Nouveaux centres de santé</button>
-        <button class="menu-item" [class.active]="activeSanteProject==='HOPITAUX_EXISTANTS'" (click)="selectSante('HOPITAUX_EXISTANTS', $event)">Hôpitaux existants</button>
-        <button class="menu-item" [class.active]="activeSanteProject==='ESSP_EXISTANTS'" (click)="selectSante('ESSP_EXISTANTS', $event)">ESSP existants</button>
-        <button class="menu-item" [class.active]="activeSanteProject==='DOUIRAT'" (click)="selectSante('DOUIRAT', $event)">Zone Douirat</button>
-        <button class="menu-hide" (click)="hideMenu('sante', $event)">Masquer</button>
-      </div>
     </div>
 
-    <!-- EAU -->
+        <!-- EAU -->
     <div class="menu-wrap" (click)="$event.stopPropagation()">
       <button class="btn btn-lg water-btn"
-              [class.is-active]="activeEauProject !== null"
-              (click)="toggleMenu('eau', $event)">
-        <i class="bi" [ngClass]="getMenuLeftIcon('eau')"></i>
+              [class.is-active]="showEauActive"
+              (click)="toggleEauMode($event)">
+        <i class="bi" [ngClass]="showEauActive ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
         <span>Eau potable</span>
-        <i class="bi" [ngClass]="openMenu==='eau' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu==='eau'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeEauProject==='P1'" (click)="selectEau('P1', $event)">Réhabilitation du réseau AEP</button>
-        <button class="menu-item" [class.active]="activeEauProject==='P2'" (click)="selectEau('P2', $event)">AEP – Zone Industrielle El Marsa</button>
-        <button class="menu-item" [class.active]="activeEauProject==='P3'" (click)="selectEau('P3', $event)">STEP – Zone Industrielle El Marsa</button>
-        <button class="menu-item" [class.active]="activeEauProject==='P4'" (click)="selectEau('P4', $event)">Assainissement – Laayoune</button>
-        <button class="menu-item" [class.active]="activeEauProject==='P5'" (click)="selectEau('P5', $event)">Renforcement du stockage d’eau</button>
-        <button class="menu-item" [class.active]="activeEauProject==='P6'" (click)="selectEau('P6', $event)">Assainissement – Foum El Oued</button>
-        <button class="menu-hide" (click)="hideMenu('eau', $event)">Masquer</button>
-      </div>
     </div>
 
     <!-- EMPLOI -->
     <div class="menu-wrap" (click)="$event.stopPropagation()">
       <button class="btn btn-lg emploi-btn"
-              [class.is-active]="activeEmploiProject !== null"
-              (click)="toggleMenu('emploi', $event)">
-        <i class="bi" [ngClass]="getMenuLeftIcon('emploi')"></i>
+              [class.is-active]="showEmploiActive"
+              (click)="toggleEmploiMode($event)">
+        <i class="bi" [ngClass]="showEmploiActive ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
         <span>Emploi</span>
-        <i class="bi" [ngClass]="openMenu==='emploi' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu==='emploi'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeEmploiProject==='POINTS'" (click)="selectEmploi('POINTS', $event)">Unités de valorisation (points)</button>
-        <button class="menu-item" [class.active]="activeEmploiProject==='ZONE1'" (click)="selectEmploi('ZONE1', $event)">Extension zone d’activité (52Ha)</button>
-        <button class="menu-item" [class.active]="activeEmploiProject==='HIZAM'" (click)="selectEmploi('HIZAM', $event)">Zone d’activité Al Hizam (70Ha)</button>
-        <button class="menu-item" [class.active]="activeEmploiProject==='ATELIERS'" (click)="selectEmploi('ATELIERS', $event)">Ateliers artisanaux</button>
-        <button class="menu-item" [class.active]="activeEmploiProject==='SITES'" (click)="selectEmploi('SITES', $event)">Sites touristiques</button>
-        <button class="menu-hide" (click)="hideMenu('emploi', $event)">Masquer</button>
-      </div>
     </div>
+
+  
 
   </div>
 </div>

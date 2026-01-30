@@ -1,11 +1,55 @@
 <div class="province-page">
 
+  <!-- ✅ BUTTONS (no menus / no logic) -->
+  <div class="hstack gap-2 mb-4 justify-content-center">
+    <button type="button" class="btn btn-lg mise-btn text-center">
+      <i class="bi bi-geo-alt-fill"></i>
+      Mise à niveau
+    </button>
+
+    <button type="button" class="btn btn-lg education-btn text-center" [class.is-active]="showEducationIndicators" (click)="toggleEducationIndicators()">
+      <i class="bi bi-book-fill" [class.d-none]="showEducationIndicators"></i>
+      Education
+      <span class="active-check" *ngIf="showEducationIndicators">
+        <i class="bi bi-check-lg"></i>
+      </span>
+    </button>
+
+    <button type="button" class="btn btn-lg health-btn text-center" [class.is-active]="showSanteIndicators" (click)="toggleSanteIndicators()">
+      <i class="bi bi-heart-pulse-fill" [class.d-none]="showSanteIndicators"></i>
+      Santé
+      <span class="active-check" *ngIf="showSanteIndicators">
+        <i class="bi bi-check-lg"></i>
+      </span>
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-lg eau-btn text-center"
+      [class.is-active]="showEauIndicators"
+      (click)="toggleEauIndicators()"
+    >
+      <i class="bi bi-droplet-fill"></i>
+      Eau potable
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-lg emploi-btn text-center"
+      [class.is-active]="showEmploiIndicators"
+      (click)="toggleEmploiIndicators()"
+    >
+      <i class="bi bi-briefcase-fill"></i>
+      Emploi
+    </button>
+  </div>
+
   <div class="row g-4 align-items-stretch">
 
     <!-- ✅ COLONNE GAUCHE : INDICATEURS -->
     <div class="col-md-3 d-flex flex-column gap-4">
 
-      <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators">
+      <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators && !showEmploiIndicators && !showEauIndicators">
         <!-- ✅ INDICATEURS TERRITORIAUX -->
         <div class="panel-card indicators-card">
           <div class="panel-header text-center">Indicateurs territoriaux</div>
@@ -267,6 +311,42 @@
         </div>
       </ng-container>
 
+      <!-- ✅ ASSAINISSEMENT LIQUIDE (LEFT COLUMN) -->
+      <ng-container *ngIf="showEauIndicators && !showEauDiagnostic">
+        <div class="panel-card indicators-card">
+          <div class="panel-header text-center">Assainissement liquide</div>
+          <div class="panel-body">
+            <div class="indicator-item indicator-item-wide">
+              <div class="indicator-text">
+                <div class="indicator-title">Station d’Épuration (STEP) de Laâyoune</div>
+                <div class="mini-note">
+                  Type : Boues activées.<br />
+                  Capacité : <span class="red">320 000</span> Equivalent habitant.<br />
+                  Un traitement tertiaire de <span class="red">18 600 m3/j</span> pour permettre la réutilisation des eaux usées épurées.
+                </div>
+              </div>
+              <div class="indicator-icon soft-blue">
+                <i class="bi bi-droplet-fill"></i>
+              </div>
+            </div>
+
+            <div class="indicator-item indicator-item-wide">
+              <div class="indicator-text">
+                <div class="indicator-title">Assainissement du centre Foum El Oued</div>
+                <div class="mini-note">
+                  Réseau d’assainissement <span class="red">34 300 ml</span>.<br />
+                  Technologie : STEP de type lagunage aéré (<span class="red">débit à l’horizon 2030 : 180 m3/j</span>).
+                </div>
+              </div>
+              <div class="indicator-icon soft-indigo">
+                <i class="bi bi-recycle"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+
       <ng-container *ngIf="showSanteIndicators">
         <ng-container *ngIf="!showSanteDiagnostic">
           <div class="panel-card indicators-card health-card">
@@ -525,6 +605,356 @@
         </div>
       </ng-container>
 
+      <!-- ✅ EAU POTABLE 2025 (RIGHT COLUMN) -->
+      <ng-container *ngIf="showEauIndicators && !showEauDiagnostic">
+        <div class="panel-card indicators-card">
+          <div class="panel-header text-center">Eau Potable (Indicateurs 2025)</div>
+          <div class="panel-body">
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Capacité de production</div>
+                    <div class="indicator-value">760 l/s</div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-speedometer2"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="indicator-item red-panel">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Taux de couverture</div>
+                    <div class="indicator-value red">100%</div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-check-circle-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Infrastructures de production</div>
+                    <div class="mini-note">
+                      <span class="red">2</span> stations de dessalement et <span class="red">3</span> stations monobloc.
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-building"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Infrastructure de distribution</div>
+                    <div class="mini-note">
+                      Longueur du réseau : <span class="red">759 Km</span>.<br />
+                      Nombre d’abonnés : <span class="red">68 927 (juin 2025)</span>.<br />
+                      Capacité de stockage : <span class="red">19 340 m3</span>.
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-diagram-3-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Statistiques d’exploitation</div>
+                    <div class="mini-note">
+                      Production : <span class="red">17 392 335 m3</span> (année 2024).<br />
+                      Distribution : <span class="red">16 818 091 m3</span>.
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-yellow">
+                    <i class="bi bi-graph-up-arrow"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="indicator-item indicator-item-wide">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Ressources de surface</div>
+                    <div class="mini-note">
+                      Le barrage Sakia El Hamra (<span class="red">112 Mm3</span> de capacité).<br />
+                      Contribution à l’alimentation en eau potable de Laâyoune : <span class="red">17,5%</span> de la consommation totale.
+                    </div>
+                  </div>
+                  <div class="indicator-icon soft-green">
+                    <i class="bi bi-water"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showEauDiagnostic"
+            (click)="toggleEauDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- ✅ DIAGNOSTIC EAU POTABLE (RIGHT COLUMN) -->
+      <ng-container *ngIf="showEauIndicators && showEauDiagnostic">
+        <div class="panel-card diagnostic-card">
+          <div class="panel-header diagnostic-header text-center">Diagnostic</div>
+          <div class="panel-body diagnostic-body">
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Réseau vétuste (≈400 km) :</span>
+                pertes importantes, rendement faible <span class="diagnostic-highlight">(53,4 %)</span>.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Capacité de stockage insuffisante :</span>
+                autonomie de <span class="diagnostic-highlight">16 h</span> contre un objectif de <span class="diagnostic-highlight">24 h</span>,
+                exposant la ville à des ruptures d’approvisionnement.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Absence de STEP industrielle à El Marsa :</span>
+                rejets polluants non traités, menace directe pour le littoral et la zone industrielle.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Prétraitement insuffisant des abattoirs :</span>
+                charges polluantes élevées dans le réseau.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Extension nécessaire à Foum El Oued :</span>
+                fermes non couvertes, eaux usées non réutilisées.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showEauDiagnostic"
+            (click)="toggleEauDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- ✅ INDICATEURS EMPLOI (RIGHT COLUMN) -->
+      <ng-container *ngIf="showEmploiIndicators && !showEmploiDiagnostic">
+        <div class="panel-card indicators-card emploi-indicators-card">
+          <div class="panel-header text-center">Indicateurs emploi</div>
+          <div class="panel-body">
+            <div class="emploi-section-title">Taux de chômage</div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="indicator-item red-panel">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Provincial</div>
+                    <div class="indicator-value">27%</div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">National</div>
+                    <div class="indicator-value">21,3%</div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-graph-down-arrow"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="emploi-section-title">Taux d'activité</div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Provincial</div>
+                    <div class="indicator-value">46,8%</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-briefcase-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">National</div>
+                    <div class="indicator-value">41,6%</div>
+                  </div>
+                  <div class="indicator-icon soft-blue">
+                    <i class="bi bi-briefcase"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="emploi-section-title">Taux de pauvreté</div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Provincial</div>
+                    <div class="indicator-value">2,20%</div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-cash-coin"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">National</div>
+                    <div class="indicator-value">3,9%</div>
+                  </div>
+                  <div class="indicator-icon soft-yellow">
+                    <i class="bi bi-cash-stack"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="emploi-section-title">Taux de vulnérabilité</div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">Provincial</div>
+                    <div class="indicator-value">1,10%</div>
+                  </div>
+                  <div class="indicator-icon soft-red">
+                    <i class="bi bi-shield-fill-exclamation"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="indicator-item">
+                  <div class="indicator-text">
+                    <div class="indicator-title">National</div>
+                    <div class="indicator-value">12,9%</div>
+                  </div>
+                  <div class="indicator-icon soft-indigo">
+                    <i class="bi bi-shield-check"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showEmploiDiagnostic"
+            (click)="toggleEmploiDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- ✅ DIAGNOSTIC EMPLOI (RIGHT COLUMN) -->
+      <ng-container *ngIf="showEmploiIndicators && showEmploiDiagnostic">
+        <div class="panel-card diagnostic-card">
+          <div class="panel-header diagnostic-header text-center">Diagnostic</div>
+          <div class="panel-body diagnostic-body">
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Chômage élevé (27 %) :</span>
+                malgré un taux d’activité supérieur au national, l’insertion reste difficile.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Artisanat sous valorisé :</span>
+                absence d’infrastructures dédiées, conditions de travail précaires, faible valorisation des produits locaux.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Zones d’activité insuffisamment aménagées :</span>
+                manque de modernisation et d’extension, freinant l’attractivité pour les investisseurs.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Sites agro valorisation exposés :</span>
+                à l’ensablement et mal desservis, limitant la compétitivité des coopératives.
+              </div>
+            </div>
+
+            <div class="diagnostic-item">
+              <div class="diagnostic-dot"></div>
+              <div class="diagnostic-text">
+                <span class="diagnostic-title">Tourisme peu exploité :</span>
+                accès difficile aux sites naturels et balnéaires (<span class="diagnostic-highlight">Foum El Oued</span>), absence de circuits intégrés et de signalétique adaptée.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagnostic-toggle-wrap">
+          <button
+            type="button"
+            class="btn btn-lg diagnostic-btn w-100"
+            [class.is-active]="showEmploiDiagnostic"
+            (click)="toggleEmploiDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostic
+          </button>
+        </div>
+      </ng-container>
+
       <!-- Education Diagnostic PANEL (left of map visually) -->
       <ng-container *ngIf="showEducationIndicators && showEducationDiagnostic">
         <div class="panel-card diagnostic-card">
@@ -584,7 +1014,7 @@
       </ng-container>
 
 
-      <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators">
+      <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators && !showEmploiIndicators && !showEauIndicators">
         <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
         <div class="panel-card indicators-card">
           <div class="panel-header text-center">Indicateurs socio-économiques</div>
@@ -925,40 +1355,496 @@
     </div>
   </div>
 
-  <!-- ✅ BUTTONS (no menus / no logic) -->
-  <div class="hstack gap-2 mt-5 justify-content-center">
-    <button type="button" class="btn btn-lg mise-btn text-center">
-      <i class="bi bi-geo-alt-fill"></i>
-      Mise à niveau
-    </button>
+</div>
 
-    <button type="button" class="btn btn-lg education-btn text-center" [class.is-active]="showEducationIndicators" (click)="toggleEducationIndicators()">
-      <i class="bi bi-book-fill" [class.d-none]="showEducationIndicators"></i>
-      Education
-      <span class="active-check" *ngIf="showEducationIndicators">
-        <i class="bi bi-check-lg"></i>
-      </span>
-    </button>
+<!-- POPUP EAU POTABLE - EL MARSA -->
+<div class="mise-modal" *ngIf="showEauElmarsaPopup">
+  <div class="mise-backdrop" (click)="closeEauElmarsaPopup()"></div>
 
-    <button type="button" class="btn btn-lg health-btn text-center" [class.is-active]="showSanteIndicators" (click)="toggleSanteIndicators()">
-      <i class="bi bi-heart-pulse-fill" [class.d-none]="showSanteIndicators"></i>
-      Santé
-      <span class="active-check" *ngIf="showSanteIndicators">
-        <i class="bi bi-check-lg"></i>
-      </span>
-    </button>
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeEauElmarsaPopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
 
-    <button type="button" class="btn btn-lg eau-btn text-center">
-      <i class="bi bi-droplet-fill"></i>
-      Eau potable
-    </button>
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune El Marsa
+        </div>
+      </div>
 
-    <button type="button" class="btn btn-lg emploi-btn text-center">
-      <i class="bi bi-briefcase-fill"></i>
-      Emploi
-    </button>
+      <div class="mise-title">
+        <span>Eau Potable</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+      <!-- RIGHT -->
+      <div class="mise-right">
+        <div class="mise-map-wrap">
+          <img [src]="getCurrentEauElmarsaImage()" alt="Eau Potable - El Marsa" />
+        </div>
+      </div>
+
+      <!-- LEFT -->
+      <div class="mise-left">
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <!-- PROJECT 1 -->
+            <ng-container *ngIf="currentEauElmarsaPage === 1">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité d’alimenter en eau potable les unités industrielles existantes et projetées.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance ou absence d’infrastructures d'alimentation en eau potable adaptées aux besoins actuels et futurs de la zone d'activité industrielle d’El Marsa – Foum El Oued.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Développement progressif de nouvelles unités industrielles.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Dépendance actuelle à des solutions provisoires (citernes, forages privés, réseaux non normalisés).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité d’anticiper la croissance industrielle et d’assurer une sécurisation durable de la ressource en eau potable, conformément aux orientations régionales de développement économique.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 2 -->
+            <ng-container *ngIf="currentEauElmarsaPage === 2">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Rejets directs des eaux usées industriels dans le milieu naturel.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Charges polluantes élevées affectant le milieu marin.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité de traiter et maîtriser les rejets industriels.</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+              <div class="action-title">
+                <ng-container *ngIf="currentEauElmarsaPage === 1">
+                  Alimentation en eau potable de la zone industrielle carrefour FOE-El Marsa
+                </ng-container>
+                <ng-container *ngIf="currentEauElmarsaPage === 2">
+                  Travaux de construction d’une STEP des eaux usées à la zone industrielle de la commune d’El Marsa
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <ng-container *ngIf="currentEauElmarsaPage === 1">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réseau de distribution : réalisation d’un réseau structurant d’adduction et de distribution en eau potable destiné à desservir l’ensemble des lots industriels.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Longueur estimative du réseau : <b class="red">20 km</b> (à préciser selon l’étude APS/APD).</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Diamètres projetés adaptés aux débits industriels (<b class="red">DN 75 à DN 400</b>, selon tracé).</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Station de pompage : débit nominal dimensionné selon la demande industrielle actuelle et projetée : <b class="red">40 l/s</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réservoir semi enterré : capacité estimative <b class="red">2000 m³</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réservoir surélevé : capacité estimative <b class="red">500 m³</b>.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEauElmarsaPage === 2">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réduction des charges polluantes.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Protection de l’environnement côtier contre les impacts liés aux effluents industriels.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Respect des normes de rejet et des exigences réglementaires.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Protection de l’environnement.</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ NAV -->
+      <div class="mise-nav">
+        <button
+          type="button"
+          class="mise-nav-btn"
+          [class.disabled]="currentEauElmarsaPage === 1"
+          [disabled]="currentEauElmarsaPage === 1"
+          (click)="prevEauElmarsaPage()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="mise-page">{{ currentEauElmarsaPage }}/2</div>
+        <button
+          type="button"
+          class="mise-nav-btn ok"
+          [class.disabled]="currentEauElmarsaPage === 2"
+          [disabled]="currentEauElmarsaPage === 2"
+          (click)="nextEauElmarsaPage()">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
   </div>
+</div>
 
+<!-- POPUP EAU POTABLE - LAÂYOUNE -->
+<div class="mise-modal" *ngIf="showEauLaayounePopup">
+  <div class="mise-backdrop" (click)="closeEauLaayounePopup()"></div>
+
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeEauLaayounePopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune Laâyoune
+        </div>
+      </div>
+
+      <div class="mise-title">
+        <span>Eau Potable</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+      <!-- RIGHT -->
+      <div class="mise-right">
+        <div class="mise-map-wrap">
+          <img [src]="getCurrentEauLaayouneImage()" alt="Eau Potable - Laâyoune" />
+        </div>
+      </div>
+
+      <!-- LEFT -->
+      <div class="mise-left">
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <!-- PROJECT 1 -->
+            <ng-container *ngIf="currentEauLaayounePage === 1">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Réseau de distribution vétuste et dégradé.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Alimentation en eau potable intermittente.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Fuites fréquentes et pertes d'eau importantes.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>400 km de réseau vétuste à réhabiliter.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Rendement actuel du réseau : <b class="red">53,4 %</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 2 -->
+            <ng-container *ngIf="currentEauLaayounePage === 2">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Besoin en eau potable dans la province de Laâyoune ne cessera d'augmenter dans les prochaines années.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 3 -->
+            <ng-container *ngIf="currentEauLaayounePage === 3">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Vétusté et état dégradé du réseau d'assainissement liquide de la ville.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité de doter les zones d'activités à l'intérieur de la ville en réseau d'assainissement liquide.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité de réaliser une STEP monobloc pour la zone d'activité économique.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Manque des ouvrages de prétraitement des abattoirs de la ville de Laâyoune.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Travaux d'assainissement liquide de la zone des nouveaux équipements au nord et de la ville (CHU, CMC, faculté de médecine...).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité de renforcer le réseau d'assainissement liquide de la zone limitrophe à l'oued Sakia El Hamra.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Besoin d'extension des ouvrages de transfert vers la STEP de la ville de Laâyoune.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Extension de la STEP.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Réhabilitation du réseau d'assainissement liquide de la ville (conduites, ovoïdes...) pour une longueur de <b class="red">200 km</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Capacité de traitement de la STEP actuelle : <b class="green">18 600 m³/j</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 4 -->
+            <ng-container *ngIf="currentEauLaayounePage === 4">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Pertes d'eau et des risques de rupture d'approvisionnement.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Ouvrages de stockage et des équipements dans un état dégradé.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Performances techniques au-dessous des objectifs escomptés.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance de la capacité de stockage actuelle au niveau de la province de Laayoune.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La capacité de stockage actuelle est très insuffisante : <b class="red">29 590 m³</b> avec une <b class="red">autonomie de 16 H</b> (Objectif PNAEPI 24 H).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>L'amélioration des performances techniques des ouvrages.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La réduction des pertes et des risques de rupture d'approvisionnement.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La pérennisation des ouvrages de stockage AEP.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Le taux de rendement du réseau de distribution est de l'ordre de <b class="red">55,5%</b> à la province de Laayoune.</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+              <div class="action-title">
+                <ng-container *ngIf="currentEauLaayounePage === 1">
+                  Réhabilitation du réseau vétuste de distribution d'eau potable de la ville de Laayoune sur <b class="red">239 Km</b> (2éme tranche)
+                </ng-container>
+                <ng-container *ngIf="currentEauLaayounePage === 2">
+                  Extension de la station de dessalement et financement complémentaire de l'ouvrage de prise d'eau de mer
+                </ng-container>
+                <ng-container *ngIf="currentEauLaayounePage === 3">
+                  Mise à niveau, extension et renforcement des ouvrages d'assainissement liquide de la Ville de Laâyoune (1ère & 2ème tranche)
+                </ng-container>
+                <ng-container *ngIf="currentEauLaayounePage === 4">
+                  Renforcement et réhabilitation des ouvrages de stockage au niveau de la province de Laâyoune
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <ng-container *ngIf="currentEauLaayounePage === 1">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Sécurisation de l'alimentation, amélioration des performances, réduction des pertes.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Rendement cible : <b class="red">75 % à l'horizon 2030</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réhabilitation des <b class="red">400 km</b> de réseau.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEauLaayounePage === 2">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Sécuriser et renforcement l'alimentation en eau brute de la station de dessalement de Laâyoune.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Population bénéficiaire: Environ <b class="red">le grand public de la province</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Villes concernées: Laâyoune, El Marsa, Foum El Oued et Tarouma.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Capacité adapté la capacité de production avec l'évolution démographique.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Horizon de saturation: <b class="red">2050</b>.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEauLaayounePage === 3">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Se conformer aux recommandations des études schéma directeur SDAL.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réhabiliter le réseau existant pour optimiser son fonctionnement et maîtriser les charges d'exploitation correspondante (<b class="red">200 km</b>).</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Améliorer la capacité hydraulique et la sécurité d'écoulement.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Étendre le réseau pour couvrir les zones non encore assainies.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Mettre en place le prétraitement des effluents des abattoirs pour réduire la charge polluante avant leur introduction dans le réseau.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Protéger l'environnement et améliorer les conditions de vie de la population.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Rationaliser l'usage de l'eau potable (REUSE).</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Atteindre une capacité de traitement de <b class="red">29 000 m³/j</b>.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEauLaayounePage === 4">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>La réalisation de deux réservoirs semi enterré, de capacité totale de <b class="red">5000 m³</b>, et un réservoir surélevé de capacité <b class="red">500 m³</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>La réalisation de réservoirs à Laayoune d'une capacité de stockage de <b class="red">13 000 m³</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>La réalisation d'un réservoir de <b class="red">1500 m³</b> à la ville d'El Marsa.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>La sécurisation de l'alimentation en eau potable.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>L'amélioration de la capacité de stockage pour atteindre <b class="red">49590 m³</b> et une autonomie de stockage de <b class="red">24h</b> à l'horizon <b class="red">2030</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Atteindre un taux de rendement de <b class="red">75%</b> à l'horizon <b class="red">2030</b>.</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ NAV -->
+      <div class="mise-nav">
+        <button
+          type="button"
+          class="mise-nav-btn"
+          [class.disabled]="currentEauLaayounePage === 1"
+          [disabled]="currentEauLaayounePage === 1"
+          (click)="prevEauLaayounePage()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="mise-page">{{ currentEauLaayounePage }}/4</div>
+        <button
+          type="button"
+          class="mise-nav-btn ok"
+          [class.disabled]="currentEauLaayounePage === 4"
+          [disabled]="currentEauLaayounePage === 4"
+          (click)="nextEauLaayounePage()">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- POPUP MISE À NIVEAU (style like image 1) -->
@@ -1419,3 +2305,762 @@
   </div>
 </div>
 
+<!-- POPUP EDUCATION - LAAYOUNE -->
+<div class="mise-modal" *ngIf="showEducationLaayounePopup">
+  <div class="mise-backdrop" (click)="closeEducationLaayounePopup()"></div>
+
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeEducationLaayounePopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune Laâyoune
+        </div>
+      </div>
+
+      <div class="mise-title">
+        <span>Éducation</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+      <!-- RIGHT -->
+      <div class="mise-right">
+        <div class="mise-map-wrap">
+          <img [src]="getCurrentEducationImage()" alt="Éducation - Laâyoune" />
+        </div>
+      </div>
+
+      <!-- LEFT -->
+      <div class="mise-left">
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <!-- PROJECT 1 -->
+            <ng-container *ngIf="currentEducationProjectPage === 1">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Capacité d’accueil du collège unique du secteur scolaire est saturé.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Surcharge des effectifs dans les classes existantes.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Forte densité de la population scolaire dans le secteur concerné.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>L’encombrement des classes atteindra un effectif moyen de <b class="red">45 élèves</b> par classe à l’horizon 2027 au niveau de l’établissement collégial le plus proche du secteur scolaire (<b class="red">lycée collégial 25 Mars</b>).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La distance jusqu’à l’établissement collégial le plus proche du secteur scolaire est d’environ <b class="red">1,4 km</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Taux d’utilisation des salles de classe (<b class="red">100 %</b>).</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 2 -->
+            <ng-container *ngIf="currentEducationProjectPage === 2">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nouveaux lotissements non couverts par l’offre éducative existante.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre total de lots résidentiels du lotissement Sûreté (TADAMON) : <b class="red">1 600 lots</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre d’écoles primaires dans le secteur : <b class="red">0 établissement</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre prévisionnel de ménages dans le périmètre concerné : <b class="red">300 ménages</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre prévisionnel d’élèves du primaire résidant dans le lotissement Sûreté : <b class="red">environ 200 élèves</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La distance entre le lotissement et l’établissement scolaire le plus proche est d’environ <b class="red">1,3 km</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 3 -->
+            <ng-container *ngIf="currentEducationProjectPage === 3">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nouveau lotissement non couvert par l’offre éducative.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre total de lots résidentiels du lotissement Sûreté (TADAMON) : <b class="red">1 600 lots</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre de lycée collégial dans le secteur : <b class="red">0 établissement</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre prévisionnel de ménages dans le périmètre concerné : <b class="red">300 ménages</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre prévisionnel d’élèves du collège résidant dans le lotissement Sûreté : <b class="red">environ 200 élèves</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 4 -->
+            <ng-container *ngIf="currentEducationProjectPage === 4">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nouveaux lotissements non couverts par l’offre éducative existante.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre total de lots résidentiels du lotissement Sûreté (TADAMON) : <b class="red">1 600 lots</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre de lycée qualifiant dans le secteur : <b class="red">0 établissement</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre prévisionnel de ménages dans le périmètre concerné : <b class="red">300 ménages</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre prévisionnel d’élèves résidant dans le lotissement Sûreté : <b class="red">environ 200 élèves</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La distance entre le lotissement et l’établissement scolaire le plus proche est d’environ <b class="red">1,8 km</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 5 -->
+            <ng-container *ngIf="currentEducationProjectPage === 5">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nouveau lotissement non couvert par l’offre éducative.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre estimé de ménages dans le périmètre concerné : <b class="red">300 ménages</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre d’écoles primaires dans le secteur : <b class="red">0 établissements</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Le nombre prévisionnel d’élèves du cycle primaire attendus dans le nouvel établissement est de <b class="red">400 élèves</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 6 -->
+            <ng-container *ngIf="currentEducationProjectPage === 6">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nouveau lotissement non couvert par l’offre éducative.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre estimé de ménages dans le périmètre concerné : <b class="red">300 ménages</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nombre d’écoles primaires dans le secteur : <b class="red">0 établissements</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Le nombre prévisionnel d’élèves du cycle primaire attendus dans le nouvel établissement est de <b class="red">400 élèves</b>.</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+              <div class="action-title">
+                <ng-container *ngIf="currentEducationProjectPage === 1">
+                  Construction d’un lycée collégial dans le Lotissement Al Khayr à Laâyoune
+                </ng-container>
+                <ng-container *ngIf="currentEducationProjectPage === 2">
+                  Construction d’une école primaire dans le Lotissement de Sûreté
+                </ng-container>
+                <ng-container *ngIf="currentEducationProjectPage === 3">
+                  Construction d’un lycée collégial dans le Lotissement de Sûreté
+                </ng-container>
+                <ng-container *ngIf="currentEducationProjectPage === 4">
+                  Construction d’un lycée qualifiant dans le lotissement Sûreté – Laâyoune
+                </ng-container>
+                <ng-container *ngIf="currentEducationProjectPage === 5">
+                  Construction d’une école primaire 1 dans le Lotissement Edooha
+                </ng-container>
+                <ng-container *ngIf="currentEducationProjectPage === 6">
+                  Construction d’une école primaire 2 dans le Lotissement Edooha
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <ng-container *ngIf="currentEducationProjectPage === 1">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Les élèves du cycle collégial résidant dans le quartier concerné.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Établissement à créer pour désengorger les structures existantes.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEducationProjectPage === 2">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Le projet s’adresse aux élèves du cycle primaire résidant dans le quartier concerné, afin de garantir un accès équitable à l’éducation de base.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEducationProjectPage === 3">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Les élèves du cycle collégial résidant dans le lotissement concerné.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEducationProjectPage === 4">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Le projet s’adresse aux élèves du cycle qualifiant résidant dans le quartier concerné.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEducationProjectPage === 5">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Le projet s’adresse aux élèves du cycle primaire résidant dans le quartier concerné, afin de garantir un accès équitable à l’éducation de base.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEducationProjectPage === 6">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Le projet s’adresse aux élèves du cycle primaire résidant dans le quartier concerné, afin de garantir un accès équitable à l’éducation de base.</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ NAV -->
+      <div class="mise-nav">
+        <button
+          type="button"
+          class="mise-nav-btn"
+          [class.disabled]="currentEducationProjectPage === 1"
+          [disabled]="currentEducationProjectPage === 1"
+          (click)="prevEducationProjectPage()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="mise-page">{{ currentEducationProjectPage }}/6</div>
+        <button
+          type="button"
+          class="mise-nav-btn ok"
+          [class.disabled]="currentEducationProjectPage === 6"
+          [disabled]="currentEducationProjectPage === 6"
+          (click)="nextEducationProjectPage()">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP EMPLOI - LAAYOUNE -->
+<div class="mise-modal" *ngIf="showEmploiPopup">
+  <div class="mise-backdrop" (click)="closeEmploiPopup()"></div>
+
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeEmploiPopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune Laâyoune
+        </div>
+      </div>
+
+      <div class="mise-title">
+        <span>Emploi</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+      <!-- RIGHT -->
+      <div class="mise-right">
+        <div class="mise-map-wrap">
+          <img [src]="getCurrentEmploiImage()" alt="Emploi - Laâyoune" />
+        </div>
+      </div>
+
+      <!-- LEFT -->
+      <div class="mise-left">
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <!-- PROJECT 1 -->
+            <ng-container *ngIf="currentEmploiProjectPage === 1">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance d’infrastructures dédiées à l’artisanat.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Faible valorisation des produits artisanaux locaux.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Besoin de création d’emplois et de revenus pour les artisans.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité de dynamiser l’économie locale.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Conditions de travail des artisans à améliorer.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Importance de valoriser le patrimoine culturel de la région.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 2 -->
+            <ng-container *ngIf="currentEmploiProjectPage === 2">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Plusieurs ateliers en exploitation :</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Activités de 3° catégorie (mécanique, tôlerie...).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Unités industrielles de petite et moyenne taille (production de matériaux de construction, ateliers métallurgiques...).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Dépôts et magasins de stockage.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Faible niveau de viabilisation.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Absence d’équipement.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 3 -->
+            <ng-container *ngIf="currentEmploiProjectPage === 3">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Zone d’activité en cours de construction (<b class="red">70%</b>).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Zone d’extension encore vierge non aménagée.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Le taux de chômage provincial de (<b class="red">27 %</b>) est plus élevé que la moyenne nationale (<b class="red">21,3 %</b>), ce qui impose la création de nouvelles opportunités d’emploi.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance d’opportunités d’emploi direct et durable, freinant le développement socio-économique local.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Faible niveau d’investissement.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Concentration des activités productives dans des zones résidentielles inadaptées, créant des contraintes pour les habitants.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Absence d’une plateforme dédiée pour accueillir les fournisseurs et entreprises de la <b class="red">3° catégorie</b> hors zones résidentielles.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 4 -->
+            <ng-container *ngIf="currentEmploiProjectPage === 4">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Localisation du site dans une zone exposée à l’ensablement.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance d’infrastructures d'accès au projet inscrit dans le cadre de la stratégie Génération Green.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Manque d’électricité.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Création d'emplois : <b class="red">250 emplois permanents</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Création de valeur ajoutée : <b class="red">2,4 millions de dirhams par an</b>.</span>
+              </div>
+            </ng-container>
+
+            <!-- PROJECT 5 -->
+            <ng-container *ngIf="currentEmploiProjectPage === 5">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Accès aux sites naturels et balnéaires peu ou partiellement aménagés.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Absence de circuits touristiques intégrés et de signalétique adaptée.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Manque de valorisation culturelle et historique des sites à fort potentiel.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nature dominante du territoire Zones naturelles, littorales, dunaires et semi-désertiques.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Potentiel touristique global Elevé à très élevé, surtout en saison estivale.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Typologie de tourisme ciblé Balnéaire, Familial, Écologique Culturel, Aventure désertique.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Niveau d'aménagement requis Ouverture de pistes, signalétique, équipements d'accueil, animation touristique.</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+              <div class="action-title">
+                <ng-container *ngIf="currentEmploiProjectPage === 1">
+                  Aménagement et équipement des ateliers artisanaux au niveau de la deuxième plateforme du Grand Marché de Laâyoune
+                </ng-container>
+                <ng-container *ngIf="currentEmploiProjectPage === 2">
+                  Restructuration de la zone d'activité (3ème catégorie) Al Hizam Phase 1 (70 ha)
+                </ng-container>
+                <ng-container *ngIf="currentEmploiProjectPage === 3">
+                  Extension de la zone d’activité (52,3 Ha)
+                </ng-container>
+                <ng-container *ngIf="currentEmploiProjectPage === 4">
+                  Viabilisation des Unités de valorisation des produits agricoles à la commune territoriale de Laâyoune
+                </ng-container>
+                <ng-container *ngIf="currentEmploiProjectPage === 5">
+                  Aménagement des accès pour les sites touristiques au niveau de la province de Laâyoune sur 10 km.
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <ng-container *ngIf="currentEmploiProjectPage === 1">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre d’emplois directs créés : <b class="red">600</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre de bénéficiaires ciblés par catégorie : <b class="red">200</b>.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEmploiProjectPage === 2">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Moderniser les infrastructures de la zone d’activité.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Améliorer l'accessibilité et la mobilité au sein de la zone.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Attirer de nouveaux investissements économiques.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Améliorer les conditions de travail des usagers.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Contribuer au développement économique local.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre d’emplois directs : <b class="red">2 200 emplois</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombres des bénéficiaires par catégories ciblées : <b class="red">340</b> toute catégorie confondue.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEmploiProjectPage === 3">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Encourager l’investissement.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Accélérer la délocalisation des activités <b class="red">3° catégorie</b> hors zones résidentielles.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Créer une plateforme accueillant les fournisseurs de la zone d’activité <b class="red">3ème catégorie</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Création des postes d’emploi.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre d’emplois directs : <b class="red">2 500 emplois</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombres des bénéficiaires par catégories ciblées : <b class="red">245</b> toute catégorie confondue.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEmploiProjectPage === 4">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Valorisation des produits agricoles.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Création d'emploi.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Construction d’un mur en béton contre l’ensablement.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Électrification du site.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Construction d’une route.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Amélioration des conditions de travail des artisans.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre d'organisation professionnelle (coopératives, Union des coopératives et Groupement d’intérêt Economiques) : <b class="red">6</b> dont <b class="red">4 coopératives</b>, <b class="red">1 Union des coopératives</b> et <b class="red">1 Groupement d’intérêt Economiques</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre de bénéficiaires : <b class="red">232</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre d’emplois à créer : <b class="red">600 emplois</b>.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEmploiProjectPage === 5">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Réalisation d’accès aux sites naturels et balnéaires peu ou partiellement aménagés.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Nombre d’emplois à créer : <b class="red">400 emplois</b>.</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ NAV -->
+      <div class="mise-nav">
+        <button
+          type="button"
+          class="mise-nav-btn"
+          [class.disabled]="currentEmploiProjectPage === 1"
+          [disabled]="currentEmploiProjectPage === 1"
+          (click)="prevEmploiProjectPage()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="mise-page">{{ currentEmploiProjectPage }}/5</div>
+        <button
+          type="button"
+          class="mise-nav-btn ok"
+          [class.disabled]="currentEmploiProjectPage === 5"
+          [disabled]="currentEmploiProjectPage === 5"
+          (click)="nextEmploiProjectPage()">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP EAU POTABLE - FOUM EL OUED -->
+<div class="mise-modal" *ngIf="showEauPopup">
+  <div class="mise-backdrop" (click)="closeEauPopup()"></div>
+
+  <div class="mise-modal-card" (click)="$event.stopPropagation()">
+    <!-- TOP BAR -->
+    <div class="mise-topbar">
+      <div class="mise-topbar-right">
+        <button type="button" class="mise-close" (click)="closeEauPopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="mise-badge">
+          <span class="mise-badge-bracket"></span>
+          Commune Foum El Oued
+        </div>
+      </div>
+
+      <div class="mise-title">
+        <span>Eau Potable</span>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="mise-body">
+      <!-- RIGHT -->
+      <div class="mise-right">
+        <div class="mise-map-wrap">
+          <img src="assets/projects/eauFoumeloued.png" alt="Eau Potable - Foum El Oued" />
+        </div>
+      </div>
+
+      <!-- LEFT -->
+      <div class="mise-left">
+        <!-- INDICATEURS -->
+        <div class="mise-box etat-box">
+          <div class="mise-box-header etat-header">
+            Indicateurs et états des lieux
+          </div>
+
+          <div class="mise-box-body mise-scroll">
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Nécessité de réaliser des extensions du réseau d’assainissement liquide au niveau de la commune y compris les fermes.</span>
+            </div>
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Pénurie des ressources hydriques (<b class="red">arrosage des espaces verts</b>).</span>
+            </div>
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Extension des réseaux d’assainissement liquide.</span>
+            </div>
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Renforcement des ouvrages d’assainissement liquide.</span>
+            </div>
+            <div class="etat-line">
+              <span class="etat-bullet"></span>
+              <span>Réutilisation des eaux épurées pour l’arrosage des espaces verts.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTION + CIBLAGE -->
+        <div class="mise-bottom-grid">
+          <!-- ACTION -->
+          <div class="mise-box action-box">
+            <div class="mise-box-header action-header">Action proposée</div>
+            <div class="mise-box-body action-body">
+              <div class="s1-pill">S1</div>
+              <div class="action-title">
+                Extension du réseau d'assainissement liquide de la commune de Foum El Oued et des fermes et la réutilisation des eaux épurées pour l'arrosage des espaces verts de la commune
+              </div>
+            </div>
+          </div>
+
+          <!-- CIBLAGE -->
+          <div class="mise-box ciblage-box">
+            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-body ciblage-body mise-scroll">
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Protection de l’environnement.</span>
+              </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Amélioration des conditions de vie de la population.</span>
+              </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Rationalisation de l’usage de l’eau potable (<b class="red">REUSE</b>).</span>
+              </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Renforcement des ouvrages d’assainissement liquide pour s’aligner au développement démographique et urbain.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
