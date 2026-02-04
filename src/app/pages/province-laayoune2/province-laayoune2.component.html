@@ -44,160 +44,231 @@
     </button>
   </div>
 
-  <div class="row g-4 align-items-stretch">
+  <div class="row g-4 align-items-stretch province-layout-row">
 
     <!-- ✅ COLONNE GAUCHE : INDICATEURS -->
-    <div class="col-md-3 d-flex flex-column gap-4">
+    <div
+      class="col-12 d-flex flex-column gap-4 order-md-1 col-md-7"
+      [ngClass]="(!showSanteIndicators && !showEducationIndicators && !showEmploiIndicators) || showEauIndicators ? 'col-md-6' : 'col-md-3'"
+    >
 
       <ng-container *ngIf="!showSanteIndicators && !showEducationIndicators && !showEmploiIndicators && !showEauIndicators">
-        <!-- ✅ INDICATEURS TERRITORIAUX -->
-        <div class="panel-card indicators-card">
-          <div class="panel-header text-center">Indicateurs territoriaux</div>
+        <div class="indicators-dashboard">
+          <div class="dash-header">
+            <div class="dash-title">Indicateurs et état des lieux</div>
+            <div class="dash-subtitle">Indicateurs Démographiques et Socio-économiques Clés</div>
+          </div>
 
-          <div class="panel-body">
-            <div class="row g-3">
-
-              <div class="col-6">
-                <div class="indicator-item">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Superficie (km²)</div>
-                    <div class="indicator-value">140 018</div>
-                  </div>
-                  <div class="indicator-icon soft-indigo">
-                    <i class="bi bi-map"></i>
-                  </div>
+          <div class="dash-grid">
+            <div class="dash-card dash-card-demographie dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-people-fill"></i></div>
+              <div class="dash-card-title">Démographie</div>
+              <div class="dash-card-main">
+                <div class="dash-big">295&nbsp;555</div>
+                <div class="dash-label">Habitants</div>
+              </div>
+              <div class="dash-split">
+                <div class="dash-split-item">
+                  <div class="dash-split-val">73&nbsp;866</div>
+                  <div class="dash-split-label">Ménages</div>
+                </div>
+                <div class="dash-split-item">
+                  <div class="dash-split-val">3,9</div>
+                  <div class="dash-split-label">personnes/ménage</div>
                 </div>
               </div>
-
-              <div class="col-6">
-                <div class="indicator-item">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Densité (Hab./Km²)</div>
-                    <div class="indicator-value">3,2</div>
-                  </div>
-                  <div class="indicator-icon soft-blue">
-                    <i class="bi bi-people"></i>
-                  </div>
-                </div>
+              <div class="dash-mini">
+                <span>Hommes</span>
+                <strong>50,5%</strong>
+                <span class="sep">/</span>
+                <span>Femmes</span>
+                <strong>49,5%</strong>
               </div>
-
             </div>
+
+            <div class="dash-card dash-card--amber">
+              <div class="dash-card-icon icon-amber"><i class="bi bi-geo-alt-fill"></i></div>
+              <div class="dash-card-title">Territoire</div>
+              <div class="dash-stat">
+                <div class="dash-stat-icon soft-orange"><i class="bi bi-map"></i></div>
+                <div>
+                  <div class="dash-stat-val">11&nbsp;002</div>
+                  <div class="dash-stat-label">Km² Superficie</div>
+                </div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-icon soft-yellow"><i class="bi bi-people-fill"></i></div>
+                <div>
+                  <div class="dash-stat-val">26,9</div>
+                  <div class="dash-stat-label">Hab./Km² Densité</div>
+                  <div class="dash-note">(51,8 Hab./km² National)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card dash-card--green dash-card-activity">
+              <div class="dash-card-icon icon-green"><i class="bi bi-graph-up-arrow"></i></div>
+              <div class="dash-card-title">Taux d'Activité</div>
+              <div class="dash-big green">46,8% <i class="bi bi-arrow-up"></i></div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (41,6%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill" style="width:46.8%"></div>
+                  <span class="dash-bar-cap" style="left:41.6%"></span>
+                </div>
+              </div>
+              <div class="dash-note positive">Dynamique positive</div>
+            </div>
+
+            <div class="dash-card dash-card--green dash-card-urban">
+              <div class="dash-card-icon icon-green"><i class="bi bi-buildings"></i></div>
+              <div class="dash-card-title">Taux d'Urbanisation</div>
+              <div class="dash-urban-center">
+                <div class="dash-urban-circle">
+                  <svg viewBox="0 0 100 100" class="urban-ring">
+                    <circle cx="50" cy="50" r="40" class="urban-ring-bg"></circle>
+                    <circle cx="50" cy="50" r="40" class="urban-ring-fg" style="stroke-dasharray: 251.2; stroke-dashoffset: 3.3;"></circle>
+                    <text x="50" y="48" text-anchor="middle" class="urban-ring-text">98,7%</text>
+                    <text x="50" y="60" text-anchor="middle" class="urban-ring-sub">Urbain</text>
+                  </svg>
+                </div>
+              </div>
+              <div class="dash-urban-footer">
+                <span class="dash-urban-rural">Rural : 1,3%</span>
+                <span class="dash-urban-note">Forte concentration urbaine</span>
+              </div>
+            </div>
+
+            <div class="dash-card dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-people"></i></div>
+              <div class="dash-card-title">Jeunesse</div>
+              <div class="dash-big green">43,9%</div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (41,3%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill" style="width:43.9%"></div>
+                  <span class="dash-bar-cap" style="left:41.3%"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dash-card dash-card--red">
+              <div class="dash-card-icon icon-red"><i class="bi bi-briefcase-fill"></i></div>
+              <div class="dash-card-title">Taux de Chômage</div>
+              <div class="dash-big red">27%</div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (21,3%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill red" style="width:27%"></div>
+                  <span class="dash-bar-cap" style="left:21.3%"></span>
+                </div>
+              </div>
+              <div class="dash-note red">Écart: +5,7 pts</div>
+            </div>
+
+            <div class="dash-card dash-card-tall dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-graph-up"></i></div>
+              <div class="dash-card-title">Évolution de la Population</div>
+              <div class="evo-chart">
+                <svg class="evo-svg" viewBox="0 0 520 170" preserveAspectRatio="none">
+                  <rect x="45" y="18" width="455" height="105" class="evo-area"/>
+                  <line x1="45" y1="123" x2="500" y2="123" class="evo-grid"/>
+                  <line x1="45" y1="88"  x2="500" y2="88"  class="evo-grid"/>
+                  <line x1="45" y1="53"  x2="500" y2="53"  class="evo-grid"/>
+                  <text x="10" y="127" class="evo-y">0</text>
+                  <text x="10" y="92"  class="evo-y">200000</text>
+                  <text x="10" y="57"  class="evo-y">300000</text>
+                  <circle cx="120" cy="90" r="7" class="evo-dot"/>
+                  <text x="120" y="70" text-anchor="middle" class="evo-val">199603</text>
+                  <circle cx="285" cy="72" r="7" class="evo-dot"/>
+                  <text x="285" y="52" text-anchor="middle" class="evo-val">238096</text>
+                  <circle cx="450" cy="40" r="7" class="evo-dot"/>
+                  <text x="450" y="20" text-anchor="middle" class="evo-val">295555</text>
+                  <polyline points="120,90 285,72 450,40" class="evo-line"/>
+                  <text x="120" y="155" text-anchor="middle" class="evo-x">2004</text>
+                  <text x="285" y="155" text-anchor="middle" class="evo-x">2014</text>
+                  <text x="450" y="155" text-anchor="middle" class="evo-x">2024</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="dash-card dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-book-half"></i></div>
+              <div class="dash-card-title">Taux d'analphabétisme</div>
+              <div class="dash-big green">13,3%</div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (24,8%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill" style="width:13.3%"></div>
+                  <span class="dash-bar-cap" style="left:24.8%"></span>
+                </div>
+              </div>
+              <div class="dash-note">Inférieur au National</div>
+            </div>
+
+            <div class="dash-card dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-shield-check"></i></div>
+              <div class="dash-card-title">Taux de Vulnérabilité</div>
+              <div class="dash-big green">1,1%</div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (12,9%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill" style="width:1.1%"></div>
+                  <span class="dash-bar-cap" style="left:12.9%"></span>
+                </div>
+              </div>
+              <div class="dash-note">Excellente résilience sociale</div>
+            </div>
+
+            <div class="dash-card dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-mortarboard-fill"></i></div>
+              <div class="dash-card-title">Taux de scolarisation</div>
+              <div class="dash-big green">96,8%</div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (95,8%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill" style="width:96.8%"></div>
+                  <span class="dash-bar-cap" style="left:95.8%"></span>
+                </div>
+              </div>
+            </div>
+            <div class="dash-card dash-card--green">
+              <div class="dash-card-icon icon-green"><i class="bi bi-cash-coin"></i></div>
+              <div class="dash-card-title">Pauvreté multidimensionnelle</div>
+              <div class="dash-big green">2,4%</div>
+              <div class="dash-bar">
+                <div class="dash-bar-labels">
+                  <span class="dash-bar-province">Province</span>
+                  <span class="dash-bar-national">National (6,8%)</span>
+                </div>
+                <div class="dash-bar-track dash-bar-track-cap">
+                  <div class="dash-bar-fill" style="width:2.4%"></div>
+                  <span class="dash-bar-cap" style="left:6.8%"></span>
+                </div>
+              </div>
+              <div class="dash-note">Nettement inférieur à la moyenne</div>
+            </div>
+
           </div>
         </div>
-
-        <!-- ✅ INDICATEURS DÉMOGRAPHIQUES -->
-        <div class="panel-card indicators-card">
-          <div class="panel-header text-center">Indicateurs démographiques</div>
-
-          <div class="panel-body">
-            <div class="row g-3">
-
-              <div class="col-12">
-                <div class="indicator-item indicator-item-wide">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Population totale</div>
-                    <div class="indicator-value">451 028</div>
-                  </div>
-                  <div class="indicator-icon soft-indigo">
-                    <i class="bi bi-people-fill"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <div class="indicator-item indicator-item-wide">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Répartition (Urbaine / Rurale)</div>
-
-                    <div class="split-mini">
-                      <div class="split-mini-box">
-                        <div class="split-mini-label">Urbaine</div>
-                        <div class="split-mini-val">416 636</div>
-                        <div class="split-mini-pct">92,37%</div>
-                      </div>
-
-                      <div class="split-mini-box">
-                        <div class="split-mini-label">Rurale</div>
-                        <div class="split-mini-val">34 392</div>
-                        <div class="split-mini-pct">7,62%</div>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="indicator-icon soft-gray">
-                    <i class="bi bi-diagram-2-fill"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6">
-                <div class="indicator-item">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Ménages</div>
-                    <div class="indicator-value">106 751</div>
-                  </div>
-                  <div class="indicator-icon soft-gray">
-                    <i class="bi bi-house-door-fill"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6">
-                <div class="indicator-item">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Taille du ménage</div>
-                    <div class="indicator-value">3,9</div>
-                    <div class="mini-note">personnes/ménage</div>
-                  </div>
-                  <div class="indicator-icon soft-blue">
-                    <i class="bi bi-people"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6">
-                <div class="indicator-item">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Femmes</div>
-                    <div class="indicator-value">49%</div>
-                  </div>
-                  <div class="indicator-icon soft-red">
-                    <i class="bi bi-gender-female"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-6">
-                <div class="indicator-item">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Hommes</div>
-                    <div class="indicator-value">51%</div>
-                  </div>
-                  <div class="indicator-icon soft-indigo">
-                    <i class="bi bi-gender-male"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <div class="indicator-item indicator-item-wide">
-                  <div class="indicator-text">
-                    <div class="indicator-title">Taux d’urbanisation</div>
-                    <div class="indicator-value">92,4%</div>
-                  </div>
-                  <div class="indicator-icon soft-green">
-                    <i class="bi bi-building"></i>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- ✅ INDICATEURS SOCIO-ÉCONOMIQUES -->
-        <!-- (tu peux ajouter ici si tu veux) -->
       </ng-container>
 
       <ng-container *ngIf="showEducationIndicators && !showEducationDiagnostic">
@@ -311,41 +382,819 @@
         </div>
       </ng-container>
 
-      <!-- ✅ ASSAINISSEMENT LIQUIDE (LEFT COLUMN) -->
-      <ng-container *ngIf="showEauIndicators && !showEauDiagnostic">
-        <div class="panel-card indicators-card">
-          <div class="panel-header text-center">Assainissement liquide</div>
-          <div class="panel-body">
-            <div class="indicator-item indicator-item-wide">
-              <div class="indicator-text">
-                <div class="indicator-title">Station d’Épuration (STEP) de Laâyoune</div>
-                <div class="mini-note">
-                  Type : Boues activées.<br />
-                  Capacité : <span class="red">320 000</span> Equivalent habitant.<br />
-                  Un traitement tertiaire de <span class="red">18 600 m3/j</span> pour permettre la réutilisation des eaux usées épurées.
+      <!-- ✅ EAU & ASSAINISSEMENT (LEFT COLUMN) -->
+      <ng-container *ngIf="showEauIndicators">
+        <div class="eau-assainissement-wrapper">
+          <div class="panel-header text-center eau-main-header">
+            <div class="eau-header-sub">
+              <span class="eau-header-pill">Axe Stratégique 04</span>
+              <span class="eau-header-pill muted">Indicateurs et état des lieux</span>
+            </div>
+            EAU & ASSAINISSEMENT
+          </div>
+          <div class="row g-3 eau-two-cards">
+            <div class="col-md-6">
+              <div class="panel-card eau-card eau-card-active">
+                <div class="eau-card-header">
+                  <i class="bi bi-droplet-fill eau-card-icon"></i>
+                  <span>Eau Potable</span>
                 </div>
-              </div>
-              <div class="indicator-icon soft-blue">
-                <i class="bi bi-droplet-fill"></i>
+                <div class="panel-body">
+                  <div class="eau-list">
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Capacité de production</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">760 litres</span>
+                            <span class="eau-muted">par seconde (l/s)</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="eau-divider"></div>
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-shield-check"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Taux de couverture</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">100%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="eau-divider"></div>
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-tools"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Infrastructures de production</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">2</span>
+                            <span class="eau-muted">stations de dessalement</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">3</span>
+                            <span class="eau-muted">stations monobloc</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="eau-divider"></div>
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-gear-fill"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Infrastructure de distribution</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">759 Km</span>
+                            <span class="eau-muted">Longueur du réseau</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">68 927</span>
+                            <span class="eau-muted">Nombre d'abonnés</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">19 340 m³</span>
+                            <span class="eau-muted">Capacité de stockage</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="eau-divider"></div>
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-bar-chart-fill"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Statistiques d'exploitation</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">17 392 335 m³</span>
+                            <span class="eau-muted">Production</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">16 818 091 m³</span>
+                            <span class="eau-muted">Distribution</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="eau-divider"></div>
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-water"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Ressources de surface</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">112 Mm³</span>
+                            <span class="eau-muted">de capacité barrage Sakia El Hamra</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-value red">17,5%</span>
+                            <span class="eau-muted">de la consommation totale</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="indicator-item indicator-item-wide">
-              <div class="indicator-text">
-                <div class="indicator-title">Assainissement du centre Foum El Oued</div>
-                <div class="mini-note">
-                  Réseau d’assainissement <span class="red">34 300 ml</span>.<br />
-                  Technologie : STEP de type lagunage aéré (<span class="red">débit à l’horizon 2030 : 180 m3/j</span>).
+            <div class="col-md-6">
+              <div class="panel-card eau-card eau-card-inactive">
+                <div class="eau-card-header eau-card-header-inactive">
+                  <i class="bi bi-recycle eau-card-icon"></i>
+                  <span>Assainissement Liquide</span>
                 </div>
-              </div>
-              <div class="indicator-icon soft-indigo">
-                <i class="bi bi-recycle"></i>
+                <div class="panel-body">
+                  <div class="eau-list">
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-droplet-fill"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Station d'Épuration (STEP) de Laâyoune</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-label">Type :</span>
+                            <span class="eau-muted">Boues activées.</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-label">Capacité :</span>
+                            <span class="eau-value red">320 000</span>
+                            <span class="eau-muted">Equivalent habitant.</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-label">Un traitement tertiaire de</span>
+                            <span class="eau-value red">18 600 m3/j</span>
+                            <span class="eau-muted">pour permettre la réutilisation des eaux usées épurées.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="eau-divider"></div>
+                    <div class="eau-item">
+                      <div class="eau-item-icon"><i class="bi bi-recycle"></i></div>
+                      <div class="eau-item-content">
+                        <div class="eau-item-title">Assainissement du centre Foum El Oued</div>
+                        <div class="eau-item-lines">
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-label">Réseau d’assainissement</span>
+                            <span class="eau-value red">34 300 ml</span>
+                          </div>
+                          <div class="eau-line">
+                            <span class="eau-dot"></span>
+                            <span class="eau-label">Technologie :</span>
+                            <span class="eau-muted">STEP de type lagunage aéré</span>
+                          </div>
+                          <div class="eau-line eau-line-note">
+                            <span class="eau-value red">(débit à l’horizon 2030 : 180 m3/j).</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="eau-diagnostic-wrap">
+          <button
+            type="button"
+            class="eau-diagnostic-btn"
+            [class.is-active]="showEauDiagnostic"
+            (click)="toggleEauDiagnostic()"
+          >
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Diagnostique et Ciblage
+          </button>
+          <button type="button" class="eau-action-btn" (click)="openEauActionsPopup()">
+            <i class="bi bi-check2-circle"></i>
+            Actions proposés
+          </button>
+        </div>
       </ng-container>
 
+      <!-- POPUP DIAGNOSTIC EAU - Moved outside containers to always show when active -->
+      <div class="eau-diag-modal" *ngIf="showEauIndicators && showEauDiagnostic">
+        <div class="eau-diag-backdrop" (click)="toggleEauDiagnostic()"></div>
+        <div class="eau-diag-card" (click)="$event.stopPropagation()">
+          <button type="button" class="eau-diag-close" (click)="toggleEauDiagnostic()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+
+          <div class="eau-diag-content">
+            <!-- LEFT PANEL -->
+            <div class="eau-diag-panel eau-diag-left">
+              <div class="eau-diag-header left">
+                <i class="bi bi-droplet-fill"></i>
+                État des Lieux & Déficits
+              </div>
+
+              <div class="eau-diag-stats">
+                <div class="eau-diag-stat">
+                  <div class="stat-value">53,4%</div>
+                  <div class="stat-label red">Rendement Réseau</div>
+                </div>
+                <div class="eau-diag-stat">
+                  <div class="stat-value">16 h</div>
+                  <div class="stat-label red">Autonomie Stockage</div>
+                </div>
+                <div class="eau-diag-stat">
+                  <div class="stat-value">18 600 m³/j</div>
+                  <div class="stat-label red">Capacité de Traitement</div>
+                </div>
+              </div>
+
+              <div class="eau-diag-list">
+                <div class="eau-diag-item">
+                  <div class="eau-diag-item-title">
+                    <i class="bi bi-wind"></i>
+                    Vétusté du Réseau
+                  </div>
+                  <div class="eau-diag-item-text">
+                    ≈ <b>400 km</b> de conduites vétustes générant des pertes importantes
+                    (Rendement &lt; 60%).
+                  </div>
+                </div>
+
+                <div class="eau-diag-item">
+                  <div class="eau-diag-item-title">
+                    <i class="bi bi-hourglass-split"></i>
+                    Sécurisation Fragile
+                  </div>
+                  <div class="eau-diag-item-text">
+                    Autonomie de stockage limitée à <span class="red"><b>16h</b></span>,
+                    en deçà des normes de sécurisation (24h) pour une zone aride.
+                  </div>
+                </div>
+
+                <div class="eau-diag-item">
+                  <div class="eau-diag-item-title">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    Risque Environnemental
+                  </div>
+                  <div class="eau-diag-item-text">
+                    Absence de STEP industrielle à El Marsa : rejets directs polluant le littoral.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="eau-diag-panel eau-diag-right">
+              <div class="eau-diag-header right">
+                <i class="bi bi-bullseye"></i>
+                Impacts & Résultats Ciblés
+              </div>
+
+              <div class="eau-diag-gauge">
+                <div class="gauge-title">
+                  <i class="bi bi-droplet"></i>
+                  Rendement du Réseau
+                </div>
+                <div class="gauge-ring-wrapper">
+                  <svg class="gauge-svg" viewBox="0 0 200 100">
+                    <defs>
+                      <mask id="gauge-mask">
+                        <rect width="200" height="100" fill="white"/>
+                        <rect x="0" y="0" width="200" height="100" fill="black"/>
+                      </mask>
+                    </defs>
+                    <!-- Background arc (grey) - full semicircle -->
+                    <path d="M 20 100 A 80 80 0 0 1 180 100" 
+                          fill="none" 
+                          stroke="#e5e7eb" 
+                          stroke-width="16" 
+                          stroke-linecap="round"/>
+                    <!-- Current segment (blue) - from left to 53.4% -->
+                    <path d="M 20 100 A 80 80 0 0 1 108.5 20.5" 
+                          fill="none" 
+                          stroke="#2563eb" 
+                          stroke-width="16" 
+                          stroke-linecap="round"/>
+                    <!-- Target segment (green) - from 53.4% to 75% -->
+                    <path d="M 108.5 20.5 A 80 80 0 0 1 156.6 43.4" 
+                          fill="none" 
+                          stroke="#16a34a" 
+                          stroke-width="16" 
+                          stroke-linecap="round"/>
+                  </svg>
+                  <div class="gauge-center">
+                    <div class="gauge-value">75%</div>
+                    <div class="gauge-sub">Cible</div>
+                  </div>
+                </div>
+                <div class="gauge-footer">
+                  <div>
+                    <div class="gauge-muted">Actuel</div>
+                    <div class="gauge-current">53,4%</div>
+                  </div>
+                  <div class="gauge-up">+21,6 pts</div>
+                </div>
+              </div>
+
+              <div class="eau-diag-cards">
+                <div class="eau-diag-mini">
+                  <div class="mini-title">
+                    <i class="bi bi-stack"></i>
+                    Capacité de Stockage
+                  </div>
+                  <div class="mini-chart">
+                    <div class="mini-y-axis">
+                      <span>30</span>
+                      <span>25</span>
+                      <span>20</span>
+                      <span>15</span>
+                      <span>10</span>
+                      <span>5</span>
+                      <span>0</span>
+                    </div>
+                    <div class="mini-chart-area">
+                      <div class="mini-grid">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <div class="mini-bars">
+                        <div class="mini-bar-group">
+                          <div class="mini-bar-track">
+                            <div class="mini-bar-value red-text">29 590 m³</div>
+                            <div class="mini-bar-bar gray" style="height:60%"></div>
+                          </div>
+                          <div class="mini-bar-label">16h Autonomie</div>
+                        </div>
+                        <div class="mini-bar-group">
+                          <div class="mini-bar-track">
+                            <div class="mini-bar-value green-text">49 590 m³</div>
+                            <div class="mini-bar-bar green" style="height:100%"></div>
+                          </div>
+                          <div class="mini-bar-label">24h Autonomie</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mini-note">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span class="mini-note-text">Sécurisation 24h/24</span>
+                    <span class="mini-note-value green-bold">+ 20 000 m³</span>
+                  </div>
+                </div>
+
+                <div class="eau-diag-mini">
+                  <div class="mini-title">
+                    <i class="bi bi-water"></i>
+                    Traitement Épuration (STEP)
+                  </div>
+                  <div class="mini-chart">
+                    <div class="mini-y-axis">
+                      <span>30,000</span>
+                      <span>25,000</span>
+                      <span>20,000</span>
+                      <span>15,000</span>
+                      <span>10,000</span>
+                      <span>5,000</span>
+                      <span>0</span>
+                    </div>
+                    <div class="mini-chart-area">
+                      <div class="mini-grid">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <div class="mini-bars">
+                        <div class="mini-bar-group">
+                          <div class="mini-bar-track">
+                            <div class="mini-bar-value red-text">18 600 m³</div>
+                            <div class="mini-bar-bar gray" style="height:64%"></div>
+                          </div>
+                          <div class="mini-bar-label">Capacité Actuelle</div>
+                        </div>
+                        <div class="mini-bar-group">
+                          <div class="mini-bar-track">
+                            <div class="mini-bar-value red-text">29 000 m³</div>
+                            <div class="mini-bar-bar red" style="height:100%"></div>
+                          </div>
+                          <div class="mini-bar-label">Cible</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mini-note">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span class="mini-note-text">Augmentation de la capacité de traitement journalière</span>
+                    <span class="mini-note-value red-bold">+ 10 400 m³/j</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POPUP ACTIONS PROPOSÉES EAU -->
+      <div class="eau-actions-modal" *ngIf="showEauIndicators && showEauActionsPopup">
+        <div class="eau-actions-backdrop" (click)="closeEauActionsPopup()"></div>
+        <div class="eau-actions-card" (click)="$event.stopPropagation()">
+          <button type="button" class="eau-actions-close" (click)="closeEauActionsPopup()">
+            <i class="bi bi-x-lg"></i>
+          </button>
+
+          <div class="eau-actions-tabs">
+            <span class="eau-actions-tab">Axe Stratégique 04</span>
+            <span class="eau-actions-tab active">Actions Proposées</span>
+          </div>
+
+          <div class="eau-actions-header">
+            <i class="bi bi-droplet-fill"></i>
+            <span>EAU & ASSAINISSEMENT</span>
+          </div>
+          <div class="eau-actions-subtitle">
+            Premiers actions majeurs pour sécuriser l'approvisionnement hydraulique et mettre à niveau les infrastructures d'assainissement urbain.
+          </div>
+
+          <div class="eau-actions-grid" *ngIf="currentEauActionsPage === 1">
+            <div class="eau-action-card">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 1</div>
+                <div class="eau-action-type"><span>Type</span><b>Performance Réseau</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon teal"><i class="bi bi-tools"></i></div>
+                <div>
+                  <div class="eau-action-title">Réhabilitation Réseau Eau Potable</div>
+                  <div class="eau-action-desc">
+                    Réhabilitation de 400 km de réseaux vétustes (Tranche 2) pour réduire les pertes physiques et améliorer la durabilité.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature green">
+                  <i class="bi bi-droplet"></i>
+                  <div>
+                    <div class="eau-feature-title">Ressource en Eau</div>
+                    <div class="eau-feature-sub">Économies</div>
+                    <div class="eau-feature-note">Réduction du gaspillage</div>
+                  </div>
+                </div>
+                <div class="eau-feature red">
+                  <i class="bi bi-clock"></i>
+                  <div>
+                    <div class="eau-feature-title">Service Client</div>
+                    <div class="eau-feature-sub">Continuité</div>
+                    <div class="eau-feature-note">Disponibilité 24/7</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-speedometer2"></i>
+                  <div>
+                    <div class="eau-feature-title">Performance</div>
+                    <div class="eau-feature-sub">Pression</div>
+                    <div class="eau-feature-note">Stabilisée et conforme</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge"><i class="bi bi-graph-up"></i> Rendement Cible 75%</span>
+                <span class="eau-badge"><i class="bi bi-rulers"></i> 400 km</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> Laâyoune</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2026</span>
+              </div>
+            </div>
+
+            <div class="eau-action-card">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 2</div>
+                <div class="eau-action-type"><span>Type</span><b>Sécurisation</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon blue"><i class="bi bi-box-seam"></i></div>
+                <div>
+                  <div class="eau-action-title">Renforcement du Stockage</div>
+                  <div class="eau-action-desc">
+                    Construction de réservoirs supplémentaires : +13 000 m³ à Laâyoune et +1 500 m³ à El Marsa pour sécuriser la distribution.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature blue">
+                  <i class="bi bi-shield-check"></i>
+                  <div>
+                    <div class="eau-feature-title">Autonomie</div>
+                    <div class="eau-feature-sub">Résilience</div>
+                    <div class="eau-feature-note">Gestion optimale des pics de demande</div>
+                  </div>
+                </div>
+                <div class="eau-feature red">
+                  <i class="bi bi-fire"></i>
+                  <div>
+                    <div class="eau-feature-title">Sécurité Incendie</div>
+                    <div class="eau-feature-sub">Protection civile</div>
+                    <div class="eau-feature-note">Réserve suffisante pour la protection civile</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-buildings"></i>
+                  <div>
+                    <div class="eau-feature-title">Développement</div>
+                    <div class="eau-feature-sub">Urbanisme</div>
+                    <div class="eau-feature-note">Marge pour la croissance future</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge"><i class="bi bi-stopwatch"></i> 24h Autonomie</span>
+                <span class="eau-badge"><i class="bi bi-plus-circle"></i> +14 500 m³</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> Laâyoune</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2026</span>
+              </div>
+            </div>
+
+            <div class="eau-action-card">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 3</div>
+                <div class="eau-action-type"><span>Type</span><b>Assainissement</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon green"><i class="bi bi-recycle"></i></div>
+                <div>
+                  <div class="eau-action-title">Extension de la STEP Laâyoune</div>
+                  <div class="eau-action-desc">
+                    Mise à niveau et extension de la Station d'Épuration pour augmenter la capacité de traitement face à la croissance urbaine.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature green">
+                  <i class="bi bi-speedometer"></i>
+                  <div>
+                    <div class="eau-feature-title">Capacité Traitement</div>
+                    <div class="eau-feature-sub">29 000 m³/j</div>
+                    <div class="eau-feature-note">Capacité cible atteinte</div>
+                  </div>
+                </div>
+                <div class="eau-feature red">
+                  <i class="bi bi-heart-pulse"></i>
+                  <div>
+                    <div class="eau-feature-title">Qualité de Vie</div>
+                    <div class="eau-feature-sub">Zéro Débordements</div>
+                    <div class="eau-feature-note">Réduction nuisances</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-water"></i>
+                  <div>
+                    <div class="eau-feature-title">Protection Milieu</div>
+                    <div class="eau-feature-sub">Oued & Mer</div>
+                    <div class="eau-feature-note">Préservation écosystème</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge success"><i class="bi bi-check2-circle"></i> 29 000 m³/j</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> Laâyoune</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2026</span>
+              </div>
+            </div>
+
+            <div class="eau-action-card">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 4</div>
+                <div class="eau-action-type"><span>Type</span><b>Production Eau</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon indigo"><i class="bi bi-droplet-half"></i></div>
+                <div>
+                  <div class="eau-action-title">Extension Station Dessalement</div>
+                  <div class="eau-action-desc">
+                    Travaux d'extension de la prise d'eau de mer et sécurisation des adductions pour garantir l'alimentation potable.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature blue">
+                  <i class="bi bi-shield-check"></i>
+                  <div>
+                    <div class="eau-feature-title">Sécurisation AEP</div>
+                    <div class="eau-feature-sub">Long Terme</div>
+                    <div class="eau-feature-note">Garantie d'approvisionnement</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-building"></i>
+                  <div>
+                    <div class="eau-feature-title">Support Économique</div>
+                    <div class="eau-feature-sub">ZI El Marsa</div>
+                    <div class="eau-feature-note">Besoins industriels couverts</div>
+                  </div>
+                </div>
+                <div class="eau-feature green">
+                  <i class="bi bi-tree"></i>
+                  <div>
+                    <div class="eau-feature-title">Environnement</div>
+                    <div class="eau-feature-sub">Mix Durable</div>
+                    <div class="eau-feature-note">Réduction prélèvements nappes</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge"><i class="bi bi-shield"></i> Sécurisation</span>
+                <span class="eau-badge"><i class="bi bi-droplet"></i> Dessalement</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> El Marsa</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2026</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="eau-actions-grid" *ngIf="currentEauActionsPage === 2">
+            <div class="eau-action-card">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 5</div>
+                <div class="eau-action-type"><span>Type</span><b>Assainissement Industriel</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon teal"><i class="bi bi-building"></i></div>
+                <div>
+                  <div class="eau-action-title">STEP Industrielle El Marsa</div>
+                  <div class="eau-action-desc">
+                    Construction d'une station d'épuration dédiée pour traiter les rejets polluants de la zone industrielle avant rejet, préservant ainsi l'environnement marin et littoral.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature green">
+                  <i class="bi bi-shield-check"></i>
+                  <div>
+                    <div class="eau-feature-title">Environnement</div>
+                    <div class="eau-feature-sub">Protection Milieu Marin</div>
+                    <div class="eau-feature-note">Zéro rejet polluant</div>
+                  </div>
+                </div>
+                <div class="eau-feature red">
+                  <i class="bi bi-award"></i>
+                  <div>
+                    <div class="eau-feature-title">Conformité</div>
+                    <div class="eau-feature-sub">Normes</div>
+                    <div class="eau-feature-note">Respect législation eau</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-droplet-half"></i>
+                  <div>
+                    <div class="eau-feature-title">Valorisation</div>
+                    <div class="eau-feature-sub">Réutilisation</div>
+                    <div class="eau-feature-note">Économie circulaire</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge"><i class="bi bi-shield"></i> Dépollution</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> El Marsa</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2027</span>
+              </div>
+            </div>
+
+            <div class="eau-action-card">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 6</div>
+                <div class="eau-action-type"><span>Type</span><b>Eau Potable (AEP)</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon blue"><i class="bi bi-droplet-fill"></i></div>
+                <div>
+                  <div class="eau-action-title">AEP Zone Industrielle FOE-El Marsa</div>
+                  <div class="eau-action-desc">
+                    Alimentation en eau potable de la zone industrielle El Marsa - Foum El Oued via la réalisation de 20 km de réseau d'adduction et de distribution.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature blue">
+                  <i class="bi bi-arrow-repeat"></i>
+                  <div>
+                    <div class="eau-feature-title">Service</div>
+                    <div class="eau-feature-sub">Continuité</div>
+                    <div class="eau-feature-note">Sécurisation approvisionnement</div>
+                  </div>
+                </div>
+                <div class="eau-feature red">
+                  <i class="bi bi-magnet"></i>
+                  <div>
+                    <div class="eau-feature-title">Économie</div>
+                    <div class="eau-feature-sub">Attractivité</div>
+                    <div class="eau-feature-note">Sites industriels</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-cash-coin"></i>
+                  <div>
+                    <div class="eau-feature-title">Performance</div>
+                    <div class="eau-feature-sub">Coûts</div>
+                    <div class="eau-feature-note">Logistique eau réduite</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge"><i class="bi bi-rulers"></i> 20 Km de réseau</span>
+                <span class="eau-badge"><i class="bi bi-graph-up-arrow"></i> Attractivité Zone Industrielle</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> El Marsa</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2028</span>
+              </div>
+            </div>
+
+            <div class="eau-action-card eau-action-card-wide">
+              <div class="eau-action-head">
+                <div class="eau-action-pill">Action Proposée 7</div>
+                <div class="eau-action-type"><span>Type</span><b>Assainissement &amp; REUSE</b></div>
+              </div>
+              <div class="eau-action-main">
+                <div class="eau-action-icon green"><i class="bi bi-recycle"></i></div>
+                <div>
+                  <div class="eau-action-title">Extension Foum El Oued &amp; Réutilisation</div>
+                  <div class="eau-action-desc">
+                    Extension du réseau d'assainissement liquide de la commune de Foum El Oued et mise en place d'un système de réutilisation des eaux usées épurées (REUSE) pour l'arrosage des espaces verts, réduisant la pression sur les ressources conventionnelles.
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-features">
+                <div class="eau-feature green">
+                  <i class="bi bi-droplet"></i>
+                  <div>
+                    <div class="eau-feature-title">Ressource en Eau</div>
+                    <div class="eau-feature-sub">Économie</div>
+                    <div class="eau-feature-note">Préservation de la nappe</div>
+                  </div>
+                </div>
+                <div class="eau-feature blue">
+                  <i class="bi bi-tree"></i>
+                  <div>
+                    <div class="eau-feature-title">Cadre de Vie</div>
+                    <div class="eau-feature-sub">Entretien</div>
+                    <div class="eau-feature-note">Espaces verts valorisés</div>
+                  </div>
+                </div>
+                <div class="eau-feature amber">
+                  <i class="bi bi-geo-alt"></i>
+                  <div>
+                    <div class="eau-feature-title">Hygiène Publique</div>
+                    <div class="eau-feature-sub">100% Couverture</div>
+                    <div class="eau-feature-note">Zones d'extension</div>
+                  </div>
+                </div>
+              </div>
+              <div class="eau-action-footer">
+                <span class="eau-badge"><i class="bi bi-recycle"></i> Économie Circulaire</span>
+                <span class="eau-badge"><i class="bi bi-droplet"></i> Arrosage Espaces Verts</span>
+                <span class="eau-badge"><i class="bi bi-geo-alt-fill"></i> Foum El Oued</span>
+                <span class="eau-badge"><i class="bi bi-calendar-event"></i> AP:2029</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="eau-actions-nav">
+            <button
+              type="button"
+              class="eau-actions-nav-btn"
+              [class.disabled]="currentEauActionsPage === 1"
+              [disabled]="currentEauActionsPage === 1"
+              (click)="prevEauActionsPage()">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <div class="eau-actions-page">{{ currentEauActionsPage }}/2</div>
+            <button
+              type="button"
+              class="eau-actions-nav-btn ok"
+              [class.disabled]="currentEauActionsPage === 2"
+              [disabled]="currentEauActionsPage === 2"
+              (click)="nextEauActionsPage()">
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <ng-container *ngIf="showSanteIndicators">
         <ng-container *ngIf="!showSanteDiagnostic">
@@ -452,7 +1301,7 @@
     </div>
 
     <!-- ✅ COLONNE DROITE : MAP -->
-    <div class="col-md-6">
+    <div class="col-12 col-md-5 order-md-3">
       <div class="panel-card map-card">
         <div class="panel-header text-center">Province de Laayoune</div>
         <div class="panel-body map-body">
@@ -462,7 +1311,7 @@
     </div>
 
     <!-- ✅ COLONNE DROITE : INDICATEURS -->
-    <div class="col-md-3 d-flex flex-column gap-4">
+    <div class="col-12 col-md-3 d-flex flex-column gap-4 order-md-2" *ngIf="showSanteIndicators || showEducationIndicators || showEmploiIndicators || (showEauIndicators && false)">
 
       <ng-container *ngIf="showEducationIndicators && !showEducationDiagnostic">
         <!-- ✅ INDICATEURS ÉDUCATION - RIGHT COLUMN (One tall card with all tables) -->
@@ -697,17 +1546,6 @@
           </div>
         </div>
 
-        <div class="diagnostic-toggle-wrap">
-          <button
-            type="button"
-            class="btn btn-lg diagnostic-btn w-100"
-            [class.is-active]="showEauDiagnostic"
-            (click)="toggleEauDiagnostic()"
-          >
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            Diagnostic
-          </button>
-        </div>
       </ng-container>
 
       <!-- ✅ DIAGNOSTIC EAU POTABLE (RIGHT COLUMN) -->
@@ -758,17 +1596,6 @@
           </div>
         </div>
 
-        <div class="diagnostic-toggle-wrap">
-          <button
-            type="button"
-            class="btn btn-lg diagnostic-btn w-100"
-            [class.is-active]="showEauDiagnostic"
-            (click)="toggleEauDiagnostic()"
-          >
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            Diagnostic
-          </button>
-        </div>
       </ng-container>
 
       <!-- ✅ INDICATEURS EMPLOI (RIGHT COLUMN) -->
@@ -1154,7 +1981,6 @@
           </div>
         </div>
       </ng-container>
-
       <ng-container *ngIf="showSanteIndicators && !showSanteDiagnostic">
         <div class="panel-card indicators-card ratio-card">
           <div class="panel-header text-center">Ratios de couverture</div>
@@ -1358,7 +2184,7 @@
 </div>
 
 <!-- POPUP EAU POTABLE - EL MARSA -->
-<div class="mise-modal" *ngIf="showEauElmarsaPopup">
+<div class="mise-modal eau-elmarsa-popup" *ngIf="showEauElmarsaPopup">
   <div class="mise-backdrop" (click)="closeEauElmarsaPopup()"></div>
 
   <div class="mise-modal-card" (click)="$event.stopPropagation()">
@@ -1375,8 +2201,10 @@
         </div>
       </div>
 
-      <div class="mise-title">
-        <span>Eau Potable</span>
+      <div class="mise-title eau-popup-title">
+        
+        <span>EAU &amp; ASSAINISSEMENT</span>
+        <i class="bi bi-droplet-fill"></i>
       </div>
     </div>
 
@@ -1394,7 +2222,8 @@
         <!-- INDICATEURS -->
         <div class="mise-box etat-box">
           <div class="mise-box-header etat-header">
-            Indicateurs et états des lieux
+            <span class="box-header-icon red"><i class="bi bi-activity"></i></span>
+            <span>Indicateurs &amp; État des Lieux</span>
           </div>
 
           <div class="mise-box-body mise-scroll">
@@ -1402,23 +2231,7 @@
             <ng-container *ngIf="currentEauElmarsaPage === 1">
               <div class="etat-line">
                 <span class="etat-bullet"></span>
-                <span>Nécessité d’alimenter en eau potable les unités industrielles existantes et projetées.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Insuffisance ou absence d’infrastructures d'alimentation en eau potable adaptées aux besoins actuels et futurs de la zone d'activité industrielle d’El Marsa – Foum El Oued.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Développement progressif de nouvelles unités industrielles.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Dépendance actuelle à des solutions provisoires (citernes, forages privés, réseaux non normalisés).</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Nécessité d’anticiper la croissance industrielle et d’assurer une sécurisation durable de la ressource en eau potable, conformément aux orientations régionales de développement économique.</span>
+                <span>Un besoin en eau qui croit sans cesse avec des ressources qui diminuent.</span>
               </div>
             </ng-container>
 
@@ -1437,6 +2250,28 @@
                 <span>Nécessité de traiter et maîtriser les rejets industriels.</span>
               </div>
             </ng-container>
+            <ng-container *ngIf="currentEauElmarsaPage === 3">
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité d’alimenter en eau potable les unités industrielles existantes et projetées.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance ou absence d’infrastructures d'alimentation en eau potable adaptées aux besoins actuels et futurs de la zone d’activité industrielle d’El Marsa – Foum El Oued.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Développement progressif de nouvelles unités industrielles.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Dépendance actuelle à des solutions provisoires (<b>citernes, forages privés, réseaux non normalisés</b>).</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Nécessité d’anticiper la croissance industrielle et d’assurer une <b class="red">sécurisation durable de la ressource en eau potable</b>, conformément aux orientations régionales de développement économique.</span>
+              </div>
+            </ng-container>
           </div>
         </div>
 
@@ -1444,15 +2279,21 @@
         <div class="mise-bottom-grid">
           <!-- ACTION -->
           <div class="mise-box action-box">
-            <div class="mise-box-header action-header">Action proposée</div>
-            <div class="mise-box-body action-body">
-              <div class="s1-pill">S1</div>
-              <div class="action-title">
+            <div class="mise-box-body action-body action-bar">
+              <div class="ap-pill">
+                <ng-container *ngIf="currentEauElmarsaPage === 1">AP4</ng-container>
+                <ng-container *ngIf="currentEauElmarsaPage === 2">AP5</ng-container>
+                <ng-container *ngIf="currentEauElmarsaPage === 3">AP6</ng-container>
+              </div>
+              <div class="action-title action-bar-text">
                 <ng-container *ngIf="currentEauElmarsaPage === 1">
-                  Alimentation en eau potable de la zone industrielle carrefour FOE-El Marsa
+                  Extension de la station de dessalement et financement complémentaire de l’ouvrage de prise d’eau de mer
                 </ng-container>
                 <ng-container *ngIf="currentEauElmarsaPage === 2">
                   Travaux de construction d’une STEP des eaux usées à la zone industrielle de la commune d’El Marsa
+                </ng-container>
+                <ng-container *ngIf="currentEauElmarsaPage === 3">
+                  Alimentation en eau potable de la zone industrielle carrefour FOE-El Marsa
                 </ng-container>
               </div>
             </div>
@@ -1460,32 +2301,35 @@
 
           <!-- CIBLAGE -->
           <div class="mise-box ciblage-box">
-            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-header ciblage-header">
+              <span class="box-header-icon green"><i class="bi bi-bullseye"></i></span>
+              <span>Ciblage</span>
+            </div>
             <div class="mise-box-body ciblage-body mise-scroll">
               <ng-container *ngIf="currentEauElmarsaPage === 1">
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Réseau de distribution : réalisation d’un réseau structurant d’adduction et de distribution en eau potable destiné à desservir l’ensemble des lots industriels.</span>
+                  <span>Sécuriser et renforcement l’alimentation en eau brute de la station de dessalement de Laâyoune.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Longueur estimative du réseau : <b class="red">20 km</b> (à préciser selon l’étude APS/APD).</span>
+                  <span>Population bénéficiaire : <b class="red">Environ le grand public de la province</b>.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Diamètres projetés adaptés aux débits industriels (<b class="red">DN 75 à DN 400</b>, selon tracé).</span>
+                  <span>Communes concernées : Laâyoune, El Marsa, Foum El Oued et Tarouma.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Station de pompage : débit nominal dimensionné selon la demande industrielle actuelle et projetée : <b class="red">40 l/s</b>.</span>
+                  <span>Adapté la capacité de production avec l’évolution démographique.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Réservoir semi enterré : capacité estimative <b class="red">2000 m³</b>.</span>
+                  <span>Horizon de saturation : <b class="red">2050</b>.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Réservoir surélevé : capacité estimative <b class="red">500 m³</b>.</span>
+                  <span>Année programmée : <b class="red">2026</b>.</span>
                 </div>
               </ng-container>
               <ng-container *ngIf="currentEauElmarsaPage === 2">
@@ -1505,6 +2349,40 @@
                   <span class="ciblage-bullet"></span>
                   <span>Protection de l’environnement.</span>
                 </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Année programmée : <b class="red">2027</b>.</span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="currentEauElmarsaPage === 3">
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span><b>Réseau de distribution :</b> réalisation d’un réseau structurant d’adduction et de distribution en eau potable destiné à desservir l’ensemble des lots industriels.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Longueur estimative du réseau : <b class="red">20 km</b> (à préciser selon l’étude APS/APD).</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Diamètres projetés adaptés aux débits industriels (<b class="red">DN 75 à DN 400</b>, selon tracé).</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span><b>Station de pompage :</b> débit nominal dimensionné selon la demande industrielle actuelle et projetée : <b class="red">40 l/s</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span><b>Réservoir semi enterré :</b> capacité estimative <b class="red">2000 m³</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span><b>Réservoir surélevé :</b> capacité estimative <b class="red">500 m³</b>.</span>
+                </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Année programmée : <b class="red">2028</b>.</span>
+                </div>
               </ng-container>
             </div>
           </div>
@@ -1521,12 +2399,12 @@
           (click)="prevEauElmarsaPage()">
           <i class="bi bi-arrow-left"></i>
         </button>
-        <div class="mise-page">{{ currentEauElmarsaPage }}/2</div>
+        <div class="mise-page">{{ currentEauElmarsaPage }}/3</div>
         <button
           type="button"
           class="mise-nav-btn ok"
-          [class.disabled]="currentEauElmarsaPage === 2"
-          [disabled]="currentEauElmarsaPage === 2"
+          [class.disabled]="currentEauElmarsaPage === 3"
+          [disabled]="currentEauElmarsaPage === 3"
           (click)="nextEauElmarsaPage()">
           <i class="bi bi-arrow-right"></i>
         </button>
@@ -1536,7 +2414,7 @@
 </div>
 
 <!-- POPUP EAU POTABLE - LAÂYOUNE -->
-<div class="mise-modal" *ngIf="showEauLaayounePopup">
+<div class="mise-modal eau-laayoune-popup" *ngIf="showEauLaayounePopup">
   <div class="mise-backdrop" (click)="closeEauLaayounePopup()"></div>
 
   <div class="mise-modal-card" (click)="$event.stopPropagation()">
@@ -1553,8 +2431,10 @@
         </div>
       </div>
 
-      <div class="mise-title">
-        <span>Eau Potable</span>
+      <div class="mise-title eau-popup-title">
+      
+        <span>EAU &amp; ASSAINISSEMENT</span>
+        <i class="bi bi-droplet-fill"></i>
       </div>
     </div>
 
@@ -1572,7 +2452,8 @@
         <!-- INDICATEURS -->
         <div class="mise-box etat-box">
           <div class="mise-box-header etat-header">
-            Indicateurs et états des lieux
+            <span class="box-header-icon red"><i class="bi bi-activity"></i></span>
+            <span>Indicateurs &amp; État des Lieux</span>
           </div>
 
           <div class="mise-box-body mise-scroll">
@@ -1604,7 +2485,39 @@
             <ng-container *ngIf="currentEauLaayounePage === 2">
               <div class="etat-line">
                 <span class="etat-bullet"></span>
-                <span>Besoin en eau potable dans la province de Laâyoune ne cessera d'augmenter dans les prochaines années.</span>
+                <span>Pertes d'eau et des risques de rupture d'approvisionnement.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Ouvrages de stockage et des équipements dans un état dégradé.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Performances techniques au-dessous des objectifs escomptés.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Insuffisance de la capacité de stockage actuelle au niveau de la province de Laayoune.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La capacité de stockage actuelle est très insuffisante : <b class="red">29 590 m3</b> avec une <b class="red">autonomie de 16 H (Objectif PNAEPI 24 H)</b>.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>L’amélioration des performances techniques des ouvrages.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La réduction des pertes et des risques de rupture d’approvisionnement.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>La pérennisation des ouvrages de stockage AEP.</span>
+              </div>
+              <div class="etat-line">
+                <span class="etat-bullet"></span>
+                <span>Le taux de rendement du réseau de distribution est de l'ordre de <b class="red">55,5%</b> à la province de Laayoune.</span>
               </div>
             </ng-container>
 
@@ -1628,7 +2541,7 @@
               </div>
               <div class="etat-line">
                 <span class="etat-bullet"></span>
-                <span>Travaux d'assainissement liquide de la zone des nouveaux équipements au nord et de la ville (CHU, CMC, faculté de médecine...).</span>
+                <span>Travaux d'assainissement liquide de la zone des nouveaux équipements au nord et de la ville (<b>CHU, CMC, faculté de médecine...</b>).</span>
               </div>
               <div class="etat-line">
                 <span class="etat-bullet"></span>
@@ -1640,57 +2553,19 @@
               </div>
               <div class="etat-line">
                 <span class="etat-bullet"></span>
-                <span>Extension de la STEP.</span>
+                <span><b>Extension de la STEP.</b></span>
               </div>
               <div class="etat-line">
                 <span class="etat-bullet"></span>
-                <span>Réhabilitation du réseau d'assainissement liquide de la ville (conduites, ovoïdes...) pour une longueur de <b class="red">200 km</b>.</span>
+                <span>Réhabilitation du réseau d'assainissement liquide de la ville (<b>conduites, ovoïdes...</b>) pour une longueur de <b class="red">200 km</b>.</span>
               </div>
               <div class="etat-line">
                 <span class="etat-bullet"></span>
-                <span>Capacité de traitement de la STEP actuelle : <b class="green">18 600 m³/j</b>.</span>
+                <span>Capacité de traitement de la STEP actuelle : <b class="red">18 600 m³/j</b>.</span>
               </div>
             </ng-container>
 
             <!-- PROJECT 4 -->
-            <ng-container *ngIf="currentEauLaayounePage === 4">
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Pertes d'eau et des risques de rupture d'approvisionnement.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Ouvrages de stockage et des équipements dans un état dégradé.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Performances techniques au-dessous des objectifs escomptés.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Insuffisance de la capacité de stockage actuelle au niveau de la province de Laayoune.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>La capacité de stockage actuelle est très insuffisante : <b class="red">29 590 m³</b> avec une <b class="red">autonomie de 16 H</b> (Objectif PNAEPI 24 H).</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>L'amélioration des performances techniques des ouvrages.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>La réduction des pertes et des risques de rupture d'approvisionnement.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>La pérennisation des ouvrages de stockage AEP.</span>
-              </div>
-              <div class="etat-line">
-                <span class="etat-bullet"></span>
-                <span>Le taux de rendement du réseau de distribution est de l'ordre de <b class="red">55,5%</b> à la province de Laayoune.</span>
-              </div>
-            </ng-container>
           </div>
         </div>
 
@@ -1698,20 +2573,20 @@
         <div class="mise-bottom-grid">
           <!-- ACTION -->
           <div class="mise-box action-box">
-            <div class="mise-box-header action-header">Action proposée</div>
-            <div class="mise-box-body action-body">
-              <div class="s1-pill">S1</div>
-              <div class="action-title">
+            <div class="mise-box-body action-body action-bar">
+              <div class="ap-pill">
+                <ng-container *ngIf="currentEauLaayounePage === 1">AP1</ng-container>
+                <ng-container *ngIf="currentEauLaayounePage === 2">AP2</ng-container>
+                <ng-container *ngIf="currentEauLaayounePage === 3">AP3</ng-container>
+              </div>
+              <div class="action-title action-bar-text">
                 <ng-container *ngIf="currentEauLaayounePage === 1">
                   Réhabilitation du réseau vétuste de distribution d'eau potable de la ville de Laayoune sur <b class="red">239 Km</b> (2éme tranche)
                 </ng-container>
                 <ng-container *ngIf="currentEauLaayounePage === 2">
-                  Extension de la station de dessalement et financement complémentaire de l'ouvrage de prise d'eau de mer
+                  Renforcement et réhabilitation des ouvrages de stockage au niveau de la province de Laâyoune
                 </ng-container>
                 <ng-container *ngIf="currentEauLaayounePage === 3">
-                  Mise à niveau, extension et renforcement des ouvrages d'assainissement liquide de la Ville de Laâyoune (1ère & 2ème tranche)
-                </ng-container>
-                <ng-container *ngIf="currentEauLaayounePage === 4">
                   Renforcement et réhabilitation des ouvrages de stockage au niveau de la province de Laâyoune
                 </ng-container>
               </div>
@@ -1720,7 +2595,10 @@
 
           <!-- CIBLAGE -->
           <div class="mise-box ciblage-box">
-            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-header ciblage-header">
+              <span class="box-header-icon green"><i class="bi bi-bullseye"></i></span>
+              <span>Ciblage</span>
+            </div>
             <div class="mise-box-body ciblage-body mise-scroll">
               <ng-container *ngIf="currentEauLaayounePage === 1">
                 <div class="ciblage-line">
@@ -1735,28 +2613,40 @@
                   <span class="ciblage-bullet"></span>
                   <span>Réhabilitation des <b class="red">400 km</b> de réseau.</span>
                 </div>
+                <div class="ciblage-line">
+                  <span class="ciblage-bullet"></span>
+                  <span>Année programmée : <b class="red">2026</b>.</span>
+                </div>
               </ng-container>
               <ng-container *ngIf="currentEauLaayounePage === 2">
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Sécuriser et renforcement l'alimentation en eau brute de la station de dessalement de Laâyoune.</span>
+                <span>La réalisation de deux réservoirs semi enterré, de capacité totale de <b class="red">5 000 m³</b>, et un réservoir surélevé de capacité <b class="red">500 m³</b>.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Population bénéficiaire: Environ <b class="red">le grand public de la province</b>.</span>
+                <span>La réalisation de réservoirs à Laayoune d’une capacité de stockage de <b class="red">13 000 m³</b>.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Villes concernées: Laâyoune, El Marsa, Foum El Oued et Tarouma.</span>
+                <span>La réalisation d’un réservoir de <b class="red">1 500 m³</b> à la ville d’El Marsa.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Capacité adapté la capacité de production avec l'évolution démographique.</span>
+                <span>La sécurisation de l’alimentation en eau potable.</span>
                 </div>
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>Horizon de saturation: <b class="red">2050</b>.</span>
+                <span>L’amélioration de la capacité de stockage pour atteindre <b class="red">49 590 m³</b> et une autonomie de stockage de <b class="red">24h à l’horizon 2030</b>.</span>
                 </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Atteindre un taux de rendement de <b class="red">75% à l’horizon 2030</b>.</span>
+              </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Année programmée : <b class="red">2026</b>.</span>
+              </div>
               </ng-container>
               <ng-container *ngIf="currentEauLaayounePage === 3">
                 <div class="ciblage-line">
@@ -1791,31 +2681,9 @@
                   <span class="ciblage-bullet"></span>
                   <span>Atteindre une capacité de traitement de <b class="red">29 000 m³/j</b>.</span>
                 </div>
-              </ng-container>
-              <ng-container *ngIf="currentEauLaayounePage === 4">
                 <div class="ciblage-line">
                   <span class="ciblage-bullet"></span>
-                  <span>La réalisation de deux réservoirs semi enterré, de capacité totale de <b class="red">5000 m³</b>, et un réservoir surélevé de capacité <b class="red">500 m³</b>.</span>
-                </div>
-                <div class="ciblage-line">
-                  <span class="ciblage-bullet"></span>
-                  <span>La réalisation de réservoirs à Laayoune d'une capacité de stockage de <b class="red">13 000 m³</b>.</span>
-                </div>
-                <div class="ciblage-line">
-                  <span class="ciblage-bullet"></span>
-                  <span>La réalisation d'un réservoir de <b class="red">1500 m³</b> à la ville d'El Marsa.</span>
-                </div>
-                <div class="ciblage-line">
-                  <span class="ciblage-bullet"></span>
-                  <span>La sécurisation de l'alimentation en eau potable.</span>
-                </div>
-                <div class="ciblage-line">
-                  <span class="ciblage-bullet"></span>
-                  <span>L'amélioration de la capacité de stockage pour atteindre <b class="red">49590 m³</b> et une autonomie de stockage de <b class="red">24h</b> à l'horizon <b class="red">2030</b>.</span>
-                </div>
-                <div class="ciblage-line">
-                  <span class="ciblage-bullet"></span>
-                  <span>Atteindre un taux de rendement de <b class="red">75%</b> à l'horizon <b class="red">2030</b>.</span>
+                  <span>Année programmée : <b class="red">2026</b>.</span>
                 </div>
               </ng-container>
             </div>
@@ -1833,12 +2701,12 @@
           (click)="prevEauLaayounePage()">
           <i class="bi bi-arrow-left"></i>
         </button>
-        <div class="mise-page">{{ currentEauLaayounePage }}/4</div>
+        <div class="mise-page">{{ currentEauLaayounePage }}/3</div>
         <button
           type="button"
           class="mise-nav-btn ok"
-          [class.disabled]="currentEauLaayounePage === 4"
-          [disabled]="currentEauLaayounePage === 4"
+          [class.disabled]="currentEauLaayounePage === 3"
+          [disabled]="currentEauLaayounePage === 3"
           (click)="nextEauLaayounePage()">
           <i class="bi bi-arrow-right"></i>
         </button>
@@ -2961,7 +3829,7 @@
 </div>
 
 <!-- POPUP EAU POTABLE - FOUM EL OUED -->
-<div class="mise-modal" *ngIf="showEauPopup">
+<div class="mise-modal eau-foumeloued-popup" *ngIf="showEauPopup">
   <div class="mise-backdrop" (click)="closeEauPopup()"></div>
 
   <div class="mise-modal-card" (click)="$event.stopPropagation()">
@@ -2978,8 +3846,10 @@
         </div>
       </div>
 
-      <div class="mise-title">
-        <span>Eau Potable</span>
+      <div class="mise-title eau-popup-title">
+        
+        <span>EAU &amp; ASSAINISSEMENT</span>
+        <i class="bi bi-droplet-fill"></i>
       </div>
     </div>
 
@@ -2988,7 +3858,7 @@
       <!-- RIGHT -->
       <div class="mise-right">
         <div class="mise-map-wrap">
-          <img src="assets/projects/eauFoumeloued.png" alt="Eau Potable - Foum El Oued" />
+          <img src="assets/version2/eauFoumEloued.png" alt="Eau Potable - Foum El Oued" />
         </div>
       </div>
 
@@ -2997,7 +3867,8 @@
         <!-- INDICATEURS -->
         <div class="mise-box etat-box">
           <div class="mise-box-header etat-header">
-            Indicateurs et états des lieux
+            <span class="box-header-icon red"><i class="bi bi-activity"></i></span>
+            <span>Indicateurs &amp; État des Lieux</span>
           </div>
 
           <div class="mise-box-body mise-scroll">
@@ -3028,10 +3899,9 @@
         <div class="mise-bottom-grid">
           <!-- ACTION -->
           <div class="mise-box action-box">
-            <div class="mise-box-header action-header">Action proposée</div>
-            <div class="mise-box-body action-body">
-              <div class="s1-pill">S1</div>
-              <div class="action-title">
+            <div class="mise-box-body action-body action-bar">
+              <div class="ap-pill">AP7</div>
+              <div class="action-title action-bar-text">
                 Extension du réseau d'assainissement liquide de la commune de Foum El Oued et des fermes et la réutilisation des eaux épurées pour l'arrosage des espaces verts de la commune
               </div>
             </div>
@@ -3039,7 +3909,10 @@
 
           <!-- CIBLAGE -->
           <div class="mise-box ciblage-box">
-            <div class="mise-box-header ciblage-header">Ciblage</div>
+            <div class="mise-box-header ciblage-header">
+              <span class="box-header-icon green"><i class="bi bi-bullseye"></i></span>
+              <span>Ciblage</span>
+            </div>
             <div class="mise-box-body ciblage-body mise-scroll">
               <div class="ciblage-line">
                 <span class="ciblage-bullet"></span>
@@ -3056,6 +3929,10 @@
               <div class="ciblage-line">
                 <span class="ciblage-bullet"></span>
                 <span>Renforcement des ouvrages d’assainissement liquide pour s’aligner au développement démographique et urbain.</span>
+              </div>
+              <div class="ciblage-line">
+                <span class="ciblage-bullet"></span>
+                <span>Année programmée : <b class="red">2029</b>.</span>
               </div>
             </div>
           </div>

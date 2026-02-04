@@ -116,8 +116,448 @@ tr, td, th { height: 45px; }
    ============================ */
 
 .province-page {
-  padding: 22px 18px;
+  padding: 0px 18px 22px 18px;
   background: #eef1f6;
+  margin-bottom: 60px;
+}
+
+/* Force LTR layout for the main 3-column row */
+.province-layout-row {
+  direction: ltr;
+  flex-direction: row;
+}
+
+/* ===== Province indicators dashboard (image layout) ===== */
+.indicators-dashboard {
+  background: #fff;
+  border: 1px solid #e6e1d6;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  direction: ltr;
+  height: 790px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dash-header {
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.dash-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.dash-subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: min-content;
+  gap: 8px;
+  flex: 1;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding-right: 0;
+}
+
+@media (max-width: 1200px) {
+  .dash-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dash-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  min-height: auto;
+  height: auto;
+}
+
+/* Specific tuning for Taux d'Activité card */
+.dash-card-activity {
+  border: 2px solid #1f7a4a;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding: 8px 10px 8px;
+}
+
+.dash-card-activity .dash-card-title {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.dash-card-activity .dash-big {
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.dash-card-activity .dash-bar {
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.dash-card-activity .dash-bar-labels {
+  font-size: 11px;
+  font-weight: 800;
+  color: #374151;
+}
+
+.dash-card-activity .dash-bar-track {
+  height: 8px;
+  background: #e5e7eb;
+}
+
+.dash-card-activity .dash-bar-fill {
+  background: #1f7a4a;
+}
+
+.dash-card-activity .dash-note {
+  font-size: 12px;
+  font-weight: 800;
+  color: #374151;
+  margin-top: 2px;
+}
+
+.dash-card-activity .dash-card-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  top: 8px;
+  right: 8px;
+}
+
+.dash-card--green {
+  border-top: 3px solid #1f7a4a;
+}
+
+.dash-card--amber {
+  border-top: 3px solid #d97706;
+  background: #fff6e5;
+}
+
+.dash-card--red {
+  border-top: 3px solid #b91c1c;
+  background: #fff1f2;
+}
+
+.dash-card-demographie {
+  background: #e9fbef;
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+.dash-card-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.icon-green {
+  background: #eaf8ef;
+  color: #166534;
+  border-color: rgba(22, 101, 52, 0.2);
+}
+
+.icon-amber {
+  background: rgba(245, 158, 11, 0.18);
+  color: #b45309;
+}
+
+.icon-red {
+  background: rgba(239, 68, 68, 0.15);
+  color: #b91c1c;
+}
+
+.dash-card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #374151;
+  margin-bottom: 4px;
+  padding-right: 32px;
+}
+
+.dash-card-main {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.dash-big {
+  font-size: 20px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.dash-big i {
+  font-size: 14px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.dash-big.green { color: #166534; }
+.dash-big.red { color: #b91c1c; }
+
+.dash-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.dash-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.dash-split-item {
+  background: #f9fafb;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  padding: 4px;
+  text-align: center;
+}
+
+.dash-split-val {
+  font-weight: 900;
+  font-size: 13px;
+  color: #111827;
+}
+
+.dash-split-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.dash-mini {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dash-mini strong { color: #111827; }
+.dash-mini .sep { opacity: 0.6; }
+
+.dash-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.dash-stat-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.soft-orange { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+.soft-yellow { background: rgba(234, 179, 8, 0.14); color: #ca8a04; }
+
+.dash-stat-val {
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.dash-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.dash-note {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  margin-top: 3px;
+  text-align: center;
+}
+
+.dash-note.red { color: #b91c1c; }
+.dash-note.positive { color: #166534; }
+
+.dash-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #166534;
+  background: rgba(34, 197, 94, 0.15);
+  border-radius: 999px;
+  margin: 4px 0;
+}
+
+/* Urbanisation card specific styling */
+.dash-card-urban {
+  min-height: auto;
+  overflow: visible;
+}
+
+/* Urbanisation circular graph */
+.dash-urban-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+  min-height: 100px;
+  flex-shrink: 0;
+}
+
+.dash-urban-circle {
+  width: 100px;
+  height: 100px;
+}
+
+.urban-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.urban-ring-bg {
+  fill: none;
+  stroke: #e5e7eb;
+  stroke-width: 8;
+}
+
+.urban-ring-fg {
+  fill: none;
+  stroke: #1f7a4a;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.urban-ring-text {
+  transform: rotate(90deg);
+  transform-origin: 50px 50px;
+  font-size: 16px;
+  fill: #111827;
+  font-weight: 800;
+}
+
+.urban-ring-sub {
+  transform: rotate(90deg);
+  transform-origin: 50px 50px;
+  font-size: 10px;
+  fill: #6b7280;
+  font-weight: 700;
+}
+
+.dash-urban-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.dash-urban-rural {
+  font-size: 11px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dash-urban-note {
+  font-size: 11px;
+  font-weight: 600;
+  color: #111827;
+  text-align: right;
+}
+
+.dash-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dash-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #6b7280;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dash-bar-province {
+  color: #374151;
+  font-weight: 800;
+  padding-right: 4px;
+}
+
+.dash-bar-national {
+  white-space: nowrap;
+}
+
+.dash-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  position: relative;
+}
+
+.dash-bar-fill {
+  height: 100%;
+  background: #1f7a4a;
+}
+
+.dash-bar-fill.red { background: #dc2626; }
+
+.dash-bar-cap {
+  position: absolute;
+  transform: translateX(-50%);
+  top: 1px;
+  bottom: 1px;
+  width: 6px;
+  background: #f59e0b;
+  border-radius: 999px;
+}
+
+.dash-card-tall {
+  grid-row: span 2;
 }
 
 /* Big rounded panels like commune */
@@ -132,12 +572,13 @@ tr, td, th { height: 45px; }
 
 /* Header inside panels */
 .panel-header {
-  padding: 14px 18px;
+  padding: 8px 18px;
   font-weight: 800;
-  font-size: 14px;
+  font-size: 18px;
   letter-spacing: .5px;
   color: #1f2937;
   border-bottom: 1px solid rgba(0,0,0,0.06);
+  flex-shrink: 0;
 }
 
 /* body spacing */
@@ -154,16 +595,692 @@ tr, td, th { height: 45px; }
 
 .map-body {
   flex: 1;
-  padding: 12px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ✅ Map must fill the map-body */
 #map {
   width: 100%;
   height: 100%;
-  min-height: 620px;
+  flex: 1;
+  min-height: 0;
   background: #f5f7fa;
+  border-radius: 10px;
+}
+
+/* EAU & ASSAINISSEMENT */
+.eau-main-header {
+  font-size: 26px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border-bottom: none;
+}
+.eau-header-sub {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #ffffff;
+  background: #0b6d6f;
+  border-radius: 18px;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-self: center;
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.eau-header-pill {
+  padding: 6px 10px;
   border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.eau-header-pill.muted {
+  background: rgba(255,255,255,0.14);
+}
+.eau-section-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #374151;
+  margin: 12px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.eau-section-title:first-of-type {
+  margin-top: 0;
+}
+
+/* Two cards layout - Eau Potable | Assainissement Liquide */
+.eau-assainissement-wrapper {
+  background: #fff;
+  border: 1px solid #e6e1d6;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  min-height: 790px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  position: relative;
+}
+
+.eau-two-cards {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+  gap: 12px;
+}
+
+.eau-two-cards .col-md-6 {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+
+.eau-diagnostic-wrap {
+  position: static;
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-left: 6px;
+}
+
+.eau-diagnostic-btn {
+  width: 100%;
+  max-width: 520px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1.5px solid #dc2626;
+  background: #fff;
+  color: #dc2626;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.eau-action-btn {
+  width: 100%;
+  max-width: 520px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1.5px solid #16a34a;
+  background: #fff;
+  color: #166534;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* === Eau diagnostic popup === */
+.eau-diag-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 2vh 2vw;
+}
+
+.eau-diag-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.eau-diag-card {
+  position: relative;
+  width: 1440px;
+  max-width: 99vw;
+  height: 70vh;
+  min-height: 640px;
+  max-height: 86vh;
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.eau-diag-close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  border: none;
+  background: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+}
+
+.eau-diag-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.eau-diag-panel {
+  background: #f8fbff;
+  border-radius: 16px;
+  padding: 14px;
+  border: 2px solid #0f766e1f;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.eau-diag-left { background: #f2fbfd; }
+.eau-diag-right { background: #f6fffb; border-color: #0f766e2b; }
+
+.eau-diag-header {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.eau-diag-header.left { background: #0f8a95; }
+.eau-diag-header.right { background: #0f6b3a; }
+
+.eau-diag-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.eau-diag-stat {
+  background: #ffecec;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #f4d6d6;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.stat-label {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.eau-diag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eau-diag-item {
+  background: #fff;
+  border-radius: 12px;
+  border-left: 4px solid #dc2626;
+  padding: 10px 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+}
+
+.eau-diag-item-title {
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.eau-diag-item-text {
+  color: #475569;
+  font-size: 14px;
+}
+
+.eau-diag-gauge {
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  margin-bottom: 12px;
+  flex: 0 0 auto;
+}
+
+.gauge-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: #0f766e;
+  margin-bottom: 10px;
+}
+
+.gauge-ring-wrapper {
+  width: 200px;
+  height: 100px;
+  margin: 0 auto 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-svg {
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.gauge-center {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 70px;
+  background: #fff;
+  border-radius: 100px 100px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  z-index: 1;
+}
+
+.gauge-value { 
+  font-size: 28px; 
+  font-weight: 900; 
+  color: #111827; 
+  line-height: 1;
+}
+.gauge-sub { 
+  font-size: 12px; 
+  font-weight: 700; 
+  color: #ef4444; 
+}
+
+.gauge-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 0;
+}
+
+.gauge-muted { 
+  font-size: 12px; 
+  color: #6b7280; 
+  margin-bottom: 2px;
+}
+.gauge-current { 
+  font-size: 18px; 
+  font-weight: 800; 
+  color: #2563eb; 
+}
+.gauge-up { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #16a34a; 
+}
+
+.eau-diag-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1 1 auto;
+  align-content: stretch;
+}
+
+.eau-diag-mini {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-width: 0;
+}
+
+.mini-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: #0f766e;
+  margin-bottom: 8px;
+}
+
+.mini-chart {
+  display: flex;
+  gap: 10px;
+  height: 260px;
+  margin-bottom: 10px;
+}
+
+.mini-chart-area {
+  height: 100%;
+}
+
+.mini-y-axis {
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #9ca3af;
+  line-height: 1;
+  text-align: right;
+  padding-bottom: 2px;
+}
+
+.mini-chart-area {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mini-grid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mini-grid span {
+  height: 1px;
+  background: #eef2f7;
+  display: block;
+}
+
+.mini-bars {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 12px;
+  padding: 0 6px;
+}
+
+.mini-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  height: 100%;
+}
+
+.mini-bar-track {
+  height: 100%;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.mini-bar-bar {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  min-height: 16px;
+}
+
+.mini-bar-bar.gray { background: #9ca3af; }
+.mini-bar-bar.green { background: #16a34a; }
+.mini-bar-bar.red { background: #dc2626; }
+
+.mini-bar-value {
+  font-size: 12px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+  margin-bottom: 0;
+  transform: translateY(2px);
+  white-space: nowrap;
+}
+
+.mini-bar-value.green-text { color: #0f6b3a; }
+.mini-bar-value.red-text { color: #b91c1c; }
+
+.mini-bar-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.mini-note {
+  font-size: 12.5px;
+  color: #6b7280;
+  display: grid;
+  grid-template-columns: 16px 1fr auto;
+  column-gap: 6px;
+  align-items: center;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.mini-note i {
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  align-self: start;
+}
+
+.mini-note .red-bold,
+.mini-note .green-bold {
+  white-space: nowrap;
+}
+
+.mini-note-text {
+  grid-column: 2;
+  min-width: 0;
+  white-space: normal;
+  text-align: left;
+}
+
+.mini-note-value {
+  grid-column: 3;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.mini-note .green-bold,
+.mini-note .red-bold {
+  color: #dc2626;
+  font-weight: 800;
+}
+
+
+.eau-diagnostic-btn i {
+  font-size: 14px;
+}
+
+.eau-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  background: #fff;
+}
+
+.eau-card-active {
+  border-top: 4px solid #0d6efd;
+}
+
+.eau-card-inactive {
+  border-top: 4px solid #d1d5db;
+}
+
+.eau-card-header {
+  padding: 12px 16px;
+  font-weight: 800;
+  font-size: 16px;
+  color: #1f2937;
+  background: rgba(13, 110, 253, 0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eau-card-header-inactive {
+  background: #f9fafb;
+}
+
+.eau-card-icon {
+  font-size: 20px;
+  color: #0d6efd;
+}
+
+.eau-card-inactive .eau-card-icon {
+  color: #6b7280;
+}
+
+.eau-card .panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+/* EAU list (match image style) */
+.eau-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eau-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.eau-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: 1px solid rgba(0,0,0,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  flex: 0 0 40px;
+}
+
+.eau-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.eau-item-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.eau-item-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eau-line {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.35;
+}
+
+.eau-line-note {
+  padding-left: 18px;
+  font-weight: 800;
+}
+
+.eau-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #dc2626;
+  flex: 0 0 6px;
+  margin-top: 4px;
+}
+
+.eau-value {
+  font-weight: 800;
+}
+
+.eau-muted {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.eau-label {
+  color: #111827;
+  font-weight: 800;
+}
+
+.eau-divider {
+  border-top: 1px solid #e5e7eb;
+  margin: 4px 0;
 }
 
 /* Indicator cards */
@@ -359,8 +1476,8 @@ button{
 ========================= */
 .eau-btn {
   background: transparent;
-  color: #0d6efd;
-  border: 2px solid #0d6efd;
+  color: #0b6d6f;
+  border: 2px solid #0b6d6f;
 
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -377,13 +1494,13 @@ button{
 }
 
 .eau-btn:hover {
-  background: rgba(13, 110, 253, 0.08);
+  background: rgba(11, 109, 111, 0.12);
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
 .eau-btn.is-active {
-  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+  background: #0b6d6f;
   color: #fff;
   border-color: transparent;
 
@@ -516,6 +1633,19 @@ button{
   font-weight: 700;
   color: #d11;
   margin-top: 2px;
+}
+
+/* ✅ Override mini-note color inside Eau diagnostic cards */
+.eau-diag-mini .mini-note {
+  color: #6b7280;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.eau-diag-mini .mini-note .green-bold,
+.eau-diag-mini .mini-note .red-bold {
+  color: #dc2626;
+  font-weight: 800;
 }
 
 /* Urbaine / Rurale mini split inside indicator */
@@ -1349,6 +2479,16 @@ button{
   letter-spacing: .3px;
 }
 
+.eau-popup-title{
+  font-size: 26px;
+  color: #0f6b3a;
+}
+
+.eau-popup-title i{
+  font-size: 26px;
+  color: #0f766e;
+}
+
 .mise-ico{
   display: inline-flex;
   align-items: center;
@@ -1451,6 +2591,28 @@ button{
   font-size: 16px;
 }
 
+.box-header-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-right: 10px;
+  flex: 0 0 34px;
+}
+
+.box-header-icon.red {
+  color: #d32f2f;
+  background: #fde8e8;
+}
+
+.box-header-icon.green {
+  color: #15803d;
+  background: #e6f6ea;
+}
+
 .mise-box-body{
   padding: 12px 14px;
   text-align: left;
@@ -1522,6 +2684,135 @@ button{
   padding: 6px 12px;
   font-size: 16px;
   box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+/* === Laâyoune popup left panel style === */
+.eau-laayoune-popup .mise-box,
+.eau-elmarsa-popup .mise-box,
+.eau-foumeloued-popup .mise-box {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+}
+
+.eau-laayoune-popup .mise-bottom-grid,
+.eau-elmarsa-popup .mise-bottom-grid,
+.eau-foumeloued-popup .mise-bottom-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.eau-laayoune-popup .etat-box,
+.eau-elmarsa-popup .etat-box,
+.eau-foumeloued-popup .etat-box {
+  border-left: 4px solid #d32f2f;
+}
+
+.eau-laayoune-popup .ciblage-box,
+.eau-elmarsa-popup .ciblage-box,
+.eau-foumeloued-popup .ciblage-box {
+  border-left: 4px solid #15803d;
+}
+
+.eau-laayoune-popup .etat-header,
+.eau-laayoune-popup .ciblage-header,
+.eau-elmarsa-popup .etat-header,
+.eau-elmarsa-popup .ciblage-header,
+.eau-foumeloued-popup .etat-header,
+.eau-foumeloued-popup .ciblage-header {
+  background: transparent;
+  color: #1f2937;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.eau-laayoune-popup .mise-box-header,
+.eau-elmarsa-popup .mise-box-header,
+.eau-foumeloued-popup .mise-box-header {
+  padding: 12px 14px;
+}
+
+.eau-laayoune-popup .etat-bullet,
+.eau-elmarsa-popup .etat-bullet,
+.eau-foumeloued-popup .etat-bullet {
+  background: #d32f2f;
+}
+
+.eau-laayoune-popup .ciblage-bullet,
+.eau-elmarsa-popup .ciblage-bullet,
+.eau-foumeloued-popup .ciblage-bullet {
+  background: #16a34a;
+}
+
+.eau-laayoune-popup .etat-box .mise-box-body,
+.eau-elmarsa-popup .etat-box .mise-box-body,
+.eau-foumeloued-popup .etat-box .mise-box-body {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+}
+
+.eau-laayoune-popup .etat-line,
+.eau-elmarsa-popup .etat-line,
+.eau-foumeloued-popup .etat-line {
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.eau-laayoune-popup .action-box,
+.eau-elmarsa-popup .action-box,
+.eau-foumeloued-popup .action-box {
+  border-left: 4px solid #16a34a;
+  background: #eafff4;
+}
+
+.eau-laayoune-popup .action-body,
+.eau-elmarsa-popup .action-body,
+.eau-foumeloued-popup .action-body {
+  min-height: auto;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.eau-laayoune-popup .action-bar,
+.eau-elmarsa-popup .action-bar,
+.eau-foumeloued-popup .action-bar {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.eau-laayoune-popup .ap-pill,
+.eau-elmarsa-popup .ap-pill,
+.eau-foumeloued-popup .ap-pill {
+  background: #0f8f4e;
+  color: #fff;
+  font-weight: 900;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.eau-laayoune-popup .action-bar-text,
+.eau-elmarsa-popup .action-bar-text,
+.eau-foumeloued-popup .action-bar-text {
+  text-align: left;
+  font-weight: 800;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+
+.eau-elmarsa-popup .ciblage-line {
+  flex-wrap: nowrap;
+}
+
+.eau-elmarsa-popup .ciblage-line span {
+  white-space: nowrap;
 }
 
 .action-title{
@@ -2247,4 +3538,303 @@ button{
 
 .education-no-header-blue .education-scroll-body {
   padding-top: 16px;
+}
+
+/* === Eau actions popup === */
+.eau-actions-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vh 2vw;
+}
+
+.eau-actions-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.eau-actions-card {
+  position: relative;
+  width: min(1200px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  padding: 20px 22px 24px;
+}
+
+.eau-actions-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #f3f4f6;
+  color: #374151;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eau-actions-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #0b6d6f;
+  border-radius: 18px;
+  margin-bottom: 10px;
+}
+
+.eau-actions-tab {
+  background: transparent;
+  color: #fff;
+  font-weight: 800;
+  font-size: 12.5px;
+  padding: 2px 8px;
+  border-radius: 14px;
+}
+
+.eau-actions-tab.active {
+  background: rgba(255,255,255,0.14);
+}
+
+.eau-actions-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+  font-weight: 900;
+  color: #1f2937;
+  margin: 4px 0 6px;
+}
+
+.eau-actions-header i {
+  color: #0f766e;
+  font-size: 28px;
+}
+
+.eau-actions-subtitle {
+  font-size: 15px;
+  color: #4b5563;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.eau-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.eau-action-card-wide {
+  grid-column: auto;
+  max-width: 520px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.eau-action-card {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 180px;
+}
+
+.eau-action-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.eau-action-pill {
+  background: #0b7c86;
+  color: #fff;
+  font-weight: 900;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 16px;
+}
+
+.eau-action-type {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 700;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.eau-action-type b {
+  color: #1f2937;
+  font-weight: 800;
+}
+
+.eau-action-main {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.eau-action-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #0f766e;
+  background: #e6fffb;
+  flex: 0 0 38px;
+}
+
+.eau-action-icon.blue { color: #1d4ed8; background: #e0ecff; }
+.eau-action-icon.green { color: #0f766e; background: #e6f7f0; }
+.eau-action-icon.indigo { color: #4f46e5; background: #e8eaff; }
+.eau-action-icon.teal { color: #0b7c86; background: #e6f7f8; }
+
+.eau-action-title {
+  font-size: 17px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.eau-action-desc {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+.eau-action-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.eau-feature {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 6px 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 3px solid #e5e7eb;
+  font-size: 12px;
+}
+
+.eau-feature i {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background: #eef2f7;
+  color: #334155;
+}
+
+.eau-feature-title {
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.eau-feature-sub {
+  color: #6b7280;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.eau-feature-note {
+  color: #9ca3af;
+  font-weight: 700;
+  font-size: 11.5px;
+  line-height: 1.1;
+}
+
+.eau-feature.green { border-bottom-color: #16a34a; }
+.eau-feature.red { border-bottom-color: #dc2626; }
+.eau-feature.amber { border-bottom-color: #f59e0b; }
+.eau-feature.blue { border-bottom-color: #2563eb; }
+
+.eau-action-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.eau-badge {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  background: #f1f5f9;
+  color: #1f2937;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.eau-badge.success {
+  background: #e6f6ea;
+  color: #15803d;
+}
+
+.eau-actions-nav {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.eau-actions-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: #0b7c86;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.eau-actions-nav-btn.ok {
+  background: #0a6b6e;
+}
+
+.eau-actions-nav-btn.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.eau-actions-page {
+  font-weight: 800;
+  color: #4b5563;
+}
+
+@media (max-width: 900px) {
+  .eau-actions-grid {
+    grid-template-columns: 1fr;
+  }
+  .eau-action-card-wide {
+    max-width: 100%;
+  }
 }

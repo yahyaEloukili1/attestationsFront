@@ -154,10 +154,12 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   showEauIndicators = false;
   showEauDiagnostic = false;
   showEauPopup = false;
+  showEauActionsPopup = false;
+  currentEauActionsPage = 1; // 1 or 2
   showEauElmarsaPopup = false;
   showEauLaayounePopup = false;
-  currentEauElmarsaPage = 1; // 1 or 2
-  currentEauLaayounePage = 1; // 1 to 4
+  currentEauElmarsaPage = 1; // 1 to 3
+  currentEauLaayounePage = 1; // 1 to 3
 
   // =========================
   // ✅ ICONS
@@ -240,6 +242,57 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  private ringArea(coords: Position[]): number {
+    if (!coords || coords.length < 3) return 0;
+    let area = 0;
+    for (let i = 0, j = coords.length - 1; i < coords.length; j = i++) {
+      const [x0, y0] = coords[j];
+      const [x1, y1] = coords[i];
+      area += x0 * y1 - x1 * y0;
+    }
+    return Math.abs(area / 2);
+  }
+
+  private polygonCentroid(coords: Position[]): L.LatLng | null {
+    if (!coords || coords.length < 3) return null;
+    let area = 0;
+    let x = 0;
+    let y = 0;
+    for (let i = 0, j = coords.length - 1; i < coords.length; j = i++) {
+      const [x0, y0] = coords[j];
+      const [x1, y1] = coords[i];
+      const f = x0 * y1 - x1 * y0;
+      area += f;
+      x += (x0 + x1) * f;
+      y += (y0 + y1) * f;
+    }
+    if (area === 0) return null;
+    area *= 0.5;
+    return L.latLng(y / (6 * area), x / (6 * area));
+  }
+
+  private getFeatureCentroid(feature: Feature): L.LatLng | null {
+    const geom = feature?.geometry as any;
+    if (!geom) return null;
+    if (geom.type === 'Polygon') {
+      return this.polygonCentroid(geom.coordinates?.[0] || []);
+    }
+    if (geom.type === 'MultiPolygon') {
+      let bestRing: Position[] | null = null;
+      let bestArea = 0;
+      for (const poly of geom.coordinates || []) {
+        const ring = poly?.[0];
+        const area = this.ringArea(ring || []);
+        if (area > bestArea) {
+          bestArea = area;
+          bestRing = ring;
+        }
+      }
+      return bestRing ? this.polygonCentroid(bestRing) : null;
+    }
+    return null;
   }
 
   // =========================
@@ -417,12 +470,28 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       });
 
       const communesLayer = L.geoJSON(data as any, {
-        style: (feature: any) => ({
-          color: '#888',
-          weight: 1,
-          fillColor: this.getCommuneColor(feature.properties.id_objet),
-          fillOpacity: 0.55
-        }),
+        style: (feature: any) => {
+          const props = feature?.properties || {};
+          const id =
+            props?.id_objet ??
+            props?.ID ??
+            props?.id ??
+            props?.Id;
+          const name =
+            props?.COMMUNE ??
+            props?.Commune ??
+            props?.Nom ??
+            props?.nom ??
+            props?.name ??
+            props?.nom_objet;
+          const key = this.showEauIndicators ? (name || id) : (id || name);
+          return {
+            color: '#888',
+            weight: 1,
+            fillColor: this.getCommuneColor(key),
+            fillOpacity: 0.55
+          };
+        },
 
         onEachFeature: (feature: any, layer: L.Layer) => {
           const polygon = layer as L.Path;
@@ -431,13 +500,19 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
           if (bounds) {
             const area = bounds.getNorthEast().distanceTo(bounds.getSouthWest());
             if (area > 15000) {
+              const communeName = String(feature.properties?.COMMUNE || '').toUpperCase().trim();
+              const baseCenter = bounds.getCenter();
+              const centroid =
+                communeName === 'BOUKRAA'
+                  ? this.getFeatureCentroid(feature as Feature) || baseCenter
+                  : baseCenter;
               L.tooltip({
                 permanent: true,
                 direction: 'center',
                 className: 'commune-label'
               })
                 .setContent(feature.properties.COMMUNE)
-                .setLatLng(bounds.getCenter())
+                .setLatLng(centroid)
                 .addTo(this.map);
             }
           }
@@ -471,7 +546,17 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
           };
 
           polygon.on('click', () => {
-            const key = feature.properties.COMMUNE?.toUpperCase().trim();
+            const rawKey = feature.properties.COMMUNE?.toUpperCase().trim() || '';
+            const key = rawKey
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+            const hasActivePanel =
+              this.showSanteIndicators ||
+              this.showEducationIndicators ||
+              this.showEmploiIndicators ||
+              this.showEauIndicators ||
+              this.miseVisible;
+            if (!hasActivePanel) return;
             if (this.showSanteIndicators) {
               if (key === 'LAAYOUNE' && this.showSanteDiagnostic) {
                 this.showDiagnosticPopup = true;
@@ -500,24 +585,28 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
               return;
             }
             if (this.showEauIndicators) {
+              if (key === 'LAAYOUNE') {
+                this.showEauLaayounePopup = true;
+                this.showEauPopup = false;
+                this.showEauElmarsaPopup = false;
+                this.currentEauLaayounePage = 1;
+                return;
+              }
+              if (key === 'EL MARSA') {
+                this.showEauElmarsaPopup = true;
+                this.showEauPopup = false;
+                this.showEauLaayounePopup = false;
+                this.currentEauElmarsaPage = 1;
+                return;
+              }
+              if (key === 'FOUM EL OUED') {
+                this.showEauPopup = true;
+                this.showEauElmarsaPopup = false;
+                this.showEauLaayounePopup = false;
+                return;
+              }
               if (this.showEauDiagnostic) {
-                if (key === 'FOUM EL OUED') {
-                  this.showEauPopup = true;
-                  this.showEauElmarsaPopup = false;
-                  this.showEauLaayounePopup = false;
-                }
-                if (key === 'EL MARSA') {
-                  this.showEauElmarsaPopup = true;
-                  this.showEauPopup = false;
-                  this.showEauLaayounePopup = false;
-                  this.currentEauElmarsaPage = 1;
-                }
-                if (key === 'LAAYOUNE') {
-                  this.showEauLaayounePopup = true;
-                  this.showEauPopup = false;
-                  this.showEauElmarsaPopup = false;
-                  this.currentEauLaayounePage = 1;
-                }
+                // keep diagnostic-specific handling if needed
               }
               return;
             }
@@ -525,7 +614,6 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
           });
         }
       }).addTo(this.map);
-      this.communesLayer = communesLayer;
 
       // =========================
       // ✅ LOAD LAYERS (HIDDEN)
@@ -763,10 +851,12 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
         interactive: false
       }).addTo(this.map);
 
-      // Zoom
+      this.communesLayer = communesLayer;
+
+      // Zoom - utiliser tout l'espace disponible
       this.map.fitBounds((communesLayer as any).getBounds(), {
-        paddingTopLeft: [80, 40],
-        paddingBottomRight: [40, 40]
+        paddingTopLeft: [10, 10],
+        paddingBottomRight: [10, 10]
       });
 
       setTimeout(() => this.map.invalidateSize(), 0);
@@ -788,6 +878,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEauIndicators = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
+      this.showEauActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     }
@@ -805,6 +896,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEauIndicators = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
+      this.showEauActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     } else {
@@ -829,6 +921,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEauIndicators = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
+      this.showEauActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     } else {
@@ -836,6 +929,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEmploiPopup = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
+      this.showEauActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     }
@@ -856,11 +950,13 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEmploiPopup = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
+      this.showEauActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     } else {
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
+      this.showEauActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     }
@@ -869,7 +965,9 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   toggleEauDiagnostic() {
     this.showEauDiagnostic = !this.showEauDiagnostic;
-    if (!this.showEauDiagnostic) {
+    if (this.showEauDiagnostic) {
+      this.showEauActionsPopup = false;
+    } else {
       this.showEauPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
@@ -916,6 +1014,25 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     this.showEauPopup = false;
   }
 
+  openEauActionsPopup() {
+    if (this.showEauIndicators) {
+      this.showEauActionsPopup = true;
+    }
+  }
+
+  closeEauActionsPopup() {
+    this.showEauActionsPopup = false;
+    this.currentEauActionsPage = 1;
+  }
+
+  nextEauActionsPage() {
+    if (this.currentEauActionsPage < 2) this.currentEauActionsPage++;
+  }
+
+  prevEauActionsPage() {
+    if (this.currentEauActionsPage > 1) this.currentEauActionsPage--;
+  }
+
   closeEauElmarsaPopup() {
     this.showEauElmarsaPopup = false;
     this.currentEauElmarsaPage = 1;
@@ -927,7 +1044,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   }
 
   nextEauLaayounePage() {
-    if (this.currentEauLaayounePage < 4) {
+    if (this.currentEauLaayounePage < 3) {
       this.currentEauLaayounePage++;
     }
   }
@@ -940,13 +1057,11 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   getCurrentEauLaayouneImage(): string {
     if (this.currentEauLaayounePage === 2) {
-      return 'assets/projects/eau2.png';
+      return 'assets/version2/eauLaayoune2.png';
     } else if (this.currentEauLaayounePage === 3) {
-      return 'assets/projects/eau3.png';
-    } else if (this.currentEauLaayounePage === 4) {
-      return 'assets/projects/eau4.png';
+      return 'assets/version2/eauLaayoune3.png';
     }
-    return 'assets/projects/eau1.png';
+    return 'assets/version2/eauLaayoune1.png';
   }
 
   closeEmploiPopup() {
@@ -982,7 +1097,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   }
 
   nextEauElmarsaPage() {
-    if (this.currentEauElmarsaPage < 2) {
+    if (this.currentEauElmarsaPage < 3) {
       this.currentEauElmarsaPage++;
     }
   }
@@ -994,9 +1109,13 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   }
 
   getCurrentEauElmarsaImage(): string {
-    return this.currentEauElmarsaPage === 2
-      ? 'assets/projects/eauElmarsa2.png'
-      : 'assets/projects/eauElmarsa.png';
+    if (this.currentEauElmarsaPage === 2) {
+      return 'assets/version2/eauElmarsa2.png';
+    }
+    if (this.currentEauElmarsaPage === 3) {
+      return 'assets/version2/eauElmarsa3.png';
+    }
+    return 'assets/version2/eauElmarsa1.png';
   }
 
   nextEducationProjectPage() {
@@ -1310,36 +1429,94 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   // =========================
   // ✅ COLORS
   // =========================
-  getCommuneColor(nom: string): string {
-    switch (nom) {
+  getCommuneColor(idOrName: string): string {
+    const key = String(idOrName || '').toUpperCase().trim();
+    if (key.includes('LAAYOUNE')) {
+      return (
+        this.showEauIndicators ||
+        this.showSanteDiagnostic ||
+        this.showEducationDiagnostic ||
+        this.showEmploiDiagnostic ||
+        this.showEauDiagnostic
+      )
+        ? '#c62828'
+        : '#c9b79c';
+    }
+    if (key.includes('EL MARSA') || key === 'MARSA') {
+      return (this.showEauIndicators || this.showEducationDiagnostic) ? '#c62828' : '#64b5f6';
+    }
+    if (key.includes('FOUM EL OUED') || key.includes('FOUM EL OUAD')) {
+      return (this.showEauIndicators || this.showEauDiagnostic) ? '#c62828' : '#81c784';
+    }
+    if (key.includes('BOUKRAA')) return '#ffeb3b';
+    if (key.includes('DCHEIRA')) return '#ba68c8';
+    switch (key) {
       case '1080204':
-        return '#f6edb1';
+        return '#ffeb3b';
       case '1080202':
-        // El Marsa - red when Education Diagnostic is active
-        return (this.showEducationDiagnostic || this.showEauDiagnostic) ? '#e53935' : '#b8d9f2';
+        // El Marsa - red when Eau indicators or Education Diagnostic is active
+        return (this.showEauIndicators || this.showEducationDiagnostic) ? '#c62828' : '#64b5f6';
       case '1080206':
-        // Foum El Oued - red when Eau Diagnostic is active
-        return this.showEauDiagnostic ? '#e53935' : '#c7e3c1';
+        // Foum El Oued - red when Eau indicators or diagnostic is active
+        return (this.showEauIndicators || this.showEauDiagnostic) ? '#c62828' : '#81c784';
       case '1080203':
-        // Laayoune - red when Santé or Education Diagnostic is active
-        return (this.showSanteDiagnostic || this.showEducationDiagnostic || this.showEmploiDiagnostic || this.showEauDiagnostic)
-          ? '#e53935'
-          : '#f2b6b6';
+        // Laayoune - red when Eau indicators or any Diagnostic is active
+        return (
+          this.showEauIndicators ||
+          this.showSanteDiagnostic ||
+          this.showEducationDiagnostic ||
+          this.showEmploiDiagnostic ||
+          this.showEauDiagnostic
+        )
+          ? '#c62828'
+          : '#c9b79c';
       case '1080205':
-        return '#dbc6e8';
+        return '#ba68c8';
+      case 'LAAYOUNE':
+        return (
+          this.showEauIndicators ||
+          this.showSanteDiagnostic ||
+          this.showEducationDiagnostic ||
+          this.showEmploiDiagnostic ||
+          this.showEauDiagnostic
+        )
+          ? '#c62828'
+          : '#c9b79c';
+      case 'EL MARSA':
+        return (this.showEauIndicators || this.showEducationDiagnostic) ? '#c62828' : '#64b5f6';
+      case 'FOUM EL OUED':
+        return this.showEauDiagnostic ? '#c62828' : '#81c784';
+      case 'BOUKRAA':
+        return '#ffeb3b';
+      case 'DCHEIRA':
+        return '#ba68c8';
       default:
-        return '#c7e3c1';
+        return '#90a4ae';
     }
   }
 
   private updateCommuneStyles() {
     if (!this.communesLayer) return;
-    this.communesLayer.setStyle((feature: any) => ({
-      color: '#888',
-      weight: 1,
-      fillColor: this.getCommuneColor(feature?.properties?.id_objet),
-      fillOpacity: 0.55
-    }));
+    this.communesLayer.setStyle((feature: any) => {
+      const props = feature?.properties || {};
+      const id =
+        props?.id_objet ??
+        props?.ID ??
+        props?.id ??
+        props?.Id;
+      const name =
+        props?.COMMUNE ??
+        props?.Commune ??
+        props?.Nom ??
+        props?.nom ??
+        props?.name;
+      return {
+        color: '#888',
+        weight: 1,
+        fillColor: this.getCommuneColor(this.showEauIndicators ? (name || id) : (id || name)),
+        fillOpacity: 0.55
+      };
+    });
   }
 
   // =========================
