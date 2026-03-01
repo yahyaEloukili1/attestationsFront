@@ -1,267 +1,475 @@
 <!-- boucraa.component.html -->
 <div class="dashboard-container">
 
-  <div class="row justify-content-center g-3">
-
-    <!-- 🔹 INDICATEURS GAUCHE -->
-    <div class="col-12 col-lg-3 d-flex flex-column gap-4">
-      <ng-container *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
-
-      <!-- Démographiques -->
-      <div class="indicator-card">
-        <h5 class="text-center mb-4 indicator-title">Indicateurs démographiques</h5>
-
-        <div class="row g-3">
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-people-fill text-primary"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Population</div>
-                <div class="kpi-value">1 171</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-house-door-fill text-success"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Ménages</div>
-                <div class="kpi-value">396</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-gender-male"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Homme</div>
-                <div class="kpi-value">44,9%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-gender-female"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Femmes</div>
-                <div class="kpi-value">55,1%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Territoriaux -->
-      <div class="indicator-card">
-        <h5 class="text-center mb-4 indicator-title">Indicateurs territoriaux</h5>
-
-        <div class="row g-3">
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-aspect-ratio-fill text-secondary"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Superficie</div>
-                <div class="kpi-value">6 216 km²</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-people-fill text-warning"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Densité</div>
-                <div class="kpi-value">0,18 Hab./Km²</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      </ng-container>
-    </div>
-
-    <!-- 🔹 MAP CENTRE -->
-    <div class="col-12 col-lg-6">
-      <div class="map-card">
-        <div class="map-title">Commune de Boucraa</div>
-        <div #mapContainer class="map-only"></div>
-      </div>
-    </div>
-
-    <!-- 🔹 INDICATEURS DROITE -->
-    <div class="col-12 col-lg-3 d-flex flex-column gap-4">
-      <div class="indicator-card back-card">
-        <button type="button" class="btn btn-lg back-btn w-100" (click)="goToProvince()">
-          <i class="bi bi-arrow-left-circle me-2"></i>
-          Retour à la province
-        </button>
-      </div>
-
-      <div class="indicator-card">
-        <h5 class="text-center mb-4 indicator-title">Indicateurs socio-économiques</h5>
-
-        <div class="row g-3">
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-activity text-primary"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux d’activité</div>
-                <div class="kpi-value">50,3%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-people text-danger"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux de pauvreté multidimensionnel</div>
-                <div class="kpi-value">4,4%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-briefcase-fill text-dark"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux de chômage</div>
-                <div class="kpi-value">18,1%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-shield-exclamation text-warning"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux de vulnérabilité</div>
-                <div class="kpi-value">6,8%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-people-fill text-info"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux de préscolarisation</div>
-                <div class="kpi-value">37,93%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-mortarboard-fill text-success"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux de scolarisation (6 ans et +)</div>
-                <div class="kpi-value">89,6%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-            <div class="kpi">
-              <i class="bi bi-book-fill text-secondary"></i>
-              <div class="kpi-content">
-                <div class="kpi-label">Taux d’analphabétisme (10 ans et +)</div>
-                <div class="kpi-value">19,6%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-3">
-        <button
-          type="button"
-          class="btn btn-lg education-btn text-center"
-          style="width: 400px;"
-        >
-          <i class="bi bi-bar-chart-fill me-1"></i>
-          Voir indicateurs éducatifs
-        </button>
-      </div>
-    </div>
-
+  <div class="laayoune-back-card mb-3">
+    <button type="button" class="btn btn-lg back-btn" (click)="goToProvince()">
+      <i class="bi bi-arrow-left-circle me-2"></i>
+      Retour à la province
+    </button>
   </div>
 
-  <!-- ✅ MENUS BAR (comme province) -->
-  <div class="menus-bar">
+<!-- ✅ TOP LAYOUT (Left | Center Map | Right) -->
+<div class="boucraa-layout" [class.only-map]="showSanteActive || showEmploiActive || showEauActive">
 
-    <!-- MISE -->
-    <div class="menu-wrap" (click)="$event.stopPropagation()">
-      <button class="btn btn-lg mise-btn"
-              [class.is-active]="activeMiseProject !== null"
-              (click)="toggleMenu('mise', $event)">
+  <!-- ========== LEFT SIDE (indicateurs) ========== -->
+  <div class="side-panel left-panel" *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
+    <div class="side-header">
+      <div class="laayoune-indicators-title">Indicateurs &amp; état des lieux</div>
+      <div class="laayoune-indicators-subtitle">Indicateurs Démographiques et Socio-économiques Clés</div>
+    </div>
+
+    <div class="side-grid">
+      <!-- Démographie -->
+      <div class="laayoune-card demo-card">
+        <div class="card-title">
+          <i class="bi bi-people-fill"></i>
+          Démographie
+        </div>
+        <div class="stat-row">
+          <div class="stat-big">1&nbsp;171</div>
+          <div class="stat-unit">Habitants</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-big">396</div>
+          <div class="stat-unit">Ménages</div>
+        </div>
+        <div class="stat-split">
+          <span><i class="bi bi-gender-male"></i> 44,9%</span>
+          <span><i class="bi bi-gender-female"></i> 55,1%</span>
+        </div>
+      </div>
+
+      <!-- Territoire -->
+      <div class="laayoune-card territoire-card">
+        <div class="card-title">
+          <i class="bi bi-geo-alt-fill"></i>
+          Territoire
+        </div>
+        <div class="stat-row">
+          <div class="stat-big amber">6&nbsp;216</div>
+          <div class="stat-unit">Km² Superficie</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-big amber">0,18</div>
+          <div class="stat-unit">Hab./Km² Densité</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CENTER (MAP) ========== -->
+  <div class="map-center">
+    <div class="map-card">
+      <div class="map-title">Commune de Boucraa</div>
+      <div #mapContainer class="map-only"></div>
+    </div>
+  </div>
+
+  <!-- ========== RIGHT SIDE (indicateurs) ========== -->
+  <div class="side-panel right-panel" *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
+    <div class="side-grid">
+      <!-- Note (full width) -->
+      <div class="laayoune-card boucraa-note-card span-2">
+        La réalité révèle que la majorité des habitants de cette commune entretiennent des liens étroits avec
+        la commune de Laâyoune, tant pour leur résidence principale que pour l’exercice de leurs activités
+        économiques, ainsi que pour l’accès aux prestations sociales.
+      </div>
+
+      <!-- Santé -->
+      <div class="laayoune-card sante-card">
+        <div class="card-title">
+          <i class="bi bi-heart-pulse-fill"></i>
+          Santé
+        </div>
+        <div class="list-line">
+          <i class="bi bi-hospital"></i> 1 Établissement de Soins de Santé Primaires (ESSP)
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="laayoune-card education-card">
+        <div class="card-title">
+          <i class="bi bi-mortarboard-fill"></i>
+          Education
+        </div>
+        <div class="list-line">
+          <i class="bi bi-building"></i> 1 École primaire &amp; préscolaire
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  <!-- ✅ MENUS (projets par thématique) -->
+  <div class="menus-bar">
+    <!-- Mise à niveau -->
+    <div class="menu-wrap">
+      <button
+        type="button"
+        class="btn btn-lg mise-btn"
+        [class.is-active]="hasActive('mise')"
+        (click)="toggleMenu('mise', $event)">
         <i class="bi" [ngClass]="getMenuLeftIcon('mise')"></i>
-        <span>Mise à niveau</span>
-        <i class="bi" [ngClass]="openMenu==='mise' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        Mise à niveau
       </button>
 
-      <div class="menu-pop" *ngIf="openMenu==='mise'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeMiseProject==='M1'" (click)="selectMise('M1', $event)">Mise 1</button>
-        <button class="menu-item" [class.active]="activeMiseProject==='M2'" (click)="selectMise('M2', $event)">Mise 2</button>
-        <button class="menu-item" [class.active]="activeMiseProject==='M3'" (click)="selectMise('M3', $event)">Mise 3</button>
+      <div class="menu-pop" *ngIf="openMenu === 'mise'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeMiseProject === 'M1'" (click)="selectMise('M1', $event)">
+          Mise à niveau 1
+        </button>
+        <button class="menu-item" [class.active]="activeMiseProject === 'M2'" (click)="selectMise('M2', $event)">
+          Mise à niveau 2
+        </button>
+        <button class="menu-item" [class.active]="activeMiseProject === 'M3'" (click)="selectMise('M3', $event)">
+          Mise à niveau 3
+        </button>
         <button class="menu-hide" (click)="hideMenu('mise', $event)">Masquer</button>
       </div>
     </div>
 
-    <!-- EDUCATION -->
-    <div class="menu-wrap" (click)="$event.stopPropagation()">
-      <button class="btn btn-lg education-btn"
-              [class.is-active]="activeEducationProject !== null"
-              (click)="toggleMenu('education', $event)">
-        <i class="bi" [ngClass]="getMenuLeftIcon('education')"></i>
-        <span>Education</span>
-        <i class="bi" [ngClass]="openMenu==='education' ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+    <!-- Eau potable -->
+    <div class="menu-wrap">
+      <button
+        type="button"
+        class="btn btn-lg water-btn"
+        [class.is-active]="hasActive('eau')"
+        (click)="toggleMenu('eau', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('eau')"></i>
+        Eau potable
       </button>
 
-      <div class="menu-pop" *ngIf="openMenu==='education'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeEducationProject==='E1'" (click)="selectEducation('E1', $event)">Education 1</button>
-        <button class="menu-item" [class.active]="activeEducationProject==='E2'" (click)="selectEducation('E2', $event)">Education 2</button>
-        <button class="menu-item" [class.active]="activeEducationProject==='E3'" (click)="selectEducation('E3', $event)">Education 3</button>
-        <button class="menu-item" [class.active]="activeEducationProject==='E4'" (click)="selectEducation('E4', $event)">Education 4</button>
+      <div class="menu-pop" *ngIf="openMenu === 'eau'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeEauProject === 'P1'" (click)="selectEau('P1', $event)">
+          P1 : Réhabilitation du réseau AEP
+        </button>
+        <button class="menu-item" [class.active]="activeEauProject === 'P2'" (click)="selectEau('P2', $event)">
+          P2 : AEP – Zone industrielle El Marsa
+        </button>
+        <button class="menu-item" [class.active]="activeEauProject === 'P3'" (click)="selectEau('P3', $event)">
+          P3 : STEP – Zone industrielle El Marsa
+        </button>
+        <button class="menu-item" [class.active]="activeEauProject === 'P4'" (click)="selectEau('P4', $event)">
+          P4 : Assainissement – Ville de Laâyoune
+        </button>
+        <button class="menu-item" [class.active]="activeEauProject === 'P5'" (click)="selectEau('P5', $event)">
+          P5 : Renforcement du stockage d’eau
+        </button>
+        <button class="menu-item" [class.active]="activeEauProject === 'P6'" (click)="selectEau('P6', $event)">
+          P6 : Assainissement – Foum El Oued
+        </button>
+        <button class="menu-hide" (click)="hideMenu('eau', $event)">Masquer</button>
+      </div>
+    </div>
+
+    <!-- Emploi -->
+    <div class="menu-wrap">
+      <button
+        type="button"
+        class="btn btn-lg emploi-btn"
+        [class.is-active]="hasActive('emploi')"
+        (click)="toggleMenu('emploi', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('emploi')"></i>
+        Emploi
+      </button>
+
+      <div class="menu-pop" *ngIf="openMenu === 'emploi'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeEmploiProject === 'POINTS'" (click)="selectEmploi('POINTS', $event)">
+          Points emploi
+        </button>
+        <button class="menu-item" [class.active]="activeEmploiProject === 'ZONE1'" (click)="selectEmploi('ZONE1', $event)">
+          Zone d’activité
+        </button>
+        <button class="menu-item" [class.active]="activeEmploiProject === 'HIZAM'" (click)="selectEmploi('HIZAM', $event)">
+          Zone Al Hizam
+        </button>
+        <button class="menu-item" [class.active]="activeEmploiProject === 'ATELIERS'" (click)="selectEmploi('ATELIERS', $event)">
+          Ateliers artisanaux
+        </button>
+        <button class="menu-item" [class.active]="activeEmploiProject === 'SITES'" (click)="selectEmploi('SITES', $event)">
+          Sites touristiques
+        </button>
+        <button class="menu-hide" (click)="hideMenu('emploi', $event)">Masquer</button>
+      </div>
+    </div>
+
+    <!-- Éducation -->
+    <div class="menu-wrap">
+      <button
+        type="button"
+        class="btn btn-lg education-btn"
+        [class.is-active]="hasActive('education')"
+        (click)="toggleMenu('education', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('education')"></i>
+        Éducation
+      </button>
+
+      <div class="menu-pop" *ngIf="openMenu === 'education'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeEducationProject === 'E1'" (click)="selectEducation('E1', $event)">
+          Écoles primaires &amp; préscolaires
+        </button>
+        <button class="menu-item" [class.active]="activeEducationProject === 'E2'" (click)="selectEducation('E2', $event)">
+          Lycées collégiaux
+        </button>
+        <button class="menu-item" [class.active]="activeEducationProject === 'E3'" (click)="selectEducation('E3', $event)">
+          Lycées qualifiants
+        </button>
+        <button class="menu-item" [class.active]="activeEducationProject === 'E4'" (click)="selectEducation('E4', $event)">
+          Établissements supérieurs
+        </button>
         <button class="menu-hide" (click)="hideMenu('education', $event)">Masquer</button>
       </div>
     </div>
 
-    <!-- SANTÉ -->
-    <div class="menu-wrap" (click)="$event.stopPropagation()">
-      <button class="btn btn-lg health-btn"
-              [class.is-active]="showSanteActive"
-              (click)="toggleSanteMode($event)">
-        <i class="bi" [ngClass]="showSanteActive ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
-        <span>Santé</span>
+    <!-- Santé -->
+    <div class="menu-wrap">
+      <button
+        type="button"
+        class="btn btn-lg health-btn"
+        [class.is-active]="hasActive('sante')"
+        (click)="toggleMenu('sante', $event)">
+        <i class="bi" [ngClass]="getMenuLeftIcon('sante')"></i>
+        Santé
       </button>
+
+      <div class="menu-pop" *ngIf="openMenu === 'sante'" (click)="$event.stopPropagation()">
+        <button class="menu-item" [class.active]="activeSanteProject === 'NOUVEAUX'" (click)="selectSante('NOUVEAUX', $event)">
+          Nouveaux CHR / ESSP
+        </button>
+        <button class="menu-item" [class.active]="activeSanteProject === 'HOPITAUX_EXISTANTS'" (click)="selectSante('HOPITAUX_EXISTANTS', $event)">
+          Hôpitaux existants
+        </button>
+        <button class="menu-item" [class.active]="activeSanteProject === 'ESSP_EXISTANTS'" (click)="selectSante('ESSP_EXISTANTS', $event)">
+          ESSP existants
+        </button>
+        <button class="menu-item" [class.active]="activeSanteProject === 'DOUIRAT'" (click)="selectSante('DOUIRAT', $event)">
+          Zone Douirat
+        </button>
+        <button class="menu-hide" (click)="hideMenu('sante', $event)">Masquer</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP ACTIONS PROPOSÉES SANTÉ -->
+<div class="sante-actions-modal" *ngIf="showSanteActionsPopup">
+  <div class="sante-actions-backdrop" (click)="closeSanteActionsPopup()"></div>
+  <div class="sante-actions-card" (click)="$event.stopPropagation()">
+    <div class="sante-actions-topbar">
+      <div class="sante-actions-topbar-left">
+        <div class="sante-actions-tabs">
+          <span class="sante-actions-tab">Axe Stratégique 01</span>
+          <span class="sante-actions-tab active">Actions Proposées</span>
+        </div>
+        <div class="sante-actions-header">
+          <span class="sante-popup-title-icon"><i class="bi bi-heart-pulse-fill"></i></span>
+          SANTÉ
+        </div>
+        <div class="sante-actions-subtitle">
+          4 Actions proposées identifiées pour combler le déficit en infrastructures de proximité et moderniser le plateau technique régional.
+        </div>
+      </div>
+      <div class="sante-actions-topbar-right">
+        <button type="button" class="sante-nav-btn" [class.disabled]="currentSanteActionPage === 1" [disabled]="currentSanteActionPage === 1" (click)="prevSanteActionPage()">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button type="button" class="sante-nav-btn" [class.disabled]="currentSanteActionPage === 4" [disabled]="currentSanteActionPage === 4" (click)="nextSanteActionPage()">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+        <button type="button" class="sante-actions-close" (click)="closeSanteActionsPopup()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
     </div>
 
-        <!-- EAU -->
-    <div class="menu-wrap" (click)="$event.stopPropagation()">
-      <button class="btn btn-lg water-btn"
-              [class.is-active]="showEauActive"
-              (click)="toggleEauMode($event)">
-        <i class="bi" [ngClass]="showEauActive ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
-        <span>Eau potable</span>
-      </button>
+    <div class="sante-actions-grid">
+      <!-- Action 1 -->
+      <div class="sante-action-card">
+        <div class="sante-action-card-header">
+          <div class="sante-action-header-left">
+            <span>Action Proposée 1</span>
+            <span class="sante-action-type">Type: Soins de Proximité</span>
+          </div>
+          <div class="sante-action-header-right">
+            <span class="sante-action-year">AP:2026</span>
+            <span class="sante-action-priority">Prioritaire</span>
+          </div>
+        </div>
+        <div class="sante-action-main">
+          <div class="sante-action-title">
+            <span class="sante-action-title-icon blue"><i class="bi bi-house-heart-fill"></i></span>
+            Centre de Santé Urbain Niv. 1
+          </div>
+          <div class="sante-action-desc">
+            Construction et équipement d'un nouveau centre dans le Lotissement Al Wahda (Douirat) pour assurer la couverture des nouveaux quartiers.
+          </div>
+        </div>
+        <div class="sante-action-indicators">
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Amélioration Ratio ESSP</div>
+            <div class="sante-indicator-value">17 385 → 12 300</div>
+            <div class="sante-indicator-unit">Habitants par centre</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label red-underline">Accessibilité Géographique</div>
+            <div class="sante-indicator-icon red"><i class="bi bi-person-walking"></i></div>
+            <div class="sante-indicator-value red-underline">&lt; 2 km</div>
+            <div class="sante-indicator-unit">Rayon de couverture</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Prévention Santé</div>
+            <div class="sante-indicator-icon yellow"><i class="bi bi-house-fill"></i></div>
+            <div class="sante-indicator-value yellow-underline">100%</div>
+            <div class="sante-indicator-unit">Foyers sensibilisés</div>
+          </div>
+        </div>
+        <div class="sante-action-footer">
+          <span class="sante-footer-item blue"><i class="bi bi-people-fill"></i> &gt; 15 000 Habitants</span>
+          <span class="sante-footer-item"><i class="bi bi-geo-alt-fill"></i> Douirat, Laâyoune</span>
+        </div>
+      </div>
+
+      <!-- Action 2 -->
+      <div class="sante-action-card">
+        <div class="sante-action-card-header">
+          <div class="sante-action-header-left">
+            <span>Action Proposée 2</span>
+            <span class="sante-action-type">Type: Mise à Niveau</span>
+          </div>
+          <div class="sante-action-header-right">
+            <span class="sante-action-year">AP:2026</span>
+            <span class="sante-action-priority">Prioritaire</span>
+          </div>
+        </div>
+        <div class="sante-action-main">
+          <div class="sante-action-title">
+            <span class="sante-action-title-icon purple"><i class="bi bi-hospital-fill"></i></span>
+            Aménagement Hôpital Hassan II
+          </div>
+          <div class="sante-action-desc">
+            Renforcement du plateau technique (Imagerie, Blocs, Biomédical) pour optimiser le parcours patient et la qualité du diagnostic.
+          </div>
+        </div>
+        <div class="sante-action-indicators">
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label red-underline">Délais de RDV</div>
+            <div class="sante-indicator-value green">2 mois → Semaines</div>
+            <div class="sante-indicator-unit">Réduction drastique</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label red-underline">Fiabilité</div>
+            <div class="sante-indicator-icon green"><i class="bi bi-check-circle-fill"></i></div>
+            <div class="sante-indicator-value red-underline">Maximale</div>
+            <div class="sante-indicator-unit">0 Pannes critiques</div>
+            <div class="sante-indicator-unit">Disponibilité continue</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Prise en Charge Locale</div>
+            <div class="sante-indicator-icon green"><i class="bi bi-plus-circle-fill"></i></div>
+            <div class="sante-indicator-value">Locale</div>
+            <div class="sante-indicator-unit">Arrêt des transferts évitables</div>
+          </div>
+        </div>
+        <div class="sante-action-footer">
+          <span class="sante-footer-item purple"><i class="bi bi-clock-fill"></i> Délais Réduits</span>
+          <span class="sante-footer-item purple"><i class="bi bi-gear-fill"></i> Haute Technologie</span>
+          <span class="sante-footer-item"><i class="bi bi-geo-alt-fill"></i> Laâyoune</span>
+        </div>
+      </div>
+
+      <!-- Action 3 -->
+      <div class="sante-action-card">
+        <div class="sante-action-card-header">
+          <div class="sante-action-header-left">
+            <span>Action Proposée 3</span>
+            <span class="sante-action-type">Type: Extension Capacitaire</span>
+          </div>
+          <div class="sante-action-header-right">
+            <span class="sante-action-year">AP:2027</span>
+          </div>
+        </div>
+        <div class="sante-action-main">
+          <div class="sante-action-title">
+            <span class="sante-action-title-icon red"><i class="bi bi-hospital-fill"></i></span>
+            Extension du CHR Laâyoune
+          </div>
+          <div class="sante-action-desc">
+            Augmentation des capacités litières de la Maternité (>30 lits) et de la Réanimation (>5 lits). Modernisation de la stérilisation.
+          </div>
+        </div>
+        <div class="sante-action-indicators">
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Justice Sociale</div>
+            <div class="sante-indicator-icon green"><i class="bi bi-shield-check"></i></div>
+            <div class="sante-indicator-value red-underline">Équité Territoriale</div>
+            <div class="sante-indicator-unit red-underline">Accès aux soins spécialisés</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Performance</div>
+            <div class="sante-indicator-icon yellow"><i class="bi bi-graph-up-arrow"></i></div>
+            <div class="sante-indicator-value">Indicateurs Sanitaires</div>
+            <div class="sante-indicator-unit">Amélioration significative</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Offre de Soins</div>
+            <div class="sante-indicator-icon yellow"><i class="bi bi-hospital"></i></div>
+            <div class="sante-indicator-value yellow-underline">Capacité Renforcée</div>
+            <div class="sante-indicator-unit">Réduction des transferts</div>
+          </div>
+        </div>
+        <div class="sante-action-footer">
+          <span class="sante-footer-item yellow"><i class="bi bi-heart-fill"></i> Santé Mère-Enfant</span>
+          <span class="sante-footer-item yellow"><i class="bi bi-plus-circle-fill"></i> Capacité</span>
+          <span class="sante-footer-item"><i class="bi bi-geo-alt-fill"></i> Laâyoune</span>
+        </div>
+      </div>
+
+      <!-- Action 4 -->
+      <div class="sante-action-card">
+        <div class="sante-action-card-header">
+          <div class="sante-action-header-left">
+            <span>Action Proposée 4</span>
+            <span class="sante-action-type">Type: Spécialité Tertiaire</span>
+          </div>
+          <div class="sante-action-header-right">
+            <span class="sante-action-year">AP:2028</span>
+          </div>
+        </div>
+        <div class="sante-action-main">
+          <div class="sante-action-title">
+            <span class="sante-action-title-icon red"><i class="bi bi-heart-pulse-fill"></i></span>
+            Unité de Chirurgie Cardio-Vasculaire (CHR)
+          </div>
+          <div class="sante-action-desc">
+            Aménagement et équipement de pointe au sein de l'Hôpital Moulay Hassan Ben Mehdi. Création d'une filière de soins critique inexistante localement.
+          </div>
+        </div>
+        <div class="sante-action-indicators">
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Mortalité Évitable</div>
+            <div class="sante-indicator-icon red"><i class="bi bi-arrow-down-circle-fill"></i></div>
+            <div class="sante-indicator-value red-underline">Min</div>
+            <div class="sante-indicator-unit">Réduction drastique décès</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Évacuations</div>
+            <div class="sante-indicator-icon yellow"><i class="bi bi-ambulance"></i></div>
+            <div class="sante-indicator-value">↓ -100%</div>
+            <div class="sante-indicator-unit">Fin des transferts systématiques</div>
+          </div>
+          <div class="sante-indicator-box">
+            <div class="sante-indicator-label">Prise en Charge Locale</div>
+            <div class="sante-indicator-icon blue"><i class="bi bi-clock-fill"></i></div>
+            <div class="sante-indicator-value">Locale Immédiate</div>
+            <div class="sante-indicator-unit">Gain de temps vital</div>
+          </div>
+        </div>
+        <div class="sante-action-footer">
+          <span class="sante-footer-item red"><i class="bi bi-geo-alt-fill"></i> Portée Régionale</span>
+          <span class="sante-footer-item red"><i class="bi bi-heart-pulse-fill"></i> Soins Critiques</span>
+          <span class="sante-footer-item"><i class="bi bi-geo-alt-fill"></i> Laâyoune</span>
+        </div>
+      </div>
     </div>
-
-    <!-- EMPLOI -->
-    <div class="menu-wrap" (click)="$event.stopPropagation()">
-      <button class="btn btn-lg emploi-btn"
-              [class.is-active]="showEmploiActive"
-              (click)="toggleEmploiMode($event)">
-        <i class="bi" [ngClass]="showEmploiActive ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
-        <span>Emploi</span>
-      </button>
-    </div>
-
-  
-
   </div>
 </div>

@@ -3,11 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import { EventService } from '../../core/services/event.service';
 
 //Logout
-import { environment } from '../../../environments/environment';
-import { AuthenticationService } from '../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
-import { Router } from '@angular/router';
-import { TokenStorageService } from '../../core/services/token-storage.service';
 
 // Language
 import { CookieService } from 'ngx-cookie-service';
@@ -17,7 +12,6 @@ import { allNotification, messages } from './data'
 import { CartModel } from './topbar.model';
 import { cartData } from './data';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { restApiService } from 'src/app/core/services/rest-api.service copy';
 
 @Component({
   selector: 'app-topbar',
@@ -34,7 +28,6 @@ export class TopbarComponent implements OnInit {
   valueset: any;
   countryName: any;
   cookieValue: any;
-  userData: any;
   cartData!: CartModel[];
   total = 0;
   cart_length: any = 0;
@@ -44,17 +37,11 @@ export class TopbarComponent implements OnInit {
   isDropdownOpen = false;
   @ViewChild('removenotification') removenotification !: TemplateRef<any>;
   notifyId: any;
-  firstNameAr: any;
-  photoUser: any;
-  photoUserId: any;
 
   constructor(@Inject(DOCUMENT) private document: any, private eventService: EventService, public languageService: LanguageService, private modalService: NgbModal,
-    public _cookiesService: CookieService, public translate: TranslateService, public authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService,
-    private router: Router, private TokenStorageService: TokenStorageService,private authService1: AuthenticationService,public rnpService: restApiService) { }
+    public _cookiesService: CookieService, public translate: TranslateService) { }
    
   ngOnInit(): void {
-    this.getConnectedUser()
-    this.userData = this.TokenStorageService.getUser();
     this.element = document.documentElement;
 
     // Cookies wise Language set
@@ -77,18 +64,6 @@ export class TopbarComponent implements OnInit {
       var item_price = item.quantity * item.price
       this.total += item_price
     });
-  }
-  getConnectedUser(){
-    let user;
-    if(this.authService.loadToken())
-        user=  JSON.parse(atob(this.authService.loadToken().split('.')[1])).sub;
-      console.log(user);
-      this.rnpService.getOneResource(`${this.rnpService.host}/appUsers/search/findByUsername?username=${user}`).subscribe(data => {
-this.firstNameAr = data['_embedded'].appUsers[0].firstNameAr
-this.photoUserId = data['_embedded'].appUsers[0].id
-console.log(data,"zdsfozef");
-    })
-   
   }
   /**
    * Toggle the menu bar when having mobile screen
@@ -190,11 +165,6 @@ console.log(data,"zdsfozef");
   /**
    * Logout the user
    */
-  logout() {
-    this.authService.logout();
-    this.router.navigateByUrl('auth/signin/cover');
-    console.log("rrrrrrrrrrrrrr")
-  }
 
   windowScroll() {
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {

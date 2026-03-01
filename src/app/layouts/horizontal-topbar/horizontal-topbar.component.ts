@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
-import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-horizontal-topbar',
@@ -18,23 +17,14 @@ export class HorizontalTopbarComponent implements OnInit {
 
   menu: any;
   menuItems: MenuItem[] = [];
-  token
   @ViewChild('sideMenu') sideMenu!: ElementRef;
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
-  constructor(private router: Router, public translate: TranslateService,private authService:AuthenticationService) {
+  constructor(private router: Router, public translate: TranslateService) {
     translate.setDefaultLang('en');
-    this.met()
   }
-  met(){
-    this.token = this.authService.loadToken()
-console.log(this.getConnectedUserRole(),"jejejejejej")
-
-   }
    getConnectedUserRole(){
-    if(this.authService.loadToken()){
-      return JSON.parse(atob(this.authService.loadToken().split('.')[1])).roles[0].authority
-    }
+    return 'ADMIN';
    }
   ngOnInit(): void {
     // Menu Items

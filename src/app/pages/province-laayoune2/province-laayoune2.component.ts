@@ -140,21 +140,38 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   showSanteIndicators = false;
   showSanteDiagnostic = false;
+  showSanteActionsPopup = false;
+  currentSanteActionsPage = 1; // 1 or 2
   showDiagnosticPopup = false;
+  showConcentrationPopup = false;
+  showImpactsPopup = false;
+  showContextPopup = false;
+  showActionsPopup = false;
+  showActionsRecapPopup = false;
+  showStrategicSummaryPopup = false;
+  showRecapTablePopup = false;
+  showVisionAxesPopup = false;
+  currentActionsRecapPage = 1;
   currentSanteProjectPage = 1; // 1, 2, 3, or 4
   showEducationIndicators = false;
   showEducationDiagnostic = false;
   showEducationPopup = false;
+  showEducationActionsPopup = false;
   showEducationLaayounePopup = false;
   currentEducationProjectPage = 1; // 1 to 6
   showEmploiIndicators = false;
   showEmploiDiagnostic = false;
   showEmploiPopup = false;
+  showEmploiActionsPopup = false;
   currentEmploiProjectPage = 1; // 1 to 5
   showEauIndicators = false;
   showEauDiagnostic = false;
   showEauPopup = false;
   showEauActionsPopup = false;
+  showMiseDiagnostic = false;
+  showMiseActionsPopup = false;
+  showMiseLaayounePopup = false;
+  currentMiseLaayounePage = 1; // 1 to 2
   currentEauActionsPage = 1; // 1 or 2
   showEauElmarsaPopup = false;
   showEauLaayounePopup = false;
@@ -556,10 +573,17 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
               this.showEmploiIndicators ||
               this.showEauIndicators ||
               this.miseVisible;
-            if (!hasActivePanel) return;
+            if (!hasActivePanel) {
+              if (routes[key]) this.router.navigate([routes[key]]);
+              return;
+            }
             if (this.showSanteIndicators) {
-              if (key === 'LAAYOUNE' && this.showSanteDiagnostic) {
+              if (key === 'LAAYOUNE') {
                 this.showDiagnosticPopup = true;
+                this.currentSanteProjectPage = 1;
+                this.showEauLaayounePopup = false;
+                this.showEauElmarsaPopup = false;
+                this.showEauPopup = false;
               }
               return;
             }
@@ -582,6 +606,9 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
                 this.showEmploiPopup = true;
                 this.currentEmploiProjectPage = 1;
               }
+              return;
+            }
+            if (this.miseVisible) {
               return;
             }
             if (this.showEauIndicators) {
@@ -872,13 +899,19 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     if (!this.showSanteIndicators) {
       this.showSanteDiagnostic = false;
     } else {
+      this.hideMiseLayer();
+      this.showMiseDiagnostic = false;
+      this.showMiseActionsPopup = false;
       this.showEducationIndicators = false; // Mutually exclusive
+      this.showEducationActionsPopup = false;
       this.showEmploiIndicators = false;
       this.showEmploiDiagnostic = false;
+      this.showEmploiActionsPopup = false;
       this.showEauIndicators = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
       this.showEauActionsPopup = false;
+      this.showSanteActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     }
@@ -888,21 +921,27 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   toggleEducationIndicators() {
     this.showEducationIndicators = !this.showEducationIndicators;
     if (this.showEducationIndicators) {
+      this.hideMiseLayer();
+      this.showMiseDiagnostic = false;
+      this.showMiseActionsPopup = false;
       this.showSanteIndicators = false; // Mutually exclusive
       this.showSanteDiagnostic = false;
       this.showEmploiIndicators = false;
       this.showEmploiDiagnostic = false;
       this.showEmploiPopup = false;
+      this.showEmploiActionsPopup = false;
       this.showEauIndicators = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
       this.showEauActionsPopup = false;
+      this.showSanteActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     } else {
       this.showEducationDiagnostic = false;
       this.showEducationPopup = false;
       this.showEducationLaayounePopup = false;
+      this.showEducationActionsPopup = false;
     }
     this.updateCommuneStyles();
   }
@@ -910,18 +949,23 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   toggleEmploiIndicators() {
     this.showEmploiIndicators = !this.showEmploiIndicators;
     if (this.showEmploiIndicators) {
+      this.hideMiseLayer();
+      this.showMiseDiagnostic = false;
+      this.showMiseActionsPopup = false;
       this.showSanteIndicators = false;
       this.showSanteDiagnostic = false;
       this.showEducationIndicators = false;
       this.showEducationDiagnostic = false;
       this.showEducationPopup = false;
       this.showEducationLaayounePopup = false;
+      this.showEducationActionsPopup = false;
       this.showEmploiDiagnostic = false;
       this.showEmploiPopup = false;
       this.showEauIndicators = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
       this.showEauActionsPopup = false;
+      this.showSanteActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     } else {
@@ -930,6 +974,7 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
       this.showEauActionsPopup = false;
+      this.showSanteActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     }
@@ -939,6 +984,9 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   toggleEauIndicators() {
     this.showEauIndicators = !this.showEauIndicators;
     if (this.showEauIndicators) {
+      this.hideMiseLayer();
+      this.showMiseDiagnostic = false;
+      this.showMiseActionsPopup = false;
       this.showSanteIndicators = false;
       this.showSanteDiagnostic = false;
       this.showEducationIndicators = false;
@@ -948,15 +996,18 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
       this.showEmploiIndicators = false;
       this.showEmploiDiagnostic = false;
       this.showEmploiPopup = false;
+      this.showEmploiActionsPopup = false;
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
       this.showEauActionsPopup = false;
+      this.showSanteActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     } else {
       this.showEauDiagnostic = false;
       this.showEauPopup = false;
       this.showEauActionsPopup = false;
+      this.showSanteActionsPopup = false;
       this.showEauElmarsaPopup = false;
       this.showEauLaayounePopup = false;
     }
@@ -977,7 +1028,15 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
 
   toggleEmploiDiagnostic() {
     this.showEmploiDiagnostic = !this.showEmploiDiagnostic;
-    if (!this.showEmploiDiagnostic) this.showEmploiPopup = false;
+    if (!this.showEmploiDiagnostic) {
+      this.showEmploiPopup = false;
+      this.showEmploiActionsPopup = false;
+    }
+    this.updateCommuneStyles();
+  }
+
+  toggleEmploiPopup() {
+    this.showEmploiPopup = !this.showEmploiPopup;
     this.updateCommuneStyles();
   }
 
@@ -990,15 +1049,141 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     this.updateCommuneStyles();
   }
 
+  toggleEducationPopup() {
+    this.showEducationPopup = !this.showEducationPopup;
+    this.updateCommuneStyles();
+  }
+
   toggleSanteDiagnostic() {
     this.showSanteDiagnostic = !this.showSanteDiagnostic;
-    if (!this.showSanteDiagnostic) this.showDiagnosticPopup = false;
+    if (this.showSanteDiagnostic) {
+      this.showSanteActionsPopup = false;
+    } else {
+      this.showDiagnosticPopup = false;
+    }
     this.updateCommuneStyles();
+  }
+
+  toggleSantePopup() {
+    this.showDiagnosticPopup = !this.showDiagnosticPopup;
+    this.updateCommuneStyles();
+  }
+
+  openSanteActionsPopup() {
+    if (this.showSanteIndicators) {
+      this.showSanteActionsPopup = true;
+    }
+  }
+
+  openEmploiActionsPopup() {
+    if (this.showEmploiIndicators) {
+      this.showEmploiActionsPopup = true;
+    }
+  }
+
+  closeEmploiActionsPopup() {
+    this.showEmploiActionsPopup = false;
+  }
+
+  openEducationActionsPopup() {
+    if (this.showEducationIndicators) {
+      this.showEducationActionsPopup = true;
+    }
+  }
+
+  closeEducationActionsPopup() {
+    this.showEducationActionsPopup = false;
+  }
+
+  closeSanteActionsPopup() {
+    this.showSanteActionsPopup = false;
+    this.currentSanteActionsPage = 1;
+  }
+
+  nextSanteActionsPage() {
+    if (this.currentSanteActionsPage < 2) this.currentSanteActionsPage++;
+  }
+
+  prevSanteActionsPage() {
+    if (this.currentSanteActionsPage > 1) this.currentSanteActionsPage--;
   }
 
   closeDiagnosticPopup() {
     this.showDiagnosticPopup = false;
     this.currentSanteProjectPage = 1; // Reset to first page when closing
+  }
+
+  openConcentrationPopup() {
+    this.showConcentrationPopup = true;
+  }
+
+  closeConcentrationPopup() {
+    this.showConcentrationPopup = false;
+  }
+
+  openImpactsPopup() {
+    this.showImpactsPopup = true;
+  }
+
+  closeImpactsPopup() {
+    this.showImpactsPopup = false;
+  }
+
+  openContextPopup() {
+    this.showContextPopup = true;
+  }
+
+  closeContextPopup() {
+    this.showContextPopup = false;
+  }
+
+  openActionsPopup() {
+    this.showActionsPopup = true;
+  }
+
+  closeActionsPopup() {
+    this.showActionsPopup = false;
+  }
+
+  openActionsRecapPopup() {
+    this.showActionsRecapPopup = true;
+  }
+
+  closeActionsRecapPopup() {
+    this.showActionsRecapPopup = false;
+    this.currentActionsRecapPage = 1;
+  }
+
+  openStrategicSummaryPopup() {
+    this.showStrategicSummaryPopup = true;
+  }
+
+  closeStrategicSummaryPopup() {
+    this.showStrategicSummaryPopup = false;
+  }
+
+  openRecapTablePopup() {
+    this.showRecapTablePopup = true;
+  }
+
+  closeRecapTablePopup() {
+    this.showRecapTablePopup = false;
+  }
+
+  openVisionAxesPopup() {
+    this.showVisionAxesPopup = true;
+  }
+
+  closeVisionAxesPopup() {
+    this.showVisionAxesPopup = false;
+  }
+
+  nextActionsRecapPage() {
+    if (this.currentActionsRecapPage < 2) this.currentActionsRecapPage++;
+  }
+
+  prevActionsRecapPage() {
+    if (this.currentActionsRecapPage > 1) this.currentActionsRecapPage--;
   }
 
   closeEducationPopup() {
@@ -1162,13 +1347,13 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   getCurrentSanteImage(): string {
     switch (this.currentSanteProjectPage) {
       case 1:
-        return 'assets/projects/sante1.png';
+        return 'assets/version2/sante1.png';
       case 2:
-        return 'assets/projects/sante2.png';
+        return 'assets/version2/sante2.png';
       case 3:
-        return 'assets/projects/sante3.png';
+        return 'assets/version2/sante3.png';
       case 4:
-        return 'assets/projects/sante4.png';
+        return 'assets/version2/sante4.png';
       default:
         return 'assets/projects/sante1.png';
     }
@@ -1238,6 +1423,17 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     this.activeSanteProject = null;
   }
 
+  private hideMiseLayer() {
+    if (this.map && this.map.hasLayer(this.miseLayer)) {
+      this.map.removeLayer(this.miseLayer);
+    }
+    this.miseVisible = false;
+    this.showMiseDiagnostic = false;
+    this.showMiseActionsPopup = false;
+    this.showMiseLaayounePopup = false;
+    this.updateCommuneStyles();
+  }
+
   // Education toggle (simple)
   toggleEducation() {
     if (!this.map) return;
@@ -1249,9 +1445,58 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
   // Mise toggle (simple)
   toggleMise() {
     if (!this.map) return;
-    if (this.miseVisible) this.map.removeLayer(this.miseLayer);
-    else this.miseLayer.addTo(this.map);
-    this.miseVisible = !this.miseVisible;
+    if (this.miseVisible) {
+      this.hideMiseLayer();
+      return;
+    }
+    this.showSanteIndicators = false;
+    this.showSanteDiagnostic = false;
+    this.showEducationIndicators = false;
+    this.showEducationDiagnostic = false;
+    this.showEducationPopup = false;
+    this.showEducationLaayounePopup = false;
+    this.showEducationActionsPopup = false;
+    this.showEmploiIndicators = false;
+    this.showEmploiDiagnostic = false;
+    this.showEmploiPopup = false;
+    this.showEauIndicators = false;
+    this.showEauDiagnostic = false;
+    this.showEauPopup = false;
+    this.showEauActionsPopup = false;
+    this.showSanteActionsPopup = false;
+    this.showEauElmarsaPopup = false;
+    this.showEauLaayounePopup = false;
+    this.showMiseDiagnostic = false;
+    this.showMiseActionsPopup = false;
+    // Keep "mise" active without showing GeoJSON points
+    this.miseVisible = true;
+    this.updateCommuneStyles();
+  }
+
+  toggleMiseDiagnostic() {
+    this.showMiseDiagnostic = !this.showMiseDiagnostic;
+  }
+
+  toggleMiseActionsPopup() {
+    this.showMiseActionsPopup = !this.showMiseActionsPopup;
+  }
+
+  closeMiseLaayounePopup() {
+    this.showMiseLaayounePopup = false;
+  }
+
+  prevMiseLaayounePage() {
+    if (this.currentMiseLaayounePage > 1) this.currentMiseLaayounePage -= 1;
+  }
+
+  nextMiseLaayounePage() {
+    if (this.currentMiseLaayounePage < 2) this.currentMiseLaayounePage += 1;
+  }
+
+  getCurrentMiseLaayouneImage(): string {
+    return this.currentMiseLaayounePage === 1
+      ? 'assets/version2/miseLaayoune1.png'
+      : 'assets/version2/miseLaayoune2.png';
   }
 
   // =========================
@@ -1433,11 +1678,15 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
     const key = String(idOrName || '').toUpperCase().trim();
     if (key.includes('LAAYOUNE')) {
       return (
+        this.showSanteIndicators ||
+        this.showEducationIndicators ||
+        this.showEmploiIndicators ||
         this.showEauIndicators ||
         this.showSanteDiagnostic ||
         this.showEducationDiagnostic ||
         this.showEmploiDiagnostic ||
-        this.showEauDiagnostic
+        this.showEauDiagnostic ||
+        this.miseVisible
       )
         ? '#c62828'
         : '#c9b79c';
@@ -1460,13 +1709,17 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
         // Foum El Oued - red when Eau indicators or diagnostic is active
         return (this.showEauIndicators || this.showEauDiagnostic) ? '#c62828' : '#81c784';
       case '1080203':
-        // Laayoune - red when Eau indicators or any Diagnostic is active
+        // Laayoune - red when relevant indicators/diagnostics are active
         return (
+          this.showSanteIndicators ||
+          this.showEducationIndicators ||
+          this.showEmploiIndicators ||
           this.showEauIndicators ||
           this.showSanteDiagnostic ||
           this.showEducationDiagnostic ||
           this.showEmploiDiagnostic ||
-          this.showEauDiagnostic
+          this.showEauDiagnostic ||
+          this.miseVisible
         )
           ? '#c62828'
           : '#c9b79c';
@@ -1474,11 +1727,15 @@ export class ProvinceLaayoune2Component implements AfterViewInit, OnDestroy {
         return '#ba68c8';
       case 'LAAYOUNE':
         return (
+          this.showSanteIndicators ||
+          this.showEducationIndicators ||
+          this.showEmploiIndicators ||
           this.showEauIndicators ||
           this.showSanteDiagnostic ||
           this.showEducationDiagnostic ||
           this.showEmploiDiagnostic ||
-          this.showEauDiagnostic
+          this.showEauDiagnostic ||
+          this.miseVisible
         )
           ? '#c62828'
           : '#c9b79c';

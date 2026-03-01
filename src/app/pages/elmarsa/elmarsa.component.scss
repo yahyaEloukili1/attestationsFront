@@ -24,6 +24,212 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
+/* ================= COMMUNE INDICATORS (Laayoune style) ================= */
+.laayoune-indicators {
+  background: #fff;
+  border: 1px solid #e6e1d6;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  direction: ltr;
+  text-align: left;
+}
+
+.laayoune-back-card {
+  margin-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.laayoune-indicators-header {
+  margin-bottom: 10px;
+}
+
+.laayoune-indicators-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.laayoune-indicators-subtitle {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.laayoune-indicators-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.laayoune-row-two {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.laayoune-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 100px;
+}
+
+.laayoune-card.span-2 {
+  grid-column: span 2;
+}
+
+.laayoune-card.span-3 {
+  grid-column: span 3;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-title i { color: #0f766e; }
+.chomage-card .card-title i { color: #dc2626; }
+.demo-card .card-title i { color: #16a34a; }
+.territoire-card .card-title i { color: #f59e0b; }
+
+.stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.stat-big {
+  font-size: 22px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.stat-big.red { color: #dc2626; }
+.stat-big.green { color: #16a34a; }
+.stat-big.amber { color: #d97706; }
+
+.stat-unit {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.stat-split {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.stat-split i { margin-right: 4px; }
+
+.mini-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.mini-bar-fill {
+  height: 100%;
+  background: #16a34a;
+}
+
+.mini-bar-fill.red { background: #dc2626; }
+.mini-bar-fill.green { background: #16a34a; }
+
+.mini-bar-cap {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  width: 4px;
+  background: #f59e0b;
+  border-radius: 999px;
+  transform: translateX(-50%);
+}
+
+.mini-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.list-line {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #374151;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.list-line i { color: #dc2626; }
+
+.sante-card .list-line i { color: #dc2626; }
+.education-card .list-line i { color: #f59e0b; }
+
+.muted { color: #9ca3af; font-weight: 600; }
+
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.edu-tags span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #1f2937;
+  background: #eef2f7;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+@media (max-width: 1200px) {
+  .laayoune-indicators-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .laayoune-card.span-2 {
+    grid-column: span 2;
+  }
+  .laayoune-card.span-3 {
+    grid-column: span 2;
+  }
+  .laayoune-row-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .laayoune-indicators-grid {
+    grid-template-columns: 1fr;
+  }
+  .laayoune-card.span-2 {
+    grid-column: span 1;
+  }
+  .laayoune-card.span-3 {
+    grid-column: span 1;
+  }
+}
+
 .back-card {
   border: 1px solid #e6e6e6;
 }
@@ -36,6 +242,13 @@
   letter-spacing: 0.2px;
   box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
   transition: all 0.2s ease;
+}
+
+.laayoune-back-card .back-btn {
+  max-width: 360px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .back-btn:hover {
@@ -497,4 +710,57 @@
 .popup-body canvas {
   width: 100% !important;
   height: 400px !important;
+}
+/* ✅ Force LTR pour éviter l'inversion RTL/LTR */
+:host,
+.dashboard-container {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.laayoune-indicators,
+.laayoune-indicators * {
+  direction: ltr !important;
+}
+
+.stat-row,
+.stat-split,
+.mini-bar-labels {
+  direction: ltr !important;
+}
+
+.stat-big,
+.stat-unit {
+  unicode-bidi: isolate;
+}
+
+/* ✅ Map centrée (colonne centrale) */
+.map-centered {
+  max-width: 420px;   /* نفس شكل باقي communes */
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Placeholder panneau gauche (juste pour centrer la map si pas encore contenu) */
+.left-panel-placeholder {
+  height: 760px;
+}
+
+/* ✅ panneau gauche pour éviter le grand vide */
+.left-panel{
+  background:#fff;
+  border:1px solid #e6e1d6;
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:0 10px 26px rgba(0,0,0,0.08);
+}
+
+.left-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:10px;
+}
+
+.left-grid .full{
+  grid-column:1 / -1;
 }

@@ -247,7 +247,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
       // Label
       const bounds = (elmarsaLayer as any).getBounds();
       L.tooltip({ permanent: true, direction: 'center', className: 'commune-label' })
-        .setContent('المرسى')
+        .setContent('El Marsa')
         .setLatLng(bounds.getCenter())
         .addTo(this.map);
 
@@ -265,7 +265,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   }
 
   goToProvince() {
-    this.router.navigate(['/provinceLaayoune']);
+    this.router.navigate(['/province']);
   }
 
   // ✅ fermer le dropdown si tu cliques ailleurs (MAIS garder le projet affiché)
@@ -501,18 +501,50 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     });
 
     // ---------- EDUCATION ----------
-    this.mapService.getEducationExistants1().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.education1Layer, this.educationIcon, 'Education 1')
-    );
-    this.mapService.getEducationExistants2().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.education2Layer, this.educationIcon, 'Education 2')
-    );
-    this.mapService.getEducationExistants3().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.education3Layer, this.educationIcon, 'Education 3')
-    );
-    this.mapService.getEducationExistants4().subscribe((fc: any) =>
-      this.addFilteredPointsToLayer(fc, this.education4Layer, this.educationIcon, 'Education 4')
-    );
+    this.mapService.getEducationExistants1().subscribe((fc: any) => {
+      const normalize = (value?: string) =>
+        String(value || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase();
+
+      const byType = (type: string) => (feature: Feature) => {
+        const label = normalize((feature.properties as any)?.Etablissement);
+        return label.includes(type);
+      };
+
+      this.addFilteredPointsToLayer(
+        fc,
+        this.education1Layer,
+        this.educationIcon,
+        'Écoles primaires',
+        byType('primaire')
+      );
+      this.addFilteredPointsToLayer(
+        fc,
+        this.education2Layer,
+        this.educationIcon,
+        'Lycées collégiaux',
+        byType('collegial')
+      );
+      this.addFilteredPointsToLayer(
+        fc,
+        this.education3Layer,
+        this.educationIcon,
+        'Lycées qualifiants',
+        byType('qualifiant')
+      );
+      this.addFilteredPointsToLayer(
+        fc,
+        this.education4Layer,
+        this.educationIcon,
+        'Établissements supérieurs',
+        (feature) => {
+          const label = normalize((feature.properties as any)?.Etablissement);
+          return label.includes('superieur') || label.includes('sup');
+        }
+      );
+    });
 
     // ---------- EAU ----------
     (this.mapService as any).getEauPotable7?.().subscribe((fc: any) =>
@@ -571,7 +603,8 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
     fc: FeatureCollection,
     targetLayer: L.LayerGroup,
     icon: L.Icon,
-    label: string
+    label: string,
+    filterFn?: (feature: Feature) => boolean
   ): number {
     if (!fc?.features?.length) return 0;
 
@@ -579,6 +612,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
 
     for (const f of fc.features as Feature[]) {
       if (!f.geometry || f.geometry.type !== 'Point') continue;
+      if (filterFn && !filterFn(f)) continue;
       const coords = f.geometry.coordinates as any;
       const ll = this.toLatLngAuto(coords);
 

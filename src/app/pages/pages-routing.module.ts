@@ -3,21 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Component pages
 import { DashboardComponent } from "./dashboards/dashboard/dashboard.component";
-import { AdminGuard } from '../core/guards/admin.guard';
-import { WilayaOrAdminGuard } from '../core/guards/wilayaOrAdmin.guard';
-import { AuthGuard } from '../core/guards/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { CoverComponent } from '../account/auth/signin/cover/cover.component';
 import { ProvinceLaayoune2Component } from './province-laayoune2/province-laayoune2.component';
-import { WilayaOrAnnexeGuard } from '../core/guards/wilayaOrAnnexe.guard copy';
-import { WilayaOrAnnexeOrAdminGuard } from '../core/guards/wilayaOrAnnexeOrAdminGuard';
-import { AnnexeGuard } from '../core/guards/AnnexeGuard';
 
 
 const routes: Routes = [
     {
         path: "",
-        redirectTo : "error",
+        redirectTo : "province",
         pathMatch: 'full'
     },
     {
@@ -29,61 +23,61 @@ const routes: Routes = [
       path: '', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule)
     },
     {
-      path: 'boucraa', loadChildren: () => import('./boucraa/boucraa.module').then(m => m.BoucraaModule),canActivate:[AdminGuard]
+      path: 'boucraa', loadChildren: () => import('./boucraa/boucraa.module').then(m => m.BoucraaModule)
     },
       {
-      path: 'dcheira', loadChildren: () => import('./decheira/dcheira.module').then(m => m.DcheiraModule),canActivate:[AdminGuard]
+      path: 'dcheira', loadChildren: () => import('./decheira/dcheira.module').then(m => m.DcheiraModule)
     },
         {
-      path: 'laayoune', loadChildren: () => import('./laayoune/laayoune.module').then(m => m.LaayouneModule),canActivate:[AdminGuard]
+      path: 'laayoune', loadChildren: () => import('./laayoune/laayoune.module').then(m => m.LaayouneModule)
     },
        {
-      path: 'maroc', loadChildren: () => import('./region/region.module').then(m => m.RegionModule),canActivate:[AdminGuard]
+      path: 'maroc', loadChildren: () => import('./region/region.module').then(m => m.RegionModule)
     },
     {
-      path: 'regionLaayoune', loadChildren: () => import('./region-laayoune/regionLaayoune.module').then(m => m.RegionLaayouneModule),canActivate:[AdminGuard]
+      path: 'regionLaayoune', loadChildren: () => import('./region-laayoune/regionLaayoune.module').then(m => m.RegionLaayouneModule)
     },
      {
-      path: 'foumelouad', loadChildren: () => import('./foumelouad/foumelouad-routing.module').then(m => m.FoumelouadRoutingModule),canActivate:[AdminGuard]
+      path: 'foumelouad', loadChildren: () => import('./foumelouad/foumelouad-routing.module').then(m => m.FoumelouadRoutingModule)
     },
      {
-      path: 'elmarsa', loadChildren: () => import('./elmarsa/elmarsa-routing.module').then(m => m.ElmarsaRoutingModule),canActivate:[AdminGuard]
+      path: 'elmarsa', loadChildren: () => import('./elmarsa/elmarsa-routing.module').then(m => m.ElmarsaRoutingModule)
     },
         {
-      path: 'annexes', loadChildren: () => import('./annexes/annexes.module').then(m => m.AnnexesModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'annexes', loadChildren: () => import('./annexes/annexes.module').then(m => m.AnnexesModule)
     },
     {
-      path: 'agents', loadChildren: () => import('./agents/agents.module').then(m => m.AgentsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'agents', loadChildren: () => import('./agents/agents.module').then(m => m.AgentsModule)
     },
     {
-      path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'citoyens', loadChildren: () => import('./citoyens/citoyen.module').then(m => m.CitoyenModule)
     },
     {
-      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule),canActivate:[AnnexeGuard]
+      path: 'attestations', loadChildren: () => import('./attestations/attestations.module').then(m => m.AttetstationsModule)
     },
     {
-      path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canActivate: [AdminGuard]
+      path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
     },
     {
-      path: 'provinceLaayoune', loadChildren: () => import('./users-test/users-test.module').then(m => m.UsersTestModule), canActivate: [AdminGuard]
+      path: 'provinceLaayoune', loadChildren: () => import('./users-test/users-test.module').then(m => m.UsersTestModule)
     },
     {
-      path: 'province', component: ProvinceLaayoune2Component, canActivate:[AdminGuard]
+      path: 'province', component: ProvinceLaayoune2Component
     },
     {
-      path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'districts', loadChildren: () => import('./districts/districts.module').then(m => m.DistrictsModule)
     },
     {
-      path: 'quartiers', loadChildren: () => import('./hay/hay.module').then(m => m.HayModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'quartiers', loadChildren: () => import('./hay/hay.module').then(m => m.HayModule)
     },
     {
-      path: 'rues', loadChildren: () => import('./shari3/shari3.module').then(m => m.Shari3Module),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'rues', loadChildren: () => import('./shari3/shari3.module').then(m => m.Shari3Module)
     },
     {
-      path: 'ruelles', loadChildren: () => import('./zanqa/zanqa.module').then(m => m.ZanqaModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'ruelles', loadChildren: () => import('./zanqa/zanqa.module').then(m => m.ZanqaModule)
     },
     {
-      path: 'hommesAutorites', loadChildren: () => import('./hommesAutorites/hommesAutorites.module').then(m => m.HommeAutoritesModule),canActivate:[WilayaOrAnnexeOrAdminGuard]
+      path: 'hommesAutorites', loadChildren: () => import('./hommesAutorites/hommesAutorites.module').then(m => m.HommeAutoritesModule)
     }
    
    ,

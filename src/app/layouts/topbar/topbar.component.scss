@@ -44,6 +44,11 @@
   left: auto !important;
 }
 
+/* Remove default dropdown caret arrow */
+.topbar-user .dropdown-toggle::after {
+  display: none !important;
+}
+
 /* Force user dropdown to open on the right side */
 .topbar-user-dropend {
   position: relative;

@@ -25,15 +25,7 @@
                         <span class="text-start menu-label">Diagnostique</span>
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
-                  <a href="javascript:void(0);" class="is-parent nav-link menu-link"
-                    [routerLink]="['/provinceLaayoune']"
-                    [routerLinkActive]="['is-active']"
-                    [routerLinkActiveOptions]="{ exact: false }"
-                    [class.is-active]="isProjectsRoute()">
-                        <span class="text-start menu-label">Projects</span>
-                    </a>
-                </li>
+                <!-- Projects menu removed -->
                  
           
                   <li class="nav-item" *ngIf="getConnectedUserRole()=='USER-AAL'">

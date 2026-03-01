@@ -24,6 +24,165 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
+/* ================= COMMUNE INDICATORS (Laayoune style) ================= */
+.laayoune-indicators {
+  background: #fff;
+  border: 1px solid #e6e1d6;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  direction: ltr;
+  text-align: left;
+}
+
+.laayoune-back-card {
+  margin-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.laayoune-indicators-header {
+  margin-bottom: 10px;
+}
+
+.laayoune-indicators-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.laayoune-indicators-subtitle {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.laayoune-indicators-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.laayoune-row-two {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.laayoune-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 100px;
+}
+
+.laayoune-card.span-2 {
+  grid-column: span 2;
+}
+
+.laayoune-card.span-3 {
+  grid-column: span 3;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-title i { color: #0f766e; }
+.demo-card .card-title i { color: #16a34a; }
+.territoire-card .card-title i { color: #f59e0b; }
+
+.stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.stat-big {
+  font-size: 22px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.stat-big.amber { color: #d97706; }
+
+.stat-unit {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.stat-split {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.stat-split i { margin-right: 4px; }
+
+.list-line {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #374151;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.list-line i { color: #dc2626; }
+.sante-card .list-line i { color: #dc2626; }
+.education-card .list-line i { color: #f59e0b; }
+
+.boucraa-note-card {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.8;
+  color: #111827;
+  text-align: justify;
+}
+
+@media (max-width: 1200px) {
+  .laayoune-indicators-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .laayoune-card.span-2 {
+    grid-column: span 2;
+  }
+  .laayoune-card.span-3 {
+    grid-column: span 2;
+  }
+  .laayoune-row-two {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .laayoune-indicators-grid {
+    grid-template-columns: 1fr;
+  }
+  .laayoune-card.span-2 {
+    grid-column: span 1;
+  }
+  .laayoune-card.span-3 {
+    grid-column: span 1;
+  }
+}
+
 .back-card {
   border: 1px solid #e6e6e6;
 }
@@ -36,6 +195,13 @@
   letter-spacing: 0.2px;
   box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
   transition: all 0.2s ease;
+}
+
+.laayoune-back-card .back-btn {
+  max-width: 360px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .back-btn:hover {
@@ -430,4 +596,461 @@
 .emploi-project-btn-tout,
 .eau-project-btn-tout {
   font-weight: 700;
+}
+
+/* ================= SANTÉ ACTIONS POPUP ================= */
+.sante-actions-btn-wrap {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sante-actions-btn {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  border: 1.5px solid #dc2626;
+  background: #fff;
+  color: #dc2626;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+}
+
+.sante-actions-btn:hover {
+  background: rgba(220, 38, 38, 0.08);
+  transform: translateY(-1px);
+}
+
+.sante-actions-btn.is-active {
+  background: #dc2626;
+  color: #fff;
+  border-color: transparent;
+}
+
+.sante-actions-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 4100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vh 2vw;
+}
+
+.sante-actions-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.sante-actions-card {
+  position: relative;
+  width: min(1400px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  padding: 18px 20px 24px;
+  z-index: 1;
+}
+
+.sante-actions-close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sante-actions-close:hover {
+  background: #f3f4f6;
+  color: #dc2626;
+}
+
+.sante-actions-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #dc2626;
+  border-radius: 18px;
+  margin-bottom: 8px;
+}
+
+.sante-actions-tab {
+  background: transparent;
+  color: #fff;
+  font-weight: 800;
+  font-size: 12.5px;
+  padding: 2px 8px;
+  border-radius: 14px;
+}
+
+.sante-actions-tab.active {
+  background: rgba(255,255,255,0.2);
+}
+
+.sante-actions-header {
+  font-size: 32px;
+  font-weight: 900;
+  color: #dc2626;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sante-popup-title-icon {
+  font-size: 36px;
+  color: #dc2626;
+}
+
+.sante-actions-subtitle {
+  color: #4b5563;
+  font-size: 14.5px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.sante-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sante-action-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sante-action-card-header {
+  background: #dc2626;
+  color: #fff;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sante-action-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sante-action-header-left > span:first-child {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.sante-action-type {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.sante-action-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sante-action-year {
+  font-size: 13px;
+  font-weight: 800;
+  background: rgba(255,255,255,0.2);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.sante-action-priority {
+  font-size: 11px;
+  font-weight: 800;
+  background: #16a34a;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.sante-action-main {
+  padding: 14px 16px 10px;
+}
+
+.sante-action-title {
+  font-weight: 900;
+  font-size: 20px;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.sante-action-title-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.sante-action-title-icon.blue {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.sante-action-title-icon.purple {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.sante-action-title-icon.red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.sante-action-desc {
+  margin-top: 8px;
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.sante-action-indicators {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 16px;
+  background: #f9fafb;
+}
+
+.sante-indicator-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sante-indicator-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.sante-indicator-label.red-underline {
+  text-decoration: underline;
+  text-decoration-color: #dc2626;
+  text-decoration-style: wavy;
+}
+
+.sante-indicator-icon {
+  font-size: 24px;
+  margin: 4px 0;
+}
+
+.sante-indicator-icon.red {
+  color: #dc2626;
+}
+
+.sante-indicator-icon.green {
+  color: #16a34a;
+}
+
+.sante-indicator-icon.yellow {
+  color: #f59e0b;
+}
+
+.sante-indicator-icon.blue {
+  color: #2563eb;
+}
+
+.sante-indicator-value {
+  font-size: 16px;
+  font-weight: 900;
+  color: #1f2937;
+}
+
+.sante-indicator-value.green {
+  color: #16a34a;
+}
+
+.sante-indicator-value.red-underline {
+  text-decoration: underline;
+  text-decoration-color: #dc2626;
+  text-decoration-style: wavy;
+}
+
+.sante-indicator-value.yellow-underline {
+  text-decoration: underline;
+  text-decoration-color: #f59e0b;
+  text-decoration-style: wavy;
+}
+
+.sante-indicator-unit {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.sante-indicator-unit.red-underline {
+  text-decoration: underline;
+  text-decoration-color: #dc2626;
+  text-decoration-style: wavy;
+}
+
+.sante-action-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.sante-footer-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  background: #f1f5f9;
+  color: #1f2937;
+}
+
+.sante-footer-item.blue {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.sante-footer-item.purple {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.sante-footer-item.yellow {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.sante-footer-item.red {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+@media (max-width: 1000px) {
+  .sante-actions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sante-action-indicators {
+    grid-template-columns: 1fr;
+  }
+}
+/* ================== BOUCRAA TOP 3-COLUMNS LAYOUT ================== */
+.boucraa-layout{
+  display: grid;
+  gap: 16px;
+  align-items: stretch;
+  direction: ltr;
+
+  /* left | map | right (map a bit bigger) */
+  grid-template-columns: 0.70fr 1.60fr 0.70fr;
+}
+
+/* If side panels are hidden (santé/emploi/eau active), map takes full width */
+.boucraa-layout.only-map{
+  grid-template-columns: 1fr;
+}
+.boucraa-layout.only-map .map-center{
+  grid-column: 1;
+}
+
+/* side panels */
+.side-panel{
+  background: #fff;
+  border: 1px solid #e6e1d6;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  height: 760px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-header{ margin-bottom: 10px; }
+
+.side-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.side-grid .span-2{
+  grid-column: 1 / -1;
+}
+
+/* map center */
+.map-center{
+  display: flex;
+  justify-content: center;
+}
+.map-center .map-card{
+  width: 100%;
+  height: 760px; /* keep same height */
+  margin: 0 auto;
+}
+
+/* Pin columns */
+.left-panel  { grid-column: 1; }
+.map-center  { grid-column: 2; }
+.right-panel { grid-column: 3; }
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 991.98px){
+  .boucraa-layout{
+    grid-template-columns: 1fr;
+  }
+  .side-panel{
+    height: auto;
+  }
+  .side-grid{
+    grid-template-columns: 1fr;
+  }
+  .map-center .map-card{
+    height: 560px;
+  }
 }
