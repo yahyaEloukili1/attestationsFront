@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "AP5  Constr lycée collégial (Lot ATTADAMONE)",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Action": "Construction d un lycee collegial dans le Lotissement de Surete.", "y": "27.111268", "x": "-13.185925", "Lien_Image": "000_Media/Images/Education/AP5.jpeg" }, "geometry": { "type": "Point", "coordinates": [ -13.185925, 27.111268 ] } }
+]
+}

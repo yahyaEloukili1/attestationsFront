@@ -32,7 +32,12 @@
       Emploi
     </button>
 
-    <button type="button" class="btn btn-lg education-btn text-center" [class.is-active]="showEducationIndicators" (click)="toggleEducationIndicators()">
+    <button
+      type="button"
+      class="btn btn-lg education-btn text-center"
+      [class.is-active]="showEducationIndicators"
+      (click)="toggleEducationIndicators()"
+    >
       <i class="bi bi-book-fill" [class.d-none]="showEducationIndicators"></i>
       Education
       <span class="active-check" *ngIf="showEducationIndicators">
@@ -40,7 +45,12 @@
       </span>
     </button>
 
-    <button type="button" class="btn btn-lg health-btn text-center" [class.is-active]="showSanteIndicators" (click)="toggleSanteIndicators()">
+    <button
+      type="button"
+      class="btn btn-lg health-btn text-center"
+      [class.is-active]="showSanteIndicators"
+      (click)="toggleSanteIndicators()"
+    >
       <i class="bi bi-heart-pulse-fill" [class.d-none]="showSanteIndicators"></i>
       Santé
       <span class="active-check" *ngIf="showSanteIndicators">
@@ -48,6 +58,7 @@
       </span>
     </button>
   </div>
+  
 
   <div class="row g-4 align-items-stretch province-layout-row">
 

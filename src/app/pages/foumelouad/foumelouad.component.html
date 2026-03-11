@@ -343,26 +343,10 @@
         type="button"
         class="btn btn-lg health-btn"
         [class.is-active]="hasActive('sante')"
-        (click)="toggleMenu('sante', $event)">
+        (click)="toggleSanteMode($event)">
         <i class="bi" [ngClass]="getMenuLeftIcon('sante')"></i>
         Santé
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu === 'sante'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeSanteProject === 'NOUVEAUX'" (click)="selectSante('NOUVEAUX', $event)">
-          Nouveaux CHR / ESSP
-        </button>
-        <button class="menu-item" [class.active]="activeSanteProject === 'HOPITAUX_EXISTANTS'" (click)="selectSante('HOPITAUX_EXISTANTS', $event)">
-          Hôpitaux existants
-        </button>
-        <button class="menu-item" [class.active]="activeSanteProject === 'ESSP_EXISTANTS'" (click)="selectSante('ESSP_EXISTANTS', $event)">
-          ESSP existants
-        </button>
-        <button class="menu-item" [class.active]="activeSanteProject === 'DOUIRAT'" (click)="selectSante('DOUIRAT', $event)">
-          Zone Douirat
-        </button>
-        <button class="menu-hide" (click)="hideMenu('sante', $event)">Masquer</button>
-      </div>
     </div>
   </div>
 

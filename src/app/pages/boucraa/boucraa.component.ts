@@ -263,7 +263,7 @@ export class BoucraaComponent implements AfterViewInit, OnDestroy {
   }
 
   goToProvince() {
-    this.router.navigate(['/province']);
+    this.router.navigate(['/provinceLaayoune']);
   }
 
   toggleSanteActionsPopup() {

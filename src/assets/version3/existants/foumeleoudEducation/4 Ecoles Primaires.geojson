@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "4 Ecoles Primaires",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 95, "Commune": "Foum El Oued", "Nom établissement": "ECOLE MÈRE FOUM EL OUED AL KARIA", "Code_établissement": "06459V", "Nombre des élèves": "50", "Fille": "23", "Garçon": "27", "Type Etablissement": "Primaire", "x": "-13.367038", "y": "27.174172" }, "geometry": { "type": "Point", "coordinates": [ -13.367038, 27.174172 ] } },
+{ "type": "Feature", "properties": { "fid": 96, "Commune": "Foum El Oued", "Nom établissement": "ECOLE PRIMAIRE PALISTINE", "Code_établissement": "25876A", "Nombre des élèves": "83", "Fille": "39", "Garçon": "44", "Type Etablissement": "Primaire", "x": "-13.394589", "y": "27.175656" }, "geometry": { "type": "Point", "coordinates": [ -13.394589, 27.175656 ] } },
+{ "type": "Feature", "properties": { "fid": 97, "Commune": "Foum El Oued", "Nom établissement": "SATELLITE DAYAAT", "Code_établissement": "06460W", "Nombre des élèves": "82", "Fille": "38", "Garçon": "44", "Type Etablissement": "Primaire", "x": "-13.3313913345337", "y": "27.1877937316895" }, "geometry": { "type": "Point", "coordinates": [ -13.3313913345337, 27.187793731689499 ] } },
+{ "type": "Feature", "properties": { "fid": 98, "Commune": "Foum El Oued", "Nom établissement": "ECOLE PRIMAIRE TAROUMA", "Code_établissement": "23909M", "Nombre des élèves": "25", "Fille": "9", "Garçon": "16", "Type Etablissement": "Primaire", "x": "-13.485992", "y": "26.899516" }, "geometry": { "type": "Point", "coordinates": [ -13.485992, 26.899516 ] } }
+]
+}

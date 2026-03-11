@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "AP6 Constr lycée qualifiant (Lot ATTADAMONE)",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "begin": "1", "end": "9", "Lien_Image": "000_Media/Images/Education/AP6.jpeg" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -13.1855556, 27.1173229 ], [ -13.1905123, 27.1161579 ], [ -13.1902977, 27.109855 ], [ -13.1895252, 27.1098741 ], [ -13.1878086, 27.1112493 ], [ -13.1867357, 27.1103516 ], [ -13.1835386, 27.111383 ], [ -13.1813928, 27.1127582 ], [ -13.1855556, 27.1173229 ] ] ] ] } }
+]
+}

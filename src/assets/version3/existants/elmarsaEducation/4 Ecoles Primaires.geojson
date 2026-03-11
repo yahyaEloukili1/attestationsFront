@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "4 Ecoles Primaires",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 99, "Commune": "El Marsa", "Nom établissement": " ECOLE PRIMAIRE AL MOKHTAR ASSOUSSI", "Code_établissement": "26042F", "Nombre des élèves": "1083", "Fille": "509", "Garçon": "574", "Type Etablissement": "Primaire", "x": "-13.411759", "y": "27.086219" }, "geometry": { "type": "Point", "coordinates": [ -13.411759, 27.086219 ] } },
+{ "type": "Feature", "properties": { "fid": 100, "Commune": "El Marsa", "Nom établissement": "ECOLE COM AL MARSSA", "Code_établissement": "24034Y", "Nombre des élèves": "168", "Fille": "80", "Garçon": "88", "Type Etablissement": "Primaire", "x": "-13.409185", "y": "27.092815" }, "geometry": { "type": "Point", "coordinates": [ -13.411426256038833, 27.093182650077903 ] } },
+{ "type": "Feature", "properties": { "fid": 101, "Commune": "El Marsa", "Nom établissement": "ECOLE PRIMAIRE MAARAKAT TAFOUDART", "Code_établissement": "24875M", "Nombre des élèves": "1134", "Fille": "577", "Garçon": "557", "Type Etablissement": "Primaire", "x": "-13.409124", "y": "27.092979" }, "geometry": { "type": "Point", "coordinates": [ -13.409124, 27.092979 ] } },
+{ "type": "Feature", "properties": { "fid": 102, "Commune": "El Marsa", "Nom établissement": "ECOLE PRIMAIRE MOUHAMED 6", "Code_établissement": "06451L", "Nombre des élèves": "986", "Fille": "464", "Garçon": "522", "Type Etablissement": "Primaire", "x": "-13.414130", "y": "27.094926" }, "geometry": { "type": "Point", "coordinates": [ -13.41413, 27.094926 ] } }
+]
+}

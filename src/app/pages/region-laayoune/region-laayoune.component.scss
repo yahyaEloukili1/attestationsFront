@@ -119,6 +119,29 @@ tr, td, th { height: 45px; }
 .province-page {
   padding: 22px 18px;
   background: #eef1f6;
+  direction: ltr;
+}
+
+.laayoune-back-card {
+  margin-bottom: 10px;
+  align-self: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-btn {
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(29, 78, 216, 0.25);
+}
+
+.back-btn:hover {
+  background: #1e40af;
+  color: #fff;
 }
 
 /* Big rounded panels like commune */

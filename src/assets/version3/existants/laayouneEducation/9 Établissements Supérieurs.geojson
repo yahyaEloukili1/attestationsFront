@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "9 Établissements Supérieurs",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Abrv": "ISPITS ", "Etablissments": "Institut Supérieur des Professions Infirmières et Techniques de Santé", "X": "-13.171771778960037", "Y": "27.13834148237442", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.171771778960037, 27.138341482374418 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "Abrv": "EST ", "Etablissments": "École Supérieure de Technologie", "X": "-13.138981794526206", "Y": "27.130972185054613", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.138981794526206, 27.130972185054613 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "Abrv": "CMC ", "Etablissments": "Cité des Métiers et des Compétences", "X": "-13.136400178969614", "Y": "27.13288679466167", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.136400178969614, 27.132886794661669 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "Abrv": "FMP", "Etablissments": "Faculté de Médecine et de Pharmacie", "X": "-13.137370290304155", "Y": "27.130630377584374", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.137370290304155, 27.130630377584374 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "Abrv": "ISTA ", "Etablissments": "Institut Spécialisé de Technologie Appliquée - El Wahda", "X": "-13.155866611595247", "Y": "27.144539431431305", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.155866611595247, 27.144539431431305 ] } },
+{ "type": "Feature", "properties": { "fid": 6, "Abrv": "ISGI ", "Etablissments": "Institut spécialisé de gestion et d'informatique", "X": "-13.20257973926098", "Y": "27.158976038955647", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.20257973926098, 27.158976038955647 ] } },
+{ "type": "Feature", "properties": { "fid": 7, "Abrv": "ISTA ", "Etablissments": "Institut Spécialisé de Technologie Appliquée - Hay Taaouane", "X": "-13.207293051046783", "Y": "27.151385975790404", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.207293051046783, 27.151385975790404 ] } },
+{ "type": "Feature", "properties": { "fid": 8, "Abrv": "CPGE ", "Etablissments": "Classes Préparatoires aux Grandes Ecoles ", "X": "-13.20585475356833", "Y": "27.150698891296436", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.20585475356833, 27.150698891296436 ] } },
+{ "type": "Feature", "properties": { "fid": 9, "Abrv": "ISHT ", "Etablissments": "Institut Spécialisé d'Hotellerie & Tourisme", "X": "-13.20702288505581", "Y": "27.152027332623646", "Commune": "Laayoune" }, "geometry": { "type": "Point", "coordinates": [ -13.20702288505581, 27.152027332623646 ] } }
+]
+}

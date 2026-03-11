@@ -1,5 +1,12 @@
 <div class="province-page">
 
+  <div class="laayoune-back-card mb-3">
+    <button type="button" class="btn btn-lg back-btn" (click)="goToRegion($event)">
+      <i class="bi bi-arrow-left-circle me-2"></i>
+      Retour à la région
+    </button>
+  </div>
+
   <div class="row g-4 align-items-stretch">
 
     <!-- ✅ COLONNE GAUCHE : INDICATEURS (hidden when Santé / Emploi / Eau active) -->
@@ -392,46 +399,6 @@
     </div>
   </div>
 
-  <!-- ✅ BUTTONS -->
-  <div class="hstack gap-2 mt-5 justify-content-center">
 
-    <button type="button" class="btn btn-lg mise-btn text-center"
-      [class.is-active]="miseVisible" (click)="toggleMise()">
-      <i class="bi" [ngClass]="miseVisible ? 'bi-check-circle-fill' : 'bi-geo-alt-fill'"></i>
-      Mise à niveau
-    </button>
-
-    <button type="button" class="btn btn-lg education-btn text-center"
-      [class.is-active]="educationVisible" (click)="toggleEducation()">
-      <i class="bi" [ngClass]="educationVisible ? 'bi-check-circle-fill' : 'bi-book-fill'"></i>
-      Education
-    </button>
-
-    <!-- Santé: no menu; click toggles mode → hide indicators, show project buttons on the right -->
-    <button type="button" class="btn btn-lg health-btn text-center"
-      [class.is-active]="showSanteActive"
-      (click)="toggleSante()">
-      <i class="bi" [ngClass]="showSanteActive ? 'bi-check-circle-fill' : 'bi-heart-pulse-fill'"></i>
-      Santé
-    </button>
-
-
-    <!-- Eau potable: same as Santé – toggle mode, project buttons on the right -->
-    <button type="button" class="btn btn-lg eau-btn text-center"
-      [class.is-active]="showEauActive"
-      (click)="toggleEauPotable()">
-      <i class="bi" [ngClass]="showEauActive ? 'bi-check-circle-fill' : 'bi-droplet-fill'"></i>
-      Eau potable
-    </button>
-
-    <!-- Emploi: same as Santé – toggle mode, project buttons on the right -->
-    <button type="button" class="btn btn-lg emploi-btn text-center"
-      [class.is-active]="showEmploiActive"
-      (click)="toggleEmploi()">
-      <i class="bi" [ngClass]="showEmploiActive ? 'bi-check-circle-fill' : 'bi-briefcase-fill'"></i>
-      Emploi
-    </button>
-
-  </div>
 
 </div>

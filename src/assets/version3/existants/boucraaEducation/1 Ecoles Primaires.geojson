@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "1 Ecoles Primaires",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 93, "Commune": "Boukraa", "Nom établissement": "SATELLITE BOUGRAA", "Code_établissement": "23910N", "Nombre des élèves": "51", "Fille": "23", "Garçon": "28", "Type Etablissement": "Primaire", "x": "-12.8454456329345", "y": "26.3640308380127" }, "geometry": { "type": "Point", "coordinates": [ -12.845445632934499, 26.364030838012699 ] } }
+]
+}

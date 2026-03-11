@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Centre Régional d’Oncologie",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 5, "Hopital": "Centre Régional d’Oncologie", "abrv": "CROL", "x": "-13.142043413087658", "y": "27.129881003261016" }, "geometry": { "type": "Point", "coordinates": [ -13.142043413087658, 27.129881003261016 ] } }
+]
+}

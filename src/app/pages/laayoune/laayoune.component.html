@@ -13,12 +13,97 @@
 
   <!-- ========== LEFT SIDE (indicateurs) ========== -->
   <div class="side-panel">
-    <div class="side-header">
-      <div class="laayoune-indicators-title">Indicateurs &amp; état des lieux</div>
-      <div class="laayoune-indicators-subtitle">Indicateurs Démographiques et Socio-économiques Clés</div>
+    <div class="sante-side" *ngIf="showSanteOverlay; else educationOrIndicators">
+      <div class="sante-ap-title">Santé – Actions proposées</div>
+      <button type="button" class="sante-ap-btn" [class.is-active]="activeSanteAp === 'AP1'" (click)="showSanteAp('AP1')">
+        AP 2026 – Construction et équipement du ESSP (CSU-1) Douirat
+      </button>
+      <button type="button" class="sante-ap-btn" [class.is-active]="activeSanteAp === 'AP2'" (click)="showSanteAp('AP2')">
+        AP 2026 – Équipement de l’hôpital Hassan II
+      </button>
+      <button type="button" class="sante-ap-btn" [class.is-active]="activeSanteAp === 'AP3'" (click)="showSanteAp('AP3')">
+        AP 2027 – Extension et équipement du CHR
+      </button>
+      <button type="button" class="sante-ap-btn" [class.is-active]="activeSanteAp === 'AP4'" (click)="showSanteAp('AP4')">
+        AP 2028 – Aménagement et équipement UCCV – CHR
+      </button>
     </div>
 
-    <div class="side-grid">
+    <ng-template #educationOrIndicators>
+      <div class="education-side" *ngIf="showEducationOverlay; else eauOrIndicators">
+        <div class="sante-ap-title">Éducation – Actions proposées</div>
+        <button type="button" class="sante-ap-btn" [class.is-active]="activeEducationAp === 'AP1'" (click)="showEducationAp('AP1')">
+          AP 2026 – Construction lycée collégial (Lot Al Khayr)
+        </button>
+        <button type="button" class="sante-ap-btn" [class.is-active]="activeEducationAp === 'AP2'" (click)="showEducationAp('AP2')">
+          AP 2027 – Construction 1ère école primaire (Lot Addoha)
+        </button>
+        <button type="button" class="sante-ap-btn" [class.is-active]="activeEducationAp === 'AP3'" (click)="showEducationAp('AP3')">
+          AP 2027 – Construction école primaire (Lot ATTADAMONE)
+        </button>
+        <button type="button" class="sante-ap-btn" [class.is-active]="activeEducationAp === 'AP4'" (click)="showEducationAp('AP4')">
+          AP 2028 – Construction 2ème école primaire (Lot Addoha)
+        </button>
+        <button type="button" class="sante-ap-btn" [class.is-active]="activeEducationAp === 'AP5'" (click)="showEducationAp('AP5')">
+          AP 2028 – Construction lycée collégial (Lot ATTADAMONE)
+        </button>
+        <button type="button" class="sante-ap-btn" [class.is-active]="activeEducationAp === 'AP6'" (click)="showEducationAp('AP6')">
+          AP 2028 – Construction lycée qualifiant (Lot ATTADAMONE)
+        </button>
+      </div>
+
+      <ng-template #eauOrIndicators>
+        <div class="education-side" *ngIf="showEauOverlay; else emploiOrIndicators">
+          <div class="sante-ap-title">Eau – Actions proposées</div>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEauAp === 'AP1'" (click)="showEauAp('AP1')">
+            AP 2026 – Renforcement et réhabilitation des ouvrages de stockage
+          </button>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEauAp === 'AP3'" (click)="showEauAp('AP3')">
+            AP 2027 – Mise à niveau et extension des ouvrages d'assainissement liquide 2ème tranche
+          </button>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEauAp === 'AP6'" (click)="showEauAp('AP6')">
+            AP 2028 – Réhabilitation du réseau AEP
+          </button>
+        </div>
+
+      <ng-template #emploiOrIndicators>
+        <div class="education-side" *ngIf="showEmploiOverlay; else miseOrIndicators">
+          <div class="sante-ap-title">Emploi – Actions proposées</div>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEmploiAp === 'AP1'" (click)="showEmploiAp('AP1')">
+            AP 2026 – Aménagement et équipement des ateliers artisanaux
+          </button>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEmploiAp === 'AP2'" (click)="showEmploiAp('AP2')">
+            AP 2026 – Aménagement des accès touristiques 10 Km
+          </button>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEmploiAp === 'AP3'" (click)="showEmploiAp('AP3')">
+            AP 2027 – Restructuration zone d'activité AL Hizam (70 ha)
+          </button>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEmploiAp === 'AP4'" (click)="showEmploiAp('AP4')">
+            AP 2027 – Extension de la zone d'activité (52,3 ha)
+          </button>
+          <button type="button" class="sante-ap-btn" [class.is-active]="activeEmploiAp === 'AP5'" (click)="showEmploiAp('AP5')">
+            AP 2028 – Viabilisation des unités de valorisation des produits agricoles
+          </button>
+        </div>
+
+        <ng-template #miseOrIndicators>
+          <div class="education-side" *ngIf="showMiseOverlay; else laayouneIndicators">
+            <div class="sante-ap-title">Mise à niveau – Actions proposées</div>
+            <button type="button" class="sante-ap-btn" [class.is-active]="activeMiseAp === 'AP1'" (click)="showMiseAp('AP1')">
+              AP 2026 – Construction de la voie de contournement Est Laâyoune – 17 km
+            </button>
+            <button type="button" class="sante-ap-btn" [class.is-active]="activeMiseAp === 'AP2'" (click)="showMiseAp('AP2')">
+              AP 2027 – Construction et aménagement de la route de la berge Sakia El Hamra – 5 km
+            </button>
+          </div>
+
+        <ng-template #laayouneIndicators>
+      <div class="side-header">
+        <div class="laayoune-indicators-title">Indicateurs &amp; état des lieux</div>
+        <div class="laayoune-indicators-subtitle">Indicateurs Démographiques et Socio-économiques Clés</div>
+      </div>
+
+      <div class="side-grid">
       <!-- Démographie -->
       <div class="laayoune-card demo-card">
         <div class="card-title">
@@ -105,7 +190,12 @@
           <span>Provincial (24,8%)</span>
         </div>
       </div>
-    </div>
+      </div>
+        </ng-template>
+      </ng-template>
+    </ng-template>
+      </ng-template>
+  </ng-template>
   </div>
 
   <!-- ========== CENTER (MAP) ========== -->
@@ -117,7 +207,7 @@
   </div>
 
   <!-- ========== RIGHT SIDE (indicateurs) ========== -->
-  <div class="side-panel">
+  <div class="side-panel" *ngIf="!showSanteOverlay && !showEducationOverlay && !showEmploiOverlay && !showEauOverlay && !showMiseOverlay">
     <div class="side-grid">
       <!-- Activité -->
       <div class="laayoune-card activite-card">
@@ -236,23 +326,10 @@
         type="button"
         class="btn btn-lg mise-btn"
         [class.is-active]="hasActive('mise')"
-        (click)="toggleMenu('mise', $event)">
+        (click)="toggleMiseDirect($event)">
         <i class="bi" [ngClass]="getMenuLeftIcon('mise')"></i>
         Mise à niveau
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu === 'mise'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeMiseProject === 'M1'" (click)="selectMise('M1', $event)">
-          Mise à niveau 1
-        </button>
-        <button class="menu-item" [class.active]="activeMiseProject === 'M2'" (click)="selectMise('M2', $event)">
-          Mise à niveau 2
-        </button>
-        <button class="menu-item" [class.active]="activeMiseProject === 'M3'" (click)="selectMise('M3', $event)">
-          Mise à niveau 3
-        </button>
-        <button class="menu-hide" (click)="hideMenu('mise', $event)">Masquer</button>
-      </div>
     </div>
 
     <!-- Eau potable -->
@@ -261,32 +338,10 @@
         type="button"
         class="btn btn-lg water-btn"
         [class.is-active]="hasActive('eau')"
-        (click)="toggleMenu('eau', $event)">
+        (click)="toggleEauDirect($event)">
         <i class="bi" [ngClass]="getMenuLeftIcon('eau')"></i>
         Eau potable
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu === 'eau'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeEauProject === 'P1'" (click)="selectEau('P1', $event)">
-          P1 : Réhabilitation du réseau AEP
-        </button>
-        <button class="menu-item" [class.active]="activeEauProject === 'P2'" (click)="selectEau('P2', $event)">
-          P2 : AEP – Zone industrielle El Marsa
-        </button>
-        <button class="menu-item" [class.active]="activeEauProject === 'P3'" (click)="selectEau('P3', $event)">
-          P3 : STEP – Zone industrielle El Marsa
-        </button>
-        <button class="menu-item" [class.active]="activeEauProject === 'P4'" (click)="selectEau('P4', $event)">
-          P4 : Assainissement – Ville de Laâyoune
-        </button>
-        <button class="menu-item" [class.active]="activeEauProject === 'P5'" (click)="selectEau('P5', $event)">
-          P5 : Renforcement du stockage d’eau
-        </button>
-        <button class="menu-item" [class.active]="activeEauProject === 'P6'" (click)="selectEau('P6', $event)">
-          P6 : Assainissement – Foum El Oued
-        </button>
-        <button class="menu-hide" (click)="hideMenu('eau', $event)">Masquer</button>
-      </div>
     </div>
 
     <!-- Emploi -->
@@ -295,29 +350,10 @@
         type="button"
         class="btn btn-lg emploi-btn"
         [class.is-active]="hasActive('emploi')"
-        (click)="toggleMenu('emploi', $event)">
+        (click)="toggleEmploiDirect($event)">
         <i class="bi" [ngClass]="getMenuLeftIcon('emploi')"></i>
         Emploi
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu === 'emploi'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeEmploiProject === 'POINTS'" (click)="selectEmploi('POINTS', $event)">
-          Points emploi
-        </button>
-        <button class="menu-item" [class.active]="activeEmploiProject === 'ZONE1'" (click)="selectEmploi('ZONE1', $event)">
-          Zone d’activité
-        </button>
-        <button class="menu-item" [class.active]="activeEmploiProject === 'HIZAM'" (click)="selectEmploi('HIZAM', $event)">
-          Zone Al Hizam
-        </button>
-        <button class="menu-item" [class.active]="activeEmploiProject === 'ATELIERS'" (click)="selectEmploi('ATELIERS', $event)">
-          Ateliers artisanaux
-        </button>
-        <button class="menu-item" [class.active]="activeEmploiProject === 'SITES'" (click)="selectEmploi('SITES', $event)">
-          Sites touristiques
-        </button>
-        <button class="menu-hide" (click)="hideMenu('emploi', $event)">Masquer</button>
-      </div>
     </div>
 
     <!-- Éducation -->
@@ -326,54 +362,23 @@
         type="button"
         class="btn btn-lg education-btn"
         [class.is-active]="hasActive('education')"
-        (click)="toggleMenu('education', $event)">
+        (click)="toggleEducationDirect($event)">
         <i class="bi" [ngClass]="getMenuLeftIcon('education')"></i>
         Éducation
       </button>
-
-      <div class="menu-pop" *ngIf="openMenu === 'education'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeEducationProject === 'E1'" (click)="selectEducation('E1', $event)">
-          Écoles primaires &amp; préscolaires
-        </button>
-        <button class="menu-item" [class.active]="activeEducationProject === 'E2'" (click)="selectEducation('E2', $event)">
-          Lycées collégiaux
-        </button>
-        <button class="menu-item" [class.active]="activeEducationProject === 'E3'" (click)="selectEducation('E3', $event)">
-          Lycées qualifiants
-        </button>
-        <button class="menu-item" [class.active]="activeEducationProject === 'E4'" (click)="selectEducation('E4', $event)">
-          Établissements supérieurs
-        </button>
-        <button class="menu-hide" (click)="hideMenu('education', $event)">Masquer</button>
-      </div>
     </div>
 
     <!-- Santé -->
     <div class="menu-wrap">
-      <button
-        type="button"
-        class="btn btn-lg health-btn"
-        [class.is-active]="hasActive('sante')"
-        (click)="toggleMenu('sante', $event)">
-        <i class="bi" [ngClass]="getMenuLeftIcon('sante')"></i>
-        Santé
-      </button>
-
-      <div class="menu-pop" *ngIf="openMenu === 'sante'" (click)="$event.stopPropagation()">
-        <button class="menu-item" [class.active]="activeSanteProject === 'NOUVEAUX'" (click)="selectSante('NOUVEAUX', $event)">
-          Nouveaux CHR / ESSP
-        </button>
-        <button class="menu-item" [class.active]="activeSanteProject === 'HOPITAUX_EXISTANTS'" (click)="selectSante('HOPITAUX_EXISTANTS', $event)">
-          Hôpitaux existants
-        </button>
-        <button class="menu-item" [class.active]="activeSanteProject === 'ESSP_EXISTANTS'" (click)="selectSante('ESSP_EXISTANTS', $event)">
-          ESSP existants
-        </button>
-        <button class="menu-item" [class.active]="activeSanteProject === 'DOUIRAT'" (click)="selectSante('DOUIRAT', $event)">
-          Zone Douirat
-        </button>
-        <button class="menu-hide" (click)="hideMenu('sante', $event)">Masquer</button>
-      </div>
+<button
+  type="button"
+  class="btn btn-lg health-btn"
+  [class.is-active]="hasActive('sante')"
+  (click)="toggleSanteDirect($event)">
+  <i class="bi" [ngClass]="getMenuLeftIcon('sante')"></i>
+  Santé
+</button>
+     
     </div>
   </div>
 

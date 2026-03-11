@@ -262,7 +262,7 @@ export class FoumelouadComponent implements AfterViewInit, OnDestroy {
   }
 
   goToProvince() {
-    this.router.navigate(['/province']);
+    this.router.navigate(['/provinceLaayoune']);
   }
 
   // ✅ fermer le dropdown si tu cliques ailleurs (MAIS garder le projet affiché)
@@ -328,6 +328,7 @@ export class FoumelouadComponent implements AfterViewInit, OnDestroy {
       this.hideAllEmploiProjects();
       this.hideAllEauProjects();
       this.openMenu = null;
+      this.showSante('ESSP_EXISTANTS');
     } else {
       this.hideAllSanteProjects();
     }
@@ -385,7 +386,7 @@ export class FoumelouadComponent implements AfterViewInit, OnDestroy {
     this.mapService.getSanteExistants().subscribe((fc: any) => {
       this.santeHopitauxCount = this.addFilteredPointsToLayer(fc, this.santeHopitauxLayer, this.chrIcon, 'Centre de santé');
     });
-    (this.mapService as any).getSanteESSPExistants?.().subscribe((fc: any) => {
+    (this.mapService as any).getExistantsFoumEleoudESSP?.().subscribe((fc: any) => {
       this.santeESSPCount = this.addFilteredPointsToLayer(fc, this.santeESSPLayer, this.chrIcon, 'ESSP existant');
     });
     (this.mapService as any).getZoneDouirat?.().subscribe((fc: any) => {

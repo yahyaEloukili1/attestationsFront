@@ -1,4 +1,4 @@
-<div class="app-menu navbar-menu" style="background-color: #405189;">
+<div class="app-menu navbar-menu" style="background-color: #405189;" *ngIf="false">
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->
@@ -19,10 +19,10 @@
                         <span class="droid-arabic-kufi" style="color: white !important;">تدبير المستعملين</span>  
                     </a>
                 </li> -->
-                <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
+          <!---->      <li class="nav-item" *ngIf="getConnectedUserRole()=='ADMIN'">
                   <a href="javascript:void(0);" class="is-parent nav-link menu-link"
                     [routerLink]="['/province']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">
-                        <span class="text-start menu-label">Diagnostique</span>
+                        <span class="text-start menu-label" style="visibility:hidden;">Diagnostic</span>
                     </a>
                 </li>
                 <!-- Projects menu removed -->

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "1 Établissement Supérieur",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 11, "Abrv": "UM6P", "Etablissments": "Centre de Recherche de l’UM6P", "X": "-13.382704845479813", "Y": "27.177969343925742", "Commune": "Foum El Oued" }, "geometry": { "type": "Point", "coordinates": [ -13.382704845479813, 27.177969343925742 ] } }
+]
+}

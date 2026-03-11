@@ -441,7 +441,9 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
         style: (feature: any) => ({
           color: '#888',
           weight: 1,
-          fillColor: this.getCommuneColor(feature.properties.id_objet),
+          fillColor: this.getCommuneColor(
+            feature.properties?.COMMUNE || feature.properties?.id_objet
+          ),
           fillOpacity: 0.55
         }),
 
@@ -1097,21 +1099,15 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   // =========================
   // ✅ COLORS
   // =========================
-  getCommuneColor(nom: string): string {
-    switch (nom) {
-      case '1080204':
-        return '#f6edb1';
-      case '1080202':
-        return '#b8d9f2';
-      case '1080206':
-        return '#c7e3c1';
-      case '1080203':
-        return '#f2b6b6';
-      case '1080205':
-        return '#dbc6e8';
-      default:
-        return '#c7e3c1';
-    }
+  getCommuneColor(value: string): string {
+    const key = String(value || '').toUpperCase().trim();
+
+    if (key.includes('LAAYOUNE') || key === '1080203') return '#c9b79c';
+    if (key.includes('EL MARSA') || key === 'MARSA' || key === '1080202') return '#64b5f6';
+    if (key.includes('FOUM EL OUED') || key.includes('FOUM EL OUAD') || key === '1080206') return '#81c784';
+    if (key.includes('BOUKRAA') || key.includes('BOUCRAA') || key === '1080204') return '#ffeb3b';
+    if (key.includes('DCHEIRA') || key.includes('DCHIERA') || key === '1080205') return '#ba68c8';
+    return '#81c784';
   }
 
   // =========================
@@ -1136,5 +1132,10 @@ export class UsersTestListComponent implements AfterViewInit, OnDestroy {
   goToFoumelouad(e: Event) {
     e.preventDefault();
     this.router.navigate(['/foumelouad']);
+  }
+
+  goToRegion(e: Event) {
+    e.preventDefault();
+    this.router.navigate(['/regionLaayoune']);
   }
 }

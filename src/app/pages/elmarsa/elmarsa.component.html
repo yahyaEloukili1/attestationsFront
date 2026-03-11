@@ -11,7 +11,7 @@
 <div class="row g-4 align-items-stretch">
 
   <!-- ✅ PANNEAU GAUCHE (KPI + Education + Eau + Santé) -->
-  <div class="col-12 col-lg-4 d-flex flex-column gap-3 order-2 order-lg-1">
+  <div class="col-12 col-lg-3 d-flex flex-column gap-3 order-2 order-lg-3">
     <div class="left-panel">
 
       <div class="left-grid">
@@ -120,7 +120,7 @@
   </div>
 
   <!-- ✅ MAP AU CENTRE -->
-  <div class="col-12 col-lg-4 d-flex justify-content-center order-1 order-lg-2">
+  <div class="col-12 col-lg-6 d-flex justify-content-center order-1 order-lg-2">
     <div class="map-card map-centered">
       <div class="map-title">Commune El Marsa</div>
       <div #mapContainer class="map-only"></div>
@@ -128,7 +128,7 @@
   </div>
 
   <!-- ✅ INDICATEURS À DROITE (sans Education/Eau/Santé) -->
-  <div class="col-12 col-lg-4 d-flex flex-column gap-3 order-3">
+  <div class="col-12 col-lg-3 d-flex flex-column gap-3 order-3 order-lg-1">
     <ng-container *ngIf="!showSanteActive && !showEmploiActive && !showEauActive">
       <div class="laayoune-indicators">
         <div class="laayoune-indicators-header">
@@ -157,6 +157,21 @@
             </div>
           </div>
 
+          <div class="laayoune-card territoire-card">
+            <div class="card-title">
+              <i class="bi bi-geo-alt-fill"></i>
+              Territoire
+            </div>
+            <div class="stat-row">
+              <div class="stat-big amber">34</div>
+              <div class="stat-unit">Km² Superficie</div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-big amber">848,5</div>
+              <div class="stat-unit">Hab./Km² Densité</div>
+            </div>
+          </div>
+
           <div class="laayoune-card chomage-card span-2">
             <div class="card-title">
               <i class="bi bi-briefcase-fill"></i>
@@ -173,19 +188,19 @@
             </div>
           </div>
 
-          <div class="laayoune-card activite-card">
+          <div class="laayoune-card presco-card">
             <div class="card-title">
-              <i class="bi bi-graph-up-arrow"></i>
-              Taux d’Activité
+              <i class="bi bi-people-fill"></i>
+              Taux de préscolarisation
             </div>
-            <div class="stat-big green">59% <i class="bi bi-arrow-up"></i></div>
+            <div class="stat-big green">97,4% <i class="bi bi-arrow-up"></i></div>
             <div class="mini-bar-track">
-              <div class="mini-bar-fill green" style="width:59%"></div>
-              <span class="mini-bar-cap" style="left:46.8%"></span>
+              <div class="mini-bar-fill green" style="width:97.4%"></div>
+              <span class="mini-bar-cap" style="left:89.09%"></span>
             </div>
             <div class="mini-bar-labels">
               <span>Commune</span>
-              <span>Provincial (46,8%)</span>
+              <span>Provincial (89,09%)</span>
             </div>
           </div>
 
@@ -202,21 +217,6 @@
             <div class="mini-bar-labels">
               <span>Commune</span>
               <span>Provincial (24,8%)</span>
-            </div>
-          </div>
-
-          <div class="laayoune-card territoire-card">
-            <div class="card-title">
-              <i class="bi bi-geo-alt-fill"></i>
-              Territoire
-            </div>
-            <div class="stat-row">
-              <div class="stat-big amber">34</div>
-              <div class="stat-unit">Km² Superficie</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-big amber">848,5</div>
-              <div class="stat-unit">Hab./Km² Densité</div>
             </div>
           </div>
 

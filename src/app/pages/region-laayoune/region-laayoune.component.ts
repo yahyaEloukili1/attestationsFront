@@ -103,7 +103,7 @@ export class RegionLaayouneComponent implements AfterViewInit, OnDestroy {
           ?.trim();
 
       if (province === 'LAAYOUNE') {
-        this.router.navigate(['/province']);
+        this.router.navigate(['/provinceLaayoune']);
       }
     });
   }
@@ -123,5 +123,10 @@ export class RegionLaayouneComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.map) this.map.remove();
+  }
+
+  goToMaroc(e: Event) {
+    e.preventDefault();
+    this.router.navigate(['/maroc']);
   }
 }

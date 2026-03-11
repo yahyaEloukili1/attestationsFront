@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "1 Établissement Supérieur",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 10, "Abrv": "ITPM", "Etablissments": "Institut de Technologie des Pêches Maritimes", "X": "-13.40682740866625", "Y": "27.08811163667385", "Commune": "El Marsa" }, "geometry": { "type": "Point", "coordinates": [ -13.406827408666249, 27.088111636673851 ] } }
+]
+}

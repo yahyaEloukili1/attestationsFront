@@ -265,7 +265,7 @@ export class ElmarsaComponent implements AfterViewInit, OnDestroy {
   }
 
   goToProvince() {
-    this.router.navigate(['/province']);
+    this.router.navigate(['/provinceLaayoune']);
   }
 
   // ✅ fermer le dropdown si tu cliques ailleurs (MAIS garder le projet affiché)

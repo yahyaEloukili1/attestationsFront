@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Zone Lot ATTADAMONE",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "QUARTIER": "LOT ATTADAMONE", "begin": "1", "end": "6" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -13.1887693, 27.1206431 ], [ -13.1950419, 27.12045 ], [ -13.2016958, 27.1037288 ], [ -13.1937471, 27.1044296 ], [ -13.179321, 27.1103357 ], [ -13.1789476, 27.110628 ], [ -13.1887693, 27.1206431 ] ] ] ] } }
+]
+}
